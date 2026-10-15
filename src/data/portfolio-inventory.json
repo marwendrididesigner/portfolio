@@ -1,0 +1,6977 @@
+{
+ "generated_from": "MARWEN DRIDI PORTFOLIO-151026.pdf",
+ "chapters": [
+  {
+   "id": "social",
+   "dividerPage": 3,
+   "title": "Social Media & Digital Campaigns",
+   "description": "Digital campaigns and social content designed to connect brands with their audiences."
+  },
+  {
+   "id": "identity",
+   "dividerPage": 40,
+   "title": "Brand Identity & Logo Design",
+   "description": "Distinctive identities built through thoughtful design and cohesive visual systems."
+  },
+  {
+   "id": "guidelines",
+   "dividerPage": 60,
+   "title": "Brand Guidelines",
+   "description": "Clear visual standards that keep brands consistent across every touchpoint."
+  },
+  {
+   "id": "editorial",
+   "dividerPage": 83,
+   "title": "Editorial & Presentation Design",
+   "description": "Reports, publications, and presentations shaped by clarity and visual storytelling."
+  },
+  {
+   "id": "collateral",
+   "dividerPage": 108,
+   "title": "Marketing Collateral & Print Design",
+   "description": "Branded materials that bring visual identities into the physical world."
+  },
+  {
+   "id": "ai",
+   "dividerPage": 145,
+   "title": "AI-Powered Visual Design",
+   "description": "Generative visuals and visual assets developed through AI-enhanced design workflows."
+  }
+ ],
+ "projects": [
+  {
+   "chapter": "social",
+   "pdfPages": [
+    4
+   ],
+   "country": "Kenya",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-mzuriorganics",
+   "client": "MZURI Organics",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_01_MZURI_Organics",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_01_MZURI_Organics/PNG/Project_01_MZURI_Organics_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/Asset 4.png",
+    "assets-original/Asset 7.png",
+    "assets-original/Asset 5_1.png",
+    "assets-original/Asset 6.png"
+   ],
+   "creatives": 4,
+   "status": "ready",
+   "order": 1
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    5
+   ],
+   "country": "Kenya",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [
+    "PDF p.5 is labelled 'ACE MOBILITY LTD' but every creative carries Kuku poultry branding (prepared-asset folder: Kuku Poultry) — confirm client"
+   ],
+   "id": "social-kukupoultry",
+   "client": "Kuku Poultry",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_02_Kuku_Poultry",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_02_Kuku_Poultry/PNG/Project_02_Kuku_Poultry_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/Artboard 13_1.png",
+    "assets-original/Artboard 8_2.png",
+    "assets-original/Artboard 11.png",
+    "assets-original/img239.jpg"
+   ],
+   "creatives": 4,
+   "status": "ready",
+   "order": 2
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    6,
+    7
+   ],
+   "country": "Uganda",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-eddykenzo",
+   "client": "Eddy Kenzo",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_03_Eddy_Kenzo",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_03_Eddy_Kenzo/PNG/Project_03_Eddy_Kenzo_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_03_Eddy_Kenzo/PNG/Project_03_Eddy_Kenzo_Board_02.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_03_Eddy_Kenzo/PNG/Project_03_Eddy_Kenzo_Board_03.png"
+   ],
+   "mobile": [
+    "assets-original/FB_IMG_1692304233456.jpg",
+    "assets-original/FB_IMG_1692306796352.jpg",
+    "assets-original/FB_IMG_1692307844231.jpg",
+    "assets-original/FB_IMG_1692307139334.jpg",
+    "assets-original/FB_IMG_1692307942480.jpg",
+    "assets-original/FB_IMG_1692307119904.jpg",
+    "assets-original/FB_IMG_1692307025929.jpg",
+    "assets-original/FB_IMG_1692307047387.jpg",
+    "assets-original/FB_IMG_1692307577810.jpg"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 3
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    8
+   ],
+   "country": "Kenya",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-acemobility",
+   "client": "Ace Mobility",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_04_Ace_Mobility",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_04_Ace_Mobility/PNG/Project_04_Ace_Mobility_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/Artboard 9.png",
+    "assets-original/Artboard 8.png",
+    "assets-original/Artboard 7.png",
+    "assets-original/Artboard 3.png"
+   ],
+   "creatives": 4,
+   "status": "ready",
+   "order": 4
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    9
+   ],
+   "country": "Rwanda",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-indintambwe",
+   "client": "Indintambwe",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_05_Indintambwe",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_05_Indintambwe/PNG/Project_05_Indintambwe_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/Artboard 24.png",
+    "assets-original/Artboard 23.png",
+    "assets-original/Artboard 31.png",
+    "assets-original/Artboard 23 copy.png"
+   ],
+   "creatives": 4,
+   "status": "ready",
+   "order": 5
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    10,
+    11
+   ],
+   "country": "USA",
+   "services": "Social Media Design · Ad Creatives",
+   "notes": [],
+   "id": "social-shepherdcollege",
+   "client": "Shepherd College",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_06_Shepherd_College",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_06_Shepherd_College/PNG/Project_06_Shepherd_College_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_06_Shepherd_College/PNG/Project_06_Shepherd_College_Board_02.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_06_Shepherd_College/PNG/Project_06_Shepherd_College_Board_03.png"
+   ],
+   "mobile": [
+    "assets-original/FB_IMG_1692297047520.jpg",
+    "assets-original/FB_IMG_1692297130895.jpg",
+    "assets-original/FB_IMG_1692296942614.jpg",
+    "assets-original/FB_IMG_1692297155793.jpg",
+    "assets-original/FB_IMG_1692297215858.jpg",
+    "assets-original/FB_IMG_1692297299332.jpg",
+    "assets-original/FB_IMG_1692297002821.jpg",
+    "assets-original/FB_IMG_1692297029677.jpg",
+    "assets-original/FB_IMG_1692297036364.jpg"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 6
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    12
+   ],
+   "country": "Kenya",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-motirentals",
+   "client": "Moti Rentals",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_07_Moti_Rentals",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_07_Moti_Rentals/PNG/Project_07_Moti_Rentals_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/LinkedIn Cover - MOTI.jpg",
+    "assets-original/Artboard 8 copyzd.png",
+    "assets-original/Artboarddzd 9.png",
+    "assets-original/Artboard 8_1.png"
+   ],
+   "creatives": 4,
+   "status": "ready",
+   "order": 7
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    13
+   ],
+   "country": "Kenya",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-patvention",
+   "client": "Patvention",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_08_Patvention",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_08_Patvention/PNG/Project_08_Patvention_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/Artboard 13.png",
+    "assets-original/Artboard 14.png",
+    "assets-original/Artboard 16.png",
+    "assets-original/Artboard 17.png"
+   ],
+   "creatives": 4,
+   "status": "ready",
+   "order": 8
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    14,
+    15
+   ],
+   "country": "India",
+   "services": "Social Media Design · Ad Creatives",
+   "notes": [],
+   "id": "social-vijaysales",
+   "client": "Vijay Sales",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_09_Vijay_Sales",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_09_Vijay_Sales/PNG/Project_09_Vijay_Sales_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_09_Vijay_Sales/PNG/Project_09_Vijay_Sales_Board_02.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_09_Vijay_Sales/PNG/Project_09_Vijay_Sales_Board_03.png"
+   ],
+   "mobile": [
+    "assets-original/FB_IMG_1692309511490.jpg",
+    "assets-original/FB_IMG_1692309763197.jpg",
+    "assets-original/FB_IMG_1692309533529.jpg",
+    "assets-original/FB_IMG_1692310690036.jpg",
+    "assets-original/FB_IMG_1692310873453.jpg",
+    "assets-original/FB_IMG_1692310517783.jpg",
+    "assets-original/FB_IMG_1692310292930.jpg",
+    "assets-original/FB_IMG_1692310414581.jpg",
+    "assets-original/FB_IMG_1692310210399.jpg"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 9
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    16,
+    17
+   ],
+   "country": "Kuwait",
+   "services": "Social Media Design · Ad Creatives",
+   "notes": [],
+   "id": "social-seensociety",
+   "client": "Seen Society",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_11_Seen_Society",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_11_Seen_Society/PNG/Project_11_Seen_Society_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/POST 2_1.png",
+    "assets-original/POST 6.png",
+    "assets-original/POST 2.png",
+    "assets-original/POST 3.1.png",
+    "assets-original/POST 1_1.png",
+    "assets-original/POST 1.png"
+   ],
+   "creatives": 6,
+   "status": "ready",
+   "order": 10
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    18,
+    19
+   ],
+   "country": "Tunisia",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-shitanaultratrail",
+   "client": "Shitana Ultra Trail",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_12_Shitana_Ultra_Trail",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_12_Shitana_Ultra_Trail/PNG/Project_12_Shitana_Ultra_Trail_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/4.png",
+    "assets-original/8.png",
+    "assets-original/3.png",
+    "assets-original/9.png",
+    "assets-original/11.png",
+    "assets-original/6.png"
+   ],
+   "creatives": 6,
+   "status": "ready",
+   "order": 11
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    20,
+    21
+   ],
+   "country": "UAE",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-bodies",
+   "client": "Bodies",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_13_Bodies",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_13_Bodies/PNG/Project_13_Bodies_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_13_Bodies/PNG/Project_13_Bodies_Board_02.png"
+   ],
+   "mobile": [
+    "assets-original/POST 1_4.png",
+    "assets-original/POST 3.png",
+    "assets-original/POST 2-AR.png",
+    "assets-original/KSA DAY OFFER ADS POST 1.png",
+    "assets-original/POST 8.png",
+    "assets-original/SORRY v4 POST 4.png",
+    "assets-original/POST 7_1.png",
+    "assets-original/POST 7.png",
+    "assets-original/POST 1_2.png"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 12
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    22,
+    23
+   ],
+   "country": "UAE",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-vivaextensions",
+   "client": "Viva Extensions",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_14_Viva_Extensions",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_14_Viva_Extensions/PNG/Project_14_Viva_Extensions_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/Discount Ad- - POST v4.png",
+    "assets-original/Halo VS All - STORY 3.png",
+    "assets-original/1 - Greeting Story (2).png",
+    "assets-original/1.1.png",
+    "assets-original/5.1.png",
+    "assets-original/Discount Ad- - POST v2.png",
+    "assets-original/Discount Ad- - POST v1.png"
+   ],
+   "creatives": 7,
+   "status": "ready",
+   "order": 13
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    24,
+    25,
+    26,
+    27
+   ],
+   "country": "UAE",
+   "services": "Social Media Design · Ad Creatives",
+   "notes": [],
+   "id": "social-papparazo",
+   "client": "Papparazo",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_10_Papparazo",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_10_Papparazo/PNG/Project_10_Papparazo_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_10_Papparazo/PNG/Project_10_Papparazo_Board_02.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_10_Papparazo/PNG/Project_10_Papparazo_Board_03.png"
+   ],
+   "mobile": [
+    "assets-original/7.1.png",
+    "assets-original/ADS June - STORY 21.png",
+    "assets-original/6.1.png",
+    "assets-original/ADS June - POST 26.png",
+    "assets-original/ADS June - POST copy 2.png",
+    "assets-original/ADS June - POST 23.png",
+    "assets-original/بيان اعتذار رسمي - POST- v2.png",
+    "assets-original/10.1.png",
+    "assets-original/23.1.png",
+    "assets-original/EID ADHHA 1.png",
+    "assets-original/Saudi National Day - POST 2.png",
+    "assets-original/Version B.2 - POST.png",
+    "assets-original/KSA-NATIONAL-DAY-50%-OFFERv3.jpg",
+    "assets-original/ADS June - STORY.png",
+    "assets-original/ADS June - STORY  v2.png",
+    "assets-original/Saudi National Day - POST 1.png",
+    "assets-original/ADS June - POST 17.png"
+   ],
+   "creatives": 17,
+   "status": "ready",
+   "order": 14
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    28,
+    29
+   ],
+   "country": "Tunisia",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-elspace",
+   "client": "Elspace",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_15_Elspace",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_15_Elspace/PNG/Project_15_Elspace_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_15_Elspace/PNG/Project_15_Elspace_Board_02.png"
+   ],
+   "mobile": [
+    "assets-original/274233157_390562126075009_7187451693767140772_n (1).jpg",
+    "assets-original/269748820_350922006705688_672059417390885936_n.png",
+    "assets-original/269721759_350237530107469_79497651755414942_n.png",
+    "assets-original/273636742_384241173373771_7552740461295937905_n.jpg",
+    "assets-original/269779552_350237460107476_6332612148376567376_n.jpg",
+    "assets-original/269880774_351812006616688_2797724287087829205_n.png",
+    "assets-original/269848101_350921976705691_9174708680731344779_n.jpg",
+    "assets-original/273924036_386878406443381_9178241730943493125_n.jpg",
+    "assets-original/269887304_351811953283360_8163094878607697611_n.jpg"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 15
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    30,
+    31
+   ],
+   "country": "Tunisia",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-futureisland",
+   "client": "Future Islands",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_16_Future_Island",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_16_Future_Island/PNG/Project_16_Future_Island_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_16_Future_Island/PNG/Project_16_Future_Island_Board_02.png"
+   ],
+   "mobile": [
+    "assets-original/254662747_321972786267277_3652601049887146044_n.jpg",
+    "assets-original/254950795_321972952933927_6500600556113366703_n.jpg",
+    "assets-original/420078268_387888450425964_5431129032491922547_n.jpg",
+    "assets-original/407905732_359416706606472_1304846406050717184_n.jpg",
+    "assets-original/481920021_649533460928127_4436424479853436019_n.png",
+    "assets-original/481455871_648215714393235_5193281836236911000_n.png",
+    "assets-original/255010034_321972852933937_5521450205486300186_n.png",
+    "assets-original/481256648_648215721059901_7884579404041646507_n.png",
+    "assets-original/481971808_648215517726588_4072883393810938228_n.png"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 16
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    32,
+    33
+   ],
+   "country": "Tunisia",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-ccd4tunisia",
+   "client": "CCD4Tunisia",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_17_CCD4Tunisia",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_17_CCD4Tunisia/PNG/Project_17_CCD4Tunisia_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_17_CCD4Tunisia/PNG/Project_17_CCD4Tunisia_Board_02.png"
+   ],
+   "mobile": [
+    "assets-original/01.jpg",
+    "assets-original/03.jpg",
+    "assets-original/08.jpg",
+    "assets-original/17.jpg",
+    "assets-original/14.jpg",
+    "assets-original/24.jpg",
+    "assets-original/06.jpg",
+    "assets-original/23.jpg",
+    "assets-original/34.jpg"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 17
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    34,
+    35
+   ],
+   "country": "Tunisia",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-cleantech216",
+   "client": "Cleantech216",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_18_Cleantech216",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_18_Cleantech216/PNG/Project_18_Cleantech216_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_18_Cleantech216/PNG/Project_18_Cleantech216_Board_02.png"
+   ],
+   "mobile": [
+    "assets-original/381064139_318040474077429_5715764994058964869_n.jpg",
+    "assets-original/380522520_318040397410770_1885011033936545584_n.jpg",
+    "assets-original/480690734_645156764699130_5223914745380427601_n.png",
+    "assets-original/481250234_645157038032436_8316274254401380160_n.png",
+    "assets-original/481979231_645157084699098_5459258960017536147_n.png",
+    "assets-original/434028890_427184523163023_712196117365998629_n.jpg",
+    "assets-original/380475453_318040440744099_5169436331591240712_n.jpg",
+    "assets-original/481137561_644467314768075_7562205076725238571_n.png",
+    "assets-original/454892639_505871571960984_5644243188189259687_n.jpg"
+   ],
+   "creatives": 9,
+   "status": "ready",
+   "order": 18
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    36,
+    37
+   ],
+   "country": "Kuwait",
+   "services": "Social Media Design · Digital Brand Assets",
+   "notes": [],
+   "id": "social-wyanatravels",
+   "client": "Wyana Travels",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_19_Wyana_Travels",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_19_Wyana_Travels/PNG/Project_19_Wyana_Travels_Board_01.png"
+   ],
+   "mobile": [
+    "assets-original/POST 2_2.png",
+    "assets-original/POST 3_1.png",
+    "assets-original/dzdz (1).png",
+    "assets-original/OFFER POST_1.png",
+    "assets-original/POST 1_3.png",
+    "assets-original/OFFER 3.png"
+   ],
+   "creatives": 6,
+   "status": "ready",
+   "order": 19
+  },
+  {
+   "chapter": "social",
+   "pdfPages": [
+    38,
+    39
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pp.38–39 carry no client label; covers show Future Islands, GIZ, EcoCollab and Inrgize Nexus events — confirm grouping/title"
+   ],
+   "id": "social-eventandfacebookcovers",
+   "client": null,
+   "title": "Event & Facebook covers",
+   "source": "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_20_Event_and_Facebook_Covers",
+   "layout": "boards",
+   "desktop": [
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_20_Event_and_Facebook_Covers/PNG/Project_20_Event_and_Facebook_Covers_Board_01.png",
+    "assets-original/UPWORK_SOCIAL_ADS_SHOWCASE_FINAL/Project_20_Event_and_Facebook_Covers/PNG/Project_20_Event_and_Facebook_Covers_Board_02.png"
+   ],
+   "mobile": [
+    "assets-original/310876560_180284524519692_296321898543262668_n.jpg",
+    "assets-original/4.jpg",
+    "assets-original/396076201_337155878832555_8921197511788407060_n.jpg",
+    "assets-original/264930617_342937274170828_8239782035796301445_n.jpg",
+    "assets-original/5.jpg",
+    "assets-original/433923369_424723633409112_7572204152534295302_n.jpg",
+    "assets-original/445772552_462423132972495_7701028442819274717_n.jpg",
+    "assets-original/486695620_1075011791327846_8078461764108872902_n.png"
+   ],
+   "creatives": 8,
+   "status": "ready",
+   "order": 20
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    41
+   ],
+   "country": "Tunisia",
+   "services": "Brand Identity",
+   "notes": [
+    "3 application files missing from Links; used the PDF's embedded copies (601-630 px wide, lower resolution)"
+   ],
+   "id": "identity-optinetconsulting",
+   "client": "Optinet Consulting",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_02_Optinet_Consulting",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_02_Optinet_Consulting/Optinet_Consulting_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/021-identity-optinetconsulting/panel-01.png",
+    ".cache/portfolio-src/021-identity-optinetconsulting/panel-02.png",
+    ".cache/portfolio-src/021-identity-optinetconsulting/panel-03.png",
+    ".cache/portfolio-src/021-identity-optinetconsulting/panel-04.png",
+    ".cache/portfolio-src/021-identity-optinetconsulting/panel-05.png",
+    ".cache/portfolio-src/021-identity-optinetconsulting/panel-06.png"
+   ],
+   "status": "check",
+   "order": 21
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    42
+   ],
+   "country": "France",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-aenergihouse",
+   "client": "A+ EnergiHouse",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_03_A_Plus_EnergiHouse",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_03_A_Plus_EnergiHouse/A_Plus_EnergiHouse_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/022-identity-aenergihouse/panel-02.png",
+    ".cache/portfolio-src/022-identity-aenergihouse/panel-03.png",
+    ".cache/portfolio-src/022-identity-aenergihouse/panel-04.png",
+    ".cache/portfolio-src/022-identity-aenergihouse/panel-05.png",
+    ".cache/portfolio-src/022-identity-aenergihouse/panel-06.png",
+    ".cache/portfolio-src/022-identity-aenergihouse/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 22
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    43
+   ],
+   "country": "Tunisia",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [],
+   "id": "identity-proofagency",
+   "client": "Proof Agency",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_04_Proof_Agency",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_04_Proof_Agency/Proof_Agency_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/023-identity-proofagency/panel-01.png",
+    ".cache/portfolio-src/023-identity-proofagency/panel-02.png",
+    ".cache/portfolio-src/023-identity-proofagency/panel-03.png",
+    ".cache/portfolio-src/023-identity-proofagency/panel-05.png",
+    ".cache/portfolio-src/023-identity-proofagency/panel-06.png",
+    ".cache/portfolio-src/023-identity-proofagency/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 23
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    44
+   ],
+   "country": "Tunisia",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [],
+   "id": "identity-hattabio",
+   "client": "Hatta Bio",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_05_Hatta_Bio",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_05_Hatta_Bio/Hatta_Bio_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/024-identity-hattabio/panel-01.png",
+    ".cache/portfolio-src/024-identity-hattabio/panel-02.png",
+    ".cache/portfolio-src/024-identity-hattabio/panel-03.png",
+    ".cache/portfolio-src/024-identity-hattabio/panel-04.png",
+    ".cache/portfolio-src/024-identity-hattabio/panel-05.png",
+    ".cache/portfolio-src/024-identity-hattabio/panel-06.png"
+   ],
+   "status": "ready",
+   "order": 24
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    45
+   ],
+   "country": "Qatar",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-soun",
+   "client": "Soun",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_06_Soun",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_06_Soun/Soun_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/025-identity-soun/panel-01.png",
+    ".cache/portfolio-src/025-identity-soun/panel-02.png",
+    ".cache/portfolio-src/025-identity-soun/panel-03.png",
+    ".cache/portfolio-src/025-identity-soun/panel-05.png",
+    ".cache/portfolio-src/025-identity-soun/panel-06.png",
+    ".cache/portfolio-src/025-identity-soun/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 25
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    46
+   ],
+   "country": "Tunisia",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [],
+   "title": "Sahtek Bin Idik",
+   "id": "identity-touneselmezyena",
+   "client": "Tounes El Mezyena",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_07_Tounes_El_Mezyena_Sahtek_Bin_Idik",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_07_Tounes_El_Mezyena_Sahtek_Bin_Idik/Tounes_El_Mezyena_Sahtek_Bin_Idik_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/026-identity-touneselmezyena/panel-02.png",
+    ".cache/portfolio-src/026-identity-touneselmezyena/panel-03.png",
+    ".cache/portfolio-src/026-identity-touneselmezyena/panel-04.png",
+    ".cache/portfolio-src/026-identity-touneselmezyena/panel-05.png",
+    ".cache/portfolio-src/026-identity-touneselmezyena/panel-06.png",
+    ".cache/portfolio-src/026-identity-touneselmezyena/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 26
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    47
+   ],
+   "country": "Tunisia",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-espresso21",
+   "client": "Espresso21",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_08_Espresso21",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_08_Espresso21/Espresso21_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/027-identity-espresso21/panel-01.png",
+    ".cache/portfolio-src/027-identity-espresso21/panel-02.png",
+    ".cache/portfolio-src/027-identity-espresso21/panel-03.png",
+    ".cache/portfolio-src/027-identity-espresso21/panel-04.png",
+    ".cache/portfolio-src/027-identity-espresso21/panel-05.png",
+    ".cache/portfolio-src/027-identity-espresso21/panel-06.png"
+   ],
+   "status": "ready",
+   "order": 27
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    48
+   ],
+   "country": "Tunisia",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-cleantech216",
+   "client": "Cleantech216",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_09_Cleantech216",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_09_Cleantech216/Cleantech216_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/028-identity-cleantech216/panel-01.png",
+    ".cache/portfolio-src/028-identity-cleantech216/panel-02.png",
+    ".cache/portfolio-src/028-identity-cleantech216/panel-03.png",
+    ".cache/portfolio-src/028-identity-cleantech216/panel-05.png",
+    ".cache/portfolio-src/028-identity-cleantech216/panel-06.png",
+    ".cache/portfolio-src/028-identity-cleantech216/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 28
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    49
+   ],
+   "country": "Tunisia",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-futureislands",
+   "client": "Future Islands",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_10_Future_Islands",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_10_Future_Islands/Future_Islands_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/029-identity-futureislands/panel-01.png",
+    ".cache/portfolio-src/029-identity-futureislands/panel-02.png",
+    ".cache/portfolio-src/029-identity-futureislands/panel-03.png",
+    ".cache/portfolio-src/029-identity-futureislands/panel-05.png",
+    ".cache/portfolio-src/029-identity-futureislands/panel-06.png",
+    ".cache/portfolio-src/029-identity-futureislands/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 29
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    50
+   ],
+   "country": "Kuwait",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [
+    "all 6 linked files missing from Links; logos rendered from the vector guideline (logo-versions page), report mockup = guideline's embedded original, other 3 applications = same-named originals found in the AI imagery folder"
+   ],
+   "id": "identity-almizan",
+   "client": "Almizan",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_11_Almizan",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_11_Almizan/Almizan_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/030-identity-almizan/panel-01.png",
+    ".cache/portfolio-src/030-identity-almizan/panel-02.png",
+    ".cache/portfolio-src/030-identity-almizan/panel-03.png",
+    ".cache/portfolio-src/030-identity-almizan/panel-05.png",
+    ".cache/portfolio-src/030-identity-almizan/panel-06.png",
+    ".cache/portfolio-src/030-identity-almizan/panel-07.png"
+   ],
+   "status": "check",
+   "order": 30
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    51
+   ],
+   "country": "Kuwait",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [
+    "3 logo files + 1 mockup missing from Links; logos rendered from the vector guideline, mug = guideline's embedded original"
+   ],
+   "id": "identity-elhudaib",
+   "client": "Elhudaib",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_12_Elhudaib",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_12_Elhudaib/Elhudaib_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/031-identity-elhudaib/panel-01.png",
+    ".cache/portfolio-src/031-identity-elhudaib/panel-02.png",
+    ".cache/portfolio-src/031-identity-elhudaib/panel-03.png",
+    ".cache/portfolio-src/031-identity-elhudaib/panel-04.png",
+    ".cache/portfolio-src/031-identity-elhudaib/panel-05.png",
+    ".cache/portfolio-src/031-identity-elhudaib/panel-06.png"
+   ],
+   "status": "check",
+   "order": 31
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    52
+   ],
+   "country": "Kuwait",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [
+    "primary + reversed logos rendered from the vector guideline (Links PNGs are only 446 px wide)"
+   ],
+   "id": "identity-akeedtravel",
+   "client": "Akeed Travel",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_13_Akeed_Travel",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_13_Akeed_Travel/Akeed_Travel_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/032-identity-akeedtravel/panel-02.png",
+    ".cache/portfolio-src/032-identity-akeedtravel/panel-03.png",
+    ".cache/portfolio-src/032-identity-akeedtravel/panel-04.png",
+    ".cache/portfolio-src/032-identity-akeedtravel/panel-05.png",
+    ".cache/portfolio-src/032-identity-akeedtravel/panel-06.png",
+    ".cache/portfolio-src/032-identity-akeedtravel/panel-07.png"
+   ],
+   "status": "check",
+   "order": 32
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    53
+   ],
+   "country": "Jordan",
+   "services": "Brand Identity",
+   "notes": [
+    "no logo variants exist in the source (single black wordmark); palette is the logo's own black + white"
+   ],
+   "id": "identity-vita",
+   "client": "Vita",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_14_Vita",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_14_Vita/Vita_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/033-identity-vita/panel-01.png",
+    ".cache/portfolio-src/033-identity-vita/panel-02.png",
+    ".cache/portfolio-src/033-identity-vita/panel-03.png",
+    ".cache/portfolio-src/033-identity-vita/panel-05.png",
+    ".cache/portfolio-src/033-identity-vita/panel-06.png",
+    ".cache/portfolio-src/033-identity-vita/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 33
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    54
+   ],
+   "country": "Tunisia",
+   "services": "Brand Identity",
+   "notes": [
+    "no logo variants exist in the source (single full-colour logo)"
+   ],
+   "id": "identity-ajiddouz",
+   "client": "Ajid Douz",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_15_Ajid_Douz",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_15_Ajid_Douz/Ajid_Douz_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/034-identity-ajiddouz/panel-01.png",
+    ".cache/portfolio-src/034-identity-ajiddouz/panel-02.png",
+    ".cache/portfolio-src/034-identity-ajiddouz/panel-03.png",
+    ".cache/portfolio-src/034-identity-ajiddouz/panel-04.png",
+    ".cache/portfolio-src/034-identity-ajiddouz/panel-05.png",
+    ".cache/portfolio-src/034-identity-ajiddouz/panel-06.png"
+   ],
+   "status": "ready",
+   "order": 34
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    55
+   ],
+   "country": "Kuwait",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-ghitra",
+   "client": "Ghitra",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_01_Ghitra",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_01_Ghitra/Ghitra_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/035-identity-ghitra/panel-01.png",
+    ".cache/portfolio-src/035-identity-ghitra/panel-02.png",
+    ".cache/portfolio-src/035-identity-ghitra/panel-03.png",
+    ".cache/portfolio-src/035-identity-ghitra/panel-05.png",
+    ".cache/portfolio-src/035-identity-ghitra/panel-06.png",
+    ".cache/portfolio-src/035-identity-ghitra/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 35
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    56
+   ],
+   "country": "Egypt",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-aquarabia",
+   "client": "Aquarabia",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_16_Aquarabia",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_16_Aquarabia/Aquarabia_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/036-identity-aquarabia/panel-01.png",
+    ".cache/portfolio-src/036-identity-aquarabia/panel-02.png",
+    ".cache/portfolio-src/036-identity-aquarabia/panel-03.png",
+    ".cache/portfolio-src/036-identity-aquarabia/panel-05.png",
+    ".cache/portfolio-src/036-identity-aquarabia/panel-06.png",
+    ".cache/portfolio-src/036-identity-aquarabia/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 36
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    57
+   ],
+   "country": "Turkey",
+   "services": "Brand Identity",
+   "notes": [],
+   "id": "identity-pavlov",
+   "client": "Pavlov",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_17_Pavlov",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_17_Pavlov/Pavlov_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/037-identity-pavlov/panel-01.png",
+    ".cache/portfolio-src/037-identity-pavlov/panel-02.png",
+    ".cache/portfolio-src/037-identity-pavlov/panel-03.png",
+    ".cache/portfolio-src/037-identity-pavlov/panel-05.png",
+    ".cache/portfolio-src/037-identity-pavlov/panel-06.png",
+    ".cache/portfolio-src/037-identity-pavlov/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 37
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    58
+   ],
+   "country": "Tunisia",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [
+    "no logo variants exist in the source (single full-colour logo)",
+    "PDF page 58 is labelled 'FUTURE ISLANDS' (client); the identity shown is TADA"
+   ],
+   "id": "identity-tada",
+   "client": "TADA",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_18_TADA",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_18_TADA/TADA_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/038-identity-tada/panel-01.png",
+    ".cache/portfolio-src/038-identity-tada/panel-02.png",
+    ".cache/portfolio-src/038-identity-tada/panel-03.png",
+    ".cache/portfolio-src/038-identity-tada/panel-05.png",
+    ".cache/portfolio-src/038-identity-tada/panel-06.png",
+    ".cache/portfolio-src/038-identity-tada/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 38
+  },
+  {
+   "chapter": "identity",
+   "pdfPages": [
+    59
+   ],
+   "country": "Tunisia",
+   "services": "Logo Design · Brand Guidelines",
+   "notes": [
+    "PDF page 59 is labelled 'FUTURE ISLANDS' (client); the identity shown is Green Bazar"
+   ],
+   "id": "identity-greenbazar",
+   "client": "Green Bazar",
+   "source": "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_19_Green_Bazar",
+   "layout": "board",
+   "desktop": [
+    "assets-original/UPWORK_BRAND_IDENTITY_CASE_STUDIES_FINAL/Project_19_Green_Bazar/Green_Bazar_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/039-identity-greenbazar/panel-02.png",
+    ".cache/portfolio-src/039-identity-greenbazar/panel-03.png",
+    ".cache/portfolio-src/039-identity-greenbazar/panel-04.png",
+    ".cache/portfolio-src/039-identity-greenbazar/panel-05.png",
+    ".cache/portfolio-src/039-identity-greenbazar/panel-06.png",
+    ".cache/portfolio-src/039-identity-greenbazar/panel-07.png"
+   ],
+   "status": "ready",
+   "order": 39
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    61,
+    62
+   ],
+   "country": "Kenya",
+   "services": "Brand Guidelines",
+   "notes": [],
+   "id": "guidelines-p61",
+   "client": "Patvention",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 61,
+     "images": [
+      {
+       "file": "assets-original/mockup-001.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 13
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 62,
+     "images": [
+      {
+       "file": "assets-original/mockup-002.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 23
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 40,
+   "desktop": [
+    ".cache/portfolio-src/040-guidelines-p61/d-p61.png",
+    "assets-original/mockup-002.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001.png",
+    "assets-original/mockup-002.png"
+   ],
+   "render": [
+    "p.61: composite (1 originals swapped in, 0 embedded kept)",
+    "p.62: full-image"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    63,
+    64
+   ],
+   "country": "Kuwait",
+   "services": "Brand Guidelines",
+   "notes": [
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "guidelines-p63",
+   "client": "Ghitra",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 63,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_3.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 33
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 64,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        39,
+        50,
+        437,
+        202
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 105
+      },
+      {
+       "file": null,
+       "rect": [
+        421,
+        49,
+        819,
+        202
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 103
+      },
+      {
+       "file": null,
+       "rect": [
+        39,
+        223,
+        703,
+        569
+       ],
+       "pdfImage": [
+        886,
+        462
+       ],
+       "dist": 98
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 41,
+   "desktop": [
+    ".cache/portfolio-src/041-guidelines-p63/d-p63.png",
+    ".cache/portfolio-src/041-guidelines-p63/d-p64.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_3.png",
+    ".cache/portfolio-src/041-guidelines-p63/p64-img1.png",
+    ".cache/portfolio-src/041-guidelines-p63/p64-img2.png",
+    ".cache/portfolio-src/041-guidelines-p63/p64-img3.png"
+   ],
+   "render": [
+    "p.63: composite (1 originals swapped in, 1 embedded kept)",
+    "p.64: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    65,
+    66
+   ],
+   "country": "UAE",
+   "services": "Brand Guidelines",
+   "notes": [
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "guidelines-p65",
+   "client": "Gzara Studio",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 65,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_4.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 20
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 66,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        39,
+        50,
+        437,
+        202
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 124
+      },
+      {
+       "file": null,
+       "rect": [
+        421,
+        49,
+        819,
+        202
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 120
+      },
+      {
+       "file": null,
+       "rect": [
+        39,
+        223,
+        703,
+        569
+       ],
+       "pdfImage": [
+        886,
+        462
+       ],
+       "dist": 95
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 42,
+   "desktop": [
+    ".cache/portfolio-src/042-guidelines-p65/d-p65.png",
+    ".cache/portfolio-src/042-guidelines-p65/d-p66.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_4.png",
+    ".cache/portfolio-src/042-guidelines-p65/p66-img1.png",
+    ".cache/portfolio-src/042-guidelines-p65/p66-img2.png",
+    ".cache/portfolio-src/042-guidelines-p65/p66-img3.png"
+   ],
+   "render": [
+    "p.65: composite (1 originals swapped in, 0 embedded kept)",
+    "p.66: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    67,
+    68
+   ],
+   "country": "Kenya",
+   "services": "Brand Guidelines",
+   "notes": [],
+   "id": "guidelines-p67",
+   "client": "Ace Mobility",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 67,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_1.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 11
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 68,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_1.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 30
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 43,
+   "desktop": [
+    ".cache/portfolio-src/043-guidelines-p67/d-p67.png",
+    "assets-original/mockup-002_1.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_1.png",
+    "assets-original/mockup-002_1.png"
+   ],
+   "render": [
+    "p.67: composite (1 originals swapped in, 0 embedded kept)",
+    "p.68: full-image"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    69,
+    70
+   ],
+   "country": "Kuwait",
+   "services": "Brand Guidelines",
+   "notes": [
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "guidelines-p69",
+   "client": "Akeed Travel",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 69,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_2.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 26
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 70,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_2.png",
+       "rect": [
+        19,
+        21,
+        337,
+        261
+       ],
+       "pdfImage": [
+        425,
+        320
+       ],
+       "dist": 5
+      },
+      {
+       "file": "assets-original/mockup-004.png",
+       "rect": [
+        374,
+        21,
+        693,
+        261
+       ],
+       "pdfImage": [
+        425,
+        320
+       ],
+       "dist": 6
+      },
+      {
+       "file": "assets-original/mockup-003.png",
+       "rect": [
+        19,
+        298,
+        337,
+        537
+       ],
+       "pdfImage": [
+        425,
+        320
+       ],
+       "dist": 4
+      },
+      {
+       "file": null,
+       "rect": [
+        374,
+        280,
+        687,
+        421
+       ],
+       "pdfImage": [
+        418,
+        189
+       ],
+       "dist": 107
+      },
+      {
+       "file": null,
+       "rect": [
+        363,
+        428,
+        534,
+        570
+       ],
+       "pdfImage": [
+        228,
+        189
+       ],
+       "dist": 89
+      },
+      {
+       "file": null,
+       "rect": [
+        530,
+        432,
+        699,
+        574
+       ],
+       "pdfImage": [
+        227,
+        189
+       ],
+       "dist": 83
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 44,
+   "desktop": [
+    ".cache/portfolio-src/044-guidelines-p69/d-p69.png",
+    ".cache/portfolio-src/044-guidelines-p69/d-p70.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_2.png",
+    "assets-original/mockup-002_2.png",
+    "assets-original/mockup-004.png",
+    "assets-original/mockup-003.png",
+    ".cache/portfolio-src/044-guidelines-p69/p70-img4.png",
+    ".cache/portfolio-src/044-guidelines-p69/p70-img5.png",
+    ".cache/portfolio-src/044-guidelines-p69/p70-img6.png"
+   ],
+   "render": [
+    "p.69: composite (1 originals swapped in, 1 embedded kept)",
+    "p.70: composite (3 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    71,
+    72
+   ],
+   "country": "Kenya",
+   "services": "Brand Guidelines",
+   "notes": [
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "guidelines-p71",
+   "client": "Kuku Pure",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 71,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_6.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 15
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 72,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_6.png",
+       "rect": [
+        47,
+        78,
+        406,
+        347
+       ],
+       "pdfImage": [
+        479,
+        360
+       ],
+       "dist": 14
+      },
+      {
+       "file": "assets-original/mockup-003_3.png",
+       "rect": [
+        447,
+        78,
+        806,
+        347
+       ],
+       "pdfImage": [
+        479,
+        360
+       ],
+       "dist": 11
+      },
+      {
+       "file": null,
+       "rect": [
+        11,
+        338,
+        402,
+        515
+       ],
+       "pdfImage": [
+        522,
+        236
+       ],
+       "dist": 94
+      },
+      {
+       "file": null,
+       "rect": [
+        408,
+        374,
+        625,
+        554
+       ],
+       "pdfImage": [
+        290,
+        241
+       ],
+       "dist": 77
+      },
+      {
+       "file": null,
+       "rect": [
+        620,
+        379,
+        837,
+        559
+       ],
+       "pdfImage": [
+        290,
+        241
+       ],
+       "dist": 91
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 45,
+   "desktop": [
+    ".cache/portfolio-src/045-guidelines-p71/d-p71.png",
+    ".cache/portfolio-src/045-guidelines-p71/d-p72.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_6.png",
+    "assets-original/mockup-002_6.png",
+    "assets-original/mockup-003_3.png",
+    ".cache/portfolio-src/045-guidelines-p71/p72-img3.png",
+    ".cache/portfolio-src/045-guidelines-p71/p72-img4.png",
+    ".cache/portfolio-src/045-guidelines-p71/p72-img5.png"
+   ],
+   "render": [
+    "p.71: composite (1 originals swapped in, 0 embedded kept)",
+    "p.72: composite (2 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    73,
+    74
+   ],
+   "country": "Kuwait",
+   "services": "Brand Guidelines",
+   "notes": [
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "guidelines-p73",
+   "client": "Almizan",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 73,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_9.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 12
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 74,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        39,
+        50,
+        437,
+        202
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 97
+      },
+      {
+       "file": null,
+       "rect": [
+        421,
+        49,
+        819,
+        202
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 118
+      },
+      {
+       "file": null,
+       "rect": [
+        89,
+        222,
+        753,
+        569
+       ],
+       "pdfImage": [
+        886,
+        462
+       ],
+       "dist": 90
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 46,
+   "desktop": [
+    ".cache/portfolio-src/046-guidelines-p73/d-p73.png",
+    ".cache/portfolio-src/046-guidelines-p73/d-p74.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_9.png",
+    ".cache/portfolio-src/046-guidelines-p73/p74-img1.png",
+    ".cache/portfolio-src/046-guidelines-p73/p74-img2.png",
+    ".cache/portfolio-src/046-guidelines-p73/p74-img3.png"
+   ],
+   "render": [
+    "p.73: composite (1 originals swapped in, 0 embedded kept)",
+    "p.74: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    75,
+    76
+   ],
+   "country": "Rwanda",
+   "services": "Brand Guidelines",
+   "notes": [],
+   "id": "guidelines-p75",
+   "client": "Indintambwe",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 75,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_5.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 12
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 76,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_5.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 16
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 47,
+   "desktop": [
+    ".cache/portfolio-src/047-guidelines-p75/d-p75.png",
+    "assets-original/mockup-002_5.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_5.png",
+    "assets-original/mockup-002_5.png"
+   ],
+   "render": [
+    "p.75: composite (1 originals swapped in, 0 embedded kept)",
+    "p.76: full-image"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    77,
+    78
+   ],
+   "country": "Kuwait",
+   "services": "Brand Guidelines",
+   "notes": [],
+   "id": "guidelines-p77",
+   "client": "Alhudaib",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 77,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_10.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 29
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 78,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_10.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 30
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 48,
+   "desktop": [
+    ".cache/portfolio-src/048-guidelines-p77/d-p77.png",
+    "assets-original/mockup-002_10.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_10.png",
+    "assets-original/mockup-002_10.png"
+   ],
+   "render": [
+    "p.77: composite (1 originals swapped in, 1 embedded kept)",
+    "p.78: full-image"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    79,
+    80
+   ],
+   "country": "Kenya",
+   "services": "Brand Guidelines",
+   "notes": [],
+   "id": "guidelines-p79",
+   "client": "Moti Rentals",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 79,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_7.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 13
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 80,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_7.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 30
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 49,
+   "desktop": [
+    ".cache/portfolio-src/049-guidelines-p79/d-p79.png",
+    "assets-original/mockup-002_7.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_7.png",
+    "assets-original/mockup-002_7.png"
+   ],
+   "render": [
+    "p.79: composite (1 originals swapped in, 0 embedded kept)",
+    "p.80: full-image"
+   ]
+  },
+  {
+   "chapter": "guidelines",
+   "pdfPages": [
+    81,
+    82
+   ],
+   "country": "Kenya",
+   "services": "Brand Guidelines",
+   "notes": [],
+   "id": "guidelines-p81",
+   "client": "MZURI Organics",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 81,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_8.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 9
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 82,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_8.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 17
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 50,
+   "desktop": [
+    ".cache/portfolio-src/050-guidelines-p81/d-p81.png",
+    "assets-original/mockup-002_8.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_8.png",
+    "assets-original/mockup-002_8.png"
+   ],
+   "render": [
+    "p.81: composite (1 originals swapped in, 0 embedded kept)",
+    "p.82: full-image"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    84,
+    85,
+    86
+   ],
+   "country": "Canada",
+   "services": "Report Design",
+   "notes": [
+    "2 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "editorial-p84",
+   "client": "Impact Hub",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 84,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        2,
+        9,
+        818,
+        596
+       ],
+       "pdfImage": [
+        1088,
+        784
+       ],
+       "dist": 47
+      }
+     ],
+     "unmatched": 1
+    },
+    {
+     "page": 85,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_20.png",
+       "rect": [
+        38,
+        25,
+        397,
+        296
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 3
+      },
+      {
+       "file": "assets-original/mockup-003_12.png",
+       "rect": [
+        439,
+        25,
+        798,
+        296
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 6
+      },
+      {
+       "file": "assets-original/mockup-004_6.png",
+       "rect": [
+        38,
+        296,
+        397,
+        566
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 5
+      },
+      {
+       "file": "assets-original/mockup-005_3.png",
+       "rect": [
+        439,
+        296,
+        798,
+        566
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 8
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 86,
+     "images": [
+      {
+       "file": "assets-original/mockup-006_1.png",
+       "rect": [
+        38,
+        25,
+        397,
+        296
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 6
+      },
+      {
+       "file": "assets-original/mockup-007.png",
+       "rect": [
+        439,
+        25,
+        798,
+        296
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 11
+      },
+      {
+       "file": null,
+       "rect": [
+        68,
+        280,
+        770,
+        585
+       ],
+       "pdfImage": [
+        937,
+        407
+       ],
+       "dist": 110
+      }
+     ],
+     "unmatched": 1
+    }
+   ],
+   "status": "missing-originals",
+   "order": 51,
+   "desktop": [
+    ".cache/portfolio-src/051-editorial-p84/d-p84.png",
+    ".cache/portfolio-src/051-editorial-p84/d-p85.png",
+    ".cache/portfolio-src/051-editorial-p84/d-p86.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/051-editorial-p84/p84-img1.png",
+    "assets-original/mockup-002_20.png",
+    "assets-original/mockup-003_12.png",
+    "assets-original/mockup-004_6.png",
+    "assets-original/mockup-005_3.png",
+    "assets-original/mockup-006_1.png",
+    "assets-original/mockup-007.png",
+    ".cache/portfolio-src/051-editorial-p84/p86-img3.png"
+   ],
+   "render": [
+    "p.84: composite (0 originals swapped in, 1 embedded kept)",
+    "p.85: composite (4 originals swapped in, 0 embedded kept)",
+    "p.86: composite (2 originals swapped in, 1 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    87,
+    88
+   ],
+   "country": "Tunisia",
+   "services": "Journal Note Book Design",
+   "notes": [],
+   "id": "editorial-p87",
+   "client": "Future Islands",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 87,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_17.png",
+       "rect": [
+        73,
+        74,
+        730,
+        568
+       ],
+       "pdfImage": [
+        876,
+        659
+       ],
+       "dist": 7
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 88,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_16.png",
+       "rect": [
+        35,
+        27,
+        395,
+        298
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 3
+      },
+      {
+       "file": "assets-original/mockup-003_8.png",
+       "rect": [
+        437,
+        20,
+        796,
+        291
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 7
+      },
+      {
+       "file": "assets-original/mockup-004_3.png",
+       "rect": [
+        235,
+        310,
+        594,
+        580
+       ],
+       "pdfImage": [
+        480,
+        361
+       ],
+       "dist": 4
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 52,
+   "desktop": [
+    ".cache/portfolio-src/052-editorial-p87/d-p87.png",
+    ".cache/portfolio-src/052-editorial-p87/d-p88.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_17.png",
+    "assets-original/mockup-003_8.png",
+    "assets-original/mockup-002_16.png",
+    "assets-original/mockup-004_3.png"
+   ],
+   "render": [
+    "p.87: composite (1 originals swapped in, 0 embedded kept)",
+    "p.88: composite (3 originals swapped in, 1 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    89,
+    90,
+    91
+   ],
+   "country": "Kuwait",
+   "services": "Company Profile Design",
+   "notes": [],
+   "id": "editorial-p89",
+   "client": "Seen Society",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 89,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_20.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 18
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 90,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_19.png",
+       "rect": [
+        15,
+        0,
+        414,
+        300
+       ],
+       "pdfImage": [
+        532,
+        400
+       ],
+       "dist": 2
+      },
+      {
+       "file": "assets-original/mockup-003_11.png",
+       "rect": [
+        428,
+        0,
+        826,
+        300
+       ],
+       "pdfImage": [
+        532,
+        400
+       ],
+       "dist": 8
+      },
+      {
+       "file": "assets-original/mockup-004_5.png",
+       "rect": [
+        229,
+        283,
+        627,
+        583
+       ],
+       "pdfImage": [
+        532,
+        400
+       ],
+       "dist": 13
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 91,
+     "images": [
+      {
+       "file": "assets-original/mockup-005_2.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 17
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 53,
+   "desktop": [
+    ".cache/portfolio-src/053-editorial-p89/d-p89.png",
+    ".cache/portfolio-src/053-editorial-p89/d-p90.png",
+    "assets-original/mockup-005_2.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_20.png",
+    "assets-original/mockup-002_19.png",
+    "assets-original/mockup-003_11.png",
+    "assets-original/mockup-004_5.png",
+    "assets-original/mockup-005_2.png"
+   ],
+   "render": [
+    "p.89: composite (1 originals swapped in, 0 embedded kept)",
+    "p.90: composite (3 originals swapped in, 1 embedded kept)",
+    "p.91: full-image"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    92,
+    93
+   ],
+   "country": "Kuwait",
+   "services": "Brochure Design",
+   "notes": [
+    "4 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "editorial-p92",
+   "client": "Dairat Podcast",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 92,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_18.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 27
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 93,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        36,
+        38,
+        434,
+        191
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 128
+      },
+      {
+       "file": null,
+       "rect": [
+        419,
+        57,
+        817,
+        211
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 134
+      },
+      {
+       "file": null,
+       "rect": [
+        42,
+        207,
+        453,
+        514
+       ],
+       "pdfImage": [
+        549,
+        411
+       ],
+       "dist": 54
+      },
+      {
+       "file": null,
+       "rect": [
+        440,
+        226,
+        654,
+        370
+       ],
+       "pdfImage": [
+        286,
+        193
+       ],
+       "dist": 82
+      }
+     ],
+     "unmatched": 4
+    }
+   ],
+   "status": "missing-originals",
+   "order": 54,
+   "desktop": [
+    ".cache/portfolio-src/054-editorial-p92/d-p92.png",
+    ".cache/portfolio-src/054-editorial-p92/d-p93.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_18.png",
+    ".cache/portfolio-src/054-editorial-p92/p93-img1.png",
+    ".cache/portfolio-src/054-editorial-p92/p93-img2.png",
+    ".cache/portfolio-src/054-editorial-p92/p93-img3.png",
+    ".cache/portfolio-src/054-editorial-p92/p93-img4.png"
+   ],
+   "render": [
+    "p.92: composite (1 originals swapped in, 0 embedded kept)",
+    "p.93: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    94
+   ],
+   "country": "France",
+   "services": "Presentation Design",
+   "notes": [
+    "1 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "editorial-p94",
+   "client": "RDVmédecins",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 94,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        21,
+        100,
+        793,
+        414
+       ],
+       "pdfImage": [
+        1030,
+        418
+       ],
+       "dist": 98
+      },
+      {
+       "file": "assets-original/mockup-002_12.png",
+       "rect": [
+        554,
+        398,
+        784,
+        571
+       ],
+       "pdfImage": [
+        308,
+        232
+       ],
+       "dist": 29
+      }
+     ],
+     "unmatched": 1
+    }
+   ],
+   "status": "missing-originals",
+   "order": 55,
+   "desktop": [
+    ".cache/portfolio-src/055-editorial-p94/d-p94.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/055-editorial-p94/p94-img1.png",
+    "assets-original/mockup-002_12.png"
+   ],
+   "render": [
+    "p.94: composite (1 originals swapped in, 2 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    95,
+    96
+   ],
+   "country": "Libya",
+   "services": "Presentation Design",
+   "notes": [
+    "2 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "editorial-p95",
+   "client": "RDVmédecins",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 95,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_16.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 10
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 96,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        36,
+        38,
+        434,
+        191
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 86
+      },
+      {
+       "file": null,
+       "rect": [
+        419,
+        55,
+        817,
+        209
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 105
+      },
+      {
+       "file": "assets-original/mockup-003_7.png",
+       "rect": [
+        139,
+        189,
+        703,
+        583
+       ],
+       "pdfImage": [
+        752,
+        526
+       ],
+       "dist": 21
+      }
+     ],
+     "unmatched": 2
+    }
+   ],
+   "status": "missing-originals",
+   "order": 56,
+   "desktop": [
+    ".cache/portfolio-src/056-editorial-p95/d-p95.png",
+    ".cache/portfolio-src/056-editorial-p95/d-p96.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_16.png",
+    ".cache/portfolio-src/056-editorial-p95/p96-img1.png",
+    ".cache/portfolio-src/056-editorial-p95/p96-img2.png",
+    "assets-original/mockup-003_7.png"
+   ],
+   "render": [
+    "p.95: composite (1 originals swapped in, 0 embedded kept)",
+    "p.96: composite (1 originals swapped in, 2 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    97,
+    98
+   ],
+   "country": "UAE",
+   "services": "Brochure Design",
+   "notes": [],
+   "id": "editorial-p97",
+   "client": "AIQ",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 97,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_11.png",
+       "rect": [
+        45,
+        14,
+        791,
+        575
+       ],
+       "pdfImage": [
+        995,
+        748
+       ],
+       "dist": 10
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 98,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_11.png",
+       "rect": [
+        45,
+        14,
+        791,
+        575
+       ],
+       "pdfImage": [
+        995,
+        748
+       ],
+       "dist": 9
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 57,
+   "desktop": [
+    ".cache/portfolio-src/057-editorial-p97/d-p97.png",
+    ".cache/portfolio-src/057-editorial-p97/d-p98.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_11.png",
+    "assets-original/mockup-002_11.png"
+   ],
+   "render": [
+    "p.97: composite (1 originals swapped in, 0 embedded kept)",
+    "p.98: composite (1 originals swapped in, 1 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    99,
+    100
+   ],
+   "country": "Kuwait",
+   "services": "Brochure Design",
+   "notes": [],
+   "id": "editorial-p99",
+   "client": "Balad Alkhayr",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 99,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_19.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 26
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 100,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_18.png",
+       "rect": [
+        36,
+        36,
+        280,
+        220
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 4
+      },
+      {
+       "file": "assets-original/mockup-003_10.png",
+       "rect": [
+        294,
+        36,
+        538,
+        220
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 2
+      },
+      {
+       "file": "assets-original/mockup-004_4.png",
+       "rect": [
+        562,
+        36,
+        806,
+        220
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 6
+      },
+      {
+       "file": "assets-original/mockup-005_1.png",
+       "rect": [
+        36,
+        249,
+        280,
+        433
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 7
+      },
+      {
+       "file": "assets-original/mockup-006.png",
+       "rect": [
+        317,
+        248,
+        768,
+        587
+       ],
+       "pdfImage": [
+        602,
+        453
+       ],
+       "dist": 8
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 58,
+   "desktop": [
+    ".cache/portfolio-src/058-editorial-p99/d-p99.png",
+    ".cache/portfolio-src/058-editorial-p99/d-p100.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_19.png",
+    "assets-original/mockup-002_18.png",
+    "assets-original/mockup-003_10.png",
+    "assets-original/mockup-004_4.png",
+    "assets-original/mockup-005_1.png",
+    "assets-original/mockup-006.png"
+   ],
+   "render": [
+    "p.99: composite (1 originals swapped in, 0 embedded kept)",
+    "p.100: composite (5 originals swapped in, 0 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    101
+   ],
+   "country": "USA",
+   "services": "Brochure Design",
+   "notes": [],
+   "id": "editorial-p101",
+   "client": "Cleantech Group",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 101,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_14.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 16
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 59,
+   "desktop": [
+    ".cache/portfolio-src/059-editorial-p101/d-p101.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_14.png"
+   ],
+   "render": [
+    "p.101: composite (1 originals swapped in, 0 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    102,
+    103
+   ],
+   "country": "Libya",
+   "services": "Presentation Design",
+   "notes": [
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "editorial-p102",
+   "client": "CCD4Libya",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 102,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_13.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 15
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 103,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        36,
+        38,
+        434,
+        191
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 124
+      },
+      {
+       "file": null,
+       "rect": [
+        419,
+        55,
+        817,
+        209
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 112
+      },
+      {
+       "file": null,
+       "rect": [
+        148,
+        170,
+        692,
+        596
+       ],
+       "pdfImage": [
+        726,
+        569
+       ],
+       "dist": 90
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 60,
+   "desktop": [
+    ".cache/portfolio-src/060-editorial-p102/d-p102.png",
+    ".cache/portfolio-src/060-editorial-p102/d-p103.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_13.png",
+    ".cache/portfolio-src/060-editorial-p102/p103-img1.png",
+    ".cache/portfolio-src/060-editorial-p102/p103-img2.png",
+    ".cache/portfolio-src/060-editorial-p102/p103-img3.png"
+   ],
+   "render": [
+    "p.102: composite (1 originals swapped in, 0 embedded kept)",
+    "p.103: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    104,
+    105
+   ],
+   "country": "Tunisia",
+   "services": "Presentation Design",
+   "notes": [
+    "6 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "id": "editorial-p104",
+   "client": "Cleantech216",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 104,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        -1,
+        -1,
+        843,
+        540
+       ],
+       "pdfImage": [
+        1126,
+        722
+       ],
+       "dist": 82
+      },
+      {
+       "file": null,
+       "rect": [
+        31,
+        412,
+        429,
+        564
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 100
+      },
+      {
+       "file": null,
+       "rect": [
+        413,
+        428,
+        812,
+        582
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 94
+      }
+     ],
+     "unmatched": 3
+    },
+    {
+     "page": 105,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        36,
+        38,
+        434,
+        191
+       ],
+       "pdfImage": [
+        532,
+        204
+       ],
+       "dist": 101
+      },
+      {
+       "file": null,
+       "rect": [
+        419,
+        55,
+        817,
+        209
+       ],
+       "pdfImage": [
+        532,
+        205
+       ],
+       "dist": 101
+      },
+      {
+       "file": null,
+       "rect": [
+        165,
+        216,
+        693,
+        556
+       ],
+       "pdfImage": [
+        705,
+        454
+       ],
+       "dist": 111
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 61,
+   "desktop": [
+    ".cache/portfolio-src/061-editorial-p104/d-p104.png",
+    ".cache/portfolio-src/061-editorial-p104/d-p105.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/061-editorial-p104/p104-img1.png",
+    ".cache/portfolio-src/061-editorial-p104/p104-img2.png",
+    ".cache/portfolio-src/061-editorial-p104/p104-img3.png",
+    ".cache/portfolio-src/061-editorial-p104/p105-img1.png",
+    ".cache/portfolio-src/061-editorial-p104/p105-img2.png",
+    ".cache/portfolio-src/061-editorial-p104/p105-img3.png"
+   ],
+   "render": [
+    "p.104: composite (0 originals swapped in, 3 embedded kept)",
+    "p.105: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "editorial",
+   "pdfPages": [
+    106,
+    107
+   ],
+   "country": "Tunisia",
+   "services": "Presentation Design",
+   "notes": [],
+   "id": "editorial-p106",
+   "client": "Future Islands",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 106,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_24.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 26
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 107,
+     "images": [
+      {
+       "file": "assets-original/mockup-002_21.png",
+       "rect": [
+        36,
+        36,
+        280,
+        220
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 5
+      },
+      {
+       "file": "assets-original/mockup-003_13.png",
+       "rect": [
+        294,
+        36,
+        538,
+        220
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 1
+      },
+      {
+       "file": "assets-original/mockup-004_7.png",
+       "rect": [
+        562,
+        36,
+        806,
+        220
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 4
+      },
+      {
+       "file": "assets-original/mockup-006_2.png",
+       "rect": [
+        317,
+        235,
+        768,
+        574
+       ],
+       "pdfImage": [
+        602,
+        453
+       ],
+       "dist": 2
+      },
+      {
+       "file": "assets-original/mockup-005_4.png",
+       "rect": [
+        36,
+        249,
+        280,
+        433
+       ],
+       "pdfImage": [
+        326,
+        245
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 62,
+   "desktop": [
+    ".cache/portfolio-src/062-editorial-p106/d-p106.png",
+    ".cache/portfolio-src/062-editorial-p106/d-p107.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_24.png",
+    "assets-original/mockup-002_21.png",
+    "assets-original/mockup-003_13.png",
+    "assets-original/mockup-004_7.png",
+    "assets-original/mockup-005_4.png",
+    "assets-original/mockup-006_2.png"
+   ],
+   "render": [
+    "p.106: composite (1 originals swapped in, 0 embedded kept)",
+    "p.107: composite (5 originals swapped in, 0 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    109
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Event roll-up banners",
+   "id": "collateral-p109",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 109,
+     "images": [],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 63,
+   "desktop": [
+    ".cache/portfolio-src/063-collateral-p109/d-p109.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/063-collateral-p109/p109-img1.png",
+    ".cache/portfolio-src/063-collateral-p109/p109-img2.png",
+    ".cache/portfolio-src/063-collateral-p109/p109-img3.png"
+   ],
+   "render": [
+    "p.109: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    110,
+    111
+   ],
+   "country": "Tunisia",
+   "services": "Journal Design",
+   "notes": [],
+   "id": "collateral-p110",
+   "client": "Future Islands",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 110,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_21.png",
+       "rect": [
+        42,
+        38,
+        780,
+        593
+       ],
+       "pdfImage": [
+        984,
+        740
+       ],
+       "dist": 8
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 111,
+     "images": [
+      {
+       "file": "assets-original/mockup-001_22.png",
+       "rect": [
+        42,
+        38,
+        780,
+        593
+       ],
+       "pdfImage": [
+        984,
+        740
+       ],
+       "dist": 3
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "ready",
+   "order": 64,
+   "desktop": [
+    ".cache/portfolio-src/064-collateral-p110/d-p110.png",
+    ".cache/portfolio-src/064-collateral-p110/d-p111.png"
+   ],
+   "mobile": [
+    "assets-original/mockup-001_21.png",
+    "assets-original/mockup-001_22.png"
+   ],
+   "render": [
+    "p.110: composite (1 originals swapped in, 0 embedded kept)",
+    "p.111: composite (1 originals swapped in, 0 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    112
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.112 = Direction 5 Ivory Gold (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d5",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_05_Samray_Direction_5_Ivory_Gold",
+   "layout": "board",
+   "status": "ready",
+   "order": 65,
+   "title": "Direction 5 Ivory Gold",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_05_Samray_Direction_5_Ivory_Gold/Project_05_Samray_Direction_5_Ivory_Gold_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/065-collateral-samray-d5/panel-01.png",
+    ".cache/portfolio-src/065-collateral-samray-d5/panel-02.png",
+    ".cache/portfolio-src/065-collateral-samray-d5/panel-03.png",
+    ".cache/portfolio-src/065-collateral-samray-d5/panel-04.png",
+    ".cache/portfolio-src/065-collateral-samray-d5/panel-05.png",
+    ".cache/portfolio-src/065-collateral-samray-d5/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    113
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.113 = Direction 7 Desert Sunset (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d7",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_07_Samray_Direction_7_Desert_Sunset",
+   "layout": "board",
+   "status": "ready",
+   "order": 66,
+   "title": "Direction 7 Desert Sunset",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_07_Samray_Direction_7_Desert_Sunset/Project_07_Samray_Direction_7_Desert_Sunset_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/066-collateral-samray-d7/panel-01.png",
+    ".cache/portfolio-src/066-collateral-samray-d7/panel-02.png",
+    ".cache/portfolio-src/066-collateral-samray-d7/panel-03.png",
+    ".cache/portfolio-src/066-collateral-samray-d7/panel-04.png",
+    ".cache/portfolio-src/066-collateral-samray-d7/panel-05.png",
+    ".cache/portfolio-src/066-collateral-samray-d7/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    114
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.114 = Direction 4 Jasmine Floral (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d4",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_04_Samray_Direction_4_Jasmine_Floral",
+   "layout": "board",
+   "status": "ready",
+   "order": 67,
+   "title": "Direction 4 Jasmine Floral",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_04_Samray_Direction_4_Jasmine_Floral/Project_04_Samray_Direction_4_Jasmine_Floral_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/067-collateral-samray-d4/panel-01.png",
+    ".cache/portfolio-src/067-collateral-samray-d4/panel-02.png",
+    ".cache/portfolio-src/067-collateral-samray-d4/panel-03.png",
+    ".cache/portfolio-src/067-collateral-samray-d4/panel-04.png",
+    ".cache/portfolio-src/067-collateral-samray-d4/panel-05.png",
+    ".cache/portfolio-src/067-collateral-samray-d4/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    115
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.115 = Direction 6 Purple Arabesque (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d6",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_06_Samray_Direction_6_Purple_Arabesque",
+   "layout": "board",
+   "status": "ready",
+   "order": 68,
+   "title": "Direction 6 Purple Arabesque",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_06_Samray_Direction_6_Purple_Arabesque/Project_06_Samray_Direction_6_Purple_Arabesque_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/068-collateral-samray-d6/panel-01.png",
+    ".cache/portfolio-src/068-collateral-samray-d6/panel-02.png",
+    ".cache/portfolio-src/068-collateral-samray-d6/panel-03.png",
+    ".cache/portfolio-src/068-collateral-samray-d6/panel-04.png",
+    ".cache/portfolio-src/068-collateral-samray-d6/panel-05.png",
+    ".cache/portfolio-src/068-collateral-samray-d6/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    116
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.116 = Direction 1 Ceylon Black Tea (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d1",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_01_Samray_Direction_1_Ceylon_Black_Tea",
+   "layout": "board",
+   "status": "ready",
+   "order": 69,
+   "title": "Direction 1 Ceylon Black Tea",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_01_Samray_Direction_1_Ceylon_Black_Tea/Project_01_Samray_Direction_1_Ceylon_Black_Tea_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/069-collateral-samray-d1/panel-01.png",
+    ".cache/portfolio-src/069-collateral-samray-d1/panel-02.png",
+    ".cache/portfolio-src/069-collateral-samray-d1/panel-03.png",
+    ".cache/portfolio-src/069-collateral-samray-d1/panel-04.png",
+    ".cache/portfolio-src/069-collateral-samray-d1/panel-05.png",
+    ".cache/portfolio-src/069-collateral-samray-d1/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    117
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.117 = Direction 3 Sand Calligraphy (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d3",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_03_Samray_Direction_3_Sand_Calligraphy",
+   "layout": "board",
+   "status": "ready",
+   "order": 70,
+   "title": "Direction 3 Sand Calligraphy",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_03_Samray_Direction_3_Sand_Calligraphy/Project_03_Samray_Direction_3_Sand_Calligraphy_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/070-collateral-samray-d3/panel-01.png",
+    ".cache/portfolio-src/070-collateral-samray-d3/panel-02.png",
+    ".cache/portfolio-src/070-collateral-samray-d3/panel-03.png",
+    ".cache/portfolio-src/070-collateral-samray-d3/panel-04.png",
+    ".cache/portfolio-src/070-collateral-samray-d3/panel-05.png",
+    ".cache/portfolio-src/070-collateral-samray-d3/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    118
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.118 = Direction 9 Teal Abstract (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d9",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_09_Samray_Direction_9_Teal_Abstract",
+   "layout": "board",
+   "status": "ready",
+   "order": 71,
+   "title": "Direction 9 Teal Abstract",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_09_Samray_Direction_9_Teal_Abstract/Project_09_Samray_Direction_9_Teal_Abstract_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/071-collateral-samray-d9/panel-01.png",
+    ".cache/portfolio-src/071-collateral-samray-d9/panel-02.png",
+    ".cache/portfolio-src/071-collateral-samray-d9/panel-03.png",
+    ".cache/portfolio-src/071-collateral-samray-d9/panel-04.png",
+    ".cache/portfolio-src/071-collateral-samray-d9/panel-05.png",
+    ".cache/portfolio-src/071-collateral-samray-d9/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    119
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.119 = Direction 8 Orange Kilim (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d8",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_08_Samray_Direction_8_Orange_Kilim",
+   "layout": "board",
+   "status": "ready",
+   "order": 72,
+   "title": "Direction 8 Orange Kilim",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_08_Samray_Direction_8_Orange_Kilim/Project_08_Samray_Direction_8_Orange_Kilim_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/072-collateral-samray-d8/panel-01.png",
+    ".cache/portfolio-src/072-collateral-samray-d8/panel-02.png",
+    ".cache/portfolio-src/072-collateral-samray-d8/panel-03.png",
+    ".cache/portfolio-src/072-collateral-samray-d8/panel-04.png",
+    ".cache/portfolio-src/072-collateral-samray-d8/panel-05.png",
+    ".cache/portfolio-src/072-collateral-samray-d8/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    120
+   ],
+   "country": null,
+   "services": "Packaging Design",
+   "notes": [
+    "PDF p.120 = Direction 2 Emerald Botanical (visually verified: same hero photograph); client name from the prepared-asset folder — the PDF page is unlabelled"
+   ],
+   "id": "collateral-samray-d2",
+   "client": "Samray",
+   "source": "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_02_Samray_Direction_2_Emerald_Botanical",
+   "layout": "board",
+   "status": "ready",
+   "order": 73,
+   "title": "Direction 2 Emerald Botanical",
+   "desktop": [
+    "assets-original/UPWORK_SAMRAY_PACKAGING_CASE_STUDIES_FINAL/Project_02_Samray_Direction_2_Emerald_Botanical/Project_02_Samray_Direction_2_Emerald_Botanical_Packaging_Case_Study.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/073-collateral-samray-d2/panel-01.png",
+    ".cache/portfolio-src/073-collateral-samray-d2/panel-02.png",
+    ".cache/portfolio-src/073-collateral-samray-d2/panel-03.png",
+    ".cache/portfolio-src/073-collateral-samray-d2/panel-04.png",
+    ".cache/portfolio-src/073-collateral-samray-d2/panel-05.png",
+    ".cache/portfolio-src/073-collateral-samray-d2/panel-06.png"
+   ],
+   "tags": [
+    "packaging"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    121
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm",
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "title": "Branded polo shirts & business cards",
+   "id": "collateral-p121",
+   "client": "Future Islands",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 121,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        86,
+        14,
+        742,
+        451
+       ],
+       "pdfImage": [
+        720,
+        480
+       ],
+       "dist": 89
+      },
+      {
+       "file": null,
+       "rect": [
+        285,
+        438,
+        435,
+        560
+       ],
+       "pdfImage": [
+        201,
+        163
+       ],
+       "dist": 97
+      },
+      {
+       "file": null,
+       "rect": [
+        444,
+        438,
+        594,
+        560
+       ],
+       "pdfImage": [
+        201,
+        163
+       ],
+       "dist": 51
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 74,
+   "desktop": [
+    ".cache/portfolio-src/074-collateral-p121/d-p121.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/074-collateral-p121/p121-img1.png",
+    ".cache/portfolio-src/074-collateral-p121/p121-img2.png",
+    ".cache/portfolio-src/074-collateral-p121/p121-img3.png"
+   ],
+   "render": [
+    "p.121: composite (0 originals swapped in, 4 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    122
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Tote bag",
+   "id": "collateral-p122",
+   "client": "CCD4Libya",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 122,
+     "images": [
+      {
+       "file": "assets-original/dzadz.jpg",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 37
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 75,
+   "desktop": [
+    "assets-original/dzadz.jpg"
+   ],
+   "mobile": [
+    "assets-original/dzadz.jpg"
+   ],
+   "render": [
+    "p.122: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    123
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Tote bag — “Ancestral Practices”",
+   "id": "collateral-p123",
+   "client": "Maarifa for Transition",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 123,
+     "images": [
+      {
+       "file": "assets-original/dzz.jpg",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 36
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 76,
+   "desktop": [
+    "assets-original/dzz.jpg"
+   ],
+   "mobile": [
+    "assets-original/dzz.jpg"
+   ],
+   "render": [
+    "p.123: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    124,
+    125
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Brochure",
+   "id": "collateral-p124",
+   "client": "Fifth Insight",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 124,
+     "images": [
+      {
+       "file": "assets-original/c89625126794649.614b67cc0abd2.jpg",
+       "rect": [
+        0,
+        -1,
+        842,
+        596
+       ],
+       "pdfImage": [
+        1124,
+        797
+       ],
+       "dist": 32
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 125,
+     "images": [
+      {
+       "file": "assets-original/8674e4126794649.614b67cc0b33a.jpg",
+       "rect": [
+        0,
+        17,
+        842,
+        578
+       ],
+       "pdfImage": [
+        1122,
+        748
+       ],
+       "dist": 9
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 77,
+   "desktop": [
+    "assets-original/c89625126794649.614b67cc0abd2.jpg",
+    ".cache/portfolio-src/077-collateral-p124/d-p125.png"
+   ],
+   "mobile": [
+    "assets-original/c89625126794649.614b67cc0abd2.jpg",
+    "assets-original/8674e4126794649.614b67cc0b33a.jpg"
+   ],
+   "render": [
+    "p.124: full-image",
+    "p.125: composite (1 originals swapped in, 1 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    126
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Company brochure",
+   "id": "collateral-p126",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 126,
+     "images": [
+      {
+       "file": "assets-original/c3e563129589375.616e7e9b549a5.jpg",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1125,
+        797
+       ],
+       "dist": 22
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 78,
+   "desktop": [
+    "assets-original/c3e563129589375.616e7e9b549a5.jpg"
+   ],
+   "mobile": [
+    "assets-original/c3e563129589375.616e7e9b549a5.jpg"
+   ],
+   "render": [
+    "p.126: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    127,
+    128
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm",
+    "3 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "title": "Event badges & speaker cards",
+   "id": "collateral-p127",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 127,
+     "images": [
+      {
+       "file": "assets-original/Group 9.png",
+       "rect": [
+        64,
+        57,
+        170,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 8
+      },
+      {
+       "file": "assets-original/Group 10.png",
+       "rect": [
+        179,
+        57,
+        285,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 8
+      },
+      {
+       "file": "assets-original/Group 7.png",
+       "rect": [
+        309,
+        57,
+        415,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 12
+      },
+      {
+       "file": "assets-original/Group 8.png",
+       "rect": [
+        423,
+        57,
+        529,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 7
+      },
+      {
+       "file": "assets-original/Group 11.png",
+       "rect": [
+        557,
+        57,
+        663,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 10
+      },
+      {
+       "file": "assets-original/Group 12.png",
+       "rect": [
+        672,
+        57,
+        778,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 11
+      },
+      {
+       "file": "assets-original/Flyer copy 2.png",
+       "rect": [
+        324,
+        319,
+        518,
+        584
+       ],
+       "pdfImage": [
+        259,
+        354
+       ],
+       "dist": 3
+      },
+      {
+       "file": "assets-original/Flyer copy.png",
+       "rect": [
+        83,
+        322,
+        281,
+        590
+       ],
+       "pdfImage": [
+        265,
+        358
+       ],
+       "dist": 1
+      },
+      {
+       "file": "assets-original/Flyer copy 3.png",
+       "rect": [
+        577,
+        321,
+        767,
+        582
+       ],
+       "pdfImage": [
+        255,
+        348
+       ],
+       "dist": 4
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 128,
+     "images": [
+      {
+       "file": "assets-original/Group 1.png",
+       "rect": [
+        43,
+        57,
+        148,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 5
+      },
+      {
+       "file": "assets-original/Group 2.png",
+       "rect": [
+        157,
+        57,
+        263,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 15
+      },
+      {
+       "file": "assets-original/Group 3.png",
+       "rect": [
+        293,
+        57,
+        399,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 12
+      },
+      {
+       "file": "assets-original/Group 6.png",
+       "rect": [
+        407,
+        57,
+        513,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 16
+      },
+      {
+       "file": "assets-original/Group 5.png",
+       "rect": [
+        543,
+        57,
+        649,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 9
+      },
+      {
+       "file": "assets-original/Group 6.png",
+       "rect": [
+        657,
+        57,
+        763,
+        273
+       ],
+       "pdfImage": [
+        142,
+        289
+       ],
+       "dist": 12
+      },
+      {
+       "file": "assets-original/Group 1dddd.png",
+       "rect": [
+        34,
+        347,
+        291,
+        540
+       ],
+       "pdfImage": [
+        343,
+        257
+       ],
+       "dist": 3
+      },
+      {
+       "file": null,
+       "rect": [
+        297,
+        331,
+        486,
+        558
+       ],
+       "pdfImage": [
+        186,
+        242
+       ],
+       "dist": 114
+      },
+      {
+       "file": null,
+       "rect": [
+        432,
+        331,
+        643,
+        559
+       ],
+       "pdfImage": [
+        221,
+        245
+       ],
+       "dist": 119
+      },
+      {
+       "file": null,
+       "rect": [
+        590,
+        332,
+        802,
+        560
+       ],
+       "pdfImage": [
+        216,
+        241
+       ],
+       "dist": 109
+      }
+     ],
+     "unmatched": 3
+    }
+   ],
+   "status": "missing-originals",
+   "order": 79,
+   "desktop": [
+    ".cache/portfolio-src/079-collateral-p127/d-p127.png",
+    ".cache/portfolio-src/079-collateral-p127/d-p128.png"
+   ],
+   "mobile": [
+    "assets-original/Group 9.png",
+    "assets-original/Group 10.png",
+    "assets-original/Group 7.png",
+    "assets-original/Group 8.png",
+    "assets-original/Group 11.png",
+    "assets-original/Group 12.png",
+    "assets-original/Flyer copy.png",
+    "assets-original/Flyer copy 2.png",
+    "assets-original/Flyer copy 3.png",
+    "assets-original/Group 1.png",
+    "assets-original/Group 2.png",
+    "assets-original/Group 3.png",
+    "assets-original/Group 6.png",
+    "assets-original/Group 5.png",
+    "assets-original/Group 6.png",
+    ".cache/portfolio-src/079-collateral-p127/p128-img7.png",
+    ".cache/portfolio-src/079-collateral-p127/p128-img8.png",
+    ".cache/portfolio-src/079-collateral-p127/p128-img9.png",
+    "assets-original/Group 1dddd.png"
+   ],
+   "render": [
+    "p.127: composite (9 originals swapped in, 0 embedded kept)",
+    "p.128: composite (7 originals swapped in, 3 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    129
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Event badges",
+   "id": "collateral-p129",
+   "client": "Career Insider",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 129,
+     "images": [
+      {
+       "file": "assets-original/02eeb3115151665.604eec621780c.jpg",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        798
+       ],
+       "dist": 28
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 80,
+   "desktop": [
+    "assets-original/02eeb3115151665.604eec621780c.jpg"
+   ],
+   "mobile": [
+    "assets-original/02eeb3115151665.604eec621780c.jpg"
+   ],
+   "render": [
+    "p.129: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    130
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm",
+    "2 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "title": "Hoodie & notebook",
+   "id": "collateral-p130",
+   "client": "CCD4Libya",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 130,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        34,
+        75,
+        413,
+        521
+       ],
+       "pdfImage": [
+        505,
+        596
+       ],
+       "dist": 110
+      },
+      {
+       "file": null,
+       "rect": [
+        435,
+        74,
+        807,
+        521
+       ],
+       "pdfImage": [
+        496,
+        596
+       ],
+       "dist": 104
+      }
+     ],
+     "unmatched": 2
+    }
+   ],
+   "status": "missing-originals",
+   "order": 81,
+   "desktop": [
+    ".cache/portfolio-src/081-collateral-p130/d-p130.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/081-collateral-p130/p130-img1.png",
+    ".cache/portfolio-src/081-collateral-p130/p130-img2.png"
+   ],
+   "render": [
+    "p.130: composite (0 originals swapped in, 2 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    131
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Poster campaign",
+   "id": "collateral-p131",
+   "client": "Delace",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 131,
+     "images": [
+      {
+       "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_118.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        597
+       ],
+       "pdfImage": [
+        1125,
+        797
+       ],
+       "dist": 102
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 82,
+   "desktop": [
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_118.png"
+   ],
+   "mobile": [
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_118.png"
+   ],
+   "render": [
+    "p.131: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    132,
+    133
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Brochure & roll-up banners",
+   "id": "collateral-p132",
+   "client": "BD’s — Saudi Business Developers Forum",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 132,
+     "images": [
+      {
+       "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_119.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        798
+       ],
+       "dist": 75
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 133,
+     "images": [
+      {
+       "file": "assets-original/0ea3d2118335363.60877e964c45e.png",
+       "rect": [
+        -1,
+        61,
+        842,
+        535
+       ],
+       "pdfImage": [
+        1124,
+        633
+       ],
+       "dist": 5
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 83,
+   "desktop": [
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_119.png",
+    ".cache/portfolio-src/083-collateral-p132/d-p133.png"
+   ],
+   "mobile": [
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_119.png",
+    "assets-original/0ea3d2118335363.60877e964c45e.png"
+   ],
+   "render": [
+    "p.132: full-image",
+    "p.133: composite (1 originals swapped in, 1 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    134,
+    135
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Event badges & tote bag",
+   "id": "collateral-p134",
+   "client": "IEEEXtreme — Egypt Section",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 134,
+     "images": [
+      {
+       "file": "assets-original/864aa0128599005.615a46a345e3c.jpg",
+       "rect": [
+        0,
+        0,
+        841,
+        597
+       ],
+       "pdfImage": [
+        1122,
+        796
+       ],
+       "dist": 5
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 135,
+     "images": [
+      {
+       "file": "assets-original/8253a0128599005.615b19566f812.jpg",
+       "rect": [
+        0,
+        0,
+        842,
+        596
+       ],
+       "pdfImage": [
+        1124,
+        796
+       ],
+       "dist": 31
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 84,
+   "desktop": [
+    "assets-original/864aa0128599005.615a46a345e3c.jpg",
+    "assets-original/8253a0128599005.615b19566f812.jpg"
+   ],
+   "mobile": [
+    "assets-original/864aa0128599005.615a46a345e3c.jpg",
+    "assets-original/8253a0128599005.615b19566f812.jpg"
+   ],
+   "render": [
+    "p.134: full-image",
+    "p.135: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    136
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Employee ID badges",
+   "id": "collateral-p136",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 136,
+     "images": [
+      {
+       "file": "assets-original/a8ea7c126794649.6134f6c144a18.jpg",
+       "rect": [
+        0,
+        46,
+        842,
+        559
+       ],
+       "pdfImage": [
+        1122,
+        685
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 85,
+   "desktop": [
+    ".cache/portfolio-src/085-collateral-p136/d-p136.png"
+   ],
+   "mobile": [
+    "assets-original/a8ea7c126794649.6134f6c144a18.jpg"
+   ],
+   "render": [
+    "p.136: composite (1 originals swapped in, 0 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    137,
+    138
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Event flags & staff polo shirts",
+   "id": "collateral-p137",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 137,
+     "images": [
+      {
+       "file": "assets-original/7d3b85128369451.6154a9c471a42.jpg",
+       "rect": [
+        0,
+        0,
+        841,
+        595
+       ],
+       "pdfImage": [
+        1122,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 138,
+     "images": [
+      {
+       "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_125.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        597
+       ],
+       "pdfImage": [
+        1126,
+        798
+       ],
+       "dist": 56
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 86,
+   "desktop": [
+    "assets-original/7d3b85128369451.6154a9c471a42.jpg",
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_125.png"
+   ],
+   "mobile": [
+    "assets-original/7d3b85128369451.6154a9c471a42.jpg",
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_125.png"
+   ],
+   "render": [
+    "p.137: full-image",
+    "p.138: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    139,
+    140,
+    141,
+    142
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Event print & signage",
+   "id": "collateral-p139",
+   "client": "Career Insider — IEEE Mansoura Student Branch",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 139,
+     "images": [
+      {
+       "file": "assets-original/3df614115151665.60592f57927d8.jpg",
+       "rect": [
+        0,
+        72,
+        842,
+        523
+       ],
+       "pdfImage": [
+        1122,
+        602
+       ],
+       "dist": 16
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 140,
+     "images": [
+      {
+       "file": "assets-original/405f44115151665.604eec621868c.jpg",
+       "rect": [
+        0,
+        0,
+        842,
+        597
+       ],
+       "pdfImage": [
+        1123,
+        796
+       ],
+       "dist": 13
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 141,
+     "images": [
+      {
+       "file": "assets-original/fc9416115151665.60592f5793178.jpg",
+       "rect": [
+        -1,
+        -1,
+        842,
+        597
+       ],
+       "pdfImage": [
+        1125,
+        798
+       ],
+       "dist": 12
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 142,
+     "images": [
+      {
+       "file": "assets-original/d6593a115151665.604eec6217f3f.jpg",
+       "rect": [
+        -1,
+        0,
+        842,
+        596
+       ],
+       "pdfImage": [
+        1124,
+        796
+       ],
+       "dist": 15
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 87,
+   "desktop": [
+    ".cache/portfolio-src/087-collateral-p139/d-p139.png",
+    "assets-original/405f44115151665.604eec621868c.jpg",
+    "assets-original/fc9416115151665.60592f5793178.jpg",
+    "assets-original/d6593a115151665.604eec6217f3f.jpg"
+   ],
+   "mobile": [
+    "assets-original/3df614115151665.60592f57927d8.jpg",
+    "assets-original/405f44115151665.604eec621868c.jpg",
+    "assets-original/fc9416115151665.60592f5793178.jpg",
+    "assets-original/d6593a115151665.604eec6217f3f.jpg"
+   ],
+   "render": [
+    "p.139: composite (1 originals swapped in, 1 embedded kept)",
+    "p.140: full-image",
+    "p.141: full-image",
+    "p.142: full-image"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    143
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm",
+    "4 image(s) without a high-res original — PDF-embedded copy only"
+   ],
+   "title": "Event report & certificates",
+   "id": "collateral-p143",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 143,
+     "images": [
+      {
+       "file": null,
+       "rect": [
+        31,
+        2,
+        240,
+        192
+       ],
+       "pdfImage": [
+        205,
+        187
+       ],
+       "dist": 71
+      },
+      {
+       "file": "assets-original/zdzd.png",
+       "rect": [
+        247,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        793,
+        794
+       ],
+       "dist": 0
+      },
+      {
+       "file": null,
+       "rect": [
+        19,
+        138,
+        231,
+        326
+       ],
+       "pdfImage": [
+        207,
+        184
+       ],
+       "dist": 77
+      },
+      {
+       "file": null,
+       "rect": [
+        48,
+        304,
+        198,
+        411
+       ],
+       "pdfImage": [
+        201,
+        143
+       ],
+       "dist": 97
+      },
+      {
+       "file": null,
+       "rect": [
+        48,
+        440,
+        198,
+        547
+       ],
+       "pdfImage": [
+        201,
+        143
+       ],
+       "dist": 99
+      }
+     ],
+     "unmatched": 4
+    }
+   ],
+   "status": "missing-originals",
+   "order": 88,
+   "desktop": [
+    ".cache/portfolio-src/088-collateral-p143/d-p143.png"
+   ],
+   "mobile": [
+    ".cache/portfolio-src/088-collateral-p143/p143-img1.png",
+    "assets-original/zdzd.png",
+    ".cache/portfolio-src/088-collateral-p143/p143-img3.png",
+    ".cache/portfolio-src/088-collateral-p143/p143-img4.png",
+    ".cache/portfolio-src/088-collateral-p143/p143-img5.png"
+   ],
+   "render": [
+    "p.143: composite (1 originals swapped in, 5 embedded kept)"
+   ]
+  },
+  {
+   "chapter": "collateral",
+   "pdfPages": [
+    144
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork — confirm"
+   ],
+   "title": "Menu",
+   "id": "collateral-p144",
+   "client": "Nayyar",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 144,
+     "images": [
+      {
+       "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_135.png",
+       "rect": [
+        -1,
+        -1,
+        843,
+        596
+       ],
+       "pdfImage": [
+        1126,
+        797
+       ],
+       "dist": 74
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 89,
+   "desktop": [
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_135.png"
+   ],
+   "mobile": [
+    "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_135.png"
+   ],
+   "render": [
+    "p.144: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    146,
+    147,
+    148
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Instagram feed imagery",
+   "id": "ai-p146",
+   "client": "Bodies",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 146,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0006__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 147,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0007__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 3
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 148,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0008__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_003.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 90,
+   "desktop": [
+    "assets-original/AI_Portfolio_0006__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_001.png",
+    "assets-original/AI_Portfolio_0007__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_002.png",
+    "assets-original/AI_Portfolio_0008__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_003.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0006__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_001.png",
+    "assets-original/AI_Portfolio_0007__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_002.png",
+    "assets-original/AI_Portfolio_0008__Project_03_BODEIS_INSTAGRAM_FEED_SHOOTING_IMAGER_003.png"
+   ],
+   "render": [
+    "p.146: full-image",
+    "p.147: full-image",
+    "p.148: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    149
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Product imagery",
+   "id": "ai-p149",
+   "client": "Bodies",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 149,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0013__Project_04_BODIES_005.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 91,
+   "desktop": [
+    "assets-original/AI_Portfolio_0013__Project_04_BODIES_005.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0013__Project_04_BODIES_005.png"
+   ],
+   "render": [
+    "p.149: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    150,
+    151,
+    152,
+    153,
+    154,
+    155
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Brand imagery",
+   "id": "ai-p150",
+   "client": "Ghitra",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 150,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0043__Project_10_Ghitra_Brand_Imagery_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 3
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 151,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0044__Project_10_Ghitra_Brand_Imagery_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 4
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 152,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0047__Project_10_Ghitra_Brand_Imagery_005.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 153,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0048__Project_10_Ghitra_Brand_Imagery_006.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 154,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0045__Project_10_Ghitra_Brand_Imagery_003.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 155,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0046__Project_10_Ghitra_Brand_Imagery_004.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 3
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 92,
+   "desktop": [
+    "assets-original/AI_Portfolio_0043__Project_10_Ghitra_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0044__Project_10_Ghitra_Brand_Imagery_002.png",
+    "assets-original/AI_Portfolio_0047__Project_10_Ghitra_Brand_Imagery_005.png",
+    "assets-original/AI_Portfolio_0048__Project_10_Ghitra_Brand_Imagery_006.png",
+    "assets-original/AI_Portfolio_0045__Project_10_Ghitra_Brand_Imagery_003.png",
+    "assets-original/AI_Portfolio_0046__Project_10_Ghitra_Brand_Imagery_004.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0043__Project_10_Ghitra_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0044__Project_10_Ghitra_Brand_Imagery_002.png",
+    "assets-original/AI_Portfolio_0047__Project_10_Ghitra_Brand_Imagery_005.png",
+    "assets-original/AI_Portfolio_0048__Project_10_Ghitra_Brand_Imagery_006.png",
+    "assets-original/AI_Portfolio_0045__Project_10_Ghitra_Brand_Imagery_003.png",
+    "assets-original/AI_Portfolio_0046__Project_10_Ghitra_Brand_Imagery_004.png"
+   ],
+   "render": [
+    "p.150: full-image",
+    "p.151: full-image",
+    "p.152: full-image",
+    "p.153: full-image",
+    "p.154: full-image",
+    "p.155: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    156
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Imagery shoot",
+   "id": "ai-p156",
+   "client": "Flawless",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 156,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0042__Project_09_Flawless_imagery_shoot_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 93,
+   "desktop": [
+    "assets-original/AI_Portfolio_0042__Project_09_Flawless_imagery_shoot_001.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0042__Project_09_Flawless_imagery_shoot_001.png"
+   ],
+   "render": [
+    "p.156: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    157,
+    158
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Brand imagery",
+   "id": "ai-p157",
+   "client": "Indintambwe",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 157,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0049__Project_11_indintambwe_Brand_Imagery_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 158,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0050__Project_11_indintambwe_Brand_Imagery_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 94,
+   "desktop": [
+    "assets-original/AI_Portfolio_0049__Project_11_indintambwe_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0050__Project_11_indintambwe_Brand_Imagery_002.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0049__Project_11_indintambwe_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0050__Project_11_indintambwe_Brand_Imagery_002.png"
+   ],
+   "render": [
+    "p.157: full-image",
+    "p.158: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    159,
+    160
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Brand imagery",
+   "id": "ai-p159",
+   "client": "MZURI Organics",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 159,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0051__Project_12_MZURI_Brand_Imagery_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 160,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0052__Project_12_MZURI_Brand_Imagery_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 3
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 95,
+   "desktop": [
+    "assets-original/AI_Portfolio_0051__Project_12_MZURI_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0052__Project_12_MZURI_Brand_Imagery_002.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0051__Project_12_MZURI_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0052__Project_12_MZURI_Brand_Imagery_002.png"
+   ],
+   "render": [
+    "p.159: full-image",
+    "p.160: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    161
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "5-in-1 professional hair-styling set",
+   "id": "ai-p161",
+   "client": "Viva",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 161,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0077__Project_18_مجموعة_ڤيڤا_للتسريحات_الاحترافية_5_في_1_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 96,
+   "desktop": [
+    "assets-original/AI_Portfolio_0077__Project_18_مجموعة_ڤيڤا_للتسريحات_الاحترافية_5_في_1_001.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0077__Project_18_مجموعة_ڤيڤا_للتسريحات_الاحترافية_5_في_1_001.png"
+   ],
+   "render": [
+    "p.161: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    162,
+    163
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Brand imagery",
+   "id": "ai-p162",
+   "client": "Patvention",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 162,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0059__Project_14_Patvention_Brand_Imagery_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 163,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0060__Project_14_Patvention_Brand_Imagery_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 97,
+   "desktop": [
+    "assets-original/AI_Portfolio_0059__Project_14_Patvention_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0060__Project_14_Patvention_Brand_Imagery_002.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0059__Project_14_Patvention_Brand_Imagery_001.png",
+    "assets-original/AI_Portfolio_0060__Project_14_Patvention_Brand_Imagery_002.png"
+   ],
+   "render": [
+    "p.162: full-image",
+    "p.163: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    164
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Face shapewear",
+   "id": "ai-p164",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 164,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0037__Project_07_Face_shapewear_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 98,
+   "desktop": [
+    "assets-original/AI_Portfolio_0037__Project_07_Face_shapewear_001.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0037__Project_07_Face_shapewear_001.png"
+   ],
+   "render": [
+    "p.164: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    165,
+    166,
+    167,
+    168,
+    169
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Bodysuits",
+   "id": "ai-p165",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 165,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0028__Project_05_BODYSUITS_011.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 166,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0029__Project_05_BODYSUITS_012.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 167,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0030__Project_05_BODYSUITS_013.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 168,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0031__Project_05_BODYSUITS_014.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 169,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0032__Project_05_BODYSUITS_015.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 99,
+   "desktop": [
+    "assets-original/AI_Portfolio_0028__Project_05_BODYSUITS_011.png",
+    "assets-original/AI_Portfolio_0029__Project_05_BODYSUITS_012.png",
+    "assets-original/AI_Portfolio_0030__Project_05_BODYSUITS_013.png",
+    "assets-original/AI_Portfolio_0031__Project_05_BODYSUITS_014.png",
+    "assets-original/AI_Portfolio_0032__Project_05_BODYSUITS_015.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0028__Project_05_BODYSUITS_011.png",
+    "assets-original/AI_Portfolio_0029__Project_05_BODYSUITS_012.png",
+    "assets-original/AI_Portfolio_0030__Project_05_BODYSUITS_013.png",
+    "assets-original/AI_Portfolio_0031__Project_05_BODYSUITS_014.png",
+    "assets-original/AI_Portfolio_0032__Project_05_BODYSUITS_015.png"
+   ],
+   "render": [
+    "p.165: full-image",
+    "p.166: full-image",
+    "p.167: full-image",
+    "p.168: full-image",
+    "p.169: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    170,
+    171
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Imagery",
+   "id": "ai-p170",
+   "client": "Almizan Economy",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 170,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0075__Project_17_الصور_ALMIZAN_ECONOMY_20261014T132644Z_1_001_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 171,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0076__Project_17_الصور_ALMIZAN_ECONOMY_20261014T132644Z_1_001_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 100,
+   "desktop": [
+    "assets-original/AI_Portfolio_0075__Project_17_الصور_ALMIZAN_ECONOMY_20261014T132644Z_1_001_001.png",
+    "assets-original/AI_Portfolio_0076__Project_17_الصور_ALMIZAN_ECONOMY_20261014T132644Z_1_001_002.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0075__Project_17_الصور_ALMIZAN_ECONOMY_20261014T132644Z_1_001_001.png",
+    "assets-original/AI_Portfolio_0076__Project_17_الصور_ALMIZAN_ECONOMY_20261014T132644Z_1_001_002.png"
+   ],
+   "render": [
+    "p.170: full-image",
+    "p.171: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    172,
+    173,
+    174,
+    175
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Product imagery",
+   "id": "ai-p172",
+   "client": "Bodies",
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 172,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0014__Project_04_BODIES_006.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 173,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0015__Project_04_BODIES_007.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 174,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0016__Project_04_BODIES_008.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 175,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0017__Project_04_BODIES_009.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 101,
+   "desktop": [
+    "assets-original/AI_Portfolio_0014__Project_04_BODIES_006.png",
+    "assets-original/AI_Portfolio_0015__Project_04_BODIES_007.png",
+    "assets-original/AI_Portfolio_0016__Project_04_BODIES_008.png",
+    "assets-original/AI_Portfolio_0017__Project_04_BODIES_009.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0014__Project_04_BODIES_006.png",
+    "assets-original/AI_Portfolio_0015__Project_04_BODIES_007.png",
+    "assets-original/AI_Portfolio_0016__Project_04_BODIES_008.png",
+    "assets-original/AI_Portfolio_0017__Project_04_BODIES_009.png"
+   ],
+   "render": [
+    "p.172: full-image",
+    "p.173: full-image",
+    "p.174: full-image",
+    "p.175: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    176,
+    177,
+    178,
+    179
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Packaging imagery",
+   "id": "ai-p176",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 176,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0057__Project_13_packaging_pic_005.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 177,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0058__Project_13_packaging_pic_006.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 3
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 178,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0055__Project_13_packaging_pic_003.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 179,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0056__Project_13_packaging_pic_004.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 102,
+   "desktop": [
+    "assets-original/AI_Portfolio_0057__Project_13_packaging_pic_005.png",
+    "assets-original/AI_Portfolio_0058__Project_13_packaging_pic_006.png",
+    "assets-original/AI_Portfolio_0055__Project_13_packaging_pic_003.png",
+    "assets-original/AI_Portfolio_0056__Project_13_packaging_pic_004.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0057__Project_13_packaging_pic_005.png",
+    "assets-original/AI_Portfolio_0058__Project_13_packaging_pic_006.png",
+    "assets-original/AI_Portfolio_0055__Project_13_packaging_pic_003.png",
+    "assets-original/AI_Portfolio_0056__Project_13_packaging_pic_004.png"
+   ],
+   "render": [
+    "p.176: full-image",
+    "p.177: full-image",
+    "p.178: full-image",
+    "p.179: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    180
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Shapewear product review shots",
+   "id": "ai-p180",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 180,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0061__Project_15_Shapewear_Product_Review_Shots_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 103,
+   "desktop": [
+    "assets-original/AI_Portfolio_0061__Project_15_Shapewear_Product_Review_Shots_001.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0061__Project_15_Shapewear_Product_Review_Shots_001.png"
+   ],
+   "render": [
+    "p.180: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    181,
+    182,
+    183,
+    184,
+    185
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Shapewear website product shoot",
+   "id": "ai-p181",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 181,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0064__Project_16_Shapewears_website_shooting_products_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 182,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0068__Project_16_Shapewears_website_shooting_products_005.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 183,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0065__Project_16_Shapewears_website_shooting_products_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 184,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0066__Project_16_Shapewears_website_shooting_products_003.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 185,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0067__Project_16_Shapewears_website_shooting_products_004.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 104,
+   "desktop": [
+    "assets-original/AI_Portfolio_0064__Project_16_Shapewears_website_shooting_products_001.png",
+    "assets-original/AI_Portfolio_0068__Project_16_Shapewears_website_shooting_products_005.png",
+    "assets-original/AI_Portfolio_0065__Project_16_Shapewears_website_shooting_products_002.png",
+    "assets-original/AI_Portfolio_0066__Project_16_Shapewears_website_shooting_products_003.png",
+    "assets-original/AI_Portfolio_0067__Project_16_Shapewears_website_shooting_products_004.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0064__Project_16_Shapewears_website_shooting_products_001.png",
+    "assets-original/AI_Portfolio_0068__Project_16_Shapewears_website_shooting_products_005.png",
+    "assets-original/AI_Portfolio_0065__Project_16_Shapewears_website_shooting_products_002.png",
+    "assets-original/AI_Portfolio_0066__Project_16_Shapewears_website_shooting_products_003.png",
+    "assets-original/AI_Portfolio_0067__Project_16_Shapewears_website_shooting_products_004.png"
+   ],
+   "render": [
+    "p.181: full-image",
+    "p.182: full-image",
+    "p.183: full-image",
+    "p.184: full-image",
+    "p.185: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    186,
+    187,
+    188
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Bodysuits",
+   "id": "ai-p186",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 186,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0018__Project_05_BODYSUITS_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 187,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0019__Project_05_BODYSUITS_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 188,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0020__Project_05_BODYSUITS_003.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 105,
+   "desktop": [
+    "assets-original/AI_Portfolio_0018__Project_05_BODYSUITS_001.png",
+    "assets-original/AI_Portfolio_0019__Project_05_BODYSUITS_002.png",
+    "assets-original/AI_Portfolio_0020__Project_05_BODYSUITS_003.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0018__Project_05_BODYSUITS_001.png",
+    "assets-original/AI_Portfolio_0019__Project_05_BODYSUITS_002.png",
+    "assets-original/AI_Portfolio_0020__Project_05_BODYSUITS_003.png"
+   ],
+   "render": [
+    "p.186: full-image",
+    "p.187: full-image",
+    "p.188: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    189,
+    190,
+    191
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Face shapewear",
+   "id": "ai-p189",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 189,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0038__Project_08_Face_Shapewear_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 190,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0039__Project_08_Face_Shapewear_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 191,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0040__Project_08_Face_Shapewear_003.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 106,
+   "desktop": [
+    "assets-original/AI_Portfolio_0038__Project_08_Face_Shapewear_001.png",
+    "assets-original/AI_Portfolio_0039__Project_08_Face_Shapewear_002.png",
+    "assets-original/AI_Portfolio_0040__Project_08_Face_Shapewear_003.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0038__Project_08_Face_Shapewear_001.png",
+    "assets-original/AI_Portfolio_0039__Project_08_Face_Shapewear_002.png",
+    "assets-original/AI_Portfolio_0040__Project_08_Face_Shapewear_003.png"
+   ],
+   "render": [
+    "p.189: full-image",
+    "p.190: full-image",
+    "p.191: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    192,
+    193
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Brand imagery",
+   "id": "ai-p192",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 192,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0033__Project_06_brands_imagey_001.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 193,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0034__Project_06_brands_imagey_002.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 107,
+   "desktop": [
+    "assets-original/AI_Portfolio_0033__Project_06_brands_imagey_001.png",
+    "assets-original/AI_Portfolio_0034__Project_06_brands_imagey_002.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0033__Project_06_brands_imagey_001.png",
+    "assets-original/AI_Portfolio_0034__Project_06_brands_imagey_002.png"
+   ],
+   "render": [
+    "p.192: full-image",
+    "p.193: full-image"
+   ]
+  },
+  {
+   "chapter": "ai",
+   "pdfPages": [
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200
+   ],
+   "country": null,
+   "services": null,
+   "notes": [
+    "PDF pages unlabelled; name read from the artwork and the source file names — confirm"
+   ],
+   "title": "Bodysuits",
+   "id": "ai-p194",
+   "client": null,
+   "source": "pdf-page-originals",
+   "layout": "pdf-pages",
+   "pages": [
+    {
+     "page": 194,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0021__Project_05_BODYSUITS_004.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 195,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0022__Project_05_BODYSUITS_005.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 2
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 196,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0023__Project_05_BODYSUITS_006.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 197,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0024__Project_05_BODYSUITS_007.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 198,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0025__Project_05_BODYSUITS_008.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 4
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 199,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0026__Project_05_BODYSUITS_009.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 0
+      }
+     ],
+     "unmatched": 0
+    },
+    {
+     "page": 200,
+     "images": [
+      {
+       "file": "assets-original/AI_Portfolio_0027__Project_05_BODYSUITS_010.png",
+       "rect": [
+        0,
+        0,
+        842,
+        595
+       ],
+       "pdfImage": [
+        1123,
+        794
+       ],
+       "dist": 1
+      }
+     ],
+     "unmatched": 0
+    }
+   ],
+   "status": "unlabelled",
+   "order": 108,
+   "desktop": [
+    "assets-original/AI_Portfolio_0021__Project_05_BODYSUITS_004.png",
+    "assets-original/AI_Portfolio_0022__Project_05_BODYSUITS_005.png",
+    "assets-original/AI_Portfolio_0023__Project_05_BODYSUITS_006.png",
+    "assets-original/AI_Portfolio_0024__Project_05_BODYSUITS_007.png",
+    "assets-original/AI_Portfolio_0025__Project_05_BODYSUITS_008.png",
+    "assets-original/AI_Portfolio_0026__Project_05_BODYSUITS_009.png",
+    "assets-original/AI_Portfolio_0027__Project_05_BODYSUITS_010.png"
+   ],
+   "mobile": [
+    "assets-original/AI_Portfolio_0021__Project_05_BODYSUITS_004.png",
+    "assets-original/AI_Portfolio_0022__Project_05_BODYSUITS_005.png",
+    "assets-original/AI_Portfolio_0023__Project_05_BODYSUITS_006.png",
+    "assets-original/AI_Portfolio_0024__Project_05_BODYSUITS_007.png",
+    "assets-original/AI_Portfolio_0025__Project_05_BODYSUITS_008.png",
+    "assets-original/AI_Portfolio_0026__Project_05_BODYSUITS_009.png",
+    "assets-original/AI_Portfolio_0027__Project_05_BODYSUITS_010.png"
+   ],
+   "render": [
+    "p.194: full-image",
+    "p.195: full-image",
+    "p.196: full-image",
+    "p.197: full-image",
+    "p.198: full-image",
+    "p.199: full-image",
+    "p.200: full-image"
+   ]
+  }
+ ]
+}

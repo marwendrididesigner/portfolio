@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import { chapters, totals } from '../data/portfolio';
+
+// Continuous portfolio in the PDF's order: chapter opener → project header → every visual, inline.
+// Wide screens show the prepared presentation boards; phones show the individual designs in the same
+// order (boards are 4:3 compositions whose type becomes unreadable below ~700 px). The hidden set is
+// display:none + loading="lazy", so the browser never downloads it.
+---
+<section class="work" id="work" aria-labelledby="work-title">
+  <div class="container">
+    <header class="head">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="work-title" class="display title">Portfolio</h2>
+      <p class="count">{totals.published} projects · in the order of the portfolio PDF</p>
+    </header>
+
+    <nav class="index" aria-label="Portfolio chapters">
+      <ol>
+        {chapters.map((c) => (
+          <li><a href={`#work-${c.id}`}><span class="inum">{c.number}</span>{c.title}<span class="icount">{c.projects.length}</span></a></li>
+        ))}
+      </ol>
+    </nav>
+
+    {chapters.map((c) => (
+      <section class="chapter" id={`work-${c.id}`} aria-labelledby={`chapter-${c.id}`}>
+        <header class="chapter-head">
+          <p class="outlined chapter-num" aria-hidden="true">{c.number}</p>
+          <div>
+            <h3 id={`chapter-${c.id}`} class="chapter-title">{c.title}</h3>
+            <p class="chapter-desc">{c.description}</p>
+          </div>
+        </header>
+
+        {c.projects.map((p) => (
+          <article class="project" id={p.id} aria-labelledby={`title-${p.id}`}>
+            <header class="project-head">
+              <h4 id={`title-${p.id}`} class="client">{p.client}{p.title && <span class="ptitle"> — {p.title}</span>}</h4>
+              <dl class="meta">
+                {p.country && <div><dt>Country</dt><dd>{p.country}</dd></div>}
+                {p.services && <div><dt>Services</dt><dd>{p.services}</dd></div>}
+              </dl>
+            </header>
+
+            <div class="boards">
+              {p.desktop.map((v) => (
+                <Image src={v.src} alt={v.alt} widths={[960, 1400, 1920, 2400]}
+                  sizes="(min-width: 1440px) 1312px, calc(100vw - 2 * var(--gutter))"
+                  format="webp" quality={82} loading="lazy" decoding="async" />
+              ))}
+            </div>
+            <div class="singles">
+              {p.mobile.map((v) => (
+                <Image src={v.src} alt={v.alt} widths={[480, 800, 1200]}
+                  sizes="calc(100vw - 2 * var(--gutter))"
+                  format="webp" quality={82} loading="lazy" decoding="async" />
+              ))}
+            </div>
+          </article>
+        ))}
+      </section>
+    ))}
+  </div>
+</section>
+
+<style>
+  .work { background: var(--paper); color: var(--ink); padding-block: clamp(32px, 4vw, 56px) clamp(80px, 10vw, 140px); }
+  .title { margin-top: 12px; font-size: clamp(2.5rem, 7vw, 5.5rem); color: var(--ink); }
+  .count { margin-top: 6px; color: var(--label); font-size: 0.9375rem; }
+
+  /* Chapter jump index (never hides content — plain anchor links) */
+  .index ol {
+    list-style: none; margin: clamp(24px, 3vw, 40px) 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(16px, 3vw, 40px);
+    border-top: 1px solid var(--rule-light);
+  }
+  .index a {
+    display: flex; align-items: baseline; gap: 12px; padding: 14px 0;
+    border-bottom: 1px solid var(--rule-light); text-decoration: none;
+    font-size: 0.9375rem; font-weight: 400; transition: color 0.2s var(--ease);
+  }
+  .index a:hover, .index a:focus-visible { color: var(--blue); }
+  .inum { color: var(--blue); font-weight: 800; font-size: 0.75rem; letter-spacing: 0.14em; }
+  .icount { margin-left: auto; color: var(--value); font-size: 0.8125rem; }
+  @media (max-width: 960px) { .index ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .index ol { grid-template-columns: 1fr; } .index a { padding: 11px 0; } }
+
+  /* Chapter opener — echoes the PDF divider pages (outlined number + title + one line) */
+  .chapter { margin-top: clamp(56px, 8vw, 112px); scroll-margin-top: calc(var(--header-h) + 24px); }
+  .chapter-head {
+    display: grid; grid-template-columns: auto 1fr; gap: clamp(16px, 3vw, 40px); align-items: end;
+    padding-bottom: clamp(20px, 2.5vw, 32px); border-bottom: 1px solid var(--rule-light);
+  }
+  .chapter-num { font-size: clamp(4rem, 10vw, 8.5rem); }
+  .chapter-title { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; }
+  .chapter-desc { margin-top: 8px; max-width: 60ch; color: var(--label); font-size: clamp(0.9375rem, 1.2vw, 1.0625rem); }
+
+  /* Project */
+  .project { padding-block: clamp(40px, 5vw, 72px); }
+  .project + .project { border-top: 1px solid var(--rule-light); }
+  .project-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px;
+    margin-bottom: clamp(16px, 2vw, 28px);
+  }
+  .client { font-size: clamp(1.375rem, 2.4vw, 2rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.15; }
+  .ptitle { font-weight: 400; text-transform: none; color: var(--label); }
+  .meta { display: flex; flex-wrap: wrap; margin: 0; }
+  .meta div { padding-inline: 20px; border-left: 1px solid var(--rule-light); }
+  .meta div:first-child { padding-left: 0; border-left: 0; }
+  .meta dt { font-size: 0.75rem; color: var(--label); }
+  .meta dd { margin: 2px 0 0; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--value); }
+
+  /* Visuals: full content width, original aspect ratio, never cropped */
+  .boards, .singles { display: grid; gap: clamp(12px, 1.6vw, 24px); }
+  .boards :global(img), .singles :global(img) { display: block; width: 100%; height: auto; }
+  .singles { display: none; }
+
+  @media (max-width: 759px) {
+    .boards { display: none; }
+    .singles { display: grid; gap: 14px; }
+    .singles :global(img) { box-shadow: 0 0 0 1px var(--rule-light); }
+    .chapter-head { grid-template-columns: 1fr; gap: 4px; }
+    .meta { flex-direction: column; gap: 6px; }
+    .meta div { padding: 0; border: 0; }
+  }
+</style>

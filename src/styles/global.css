@@ -1,0 +1,124 @@
+/* Brand tokens — sampled from the PDF (see README › Design system). */
+:root {
+  --ink: #000004;          /* page background, PDF cover */
+  --ink-2: #020a22;        /* navy lift used in section dividers */
+  --glow: #004c8a;         /* top-right light */
+  --blue: #00a0de;         /* signature blue: name, numbers */
+  --ribbon: #099bdd;       /* ribbon stroke */
+  --cream: #fff5ea;        /* type on dark */
+  --cream-dim: rgb(255 245 234 / 0.66);
+  --lime: #93c003;         /* tiny separators only */
+  --paper: #fbfbfb;        /* project pages */
+  --label: #6d6e71;        /* "Country / Client / Services" labels */
+  --value: #8a8b8e;        /* label values (darkened from #A0A0A0 for contrast) */
+  --rule-dark: rgb(255 245 234 / 0.14);
+  --rule-light: rgb(0 0 4 / 0.1);
+
+  --font: 'Argentum Sans', 'Montserrat', system-ui, sans-serif;
+  --gutter: clamp(16px, 4.5vw, 64px);
+  --max: 1360px;
+  --header-h: 64px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+main [id] { scroll-margin-top: var(--header-h); }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, svg { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, p { margin: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute; left: 16px; top: -100px; z-index: 100;
+  background: var(--blue); color: var(--ink);
+  padding: 10px 16px; font-weight: 800; text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+/* Shared typographic roles */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.display {
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+.outlined {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--blue);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6em;
+  min-height: 48px; padding: 0 1.5rem;
+  font-size: 0.8125rem; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: none; border: 1.5px solid currentColor;
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.btn--primary { background: var(--blue); border-color: var(--blue); color: var(--ink); }
+.btn--primary:hover { background: var(--cream); border-color: var(--cream); }
+.btn--ghost { color: var(--cream); }
+.btn--ghost:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+.btn .arrow { transition: transform 0.25s var(--ease); }
+.btn:hover .arrow { transform: translateX(3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

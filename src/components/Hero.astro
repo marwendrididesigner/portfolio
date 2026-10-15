@@ -1,0 +1,196 @@
+---
+import { Picture, Image } from 'astro:assets';
+import portrait from '../assets/brand/portrait.png';
+import glow from '../assets/brand/glow.png';
+import letters from '../assets/brand/wordmark-letters.png';
+import overMaskUrl from '../assets/brand/ribbon-over-mask.png?url';
+import { hero, person } from '../data/site';
+import { ribbon } from '../data/ribbon';
+---
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="glow-wrap" aria-hidden="true">
+    <Image src={glow} alt="" class="glow" widths={[800, 1127]} sizes="100vw" loading="eager" quality={70} format="webp" />
+  </div>
+
+  <!-- Region 1 — left content -->
+  <div class="intro">
+    <ul class="contact-line" aria-label="Contact details">
+      <li><a href={`mailto:${person.email}`}>{person.email}</a></li>
+      <li><a href={person.whatsapp} target="_blank" rel="noopener">{person.phoneDisplay}</a></li>
+      <li>{person.location}</li>
+    </ul>
+    <p class="years">{person.experience} years of experience</p>
+    <h1 id="hero-title" class="display name">Marwen<br />Dridi</h1>
+    <p class="role">{person.role}</p>
+    <p class="statement">{hero.statement.map((s) => <span>{s}</span>)}</p>
+    <p class="support">{hero.support}</p>
+    <div class="actions">
+      <a class="btn btn--primary" href="#work">View work <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <!-- Region 2 — upper-right portrait (head aligned with the name; chest fades out above the lettering) -->
+  <div class="portrait-wrap">
+    <Picture
+      src={portrait}
+      alt="Portrait of Marwen Dridi in black and white, wearing a black T-shirt"
+      class="portrait"
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      widths={[360, 540, 725]}
+      sizes="(min-width: 900px) 725px, 400px"
+      pictureAttributes={{ style: 'display: contents' }}
+      priority
+    />
+  </div>
+
+  <!-- Region 3 — lower band: original lettering + ONE continuous ribbon path.
+       The ribbon weaves like the original: drawn once beneath the letters, and the same path is
+       revealed on top only where the original passes in front of a letter (mask). -->
+  <div class="band" aria-hidden="true">
+    <div class="art">
+      <svg class="rib" viewBox={ribbon.viewBox} focusable="false">
+        <path id="hero-ribbon" d={ribbon.d} fill="none" stroke={ribbon.color} stroke-width={ribbon.strokeWidth} stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <Picture
+        src={letters}
+        alt=""
+        class="letters"
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
+        widths={[640, 980, 1400, 1916]}
+        sizes="(min-width: 900px) min(980px, 70vw), 100vw"
+        loading="eager"
+        pictureAttributes={{ style: 'display: contents' }}
+      />
+      <svg class="rib" viewBox={ribbon.viewBox} focusable="false">
+        <defs>
+          <mask id="hero-ribbon-front" maskUnits="userSpaceOnUse" x="0" y="0" width={ribbon.width} height={ribbon.height}>
+            <image href={overMaskUrl} x="0" y="0" width={ribbon.width} height={ribbon.height} preserveAspectRatio="none" />
+          </mask>
+        </defs>
+        <use href="#hero-ribbon" mask="url(#hero-ribbon-front)" />
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Three regions on one grid:
+       row 1   intro (left)  | portrait (right, rows 1–2)
+       row 2   —             | portrait bottom ∩ band top  (ribbon loops only; no letters)
+       row 3   band (full width, rows 2–3): lettering + ribbon
+     Row 2 is exactly 36% of the artwork height; the lettering starts at 42% of it, so the portrait
+     always ends above the letters. Sizes are vw-based so rows and artwork stay in proportion. */
+  .hero {
+    --side: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+    --lw: min(980px, calc((100vw - 2 * var(--side)) * 0.78));   /* artwork width */
+    --bh: calc(var(--lw) * 821 / 1916);                          /* artwork height */
+    --er: max(0px, calc(var(--side) - 0.13 * var(--lw)));        /* right inset of the artwork */
+    --pt: calc(var(--header-h) + 16px + 21px + clamp(24px, 5vh, 64px) + clamp(40px, 7vh, 80px)); /* head ≈ 20% down, face level with the name */
+
+    position: relative; isolation: isolate; overflow: hidden;
+    background: var(--ink);
+    display: grid;
+    grid-template-columns:
+      [full-start] var(--side)
+      [intro-start] minmax(0, 5fr)
+      [intro-end portrait-start] minmax(0, 6fr)
+      [portrait-end] var(--side) [full-end];
+    grid-template-rows: auto calc(var(--bh) * 0.36) auto;
+  }
+  .glow-wrap { position: absolute; inset: 0; z-index: -1; }
+  .glow { width: 100%; height: 100%; object-fit: cover; object-position: right top; }
+
+  /* Region 1 */
+  .intro {
+    grid-column: intro; grid-row: 1; z-index: 3;
+    padding: calc(var(--header-h) + 16px) clamp(16px, 3vw, 48px) clamp(28px, 4vh, 48px) 0;
+    max-width: 600px;
+  }
+  .contact-line {
+    display: flex; flex-wrap: wrap; gap: 6px 0;
+    list-style: none; margin: 0 0 clamp(24px, 5vh, 64px); padding: 0;
+    font-size: 0.8125rem; line-height: 21px; color: var(--cream);
+  }
+  .contact-line li { display: flex; align-items: center; }
+  .contact-line li + li::before {
+    content: ''; width: 1px; height: 14px; background: var(--lime); margin-inline: 14px;
+  }
+  .contact-line a { text-decoration: none; }
+  .contact-line a:hover { color: var(--blue); }
+  .years { font-size: clamp(0.875rem, 1.2vw, 1.0625rem); letter-spacing: 0.22em; text-transform: uppercase; }
+  .name { margin-top: 6px; font-size: clamp(3rem, 6.2vw, 6.25rem); color: var(--blue); }
+  .role {
+    margin-top: clamp(14px, 2.4vh, 24px);
+    padding-left: 14px; border-left: 1.5px solid var(--blue);
+    font-size: clamp(0.9375rem, 1.3vw, 1.1875rem); line-height: 1.35; letter-spacing: 0.24em;
+  }
+  .statement {
+    margin-top: clamp(20px, 3vh, 32px);
+    display: flex; flex-wrap: wrap; gap: 0 0.4em;
+    font-size: clamp(1.125rem, 1.6vw, 1.4375rem); font-weight: 800; line-height: 1.3;
+  }
+  .statement span:nth-child(2) { color: var(--blue); }
+  .support {
+    margin-top: 10px; max-width: 46ch;
+    font-size: clamp(0.9375rem, 1.05vw, 1.0625rem); line-height: 1.55; color: var(--cream-dim);
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(24px, 4vh, 40px); }
+
+  /* Region 2: the wrapper is a size container (its size comes from the grid, not the image), so the
+     portrait can be sized exactly: as tall as the space down to the band allows, never wider than
+     its column or its native 725×767. Exact box → the bottom fade lands on the chest, not on padding. */
+  .portrait-wrap {
+    grid-column: portrait; grid-row: 1 / 3; z-index: 1;
+    position: relative; container-type: size;
+  }
+  .portrait {
+    position: absolute; top: var(--pt); right: 0;
+    height: min(calc(100cqh - var(--pt)), 767px, calc(100cqw * 767 / 725));
+    width: auto;
+    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+  }
+
+  /* Region 3 */
+  .band { grid-column: full; grid-row: 2 / 4; z-index: 2; align-self: start; pointer-events: none; }
+  .art {
+    position: relative;
+    width: var(--lw); aspect-ratio: 1916 / 821;
+    margin-left: auto; margin-right: var(--er);
+  }
+  .rib { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .letters { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  @media (max-width: 899px) {
+    .hero {
+      --lw: 100vw; --er: 0px;
+      grid-template-columns:
+        [full-start] var(--gutter)
+        [intro-start portrait-start] minmax(0, 1fr)
+        [intro-end portrait-end] var(--gutter) [full-end];
+      grid-template-rows: auto auto calc(var(--bh) * 0.36) auto;
+    }
+    .intro { padding-right: 0; padding-bottom: 24px; }
+    .portrait-wrap { grid-row: 2 / 4; container-type: normal; justify-self: center; width: min(78vw, 400px); }
+    .portrait { position: static; display: block; width: 100%; height: auto; }
+    .band { grid-row: 3 / 5; }
+    .art { width: 100%; margin: 0; }
+
+    .glow-wrap {
+      inset: 0 0 auto auto; width: 170%; height: auto; aspect-ratio: 1127 / 798;
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    }
+    .glow-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(100deg, var(--ink) 18%, rgb(0 0 4 / 0.55) 55%, transparent 85%);
+    }
+    .contact-line { font-size: 0.75rem; }
+  }
+  @media (max-width: 520px) {
+    .contact-line li:last-child { display: none; }
+  }
+</style>

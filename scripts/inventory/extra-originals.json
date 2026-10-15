@@ -1,0 +1,65 @@
+{
+ "$comment": "High-res originals for PDF-only images, found outside assets-original by perceptual hash and verified visually (p.84 candidate rejected: older page export with a different caption).",
+ "images": [
+  {
+   "page": 131,
+   "rect": [
+    -1,
+    -1,
+    843,
+    597
+   ],
+   "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_118.png",
+   "size": [
+    3508,
+    2481
+   ],
+   "dist": 13
+  },
+  {
+   "page": 132,
+   "rect": [
+    -1,
+    -1,
+    843,
+    596
+   ],
+   "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_119.png",
+   "size": [
+    3508,
+    2481
+   ],
+   "dist": 4
+  },
+  {
+   "page": 138,
+   "rect": [
+    -1,
+    -1,
+    843,
+    597
+   ],
+   "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_125.png",
+   "size": [
+    3508,
+    2481
+   ],
+   "dist": 4
+  },
+  {
+   "page": 144,
+   "rect": [
+    -1,
+    -1,
+    843,
+    596
+   ],
+   "file": "../PORTFOLIO 160926/PNGGGGG_PAGES_300dpi/Page_135.png",
+   "size": [
+    3508,
+    2481
+   ],
+   "dist": 3
+  }
+ ]
+}

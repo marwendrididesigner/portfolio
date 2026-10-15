@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Credentials from '../components/Credentials.astro';
+import Ribbon from '../components/Ribbon.astro';
+import Work from '../components/Work.astro';
+import Contact from '../components/Contact.astro';
+import BackToTop from '../components/BackToTop.astro';
+---
+<Layout
+  title="Marwen Dridi — Senior Graphic Designer | Brand Identity, Editorial & Presentation Design"
+  description="Marwen Dridi is a senior graphic designer in Tunis with 8+ years of experience in brand identities, bilingual Arabic/Latin brand guidelines, company profiles, pitch decks, reports and social media campaigns for clients in 15 countries."
+>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Ribbon />
+    <Work />
+    <Ribbon from="var(--paper)" to="var(--ink-2)" />
+    <Credentials />
+    <Contact />
+  </main>
+  <BackToTop />
+</Layout>

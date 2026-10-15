@@ -1,0 +1,78 @@
+---
+import { contact, person } from '../data/site';
+const year = new Date().getFullYear();
+---
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-title" class="title">{contact.heading}</h2>
+    <p class="lede">{contact.text}</p>
+
+    <ul class="channels">
+      <li>
+        <span class="k">Email</span>
+        <a href={`mailto:${person.email}`}>{person.email}</a>
+      </li>
+      <li>
+        <span class="k">WhatsApp</span>
+        <a href={person.whatsapp} target="_blank" rel="noopener">
+          {person.phoneDisplay}<span class="visually-hidden"> (opens WhatsApp)</span>
+        </a>
+      </li>
+      <li>
+        <span class="k">Portfolio</span>
+        <a href={person.portfolioPdf} target="_blank" rel="noopener">
+          Download the full PDF <span aria-hidden="true">↗</span><span class="visually-hidden"> (Google Drive, opens in a new tab)</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="actions">
+      <a class="btn btn--primary" href={`mailto:${person.email}`}>Send an email <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href={person.whatsapp} target="_blank" rel="noopener">Message on WhatsApp</a>
+    </div>
+  </div>
+
+  <footer class="container foot">
+    <p>© {year} {person.name} · {person.role}</p>
+    <p>{person.location}</p>
+  </footer>
+</section>
+
+<style>
+  .contact {
+    position: relative; overflow: hidden;
+    padding-top: clamp(80px, 12vw, 160px);
+    background:
+      radial-gradient(60% 70% at 100% 0%, rgb(0 76 138 / 0.55), transparent 70%),
+      var(--ink);
+  }
+  .title {
+    margin-top: 16px; max-width: 16ch;
+    font-size: clamp(2.25rem, 5.6vw, 4.75rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.015em;
+  }
+  .lede { margin-top: 20px; max-width: 52ch; font-size: clamp(1rem, 1.4vw, 1.1875rem); color: var(--cream-dim); }
+
+  .channels { list-style: none; margin: clamp(40px, 6vw, 72px) 0 0; padding: 0; border-top: 1px solid var(--rule-dark); }
+  .channels li {
+    display: grid; grid-template-columns: minmax(110px, 200px) 1fr; gap: 16px; align-items: baseline;
+    padding: 20px 0; border-bottom: 1px solid var(--rule-dark);
+  }
+  .k { font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream-dim); }
+  .channels a {
+    font-size: clamp(1.125rem, 2.6vw, 2rem); font-weight: 400; text-decoration: none;
+    overflow-wrap: anywhere; transition: color 0.2s var(--ease);
+  }
+  .channels a:hover { color: var(--blue); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+
+  .foot {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+    margin-top: clamp(80px, 10vw, 140px); padding-block: 24px;
+    border-top: 1px solid var(--rule-dark);
+    font-size: 0.8125rem; color: var(--cream-dim);
+  }
+  @media (max-width: 560px) {
+    .channels li { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+// The signature blue ribbon from the PDF dividers, redrawn as a vector so it
+// stays sharp at any width. Draws itself once when scrolled into view.
+interface Props { from?: string; to?: string; }
+const { from = 'var(--ink-2)', to = 'var(--paper)' } = Astro.props;
+---
+<div class="ribbon" style={`--from:${from};--to:${to}`} aria-hidden="true" data-ribbon>
+  <svg viewBox="0 0 1440 200" preserveAspectRatio="none" focusable="false">
+    <path
+      pathLength="1"
+      d="M-10 128 C 180 92, 330 168, 520 150 C 640 138, 700 46, 640 26 C 572 4, 534 112, 640 142 C 790 184, 980 104, 1160 96 C 1290 90, 1380 110, 1450 104"
+    />
+  </svg>
+</div>
+
+<script>
+  const els = document.querySelectorAll<HTMLElement>('[data-ribbon]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    els.forEach((el) => el.classList.add('is-armed'));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); }
+    }, { threshold: 0.4 });
+    els.forEach((el) => io.observe(el));
+  }
+</script>
+
+<style>
+  .ribbon {
+    height: clamp(80px, 12vw, 180px);
+    background: linear-gradient(180deg, var(--from) 0 50%, var(--to) 50% 100%);
+  }
+  svg { width: 100%; height: 100%; overflow: visible; }
+  path {
+    fill: none; stroke: var(--ribbon); stroke-width: 3; stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 1; stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.6s var(--ease);
+  }
+  .is-armed:not(.is-drawn) path { stroke-dashoffset: 1; }
+</style>

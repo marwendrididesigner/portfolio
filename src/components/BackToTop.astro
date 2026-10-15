@@ -1,0 +1,27 @@
+---
+// Discreet "back to top" link: appears once the hero has scrolled out of view.
+---
+<a class="to-top" href="#top" data-to-top aria-label="Back to top">
+  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+
+<script>
+  const btn = document.querySelector<HTMLElement>('[data-to-top]')!;
+  const hero = document.getElementById('top');
+  if (hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => btn.classList.toggle('is-visible', !e!.isIntersecting)).observe(hero);
+  } else btn.classList.add('is-visible');
+</script>
+
+<style>
+  .to-top {
+    position: fixed; right: clamp(16px, 2.5vw, 32px); bottom: clamp(16px, 2.5vw, 32px); z-index: 90;
+    display: grid; place-items: center; width: 48px; height: 48px;
+    background: var(--ink); color: var(--cream); border: 1px solid var(--rule-dark);
+    text-decoration: none;
+    opacity: 0; visibility: hidden; transform: translateY(8px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0s 0.25s, background-color 0.2s var(--ease);
+  }
+  .to-top.is-visible { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .to-top:hover, .to-top:focus-visible { background: var(--blue); color: var(--ink); }
+</style>

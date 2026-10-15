@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+# Source files stay local (1.4 GB originals, 56 MB PDF)
+assets-original/
+*.pdf
+review-screenshots/
+.cache/

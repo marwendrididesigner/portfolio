@@ -1,0 +1,103 @@
+---
+import { person } from '../data/site';
+
+const links = [
+  { href: '#work', label: 'Work' },
+  { href: '#about', label: 'About' },
+  { href: '#services', label: 'Services' },
+  { href: '#credentials', label: 'Credentials' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+<header class="site-header" data-header>
+  <div class="container bar">
+    <a class="brand" href="#top" aria-label={`${person.name} — back to top`}>
+      Marwen <span>Dridi</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+      <span class="visually-hidden">Menu</span>
+      <span class="bars" aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+      <a class="pdf" href={person.portfolioPdf} target="_blank" rel="noopener">
+        Portfolio PDF <span aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const toggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]')!;
+  const setOpen = (open: boolean) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    header.classList.toggle('is-open', open);
+  };
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  header.querySelectorAll('nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
+  });
+</script>
+
+<style>
+  /* Always opaque: page content can never show through the navigation. */
+  .site-header {
+    position: fixed; inset: 0 0 auto; z-index: 100;
+    height: var(--header-h);
+    background: var(--ink);
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .bar { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand {
+    font-weight: 800; font-size: 0.9375rem; letter-spacing: 0.14em;
+    text-transform: uppercase; text-decoration: none; color: var(--blue);
+    white-space: nowrap;
+  }
+  .brand span { color: var(--cream); }
+
+  .nav { display: flex; align-items: center; gap: 36px; }
+  .nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav a {
+    font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; color: var(--cream-dim);
+    transition: color 0.2s var(--ease);
+  }
+  .nav a:hover { color: var(--cream); }
+  .nav .pdf { color: var(--blue); font-weight: 800; white-space: nowrap; }
+  .nav .pdf:hover { color: var(--cream); }
+
+  .menu-toggle {
+    display: none; width: 44px; height: 44px; margin-right: -10px;
+    background: none; border: 0; cursor: pointer; position: relative;
+  }
+  .bars, .bars::before, .bars::after {
+    position: absolute; left: 11px; width: 22px; height: 2px; background: var(--cream);
+    transition: transform 0.25s var(--ease), opacity 0.2s;
+  }
+  .bars { top: 21px; }
+  .bars::before, .bars::after { content: ''; left: 0; }
+  .bars::before { top: -7px; }
+  .bars::after { top: 7px; }
+  .is-open .bars { background: transparent; }
+  .is-open .bars::before { transform: translateY(7px) rotate(45deg); }
+  .is-open .bars::after { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 960px) {
+    .menu-toggle { display: block; }
+    .nav {
+      position: fixed; inset: var(--header-h) 0 auto; flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--ink); border-bottom: 1px solid var(--rule-dark);
+      padding: 8px var(--gutter) 24px;
+      visibility: hidden; opacity: 0; transform: translateY(-8px);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0s 0.2s;
+    }
+    .is-open .nav { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+    .nav ul { flex-direction: column; gap: 0; }
+    .nav a { display: block; padding: 14px 0; font-size: 1rem; border-bottom: 1px solid var(--rule-dark); }
+    .nav .pdf { border-bottom: 0; padding-top: 18px; }
+  }
+</style>
