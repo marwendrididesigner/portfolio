@@ -2,13 +2,13 @@
 import { metrics } from '../data/site';
 // Compact social-proof strip between the hero and the portfolio — numbers only, no intro copy.
 ---
-<section class="proof" aria-label="Key figures">
+<section class="proof" aria-label="Key figures" data-proof>
   <div class="container">
     <dl class="stats">
       {metrics.map((m) => (
         <div class="stat">
           <dt>{m.label}</dt>
-          <dd>{m.value}<span class="plus">+</span></dd>
+          <dd><span class="num" data-count={m.value}>{m.value}</span><span class="plus">+</span></dd>
         </div>
       ))}
     </dl>
@@ -18,7 +18,7 @@ import { metrics } from '../data/site';
 <style>
   .proof {
     background: var(--blue);
-    color: var(--ink);
+    color: #fff;
     padding-block: clamp(28px, 3.4vw, 44px);
   }
   .stats {
@@ -28,7 +28,7 @@ import { metrics } from '../data/site';
   .stat {
     display: flex; flex-direction: column; gap: 6px;
     padding-inline: clamp(16px, 3vw, 40px);
-    border-left: 1px solid rgb(0 0 4 / 0.22);
+    border-left: 1px solid rgb(255 255 255 / 0.3);
   }
   .stat:first-child { padding-left: 0; border-left: 0; }
   /* Number first visually, top-aligned so wrapped labels never shift it */
@@ -36,10 +36,12 @@ import { metrics } from '../data/site';
     order: -1; margin: 0;
     font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em;
   }
+  /* Counting numbers are right-aligned in their final width (set by Motion.astro), so "+" stays put */
+  .num { display: inline-block; text-align: right; font-variant-numeric: tabular-nums; }
   .plus { margin-left: 0.04em; font-weight: 400; }
   dt {
     font-size: 0.75rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.5;
-    color: rgb(0 0 4 / 0.78);
+    color: #fff;
   }
 
   @media (max-width: 760px) {

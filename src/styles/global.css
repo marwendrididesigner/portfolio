@@ -106,7 +106,7 @@ h1, h2, h3, p { margin: 0; }
   font-size: 0.8125rem; font-weight: 800;
   letter-spacing: 0.16em; text-transform: uppercase;
   text-decoration: none; border: 1.5px solid currentColor;
-  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+  transition: background-color 0.18s var(--ease), color 0.18s var(--ease), border-color 0.18s var(--ease);
 }
 .btn--primary { background: var(--blue); border-color: var(--blue); color: var(--ink); }
 .btn--primary:hover { background: var(--cream); border-color: var(--cream); }
@@ -114,6 +114,10 @@ h1, h2, h3, p { margin: 0; }
 .btn--ghost:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
 .btn .arrow { transition: transform 0.25s var(--ease); }
 .btn:hover .arrow { transform: translateX(3px); }
+
+/* Scroll reveal (classes added by Motion.astro only to elements still below the viewport) */
+.reveal { transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
+.reveal:not(.is-in) { opacity: 0; transform: translateY(14px); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -67,6 +67,15 @@ const links = [
   .nav a:hover { color: var(--cream); }
   .nav .pdf { color: var(--blue); font-weight: 800; white-space: nowrap; }
   .nav .pdf:hover { color: var(--cream); }
+  /* Desktop: a thin blue underline draws in under the hovered link */
+  @media (min-width: 961px) {
+    .nav ul a {
+      background: linear-gradient(var(--blue), var(--blue)) left bottom / 0 1px no-repeat;
+      padding-bottom: 4px;
+      transition: color 0.2s var(--ease), background-size 0.25s var(--ease);
+    }
+    .nav ul a:hover { background-size: 100% 1px; }
+  }
 
   .menu-toggle {
     display: none; width: 44px; height: 44px; margin-right: -10px;

@@ -1,0 +1,66 @@
+<!-- Restrained motion: scroll reveals + one-time count-up of the social-proof figures.
+     Progressive enhancement only — the HTML already shows everything in its final state; this script
+     merely hides elements that are still BELOW the viewport and fades them in when they arrive.
+     If JS is off or fails, or the visitor prefers reduced motion, nothing is ever hidden. -->
+<script>
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!calm && 'IntersectionObserver' in window) {
+    // Groups, not individual images: chapter intros, project headers, each project's board group,
+    // and the credentials / contact blocks.
+    const targets = document.querySelectorAll<HTMLElement>([
+      '.chapter-head > *', '.project-head', '.boards',
+      '.credentials header', '.credentials .tools', '.credentials .side',
+      '.contact .eyebrow', '.contact .title', '.contact .lede', '.contact .channels', '.contact .actions',
+    ].join(','));
+
+    const io = new IntersectionObserver((entries) => {
+      let n = 0;
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const el = e.target as HTMLElement;
+        io.unobserve(el);
+        // Small stagger for elements that arrive together (60 ms steps, capped)
+        if (n) el.style.transitionDelay = `${Math.min(n, 4) * 60}ms`;
+        n++;
+        el.classList.add('is-in');
+        el.addEventListener('transitionend', () => {
+          el.classList.remove('reveal', 'is-in');
+          el.style.transitionDelay = '';
+        }, { once: true });
+      }
+    }, { rootMargin: '0px 0px -6% 0px' });
+
+    const fold = innerHeight;
+    targets.forEach((el) => {
+      if (el.getBoundingClientRect().top < fold) return; // already on screen: never hide it
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+  }
+
+  // Count-up: 0 → final value, ease-out, once, when the strip first enters the viewport.
+  const strip = document.querySelector<HTMLElement>('[data-proof]');
+  const nums = strip ? [...strip.querySelectorAll<HTMLElement>('[data-count]')] : [];
+  if (strip && nums.length && !calm && 'IntersectionObserver' in window) {
+    const finals = nums.map((el) => Number(el.dataset.count));
+    // Reserve each number's final width (right-aligned) so the "+" never moves while counting
+    nums.forEach((el) => { el.style.minWidth = `${el.getBoundingClientRect().width}px`; });
+    const set = (k: number) => nums.forEach((el, i) => { el.textContent = String(Math.round(finals[i]! * k)); });
+    if (strip.getBoundingClientRect().top >= innerHeight) set(0); // off screen: start from 0 unseen
+
+    const io = new IntersectionObserver(([e]) => {
+      if (!e?.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now(), dur = 1400;
+      const tick = (now: number) => {
+        const p = Math.min(1, (now - t0) / dur);
+        set(1 - Math.pow(1 - p, 3)); // ease-out cubic, never overshoots
+        if (p < 1) requestAnimationFrame(tick);
+        else nums.forEach((el, i) => { el.textContent = String(finals[i]); });
+      };
+      requestAnimationFrame(tick);
+    });
+    io.observe(strip);
+  }
+</script>

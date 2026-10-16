@@ -115,6 +115,7 @@ const rowsOf = (projects: Project[]) => {
       const src = t.querySelector('img')!;
       const w = Number(src.getAttribute('width')) || 4, h = Number(src.getAttribute('height')) || 3;
       const shown = Math.min(window.innerWidth * 0.94, (window.innerHeight - 120) * (w / h));
+      img.classList.remove('is-loaded');
       img.removeAttribute('src');
       img.width = w; img.height = h;
       img.sizes = `${Math.round(shown)}px`;
@@ -125,6 +126,10 @@ const rowsOf = (projects: Project[]) => {
       pos.textContent = t.dataset.pos ?? '';
     };
     const step = (d: number) => show(index + d);
+    // Each image fades in once decoded (also on error, so the stage never stays blank)
+    const loaded = () => img.classList.add('is-loaded');
+    img.addEventListener('load', loaded);
+    img.addEventListener('error', loaded);
 
     triggers.forEach((t, i) => t.addEventListener('click', () => {
       opener = t;
@@ -206,8 +211,10 @@ const rowsOf = (projects: Project[]) => {
   .board :global(img) {
     display: block; width: 100%; height: auto;
     box-shadow: inset 0 0 0 1px var(--rule-light);
-    transition: transform 0.5s var(--ease), filter 0.3s var(--ease);
   }
+  /* Hover feedback on the frame only — the artwork itself never moves or scales */
+  .board { transition: box-shadow 0.25s var(--ease); }
+  .board:hover { box-shadow: 0 10px 28px -12px rgb(0 0 4 / 0.28); }
   .zoom {
     position: absolute; top: 10px; right: 10px;
     display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
@@ -215,7 +222,6 @@ const rowsOf = (projects: Project[]) => {
     opacity: 0; transform: scale(0.85);
     transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
   }
-  .board:hover :global(img) { transform: scale(1.015); }
   .board:hover .zoom, .board:focus-visible .zoom { opacity: 1; transform: none; }
   .board:focus-visible { outline-offset: 2px; }
   @media (hover: none) { .zoom { opacity: 0.85; transform: none; width: 28px; height: 28px; top: 8px; right: 8px; } }
@@ -240,13 +246,16 @@ const rowsOf = (projects: Project[]) => {
   .v-img {
     max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;
     box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+    transition: opacity 0.2s ease-out;
   }
+  .v-img:not(.is-loaded) { opacity: 0; }
   .v-btn {
     display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
     border: 1px solid var(--rule-dark); border-radius: 50%; background: rgb(0 0 4 / 0.6); color: var(--cream);
-    cursor: pointer; transition: background-color 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+    cursor: pointer; opacity: 0.85;
+    transition: opacity 0.18s var(--ease), background-color 0.18s var(--ease), color 0.18s var(--ease), border-color 0.18s var(--ease);
   }
-  .v-btn:hover { background: var(--blue); border-color: var(--blue); color: var(--ink); }
+  .v-btn:hover, .v-btn:focus-visible { opacity: 1; background: var(--blue); border-color: var(--blue); color: var(--ink); }
   .v-close { flex: none; }
   .v-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; }
   .v-prev { left: clamp(8px, 2vw, 28px); }
