@@ -164,6 +164,12 @@ import { ribbon } from '../data/ribbon';
   .rib { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   .letters { position: absolute; inset: 0; width: 100%; height: 100%; }
 
+  /* Mobile/tablet: the intro is flattened onto the hero grid (display: contents) so the artwork can sit
+     between the title and the statement without duplicating content:
+       1 contact · 2 years · 3 name · 4 role · 5 portrait · 6 portrait ∩ lettering · 7 lettering
+       8 statement · 9 support · 10 actions
+     Row 6 is 60% of the artwork height and the letters start at 42% of it, so the lettering overlaps
+     the (faded) chest — never the face — like the PDF cover. */
   @media (max-width: 899px) {
     .hero {
       --lw: 100vw; --er: 0px;
@@ -171,24 +177,39 @@ import { ribbon } from '../data/ribbon';
         [full-start] var(--gutter)
         [intro-start portrait-start] minmax(0, 1fr)
         [intro-end portrait-end] var(--gutter) [full-end];
-      grid-template-rows: auto auto calc(var(--bh) * 0.36) auto;
+      grid-template-rows: repeat(5, auto) calc(var(--bh) * 0.6) repeat(4, auto);
     }
-    .intro { padding-right: 0; padding-bottom: 24px; }
-    .portrait-wrap { grid-row: 2 / 4; container-type: normal; justify-self: center; width: min(78vw, 400px); }
+    .intro { display: contents; }
+    .intro > * { grid-column: intro; position: relative; z-index: 3; }
+    .contact-line { grid-row: 1; margin: calc(var(--header-h) + 16px) 0 clamp(18px, 3vh, 28px); font-size: 0.75rem; }
+    .years { grid-row: 2; }
+    .name { grid-row: 3; }
+    .role { grid-row: 4; justify-self: start; }
+    .statement { grid-row: 8; margin-top: 4px; }
+    .support { grid-row: 9; }
+    .actions { grid-row: 10; margin-bottom: clamp(40px, 6vh, 56px); }
+
+    .portrait-wrap {
+      grid-row: 5 / 7; container-type: normal; justify-self: center;
+      width: min(84vw, 420px); margin-top: clamp(20px, 3vh, 32px);
+    }
     .portrait { position: static; display: block; width: 100%; height: auto; }
-    .band { grid-row: 3 / 5; }
+    .band { grid-row: 6 / 8; }
     .art { width: 100%; margin: 0; }
 
+    /* Glow sits behind the portrait, fading out above the title and below the lettering */
     .glow-wrap {
-      inset: 0 0 auto auto; width: 170%; height: auto; aspect-ratio: 1127 / 798;
-      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
-      mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+      position: relative; inset: auto; grid-column: full; grid-row: 4 / 8;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 65%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 65%, transparent 100%);
     }
-    .glow-wrap::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(100deg, var(--ink) 18%, rgb(0 0 4 / 0.55) 55%, transparent 85%);
-    }
-    .contact-line { font-size: 0.75rem; }
+    .glow { object-position: 70% 30%; }
+  }
+  @media (max-width: 360px) {
+    .contact-line { font-size: 0.6875rem; }
+    .contact-line li + li::before { margin-inline: 10px; }
+    .actions { gap: 10px; }
+    .actions .btn { padding-inline: 0.95rem; letter-spacing: 0.12em; }
   }
   @media (max-width: 520px) {
     .contact-line li:last-child { display: none; }
