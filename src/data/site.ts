@@ -7,6 +7,7 @@ export const person = {
   email: 'marwendridi431@gmail.com',
   phoneDisplay: '+216 90 130 645',
   whatsapp: 'https://wa.me/21690130645',
+  whatsappMessage: 'Hello Marwen, I saw your portfolio and would like to discuss a design project.',
   location: 'Tunis, Tunisia',
   portfolioPdf: 'https://drive.google.com/file/d/1jRl5cFLPCZ_LX-N8IH4f5x87k8VcqsdH/view?usp=sharing',
 };
@@ -17,18 +18,12 @@ export const hero = {
     '8+ years designing brand identities, visual guidelines, presentations, and marketing materials for startups, agencies, and organizations across international markets.',
 };
 
-// Key numbers — verified only:
-// - 8+ years: PDF p.1 + Marwen's profile.
-// - 15 countries: distinct "Country" labels on PDF project pages (Canada, Egypt, France, India,
-//   Jordan, Kenya, Kuwait, Libya, Qatar, Rwanda, Tunisia, Turkey, UAE, Uganda, USA).
-// - 100 completed projects: the 108 project entries in src/data/portfolio-inventory.json, counting the
-//   nine Samray packaging directions (PDF p.112–120) as one project.
-// - 5 certifications: listed below.
+// Social proof strip — figures supplied by Marwen (Oct 2026). The "+" is always a suffix.
 export const metrics = [
-  { value: '8+', label: 'Years of experience' },
+  { value: '8', label: 'Years of experience' },
+  { value: '100', label: 'Projects completed' },
+  { value: '65', label: 'Clients' },
   { value: '15', label: 'Countries served' },
-  { value: '100', label: 'Completed projects' },
-  { value: '5', label: 'Professional certifications' },
 ];
 
 export const tools = [
