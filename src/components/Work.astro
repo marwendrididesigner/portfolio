@@ -2,17 +2,14 @@
 import { Image } from 'astro:assets';
 import { chapters } from '../data/portfolio';
 
-// Portfolio in the PDF's order: chapter introduction → its projects. Each outer grid cell is ONE complete
-// project. Two projects per row from 1100 px, one below. Inside a project the boards sit two per row
-// (from 760 px); with an odd count the first board leads at full width, so the order still reads
-// left → right. Boards keep their original aspect ratio — never cropped.
+// Portfolio in the PDF's order: chapter introduction → its projects, ONE project per full-width row.
+// Inside a project the boards fill a two-column grid from 760 px (1st left, 2nd right, 3rd next row
+// left…); an odd count leaves the last right-hand cell empty — the next project always starts below.
+// One column on phones. Boards keep their original aspect ratio — never cropped.
 // Every board is also a button that opens the viewer, which walks the whole portfolio in this order.
 
-// `sizes` can't use CSS variables: the gutter is ~4.5vw, the column gap 32px, the inner gap 12px.
-const SIZES = {
-  full: '(min-width: 1440px) 640px, (min-width: 1100px) 45vw, 91vw',
-  half: '(min-width: 1440px) 314px, (min-width: 1100px) 22vw, (min-width: 760px) 45vw, 91vw',
-};
+// `sizes` can't use CSS variables: the gutter is ~4.5vw, the board gap 16px.
+const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
 ---
 <section class="work" id="work" aria-label="Portfolio">
   <div class="container">
@@ -40,14 +37,13 @@ const SIZES = {
                     <p class="meta">{[p.country, p.services].filter(Boolean).join(' · ')}</p>
                   )}
                 </header>
-                <div class={n > 1 ? 'boards multi' : 'boards'}>
+                <div class="boards">
                   {p.boards.map((v, i) => {
-                    const full = n === 1 || (n % 2 === 1 && i === 0);
                     return (
-                      <button type="button" class={full ? 'board full' : 'board'}
+                      <button type="button" class="board"
                         data-viewer data-project={name} data-pos={`${i + 1} / ${n}`}>
                         <Image src={v.src} alt={v.alt} widths={[640, 960, 1400, 1920]}
-                          sizes={full ? SIZES.full : SIZES.half}
+                          sizes={SIZES}
                           format="webp" quality={82} loading="lazy" decoding="async" />
                         <span class="zoom" aria-hidden="true">
                           <svg viewBox="0 0 24 24" width="16" height="16"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.5 4.5-1.41 1.41-4.5-4.5A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm1 2.5v2h2v2h-2v2h-2v-2h-2v-2h2v-2h2Z" fill="currentColor"/></svg>
@@ -167,9 +163,8 @@ const SIZES = {
   /* Separator trails each item, so wrapped lines never start with a dot */
   .deliv li:not(:last-child)::after { content: '·'; margin-inline: 0.55em; color: var(--blue); }
 
-  /* Projects: 1 column, 2 complete projects per row from 1100 px (reading order left → right) */
-  .projects { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 4vw, 48px) 32px; align-items: start; }
-  @media (min-width: 1100px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  /* Projects: one per full-width row, a clear gap between projects */
+  .projects { display: flex; flex-direction: column; gap: clamp(48px, 6vw, 80px); }
 
   .project { scroll-margin-top: calc(var(--header-h) + 16px); }
   .project-head { margin-bottom: 12px; }
@@ -177,12 +172,9 @@ const SIZES = {
   .ptitle { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--label); }
   .meta { margin-top: 4px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--value); }
 
-  /* Boards inside a project: one column on phones, two per row from 760 px */
-  .boards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-items: start; }
-  @media (min-width: 760px) {
-    .boards.multi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .board.full { grid-column: 1 / -1; }
-  }
+  /* Boards inside a project: one column on phones, two per row from 760 px, in sequence */
+  .boards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (min-width: 760px) { .boards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
   .board {
     position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;
