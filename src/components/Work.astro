@@ -6,10 +6,23 @@ import { chapters } from '../data/portfolio';
 // Inside a project the boards fill a two-column grid from 760 px (1st left, 2nd right, 3rd next row
 // left…); an odd count leaves the last right-hand cell empty — the next project always starts below.
 // One column on phones. Boards keep their original aspect ratio — never cropped.
+// Exception: two CONSECUTIVE single-board projects in the same chapter share a row (side by side
+// from 760 px, stacked on phones); a single-board project without such a neighbour stays alone.
 // Every board is also a button that opens the viewer, which walks the whole portfolio in this order.
 
 // `sizes` can't use CSS variables: the gutter is ~4.5vw, the board gap 16px.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
+
+type Project = (typeof chapters)[number]['projects'][number];
+const rowsOf = (projects: Project[]) => {
+  const rows: Project[][] = [];
+  for (let i = 0; i < projects.length; i++) {
+    const p = projects[i]!, q = projects[i + 1];
+    if (p.boards.length === 1 && q?.boards.length === 1) { rows.push([p, q]); i++; }
+    else rows.push([p]);
+  }
+  return rows;
+};
 ---
 <section class="work" id="work" aria-label="Portfolio">
   <div class="container">
@@ -26,7 +39,9 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
         </header>
 
         <div class="projects">
-          {c.projects.map((p) => {
+          {rowsOf(c.projects).map((row) => (
+          <div class={row.length === 2 ? 'row pair' : 'row'}>
+          {row.map((p) => {
             const name = [p.client, p.title].filter(Boolean).join(' — ');
             const n = p.boards.length;
             return (
@@ -56,6 +71,8 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
               </article>
             );
           })}
+          </div>
+          ))}
         </div>
       </section>
     ))}
@@ -174,7 +191,13 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
 
   /* Boards inside a project: one column on phones, two per row from 760 px, in sequence */
   .boards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
-  @media (min-width: 760px) { .boards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 760px) {
+    .boards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* Paired single-board projects: two project columns, each board one column wide */
+    .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+    .pair .boards { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 759px) { .pair { display: flex; flex-direction: column; gap: clamp(48px, 6vw, 80px); } }
 
   .board {
     position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;
