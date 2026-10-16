@@ -1,0 +1,1312 @@
+{
+  "chapters": [
+    {
+      "id": "social",
+      "title": "Social Media & Digital Campaigns",
+      "projects": [
+        "social-mzuriorganics",
+        "social-kukupoultry",
+        "social-eddykenzo",
+        "social-acemobility",
+        "social-indintambwe",
+        "social-shepherdcollege",
+        "social-motirentals",
+        "social-patvention",
+        "social-vijaysales",
+        "social-seensociety",
+        "social-shitanaultratrail",
+        "social-bodies",
+        "social-vivaextensions",
+        "social-papparazo",
+        "social-elspace",
+        "social-futureisland",
+        "social-ccd4tunisia",
+        "social-cleantech216",
+        "social-wyanatravels",
+        "social-eventandfacebookcovers"
+      ]
+    },
+    {
+      "id": "identity",
+      "title": "Brand Identity & Logo Design",
+      "projects": [
+        "identity-optinetconsulting",
+        "identity-aenergihouse",
+        "identity-proofagency",
+        "identity-hattabio",
+        "identity-soun",
+        "identity-touneselmezyena",
+        "identity-espresso21",
+        "identity-cleantech216",
+        "identity-futureislands",
+        "identity-almizan",
+        "identity-elhudaib",
+        "identity-akeedtravel",
+        "identity-vita",
+        "identity-ajiddouz",
+        "identity-ghitra",
+        "identity-aquarabia",
+        "identity-pavlov",
+        "identity-tada",
+        "identity-greenbazar"
+      ]
+    },
+    {
+      "id": "guidelines",
+      "title": "Brand Guidelines",
+      "projects": [
+        "guidelines-p61",
+        "guidelines-p63",
+        "guidelines-p65",
+        "guidelines-p67",
+        "guidelines-p69",
+        "guidelines-p71",
+        "guidelines-p73",
+        "guidelines-p75",
+        "guidelines-p77",
+        "guidelines-p79",
+        "guidelines-p81"
+      ]
+    },
+    {
+      "id": "editorial",
+      "title": "Editorial & Presentation Design",
+      "projects": [
+        "editorial-p84",
+        "editorial-p87",
+        "editorial-p89",
+        "editorial-p92",
+        "editorial-p94",
+        "editorial-p95",
+        "editorial-p97",
+        "editorial-p99",
+        "editorial-p101",
+        "editorial-p102",
+        "editorial-p104",
+        "editorial-p106"
+      ]
+    },
+    {
+      "id": "collateral",
+      "title": "Marketing Collateral & Print Design",
+      "projects": [
+        "collateral-p109",
+        "collateral-p110",
+        "collateral-samray-d5",
+        "collateral-samray-d7",
+        "collateral-samray-d4",
+        "collateral-samray-d6",
+        "collateral-samray-d1",
+        "collateral-samray-d3",
+        "collateral-samray-d9",
+        "collateral-samray-d8",
+        "collateral-samray-d2",
+        "collateral-p121",
+        "collateral-p122",
+        "collateral-p123",
+        "collateral-p124",
+        "collateral-p126",
+        "collateral-p127",
+        "collateral-p129",
+        "collateral-p130",
+        "collateral-p131",
+        "collateral-p132",
+        "collateral-p134",
+        "collateral-p136",
+        "collateral-p137",
+        "collateral-p139",
+        "collateral-p143",
+        "collateral-p144"
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "AI-Powered Visual Design",
+      "projects": [
+        "ai-p146",
+        "ai-p149",
+        "ai-p150",
+        "ai-p156",
+        "ai-p157",
+        "ai-p159",
+        "ai-p161",
+        "ai-p162",
+        "ai-p164",
+        "ai-p165",
+        "ai-p170",
+        "ai-p172",
+        "ai-p176",
+        "ai-p180",
+        "ai-p181",
+        "ai-p186",
+        "ai-p189",
+        "ai-p192",
+        "ai-p194"
+      ]
+    }
+  ],
+  "projects": {
+    "social-mzuriorganics": {
+      "client": "MZURI Organics",
+      "title": null,
+      "country": "Kenya",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "001-social-mzuriorganics",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-kukupoultry": {
+      "client": "Kuku Poultry",
+      "title": null,
+      "country": "Kenya",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "002-social-kukupoultry",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-eddykenzo": {
+      "client": "Eddy Kenzo",
+      "title": null,
+      "country": "Uganda",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "003-social-eddykenzo",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "social-acemobility": {
+      "client": "Ace Mobility",
+      "title": null,
+      "country": "Kenya",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "004-social-acemobility",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-indintambwe": {
+      "client": "Indintambwe",
+      "title": null,
+      "country": "Rwanda",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "005-social-indintambwe",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-shepherdcollege": {
+      "client": "Shepherd College",
+      "title": null,
+      "country": "USA",
+      "services": "Social Media Design · Ad Creatives",
+      "folder": "006-social-shepherdcollege",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "social-motirentals": {
+      "client": "Moti Rentals",
+      "title": null,
+      "country": "Kenya",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "007-social-motirentals",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-patvention": {
+      "client": "Patvention",
+      "title": null,
+      "country": "Kenya",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "008-social-patvention",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-vijaysales": {
+      "client": "Vijay Sales",
+      "title": null,
+      "country": "India",
+      "services": "Social Media Design · Ad Creatives",
+      "folder": "009-social-vijaysales",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "social-seensociety": {
+      "client": "Seen Society",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Social Media Design · Ad Creatives",
+      "folder": "010-social-seensociety",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-shitanaultratrail": {
+      "client": "Shitana Ultra Trail",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "011-social-shitanaultratrail",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-bodies": {
+      "client": "Bodies",
+      "title": null,
+      "country": "UAE",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "012-social-bodies",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "social-vivaextensions": {
+      "client": "Viva Extensions",
+      "title": null,
+      "country": "UAE",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "013-social-vivaextensions",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-papparazo": {
+      "client": "Papparazo",
+      "title": null,
+      "country": "UAE",
+      "services": "Social Media Design · Ad Creatives",
+      "folder": "014-social-papparazo",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "social-elspace": {
+      "client": "Elspace",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "015-social-elspace",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "social-futureisland": {
+      "client": "Future Islands",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "016-social-futureisland",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "social-ccd4tunisia": {
+      "client": "CCD4Tunisia",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "017-social-ccd4tunisia",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "social-cleantech216": {
+      "client": "Cleantech216",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "018-social-cleantech216",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "social-wyanatravels": {
+      "client": "Wyana Travels",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Social Media Design · Digital Brand Assets",
+      "folder": "019-social-wyanatravels",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-eventandfacebookcovers": {
+      "client": null,
+      "title": "Event & Facebook covers",
+      "country": null,
+      "services": null,
+      "folder": "020-social-eventandfacebookcovers",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "identity-optinetconsulting": {
+      "client": "Optinet Consulting",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Brand Identity",
+      "folder": "021-identity-optinetconsulting",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-aenergihouse": {
+      "client": "A+ EnergiHouse",
+      "title": null,
+      "country": "France",
+      "services": "Brand Identity",
+      "folder": "022-identity-aenergihouse",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-proofagency": {
+      "client": "Proof Agency",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "023-identity-proofagency",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-hattabio": {
+      "client": "Hatta Bio",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "024-identity-hattabio",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-soun": {
+      "client": "Soun",
+      "title": null,
+      "country": "Qatar",
+      "services": "Brand Identity",
+      "folder": "025-identity-soun",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-touneselmezyena": {
+      "client": "Tounes El Mezyena",
+      "title": "Sahtek Bin Idik",
+      "country": "Tunisia",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "026-identity-touneselmezyena",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-espresso21": {
+      "client": "Espresso21",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Brand Identity",
+      "folder": "027-identity-espresso21",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-cleantech216": {
+      "client": "Cleantech216",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Brand Identity",
+      "folder": "028-identity-cleantech216",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-futureislands": {
+      "client": "Future Islands",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Brand Identity",
+      "folder": "029-identity-futureislands",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-almizan": {
+      "client": "Almizan",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "030-identity-almizan",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-elhudaib": {
+      "client": "Elhudaib",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "031-identity-elhudaib",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-akeedtravel": {
+      "client": "Akeed Travel",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "032-identity-akeedtravel",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-vita": {
+      "client": "Vita",
+      "title": null,
+      "country": "Jordan",
+      "services": "Brand Identity",
+      "folder": "033-identity-vita",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-ajiddouz": {
+      "client": "Ajid Douz",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Brand Identity",
+      "folder": "034-identity-ajiddouz",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-ghitra": {
+      "client": "Ghitra",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Brand Identity",
+      "folder": "035-identity-ghitra",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-aquarabia": {
+      "client": "Aquarabia",
+      "title": null,
+      "country": "Egypt",
+      "services": "Brand Identity",
+      "folder": "036-identity-aquarabia",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-pavlov": {
+      "client": "Pavlov",
+      "title": null,
+      "country": "Turkey",
+      "services": "Brand Identity",
+      "folder": "037-identity-pavlov",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-tada": {
+      "client": "TADA",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "038-identity-tada",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "identity-greenbazar": {
+      "client": "Green Bazar",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Logo Design · Brand Guidelines",
+      "folder": "039-identity-greenbazar",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "guidelines-p61": {
+      "client": "Patvention",
+      "title": null,
+      "country": "Kenya",
+      "services": "Brand Guidelines",
+      "folder": "040-guidelines-p61",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p63": {
+      "client": "Ghitra",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Brand Guidelines",
+      "folder": "041-guidelines-p63",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p65": {
+      "client": "Gzara Studio",
+      "title": null,
+      "country": "UAE",
+      "services": "Brand Guidelines",
+      "folder": "042-guidelines-p65",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p67": {
+      "client": "Ace Mobility",
+      "title": null,
+      "country": "Kenya",
+      "services": "Brand Guidelines",
+      "folder": "043-guidelines-p67",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p69": {
+      "client": "Akeed Travel",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Brand Guidelines",
+      "folder": "044-guidelines-p69",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p71": {
+      "client": "Kuku Pure",
+      "title": null,
+      "country": "Kenya",
+      "services": "Brand Guidelines",
+      "folder": "045-guidelines-p71",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p73": {
+      "client": "Almizan",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Brand Guidelines",
+      "folder": "046-guidelines-p73",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p75": {
+      "client": "Indintambwe",
+      "title": null,
+      "country": "Rwanda",
+      "services": "Brand Guidelines",
+      "folder": "047-guidelines-p75",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p77": {
+      "client": "Alhudaib",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Brand Guidelines",
+      "folder": "048-guidelines-p77",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p79": {
+      "client": "Moti Rentals",
+      "title": null,
+      "country": "Kenya",
+      "services": "Brand Guidelines",
+      "folder": "049-guidelines-p79",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "guidelines-p81": {
+      "client": "MZURI Organics",
+      "title": null,
+      "country": "Kenya",
+      "services": "Brand Guidelines",
+      "folder": "050-guidelines-p81",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p84": {
+      "client": "Impact Hub",
+      "title": null,
+      "country": "Canada",
+      "services": "Report Design",
+      "folder": "051-editorial-p84",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "editorial-p87": {
+      "client": "Future Islands",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Journal Note Book Design",
+      "folder": "052-editorial-p87",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p89": {
+      "client": "Seen Society",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Company Profile Design",
+      "folder": "053-editorial-p89",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "editorial-p92": {
+      "client": "Dairat Podcast",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Brochure Design",
+      "folder": "054-editorial-p92",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p94": {
+      "client": "RDVmédecins",
+      "title": null,
+      "country": "France",
+      "services": "Presentation Design",
+      "folder": "055-editorial-p94",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "editorial-p95": {
+      "client": "RDVmédecins",
+      "title": null,
+      "country": "Libya",
+      "services": "Presentation Design",
+      "folder": "056-editorial-p95",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p97": {
+      "client": "AIQ",
+      "title": null,
+      "country": "UAE",
+      "services": "Brochure Design",
+      "folder": "057-editorial-p97",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p99": {
+      "client": "Balad Alkhayr",
+      "title": null,
+      "country": "Kuwait",
+      "services": "Brochure Design",
+      "folder": "058-editorial-p99",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p101": {
+      "client": "Cleantech Group",
+      "title": null,
+      "country": "USA",
+      "services": "Brochure Design",
+      "folder": "059-editorial-p101",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "editorial-p102": {
+      "client": "CCD4Libya",
+      "title": null,
+      "country": "Libya",
+      "services": "Presentation Design",
+      "folder": "060-editorial-p102",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p104": {
+      "client": "Cleantech216",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Presentation Design",
+      "folder": "061-editorial-p104",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "editorial-p106": {
+      "client": "Future Islands",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Presentation Design",
+      "folder": "062-editorial-p106",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-p109": {
+      "client": null,
+      "title": "Event roll-up banners",
+      "country": null,
+      "services": null,
+      "folder": "063-collateral-p109",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p110": {
+      "client": "Future Islands",
+      "title": null,
+      "country": "Tunisia",
+      "services": "Journal Design",
+      "folder": "064-collateral-p110",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-samray-d5": {
+      "client": "Samray",
+      "title": "Direction 5 Ivory Gold",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "065-collateral-samray-d5",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d7": {
+      "client": "Samray",
+      "title": "Direction 7 Desert Sunset",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "066-collateral-samray-d7",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d4": {
+      "client": "Samray",
+      "title": "Direction 4 Jasmine Floral",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "067-collateral-samray-d4",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d6": {
+      "client": "Samray",
+      "title": "Direction 6 Purple Arabesque",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "068-collateral-samray-d6",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d1": {
+      "client": "Samray",
+      "title": "Direction 1 Ceylon Black Tea",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "069-collateral-samray-d1",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d3": {
+      "client": "Samray",
+      "title": "Direction 3 Sand Calligraphy",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "070-collateral-samray-d3",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d9": {
+      "client": "Samray",
+      "title": "Direction 9 Teal Abstract",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "071-collateral-samray-d9",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d8": {
+      "client": "Samray",
+      "title": "Direction 8 Orange Kilim",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "072-collateral-samray-d8",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-samray-d2": {
+      "client": "Samray",
+      "title": "Direction 2 Emerald Botanical",
+      "country": null,
+      "services": "Packaging Design",
+      "folder": "073-collateral-samray-d2",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p121": {
+      "client": "Future Islands",
+      "title": "Branded polo shirts & business cards",
+      "country": null,
+      "services": null,
+      "folder": "074-collateral-p121",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p122": {
+      "client": "CCD4Libya",
+      "title": "Tote bag",
+      "country": null,
+      "services": null,
+      "folder": "075-collateral-p122",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p123": {
+      "client": "Maarifa for Transition",
+      "title": "Tote bag — “Ancestral Practices”",
+      "country": null,
+      "services": null,
+      "folder": "076-collateral-p123",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p124": {
+      "client": "Fifth Insight",
+      "title": "Brochure",
+      "country": null,
+      "services": null,
+      "folder": "077-collateral-p124",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-p126": {
+      "client": null,
+      "title": "Company brochure",
+      "country": null,
+      "services": null,
+      "folder": "078-collateral-p126",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p127": {
+      "client": null,
+      "title": "Event badges & speaker cards",
+      "country": null,
+      "services": null,
+      "folder": "079-collateral-p127",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-p129": {
+      "client": "Career Insider",
+      "title": "Event badges",
+      "country": null,
+      "services": null,
+      "folder": "080-collateral-p129",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p130": {
+      "client": "CCD4Libya",
+      "title": "Hoodie & notebook",
+      "country": null,
+      "services": null,
+      "folder": "081-collateral-p130",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p131": {
+      "client": "Delace",
+      "title": "Poster campaign",
+      "country": null,
+      "services": null,
+      "folder": "082-collateral-p131",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p132": {
+      "client": "BD’s — Saudi Business Developers Forum",
+      "title": "Brochure & roll-up banners",
+      "country": null,
+      "services": null,
+      "folder": "083-collateral-p132",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-p134": {
+      "client": "IEEEXtreme — Egypt Section",
+      "title": "Event badges & tote bag",
+      "country": null,
+      "services": null,
+      "folder": "084-collateral-p134",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-p136": {
+      "client": null,
+      "title": "Employee ID badges",
+      "country": null,
+      "services": null,
+      "folder": "085-collateral-p136",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p137": {
+      "client": null,
+      "title": "Event flags & staff polo shirts",
+      "country": null,
+      "services": null,
+      "folder": "086-collateral-p137",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-p139": {
+      "client": "Career Insider — IEEE Mansoura Student Branch",
+      "title": "Event print & signage",
+      "country": null,
+      "services": null,
+      "folder": "087-collateral-p139",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp"
+      ]
+    },
+    "collateral-p143": {
+      "client": null,
+      "title": "Event report & certificates",
+      "country": null,
+      "services": null,
+      "folder": "088-collateral-p143",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-p144": {
+      "client": "Nayyar",
+      "title": "Menu",
+      "country": null,
+      "services": null,
+      "folder": "089-collateral-p144",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "ai-p146": {
+      "client": "Bodies",
+      "title": "Instagram feed imagery",
+      "country": null,
+      "services": null,
+      "folder": "090-ai-p146",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "ai-p149": {
+      "client": "Bodies",
+      "title": "Product imagery",
+      "country": null,
+      "services": null,
+      "folder": "091-ai-p149",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "ai-p150": {
+      "client": "Ghitra",
+      "title": "Brand imagery",
+      "country": null,
+      "services": null,
+      "folder": "092-ai-p150",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp",
+        "d-05.webp",
+        "d-06.webp"
+      ]
+    },
+    "ai-p156": {
+      "client": "Flawless",
+      "title": "Imagery shoot",
+      "country": null,
+      "services": null,
+      "folder": "093-ai-p156",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "ai-p157": {
+      "client": "Indintambwe",
+      "title": "Brand imagery",
+      "country": null,
+      "services": null,
+      "folder": "094-ai-p157",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "ai-p159": {
+      "client": "MZURI Organics",
+      "title": "Brand imagery",
+      "country": null,
+      "services": null,
+      "folder": "095-ai-p159",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "ai-p161": {
+      "client": "Viva",
+      "title": "5-in-1 professional hair-styling set",
+      "country": null,
+      "services": null,
+      "folder": "096-ai-p161",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "ai-p162": {
+      "client": "Patvention",
+      "title": "Brand imagery",
+      "country": null,
+      "services": null,
+      "folder": "097-ai-p162",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "ai-p164": {
+      "client": null,
+      "title": "Face shapewear",
+      "country": null,
+      "services": null,
+      "folder": "098-ai-p164",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "ai-p165": {
+      "client": null,
+      "title": "Bodysuits",
+      "country": null,
+      "services": null,
+      "folder": "099-ai-p165",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp",
+        "d-05.webp"
+      ]
+    },
+    "ai-p170": {
+      "client": "Almizan Economy",
+      "title": "Imagery",
+      "country": null,
+      "services": null,
+      "folder": "100-ai-p170",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "ai-p172": {
+      "client": "Bodies",
+      "title": "Product imagery",
+      "country": null,
+      "services": null,
+      "folder": "101-ai-p172",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp"
+      ]
+    },
+    "ai-p176": {
+      "client": null,
+      "title": "Packaging imagery",
+      "country": null,
+      "services": null,
+      "folder": "102-ai-p176",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp"
+      ]
+    },
+    "ai-p180": {
+      "client": null,
+      "title": "Shapewear product review shots",
+      "country": null,
+      "services": null,
+      "folder": "103-ai-p180",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "ai-p181": {
+      "client": null,
+      "title": "Shapewear website product shoot",
+      "country": null,
+      "services": null,
+      "folder": "104-ai-p181",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp",
+        "d-05.webp"
+      ]
+    },
+    "ai-p186": {
+      "client": null,
+      "title": "Bodysuits",
+      "country": null,
+      "services": null,
+      "folder": "105-ai-p186",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "ai-p189": {
+      "client": null,
+      "title": "Face shapewear",
+      "country": null,
+      "services": null,
+      "folder": "106-ai-p189",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "ai-p192": {
+      "client": null,
+      "title": "Brand imagery",
+      "country": null,
+      "services": null,
+      "folder": "107-ai-p192",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "ai-p194": {
+      "client": null,
+      "title": "Bodysuits",
+      "country": null,
+      "services": null,
+      "folder": "108-ai-p194",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp",
+        "d-05.webp",
+        "d-06.webp",
+        "d-07.webp"
+      ]
+    }
+  }
+}
