@@ -17,23 +17,17 @@ export const hero = {
     '8+ years designing brand identities, visual guidelines, presentations, and marketing materials for startups, agencies, and organizations across international markets.',
 };
 
-export const about = {
-  heading: 'Design expertise across branding, editorial, and digital communication.',
-  paragraphs: [
-    'Senior graphic designer with 8+ years of experience specializing in brand identities, brand guidelines, and presentation design for startups, agencies, and organizations.',
-    // Regions: the 15 countries include India (Vijay Sales, PDF p.14), hence "Asia".
-    'I’ve designed for clients in 15 countries across Africa, the Middle East, Europe, Asia, and North America — from logo systems and bilingual Arabic/Latin brand guidelines to company profiles, impact reports, pitch decks, and social media campaigns.',
-  ],
-};
-
 // Key numbers — verified only:
 // - 8+ years: PDF p.1 + Marwen's profile.
 // - 15 countries: distinct "Country" labels on PDF project pages (Canada, Egypt, France, India,
 //   Jordan, Kenya, Kuwait, Libya, Qatar, Rwanda, Tunisia, Turkey, UAE, Uganda, USA).
+// - 100 completed projects: the 108 project entries in src/data/portfolio-inventory.json, counting the
+//   nine Samray packaging directions (PDF p.112–120) as one project.
 // - 5 certifications: listed below.
 export const metrics = [
   { value: '8+', label: 'Years of experience' },
-  { value: '15', label: 'Countries in the client portfolio' },
+  { value: '15', label: 'Countries served' },
+  { value: '100', label: 'Completed projects' },
   { value: '5', label: 'Professional certifications' },
 ];
 

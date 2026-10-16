@@ -1,4 +1,4 @@
-// Descriptive alt text per project, in visual order (desktop = boards, mobile = individual designs).
+// Descriptive alt text per project, in visual order (desktop = boards; mobile entries are unused).
 // Written from what is visibly on each design. Projects without an entry get a generic description.
 export const alts: Record<string, { desktop?: string[]; mobile?: string[] }> = {
   'social-mzuriorganics': {
