@@ -1412,9 +1412,10 @@
           ]
         },
         {
-          "project": "editorial-p94",
+          "project": "editorial-p95",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         }
       ]
