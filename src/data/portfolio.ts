@@ -25,7 +25,15 @@ export interface StoredProject {
   client: string | null; title: string | null; country: string | null; services: string | null;
   folder: string; boards: string[];
 }
-export interface PortfolioData { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, StoredProject> }
+// Selected Work: four fixed groups, each listing up to four project ids (references, never copies) and
+// the Work chapter its "Explore all" link scrolls to. Edited from /admin/ like the rest of the file.
+export interface FeaturedGroup { id: string; title: string; chapter: string; projects: string[] }
+export interface PortfolioData {
+  chapters: { id: string; title: string; projects: string[] }[];
+  projects: Record<string, StoredProject>;
+  featured?: FeaturedGroup[];
+}
+export const MAX_FEATURED = 4;
 export const portfolioData = data as PortfolioData;
 
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/portfolio/*/d-*.{webp,jpg}', { eager: true });
@@ -57,3 +65,18 @@ export const chapters: Chapter[] = portfolioData.chapters
     projects: c.projects.map((id) => project(id, c.id)).filter((p) => p.boards.length > 0),
   }))
   .filter((c) => c.projects.length > 0);
+
+export const featured = (portfolioData.featured ?? []).map((g, i) => {
+  const chapter = chapters.find((c) => c.id === g.chapter);
+  if (!chapter) throw new Error(`portfolio.json: featured group "${g.id}" links to unknown chapter "${g.chapter}"`);
+  const all = chapters.flatMap((c) => c.projects);
+  return {
+    id: g.id, number: String(i + 1).padStart(2, '0'), title: g.title,
+    chapter: { id: chapter.id, title: chapter.title },
+    projects: g.projects.slice(0, MAX_FEATURED).map((id) => {
+      const p = all.find((x) => x.id === id);
+      if (!p) throw new Error(`portfolio.json: featured group "${g.id}" lists "${id}", which is not in any chapter`);
+      return p;
+    }),
+  };
+});

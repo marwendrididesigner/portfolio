@@ -1308,5 +1308,51 @@
         "d-07.webp"
       ]
     }
-  }
+  },
+  "featured": [
+    {
+      "id": "social",
+      "title": "Social Media & Digital Campaigns",
+      "chapter": "social",
+      "projects": [
+        "social-eddykenzo",
+        "social-vijaysales",
+        "social-papparazo",
+        "social-acemobility"
+      ]
+    },
+    {
+      "id": "identity",
+      "title": "Brand Identity, Logo Design & Guidelines",
+      "chapter": "identity",
+      "projects": [
+        "identity-almizan",
+        "identity-espresso21",
+        "identity-tada",
+        "guidelines-p63"
+      ]
+    },
+    {
+      "id": "editorial",
+      "title": "Presentation & Editorial Design",
+      "chapter": "editorial",
+      "projects": [
+        "editorial-p84",
+        "editorial-p89",
+        "editorial-p99",
+        "editorial-p104"
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "AI-Powered Visual Design",
+      "chapter": "ai",
+      "projects": [
+        "ai-p150",
+        "ai-p170",
+        "ai-p157",
+        "ai-p146"
+      ]
+    }
+  ]
 }

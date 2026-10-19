@@ -105,7 +105,7 @@ const rowsOf = (projects: Project[]) => {
     const title = dialog.querySelector<HTMLElement>('[data-v-title]')!;
     const pos = dialog.querySelector<HTMLElement>('[data-v-pos]')!;
     let index = 0;
-    let opener: HTMLButtonElement | null = null;
+    let opener: HTMLElement | null = null;
 
     // Reuse the board's own responsive sources (no extra downloads up front); the browser picks the
     // largest candidate needed for the viewer size.
@@ -131,11 +131,19 @@ const rowsOf = (projects: Project[]) => {
     img.addEventListener('load', loaded);
     img.addEventListener('error', loaded);
 
-    triggers.forEach((t, i) => t.addEventListener('click', () => {
-      opener = t;
+    const open = (i: number, from: HTMLButtonElement) => {
+      opener = from;
       show(i);
       document.documentElement.classList.add('viewer-open');
       dialog.showModal();
+    };
+    triggers.forEach((t, i) => t.addEventListener('click', () => open(i, t)));
+    // Selected Work cards open the viewer at their project's first board in the full portfolio, so the
+    // project's remaining boards follow with → / swipe.
+    document.querySelectorAll<HTMLButtonElement>('[data-viewer-open]').forEach((b) => b.addEventListener('click', () => {
+      const first = document.getElementById(b.dataset.viewerOpen ?? '')?.querySelector<HTMLButtonElement>('[data-viewer]');
+      const i = first ? triggers.indexOf(first) : -1;
+      if (i >= 0) open(i, b);
     }));
     dialog.addEventListener('close', () => {
       document.documentElement.classList.remove('viewer-open');

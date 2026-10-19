@@ -58,6 +58,12 @@ for (const p of Object.values(portfolioData.projects)) {
 
       <!-- Manager -->
       <section data-manager hidden>
+        <nav class="tabs" aria-label="Manager sections">
+          <button type="button" class="tab" data-tab="projects" aria-pressed="true">Projects</button>
+          <button type="button" class="tab" data-tab="featured" aria-pressed="false">Selected Work</button>
+        </nav>
+
+        <div data-pane="projects">
         <div class="tools">
           <label class="cat">Category
             <select data-category></select>
@@ -85,6 +91,13 @@ for (const p of Object.values(portfolioData.projects)) {
             <button class="btn btn--ghost" type="button" data-add-cancel>Cancel</button>
           </div>
         </form>
+        </div>
+
+        <!-- Selected Work: four fixed groups, up to four projects each -->
+        <div data-pane="featured" hidden>
+          <p class="hint">The <strong>Selected Work</strong> section above the full portfolio. Each group shows up to 4 projects in this order, two per row. Featured projects also stay in the full portfolio.</p>
+          <div data-featured></div>
+        </div>
 
         <div class="publish">
           <p class="msg" data-status role="status" aria-live="polite"></p>
@@ -106,7 +119,9 @@ for (const p of Object.values(portfolioData.projects)) {
       const KEY = 'portfolio-admin-token';
 
       type Stored = { client: string | null; title: string | null; country: string | null; services: string | null; folder: string; boards: string[] };
-      type Data = { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, Stored> };
+      type Group = { id: string; title: string; chapter: string; projects: string[] };
+      type Data = { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, Stored>; featured?: Group[] };
+      const MAX_FEATURED = 4;
       type Board = { blob: Blob; ext: 'webp' | 'jpg'; url: string; name: string };
 
       const $ = <T extends Element>(s: string) => document.querySelector<T>(s)!;
@@ -128,8 +143,12 @@ for (const p of Object.values(portfolioData.projects)) {
       let dataSha = '';          // blob sha of portfolio.json when loaded — publish refuses if it changed
       let pending = new Map<string, Board[]>(); // new project id → its processed boards
       let dirty = false;
+      let featuredChanged = false;
       let busy = false;
       let draft: Board[] = [];
+      // Chapter-order snapshot, so the commit message says whether the project order changed
+      const order = () => JSON.stringify(data.chapters.map((c) => c.projects));
+      let loadedOrder = '';
 
       // ---- GitHub API -------------------------------------------------------------------------
       async function gh(path: string, init: RequestInit = {}) {
@@ -164,6 +183,7 @@ for (const p of Object.values(portfolioData.projects)) {
         const f = await gh(repo(`/contents/${DATA_PATH}?ref=${BRANCH}`));
         data = JSON.parse(b64ToText(f.content));
         dataSha = f.sha;
+        loadedOrder = order();
       }
 
       // ---- Sign in ----------------------------------------------------------------------------
@@ -249,8 +269,83 @@ for (const p of Object.values(portfolioData.projects)) {
           li.append(el('span', 'num', String(i + 1).padStart(2, '0')), img, text, ctrls);
           return li;
         }));
+        renderFeatured();
         $<HTMLButtonElement>('[data-publish]').disabled = !dirty || busy;
         if (dirty && !busy) status('Unpublished changes.');
+      }
+
+      // ---- Selected Work ----------------------------------------------------------------------
+      const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+      for (const t of tabs) {
+        t.addEventListener('click', () => {
+          for (const o of tabs) o.setAttribute('aria-pressed', String(o === t));
+          for (const p of document.querySelectorAll<HTMLElement>('[data-pane]')) p.hidden = p.dataset.pane !== t.dataset.tab;
+        });
+      }
+      const nameOf = (id: string) => { const p = data.projects[id]!; return [p.client, p.title].filter(Boolean).join(' — ') || 'Untitled'; };
+
+      function renderFeatured() {
+        const root = $<HTMLElement>('[data-featured]');
+        const groups = data.featured ?? [];
+        const changed = () => { featuredChanged = true; dirty = true; render(); };
+        root.replaceChildren(...groups.map((g, gi) => {
+          const sec = el('section', 'fgroup');
+          const full = g.projects.length >= MAX_FEATURED;
+          sec.append(el('h2', 'fhead', `${String(gi + 1).padStart(2, '0')} · ${g.title}`));
+          sec.append(el('p', 'sub', `${g.projects.length} of ${MAX_FEATURED} projects`));
+          const ol = el('ol', 'list');
+          g.projects.forEach((id, i) => {
+            const li = el('li', 'item');
+            const img = el('img') as HTMLImageElement;
+            img.src = thumbFor(id); img.alt = ''; img.loading = 'lazy'; img.width = 96; img.height = 68;
+            const text = el('div', 'txt');
+            text.append(el('p', 'name', nameOf(id)), el('p', 'sub', data.chapters.find((c) => c.projects.includes(id))?.title ?? ''));
+            const ctrls = el('div', 'ctrls');
+            const mk = (label: string, aria: string, fn: () => void, disabled: boolean) => {
+              const b = el('button', 'mini', label) as HTMLButtonElement;
+              b.type = 'button'; b.disabled = busy || disabled; b.setAttribute('aria-label', aria);
+              b.addEventListener('click', () => { fn(); changed(); });
+              ctrls.append(b);
+            };
+            mk('↑', `Move ${nameOf(id)} up`, () => move(g.projects, i, -1), i === 0);
+            mk('↓', `Move ${nameOf(id)} down`, () => move(g.projects, i, 1), i === g.projects.length - 1);
+            mk('✕', `Remove ${nameOf(id)} from ${g.title}`, () => { g.projects.splice(i, 1); }, false);
+            li.append(el('span', 'num', String(i + 1).padStart(2, '0')), img, text, ctrls);
+            ol.append(li);
+          });
+          sec.append(ol);
+
+          // Add: any published project, grouped by category, not already in this group
+          const add = el('div', 'fadd');
+          const sel = el('select') as HTMLSelectElement;
+          sel.setAttribute('aria-label', `Project to add to ${g.title}`);
+          const first = el('option', undefined, full ? `Group is full (${MAX_FEATURED}) — remove one first` : 'Choose a project to add…') as HTMLOptionElement;
+          first.value = '';
+          sel.append(first);
+          for (const c of data.chapters) {
+            const og = document.createElement('optgroup');
+            og.label = c.title;
+            for (const id of c.projects) {
+              if (g.projects.includes(id) || pending.has(id)) continue;
+              const o = el('option', undefined, nameOf(id)) as HTMLOptionElement;
+              o.value = id;
+              og.append(o);
+            }
+            if (og.children.length) sel.append(og);
+          }
+          const btn = el('button', 'btn btn--ghost', 'Add') as HTMLButtonElement;
+          btn.type = 'button';
+          sel.disabled = btn.disabled = busy || full;
+          btn.addEventListener('click', () => {
+            if (!sel.value || g.projects.length >= MAX_FEATURED) return;
+            g.projects.push(sel.value);
+            changed();
+          });
+          add.append(sel, btn);
+          sec.append(add);
+          return sec;
+        }));
+        if (!groups.length) root.append(el('p', 'msg', 'No Selected Work groups found in portfolio.json.'));
       }
       function move<T>(arr: T[], i: number, d: number) {
         const j = i + d;
@@ -391,13 +486,19 @@ for (const p of Object.values(portfolioData.projects)) {
           const base = await gh(repo(`/git/commits/${head}`));
           const newTree = await gh(repo('/git/trees'), { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
           const added = [...pending.keys()].map((id) => data.projects[id]!.client);
-          const message = added.length ? `Portfolio manager: add ${added.join(', ')}` : 'Portfolio manager: reorder projects';
+          const reordered = order() !== loadedOrder;
+          const message = added.length ? `Portfolio manager: add ${added.join(', ')}`
+            : featuredChanged && reordered ? 'Portfolio manager: reorder projects, update Selected Work'
+            : featuredChanged ? 'Portfolio manager: update Selected Work'
+            : 'Portfolio manager: reorder projects';
           const commit = await gh(repo('/git/commits'), { method: 'POST', body: JSON.stringify({ message, tree: newTree.sha, parents: [head] }) });
           await gh(repo(`/git/refs/heads/${BRANCH}`), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
 
           dataSha = jsonBlob.sha;
           pending = new Map();
           dirty = false;
+          featuredChanged = false;
+          loadedOrder = order();
           busy = false;
           render();
           status('Published to GitHub. The live site updates automatically in about 2–3 minutes.', 'ok');
@@ -469,6 +570,19 @@ for (const p of Object.values(portfolioData.projects)) {
       }
       .mini:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); }
       .mini:disabled { opacity: 0.25; cursor: default; }
+
+      .tabs { display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--rule-dark); }
+      .tab {
+        font: inherit; font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+        background: none; border: 0; border-bottom: 2px solid transparent; color: var(--cream-dim);
+        padding: 12px 4px; cursor: pointer;
+      }
+      .tab[aria-pressed=true] { color: var(--cream); border-bottom-color: var(--blue); }
+      .fgroup { margin-top: 32px; }
+      .fhead { font-size: 1.125rem; margin: 0; }
+      .fadd { display: flex; gap: 12px; margin-top: 14px; }
+      .fadd select { flex: 1; }
+      .fadd select:disabled { opacity: 0.5; }
 
       .add { margin-top: 28px; }
       .add .grid { display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 12px; }
