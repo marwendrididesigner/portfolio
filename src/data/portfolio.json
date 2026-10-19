@@ -1540,7 +1540,36 @@
       "chapters": [
         "packaging"
       ],
-      "items": []
+      "items": [
+        {
+          "project": "packaging-crac",
+          "boards": [
+            "d-01.webp",
+            "d-02.webp"
+          ]
+        },
+        {
+          "project": "packaging-froste",
+          "boards": [
+            "d-01.webp",
+            "d-02.webp"
+          ]
+        },
+        {
+          "project": "packaging-altura",
+          "boards": [
+            "d-01.webp",
+            "d-02.webp"
+          ]
+        },
+        {
+          "project": "packaging-voltage",
+          "boards": [
+            "d-02.webp",
+            "d-03.webp"
+          ]
+        }
+      ]
     },
     {
       "id": "ai",
