@@ -25,11 +25,11 @@ export interface StoredProject {
   client: string | null; title: string | null; country: string | null; services: string | null;
   folder: string; boards: string[];
 }
-// Selected Work: four fixed groups. Each item references an existing project by id plus the board shown
-// as its preview (`cover`, a file name from that project's boards) — never a copy of the project or its
-// images. `chapter` is the Work chapter the "Explore all" link scrolls to; `chapters` are the categories
+// Selected Work: four fixed groups. Each item references an existing project by id plus the boards to
+// show, in display order (`boards`: file names from that project's boards — stable, unlike indices) —
+// never a copy of the project or its images. `chapter` is the Work chapter the "Explore all" link scrolls to; `chapters` are the categories
 // the admin picker offers for the group. Edited from /admin/ independently of the portfolio order.
-export interface FeaturedItem { project: string; cover: string }
+export interface FeaturedItem { project: string; boards: string[] }
 export interface FeaturedGroup { id: string; title: string; chapter: string; chapters: string[]; items: FeaturedItem[] }
 export interface PortfolioData {
   chapters: { id: string; title: string; projects: string[] }[];
@@ -62,6 +62,18 @@ function project(id: string, chapter: string): PortfolioProject {
   };
 }
 
+// Row grouping shared by Work and Selected Work: one project per row, except two CONSECUTIVE
+// single-board projects, which share a row.
+export const rowsOf = <T extends { boards: readonly unknown[] }>(projects: T[]) => {
+  const rows: T[][] = [];
+  for (let i = 0; i < projects.length; i++) {
+    const p = projects[i]!, q = projects[i + 1];
+    if (p.boards.length === 1 && q?.boards.length === 1) { rows.push([p, q]); i++; }
+    else rows.push([p]);
+  }
+  return rows;
+};
+
 export const chapters: Chapter[] = portfolioData.chapters
   .map((c, i) => ({
     id: c.id, number: String(i + 1).padStart(2, '0'), title: c.title, deliverables: deliverables[c.id] ?? [],
@@ -77,12 +89,17 @@ export const featured = (portfolioData.featured ?? []).map((g, i) => {
     id: g.id, number: String(i + 1).padStart(2, '0'), title: g.title,
     chapter: { id: chapter.id, title: chapter.title },
     // Empty slots are simply not rendered
-    projects: g.items.slice(0, MAX_FEATURED).map(({ project: id, cover }) => {
+    projects: g.items.slice(0, MAX_FEATURED).map(({ project: id, boards }) => {
       const p = all.find((x) => x.id === id);
       if (!p) throw new Error(`portfolio.json: featured group "${g.id}" lists "${id}", which is not in any chapter`);
-      const coverIndex = portfolioData.projects[id]!.boards.indexOf(cover);
-      if (coverIndex < 0) throw new Error(`portfolio.json: featured "${id}" uses cover "${cover}", which is not one of its boards`);
-      return { ...p, coverIndex, cover: p.boards[coverIndex]! };
+      if (!boards.length) throw new Error(`portfolio.json: featured "${id}" has no selected boards`);
+      const files = portfolioData.projects[id]!.boards;
+      // Only the selected boards, in the chosen order (the full portfolio still shows them all)
+      return { ...p, boards: boards.map((b) => {
+        const i = files.indexOf(b);
+        if (i < 0) throw new Error(`portfolio.json: featured "${id}" selects "${b}", which is not one of its boards`);
+        return p.boards[i]!;
+      }) };
     }),
   };
 });

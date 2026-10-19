@@ -1320,19 +1320,27 @@
       "items": [
         {
           "project": "social-eddykenzo",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "social-vijaysales",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "social-shitanaultratrail",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "social-mzuriorganics",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         }
       ]
     },
@@ -1347,19 +1355,27 @@
       "items": [
         {
           "project": "identity-optinetconsulting",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "identity-pavlov",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "guidelines-p63",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "guidelines-p79",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         }
       ]
     },
@@ -1373,19 +1389,27 @@
       "items": [
         {
           "project": "editorial-p84",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "editorial-p89",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "editorial-p92",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "editorial-p94",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         }
       ]
     },
@@ -1399,19 +1423,27 @@
       "items": [
         {
           "project": "ai-p150",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "ai-p149",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "ai-p157",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         },
         {
           "project": "ai-p162",
-          "cover": "d-01.webp"
+          "boards": [
+            "d-01.webp"
+          ]
         }
       ]
     }

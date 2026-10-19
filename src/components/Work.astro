@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { chapters } from '../data/portfolio';
+import { chapters, rowsOf } from '../data/portfolio';
 
 // Portfolio in the PDF's order: chapter introduction → its projects, ONE project per full-width row.
 // Inside a project the boards fill a two-column grid from 760 px (1st left, 2nd right, 3rd next row
@@ -13,16 +13,6 @@ import { chapters } from '../data/portfolio';
 // `sizes` can't use CSS variables: the gutter is ~4.5vw, the board gap 16px.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
 
-type Project = (typeof chapters)[number]['projects'][number];
-const rowsOf = (projects: Project[]) => {
-  const rows: Project[][] = [];
-  for (let i = 0; i < projects.length; i++) {
-    const p = projects[i]!, q = projects[i + 1];
-    if (p.boards.length === 1 && q?.boards.length === 1) { rows.push([p, q]); i++; }
-    else rows.push([p]);
-  }
-  return rows;
-};
 ---
 <section class="work" id="work" aria-label="Portfolio">
   <div class="container">
@@ -100,18 +90,23 @@ const rowsOf = (projects: Project[]) => {
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('[data-viewer-dialog]');
   const triggers = [...document.querySelectorAll<HTMLButtonElement>('[data-viewer]')];
+  // Full-portfolio boards walk the whole portfolio; Selected Work boards (data-viewer-set) walk only
+  // their own project's selected boards.
+  const portfolio = triggers.filter((t) => !t.dataset.viewerSet);
+  const setOf = (t: HTMLButtonElement) => t.dataset.viewerSet ? triggers.filter((o) => o.dataset.viewerSet === t.dataset.viewerSet) : portfolio;
   if (dialog && triggers.length) {
     const img = dialog.querySelector<HTMLImageElement>('[data-v-img]')!;
     const title = dialog.querySelector<HTMLElement>('[data-v-title]')!;
     const pos = dialog.querySelector<HTMLElement>('[data-v-pos]')!;
     let index = 0;
+    let list = portfolio;
     let opener: HTMLElement | null = null;
 
     // Reuse the board's own responsive sources (no extra downloads up front); the browser picks the
     // largest candidate needed for the viewer size.
     const show = (i: number) => {
-      index = (i + triggers.length) % triggers.length;
-      const t = triggers[index]!;
+      index = (i + list.length) % list.length;
+      const t = list[index]!;
       const src = t.querySelector('img')!;
       const w = Number(src.getAttribute('width')) || 4, h = Number(src.getAttribute('height')) || 3;
       const shown = Math.min(window.innerWidth * 0.94, (window.innerHeight - 120) * (w / h));
@@ -131,20 +126,12 @@ const rowsOf = (projects: Project[]) => {
     img.addEventListener('load', loaded);
     img.addEventListener('error', loaded);
 
-    const open = (i: number, from: HTMLButtonElement) => {
-      opener = from;
-      show(i);
+    triggers.forEach((t) => t.addEventListener('click', () => {
+      opener = t;
+      list = setOf(t);
+      show(list.indexOf(t));
       document.documentElement.classList.add('viewer-open');
       dialog.showModal();
-    };
-    triggers.forEach((t, i) => t.addEventListener('click', () => open(i, t)));
-    // Selected Work cards open the viewer at their cover board in the full portfolio, so the project's
-    // other boards follow with ← / → / swipe.
-    document.querySelectorAll<HTMLButtonElement>('[data-viewer-open]').forEach((b) => b.addEventListener('click', () => {
-      const boards = document.getElementById(b.dataset.viewerOpen ?? '')?.querySelectorAll<HTMLButtonElement>('[data-viewer]');
-      const board = boards?.[Number(b.dataset.board) || 0] ?? boards?.[0];
-      const i = board ? triggers.indexOf(board) : -1;
-      if (i >= 0) open(i, b);
     }));
     dialog.addEventListener('close', () => {
       document.documentElement.classList.remove('viewer-open');

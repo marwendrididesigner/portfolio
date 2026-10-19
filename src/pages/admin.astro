@@ -11,7 +11,7 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { portfolioData } from '../data/portfolio';
 
-// Build-time thumbnails of every board (lists show the first one, the Selected Work cover picker all of
+// Build-time thumbnails of every board (lists show the first one, the Selected Work board manager all of
 // them). Projects added since the last deploy fall back to the repository file.
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/portfolio/*/d-*.{webp,jpg}', { eager: true });
 const thumbs: Record<string, string> = {};
@@ -97,7 +97,7 @@ for (const p of Object.values(portfolioData.projects)) {
 
         <!-- Selected Work: four fixed groups, up to four projects each -->
         <div data-pane="featured" hidden>
-          <p class="hint">The <strong>Selected Work</strong> section above the full portfolio: up to 4 projects per group, shown in this order with the chosen cover. Changes here never alter the full portfolio. Empty slots are not shown on the website.</p>
+          <p class="hint">The <strong>Selected Work</strong> section above the full portfolio: up to 4 projects per group, each with the boards you select, in your order. Changes here never alter the full portfolio. Empty slots are not shown on the website.</p>
           <div data-featured></div>
         </div>
 
@@ -112,14 +112,24 @@ for (const p of Object.values(portfolioData.projects)) {
           <ol class="plist" data-picker-list></ol>
         </dialog>
 
-        <!-- Cover picker -->
-        <dialog class="picker" data-cover aria-labelledby="cover-title">
+        <!-- Featured boards manager -->
+        <dialog class="picker picker--wide" data-bm aria-labelledby="bm-title">
           <div class="picker-head">
-            <h2 id="cover-title" data-cover-title>Choose the cover</h2>
-            <button type="button" class="mini" data-cover-close aria-label="Close">✕</button>
+            <h2 id="bm-title" data-bm-title>Featured boards</h2>
+            <button type="button" class="mini" data-bm-cancel aria-label="Cancel">✕</button>
           </div>
-          <p class="hint">The chosen board is only the preview in Selected Work. The project's boards in the full portfolio stay as they are.</p>
-          <ol class="covers" data-cover-list></ol>
+          <div class="bm-body">
+            <p class="hint">Tick the boards to show in Selected Work, then set their order below. The full portfolio keeps showing every board.</p>
+            <h3 class="bm-h">All boards</h3>
+            <ol class="covers" data-bm-all></ol>
+            <h3 class="bm-h" data-bm-count>Selected boards</h3>
+            <ol class="list" data-bm-sel></ol>
+          </div>
+          <p class="msg err" data-bm-msg role="status"></p>
+          <div class="row bm-foot">
+            <button type="button" class="btn btn--primary" data-bm-done>Done</button>
+            <button type="button" class="btn btn--ghost" data-bm-cancel>Cancel</button>
+          </div>
         </dialog>
 
         <div class="publish">
@@ -142,7 +152,7 @@ for (const p of Object.values(portfolioData.projects)) {
       const KEY = 'portfolio-admin-token';
 
       type Stored = { client: string | null; title: string | null; country: string | null; services: string | null; folder: string; boards: string[] };
-      type Item = { project: string; cover: string };
+      type Item = { project: string; boards: string[] }; // boards: selected board file names, in display order
       type Group = { id: string; title: string; chapter: string; chapters: string[]; items: Item[] };
       type Data = { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, Stored>; featured?: Group[] };
       const MAX_FEATURED = 4;
@@ -346,7 +356,15 @@ for (const p of Object.values(portfolioData.projects)) {
             const name = nameOf(it.project);
             const text = el('div', 'txt');
             const p = data.projects[it.project]!;
-            text.append(el('p', 'name', name), el('p', 'sub', [chapterOf(it.project)?.title, `cover: board ${p.boards.indexOf(it.cover) + 1} of ${p.boards.length}`].filter(Boolean).join(' · ')));
+            text.append(el('p', 'name', name), el('p', 'sub', [chapterOf(it.project)?.title, `${it.boards.length} of ${p.boards.length} board${p.boards.length > 1 ? 's' : ''} selected`].filter(Boolean).join(' · ')));
+            // Small previews of the selected boards, in display order
+            const strip = el('div', 'strip');
+            it.boards.forEach((b) => {
+              const t = thumbImg(thumbFor(it.project, b), 64, 45);
+              t.title = `Board ${p.boards.indexOf(b) + 1}`;
+              strip.append(t);
+            });
+            text.append(strip);
             const ctrls = el('div', 'ctrls');
             ctrls.append(
               button('↑', 'mini', `Move ${name} up`, () => { move(g.items, i, -1); featuredEdit(); }, i === 0),
@@ -354,15 +372,15 @@ for (const p of Object.values(portfolioData.projects)) {
             );
             const acts = el('div', 'facts');
             acts.append(
+              button('Manage Featured Boards', 'link', `Choose which boards of ${name} appear in Selected Work`, () => openBoards(it, null)),
               button('Change Project', 'link', `Replace ${name} in ${g.title}`, () => openPicker(g, i)),
-              button('Change Cover', 'link', `Choose the cover of ${name}`, () => openCover(g, i), p.boards.length < 2),
               button('Remove', 'link link--danger', `Remove ${name} from ${g.title}`, () => {
                 if (!confirm(`Remove “${name}” from Selected Work?\n\nThe project stays in the full portfolio — only the featured reference is removed.`)) return;
                 g.items.splice(i, 1); featuredEdit();
               }),
             );
             text.append(acts);
-            li.append(num, thumbImg(thumbFor(it.project, it.cover)), text, ctrls);
+            li.append(num, text, ctrls);
             ol.append(li);
           }
           sec.append(ol);
@@ -404,12 +422,24 @@ for (const p of Object.values(portfolioData.projects)) {
             const t = el('span', 'txt');
             t.append(el('span', 'name', name), el('span', 'sub', `${c.title} · ${data.projects[id]!.boards.length} board${data.projects[id]!.boards.length > 1 ? 's' : ''}`));
             b.append(thumbImg(thumbFor(id), 72, 51), t);
+            // Adding or replacing starts a fresh board selection: a single-board project selects its
+            // board; otherwise the board manager opens, and cancelling it undoes the add/replace.
             b.addEventListener('click', () => {
-              const item = { project: id, cover: data.projects[id]!.boards[0]! };
-              if (slot === null) { if (g.items.length < MAX_FEATURED) g.items.push(item); }
-              else g.items[slot] = item;
+              const all = data.projects[id]!.boards;
+              const item: Item = { project: id, boards: all.length === 1 ? [all[0]!] : [] };
+              let undo: () => void;
+              if (slot === null) {
+                if (g.items.length >= MAX_FEATURED) return;
+                g.items.push(item);
+                undo = () => { g.items.splice(g.items.indexOf(item), 1); };
+              } else {
+                const prev = g.items[slot]!;
+                g.items[slot] = item;
+                undo = () => { g.items[g.items.indexOf(item)] = prev; };
+              }
               picker.close();
-              featuredEdit();
+              if (item.boards.length) featuredEdit();
+              else openBoards(item, undo);
             });
             li.append(b);
             rows.push(li);
@@ -421,31 +451,81 @@ for (const p of Object.values(portfolioData.projects)) {
       showAll.addEventListener('change', renderPicker);
       $('[data-picker-close]').addEventListener('click', () => picker.close());
 
-      // Cover picker: the project's own boards, uncropped thumbnails
-      const coverDlg = $<HTMLDialogElement>('[data-cover]');
-      function openCover(g: Group, i: number) {
-        const it = g.items[i]!;
-        const p = data.projects[it.project]!;
-        $<HTMLElement>('[data-cover-title]').textContent = `Cover for “${nameOf(it.project)}”`;
-        $<HTMLOListElement>('[data-cover-list]').replaceChildren(...p.boards.map((b, bi) => {
+      // Featured boards manager: tick any of the project's boards (uncropped thumbnails), reorder the
+      // selection with ↑/↓. Edits a draft; Done applies it (at least one board), Cancel/Esc discards it
+      // and, for a just-added/replaced project, undoes that too.
+      const bm = $<HTMLDialogElement>('[data-bm]');
+      const bmMsg = $<HTMLElement>('[data-bm-msg]');
+      let bmFor: { it: Item; draft: string[]; undo: (() => void) | null } | null = null;
+      function openBoards(it: Item, undo: (() => void) | null) {
+        bmFor = { it, draft: [...it.boards], undo };
+        $<HTMLElement>('[data-bm-title]').textContent = `Featured boards — ${nameOf(it.project)}`;
+        bmMsg.textContent = '';
+        renderBoards();
+        bm.showModal();
+      }
+      function renderBoards() {
+        if (!bmFor) return;
+        const { it, draft } = bmFor;
+        const all = data.projects[it.project]!.boards;
+        const label = (b: string) => `Board ${all.indexOf(b) + 1}`;
+        $<HTMLOListElement>('[data-bm-all]').replaceChildren(...all.map((b) => {
+          const on = draft.includes(b);
           const li = el('li');
-          const btn = el('button', b === it.cover ? 'cov is-current' : 'cov') as HTMLButtonElement;
-          btn.type = 'button';
-          btn.setAttribute('aria-pressed', String(b === it.cover));
-          btn.setAttribute('aria-label', `Board ${bi + 1} of ${p.boards.length}`);
+          const lab = el('label', on ? 'cov is-current' : 'cov');
+          const box = el('input') as HTMLInputElement;
+          box.type = 'checkbox'; box.checked = on;
+          box.addEventListener('change', () => {
+            if (box.checked) draft.push(b); else draft.splice(draft.indexOf(b), 1);
+            bmMsg.textContent = '';
+            renderBoards();
+            ($<HTMLOListElement>('[data-bm-all]').children[all.indexOf(b)]?.querySelector('input') as HTMLElement | null)?.focus();
+          });
           const img = el('img') as HTMLImageElement;
           img.src = thumbFor(it.project, b); img.alt = '';
-          btn.append(img, el('span', 'sub', `Board ${bi + 1}${b === it.cover ? ' · current' : ''}`));
-          btn.addEventListener('click', () => {
-            coverDlg.close();
-            if (b !== it.cover) { it.cover = b; featuredEdit(); }
-          });
-          li.append(btn);
+          const cap = el('span', 'cov-cap');
+          cap.append(box, el('span', undefined, label(b)), el('span', 'cov-state', on ? `Selected · #${draft.indexOf(b) + 1}` : 'Not selected'));
+          lab.append(img, cap);
+          li.append(lab);
           return li;
         }));
-        coverDlg.showModal();
+        $<HTMLElement>('[data-bm-count]').textContent = `Selected boards (${draft.length}) — display order`;
+        const sel = $<HTMLOListElement>('[data-bm-sel]');
+        sel.replaceChildren(...(draft.length ? draft.map((b, i) => {
+          const li = el('li', 'item bm-item');
+          const ctrls = el('div', 'ctrls');
+          const mk = (t: string, aria: string, fn: () => void, disabled: boolean) => {
+            const x = el('button', 'mini', t) as HTMLButtonElement;
+            x.type = 'button'; x.disabled = disabled; x.setAttribute('aria-label', aria);
+            x.addEventListener('click', () => { fn(); renderBoards(); });
+            ctrls.append(x);
+          };
+          // swap locally: the draft only counts as a change once Done applies it
+          const swap = (j: number) => { [draft[i], draft[j]] = [draft[j]!, draft[i]!]; };
+          mk('↑', `Move ${label(b)} earlier`, () => swap(i - 1), i === 0);
+          mk('↓', `Move ${label(b)} later`, () => swap(i + 1), i === draft.length - 1);
+          mk('✕', `Unselect ${label(b)}`, () => { draft.splice(i, 1); }, false);
+          li.append(el('span', 'num', String(i + 1).padStart(2, '0')), thumbImg(thumbFor(it.project, b)), el('p', 'name', label(b)), ctrls);
+          return li;
+        }) : [el('li', 'msg', 'No boards selected yet.')]));
       }
-      $('[data-cover-close]').addEventListener('click', () => coverDlg.close());
+      $('[data-bm-done]').addEventListener('click', () => {
+        if (!bmFor) return;
+        if (!bmFor.draft.length) { bmMsg.textContent = 'Select at least one board.'; return; }
+        const changed = bmFor.undo !== null || bmFor.draft.join() !== bmFor.it.boards.join();
+        bmFor.it.boards = bmFor.draft;
+        bmFor = null;
+        bm.close();
+        if (changed) featuredEdit();
+      });
+      const bmCancel = () => {
+        if (!bmFor) return;
+        bmFor.undo?.();
+        bmFor = null;
+        render();
+      };
+      for (const x of document.querySelectorAll('[data-bm-cancel]')) x.addEventListener('click', () => { bmCancel(); bm.close(); });
+      bm.addEventListener('close', bmCancel); // Esc
 
       // Checked again right before publishing (also protects against a hand-edited file)
       function validateFeatured() {
@@ -457,7 +537,9 @@ for (const p of Object.values(portfolioData.projects)) {
             if (!p || !chapterOf(it.project)) throw new Error(`“${g.title}” refers to a project that no longer exists (${it.project})`);
             if (seen.has(it.project)) throw new Error(`“${nameOf(it.project)}” appears twice in “${g.title}”`);
             seen.add(it.project);
-            if (!p.boards.includes(it.cover)) throw new Error(`the cover of “${nameOf(it.project)}” is not one of its boards`);
+            if (!it.boards.length) throw new Error(`“${nameOf(it.project)}” has no selected boards`);
+            if (new Set(it.boards).size !== it.boards.length || it.boards.some((b) => !p.boards.includes(b)))
+              throw new Error(`the selected boards of “${nameOf(it.project)}” do not match its boards`);
           }
         }
       }
@@ -720,7 +802,10 @@ for (const p of Object.values(portfolioData.projects)) {
       .fgroup-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
       .fhead { font-size: 1.125rem; margin: 0; }
       .fgroup .list { margin-top: 8px; }
-      .fitem.is-empty { grid-template-columns: 2rem minmax(0, 1fr) auto; min-height: 89px; }
+      .fitem { grid-template-columns: 2rem minmax(0, 1fr) auto; }
+      .fitem.is-empty { min-height: 89px; }
+      .strip { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+      .strip img { width: 64px; height: 45px; object-fit: contain; background: var(--paper); }
       .slot { color: var(--cream-dim); font-size: 0.875rem; border: 1px dashed var(--rule-dark); padding: 14px; }
       .facts { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 0.8125rem; }
       .link:disabled { opacity: 0.35; cursor: default; text-decoration: none; }
@@ -749,7 +834,17 @@ for (const p of Object.values(portfolioData.projects)) {
       }
       .cov:hover, .cov:focus-visible { border-color: var(--blue); }
       .cov.is-current { border-color: var(--blue); background: rgb(0 160 222 / 0.12); }
-      .cov img { width: 100%; height: 120px; object-fit: contain; background: var(--paper); }
+      .cov img { width: 100%; height: 130px; object-fit: contain; background: var(--paper); }
+      .cov-cap { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; letter-spacing: 0; text-transform: none; color: var(--cream); }
+      .cov-cap input { accent-color: var(--blue); width: 18px; height: 18px; }
+      .cov-state { margin-left: auto; color: var(--cream-dim); }
+      .cov.is-current .cov-state { color: var(--blue); font-weight: 800; }
+      .picker--wide { width: min(920px, 100vw - 24px); max-height: 90vh; }
+      .bm-body { overflow-y: auto; min-height: 0; }
+      .bm-body .covers { overflow: visible; min-height: auto; }
+      .bm-h { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-dim); margin: 20px 0 10px; }
+      .bm-body .list { margin: 0; }
+      .bm-foot { justify-content: flex-end; }
 
       .add { margin-top: 28px; }
       .add .grid { display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 12px; }
@@ -770,8 +865,8 @@ for (const p of Object.values(portfolioData.projects)) {
         .item { grid-template-columns: 1.6rem 72px minmax(0, 1fr); }
         .item img { width: 72px; height: 51px; }
         .item .ctrls { grid-column: 2 / -1; }
-        .fitem.is-empty { grid-template-columns: 1.6rem minmax(0, 1fr); }
-        .fitem.is-empty > :last-child { grid-column: 2 / -1; }
+        .fitem { grid-template-columns: 1.6rem minmax(0, 1fr); }
+        .fitem > :last-child { grid-column: 2 / -1; }
         .publish { flex-direction: column; align-items: stretch; gap: 8px; }
       }
     </style>

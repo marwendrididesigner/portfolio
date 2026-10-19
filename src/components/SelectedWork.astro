@@ -1,13 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import { featured } from '../data/portfolio';
+import { featured, rowsOf } from '../data/portfolio';
 
 // Selected Work: a short introduction to the portfolio — four groups (portfolio.json → "featured",
-// managed from /admin/) of up to four projects, each shown by its chosen cover board. Projects are the same
-// records the full portfolio renders below; nothing is duplicated, and they stay in the full portfolio.
-// Two projects per row from 760 px, one on phones; boards keep their original proportions.
-// Clicking a card opens the shared viewer (Work.astro) at that board of the project, so its other
-// boards follow with ← / → / swipe.
+// managed from /admin/) of up to four projects. Each project shows only its SELECTED boards, in the
+// chosen order; the full portfolio below still shows every board. Projects are the same records the
+// full portfolio renders; nothing is duplicated.
+// Layout follows the full portfolio: one project per row with its boards two per row from 760 px
+// (two consecutive single-board projects share a row), one column on phones, never cropped.
+// Each board opens the shared viewer (Work.astro), which walks only that project's selected boards.
 
 // Same widths/format/quality as Work.astro, so the build reuses the exact same image files.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
@@ -27,25 +28,37 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
           <h3 id={`sel-${g.id}`} class="group-title">{g.title}</h3>
         </header>
 
-        <div class="sel-grid">
-          {g.projects.map((p) => {
-            const n = p.boards.length;
-            const meta = [p.country, p.services ?? g.chapter.title, n > 1 ? `${n} boards` : ''].filter(Boolean).join(' · ');
-            return (
-              <article class="card">
-                <button type="button" class="card-board" data-viewer-open={p.id} data-board={p.coverIndex}
-                  aria-label={`Open ${[p.client, p.title].filter(Boolean).join(' — ')} in the viewer`}>
-                  <Image src={p.cover.src} alt={p.cover.alt} widths={[640, 960, 1400, 1920]}
-                    sizes={SIZES} format="webp" quality={82} loading="lazy" decoding="async" />
-                  <span class="zoom" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="16" height="16"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.5 4.5-1.41 1.41-4.5-4.5A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm1 2.5v2h2v2h-2v2h-2v-2h-2v-2h2v-2h2Z" fill="currentColor"/></svg>
-                  </span>
-                </button>
-                <h4 class="card-name">{p.client}{p.title && <span class="ptitle"> — {p.title}</span>}</h4>
-                <p class="card-meta">{meta}</p>
-              </article>
-            );
-          })}
+        <div class="projects">
+          {rowsOf(g.projects).map((row) => (
+            <div class={row.length === 2 ? 'row pair' : 'row'}>
+              {row.map((p) => {
+                const name = [p.client, p.title].filter(Boolean).join(' — ');
+                const n = p.boards.length;
+                const meta = [p.country, p.services ?? g.chapter.title].filter(Boolean).join(' · ');
+                return (
+                  <article class="project" aria-labelledby={`sel-title-${g.id}-${p.id}`}>
+                    <header class="project-head">
+                      <h4 id={`sel-title-${g.id}-${p.id}`} class="client">{p.client}{p.title && <span class="ptitle"> — {p.title}</span>}</h4>
+                      <p class="meta">{meta}</p>
+                    </header>
+                    <div class="boards">
+                      {p.boards.map((v, i) => (
+                        <button type="button" class="board"
+                          data-viewer data-viewer-set={`${g.id}/${p.id}`} data-project={name} data-pos={`${i + 1} / ${n}`}>
+                          <Image src={v.src} alt={v.alt} widths={[640, 960, 1400, 1920]}
+                            sizes={SIZES} format="webp" quality={82} loading="lazy" decoding="async" />
+                          <span class="zoom" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.5 4.5-1.41 1.41-4.5-4.5A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm1 2.5v2h2v2h-2v2h-2v-2h-2v-2h2v-2h2Z" fill="currentColor"/></svg>
+                          </span>
+                          <span class="visually-hidden">Open larger view</span>
+                        </button>
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ))}
         </div>
 
         <a class="explore" href={`#work-${g.chapter.id}`}>Explore all {g.chapter.title} projects <span aria-hidden="true">→</span></a>
@@ -79,17 +92,29 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
   .group-num { color: var(--blue); font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.24em; }
   .group-title { font-size: clamp(1.25rem, 2.2vw, 1.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.005em; }
 
-  /* Two projects per row from 760 px (two rows of two), one per row on phones */
-  .sel-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 4vw, 48px) 16px; align-items: start; }
-  @media (min-width: 760px) { .sel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  /* Same rules as the full portfolio (Work.astro): one project per row, its boards two per row from
+     760 px, consecutive single-board projects paired, one column on phones */
+  .projects { display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px); }
+  .project-head { margin-bottom: 12px; }
+  .client { margin: 0; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25; }
+  .ptitle { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--label); }
+  .meta { margin-top: 4px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--value); }
 
-  .card-board {
+  .boards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+  @media (min-width: 760px) {
+    .boards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+    .pair .boards { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 759px) { .pair { display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px); } }
+
+  .board {
     position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;
     cursor: zoom-in; overflow: hidden; transition: box-shadow 0.25s var(--ease);
   }
-  .card-board :global(img) { display: block; width: 100%; height: auto; box-shadow: inset 0 0 0 1px var(--rule-light); }
-  .card-board:hover { box-shadow: 0 10px 28px -12px rgb(0 0 4 / 0.28); }
-  .card-board:focus-visible { outline-offset: 2px; }
+  .board :global(img) { display: block; width: 100%; height: auto; box-shadow: inset 0 0 0 1px var(--rule-light); }
+  .board:hover { box-shadow: 0 10px 28px -12px rgb(0 0 4 / 0.28); }
+  .board:focus-visible { outline-offset: 2px; }
   .zoom {
     position: absolute; top: 10px; right: 10px;
     display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
@@ -97,15 +122,8 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
     opacity: 0; transform: scale(0.85);
     transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
   }
-  .card-board:hover .zoom, .card-board:focus-visible .zoom { opacity: 1; transform: none; }
+  .board:hover .zoom, .board:focus-visible .zoom { opacity: 1; transform: none; }
   @media (hover: none) { .zoom { opacity: 0.85; transform: none; width: 28px; height: 28px; top: 8px; right: 8px; } }
-
-  .card-name {
-    margin: 14px 0 0;
-    font-size: clamp(1rem, 1.4vw, 1.125rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25;
-  }
-  .ptitle { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--label); }
-  .card-meta { margin-top: 4px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--value); }
 
   .explore {
     display: inline-flex; align-items: center; gap: 8px; margin-top: clamp(24px, 3vw, 36px);
