@@ -11,14 +11,16 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { portfolioData } from '../data/portfolio';
 
-// Build-time thumbnails of each project's first board (projects added since the last deploy fall back
-// to the repository file).
+// Build-time thumbnails of every board (lists show the first one, the Selected Work cover picker all of
+// them). Projects added since the last deploy fall back to the repository file.
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/portfolio/*/d-*.{webp,jpg}', { eager: true });
 const thumbs: Record<string, string> = {};
 for (const p of Object.values(portfolioData.projects)) {
-  const key = `${p.folder}/${p.boards[0]}`;
-  const file = files[`../assets/portfolio/${key}`];
-  if (file) thumbs[key] = (await getImage({ src: file.default, width: 160, format: 'webp', quality: 70 })).src;
+  for (const b of p.boards) {
+    const key = `${p.folder}/${b}`;
+    const file = files[`../assets/portfolio/${key}`];
+    if (file) thumbs[key] = (await getImage({ src: file.default, width: 240, format: 'webp', quality: 70 })).src;
+  }
 }
 ---
 <!doctype html>
@@ -59,7 +61,7 @@ for (const p of Object.values(portfolioData.projects)) {
       <!-- Manager -->
       <section data-manager hidden>
         <nav class="tabs" aria-label="Manager sections">
-          <button type="button" class="tab" data-tab="projects" aria-pressed="true">Projects</button>
+          <button type="button" class="tab" data-tab="projects" aria-pressed="true">All Projects</button>
           <button type="button" class="tab" data-tab="featured" aria-pressed="false">Selected Work</button>
         </nav>
 
@@ -95,9 +97,30 @@ for (const p of Object.values(portfolioData.projects)) {
 
         <!-- Selected Work: four fixed groups, up to four projects each -->
         <div data-pane="featured" hidden>
-          <p class="hint">The <strong>Selected Work</strong> section above the full portfolio. Each group shows up to 4 projects in this order, two per row. Featured projects also stay in the full portfolio.</p>
+          <p class="hint">The <strong>Selected Work</strong> section above the full portfolio: up to 4 projects per group, shown in this order with the chosen cover. Changes here never alter the full portfolio. Empty slots are not shown on the website.</p>
           <div data-featured></div>
         </div>
+
+        <!-- Project picker (Add / Change Project) -->
+        <dialog class="picker" data-picker aria-labelledby="picker-title">
+          <div class="picker-head">
+            <h2 id="picker-title" data-picker-title>Choose a project</h2>
+            <button type="button" class="mini" data-picker-close aria-label="Close">✕</button>
+          </div>
+          <input type="search" placeholder="Search projects…" data-picker-search aria-label="Search projects" />
+          <label class="check"><input type="checkbox" data-picker-all /> Show projects from all categories</label>
+          <ol class="plist" data-picker-list></ol>
+        </dialog>
+
+        <!-- Cover picker -->
+        <dialog class="picker" data-cover aria-labelledby="cover-title">
+          <div class="picker-head">
+            <h2 id="cover-title" data-cover-title>Choose the cover</h2>
+            <button type="button" class="mini" data-cover-close aria-label="Close">✕</button>
+          </div>
+          <p class="hint">The chosen board is only the preview in Selected Work. The project's boards in the full portfolio stay as they are.</p>
+          <ol class="covers" data-cover-list></ol>
+        </dialog>
 
         <div class="publish">
           <p class="msg" data-status role="status" aria-live="polite"></p>
@@ -119,7 +142,8 @@ for (const p of Object.values(portfolioData.projects)) {
       const KEY = 'portfolio-admin-token';
 
       type Stored = { client: string | null; title: string | null; country: string | null; services: string | null; folder: string; boards: string[] };
-      type Group = { id: string; title: string; chapter: string; projects: string[] };
+      type Item = { project: string; cover: string };
+      type Group = { id: string; title: string; chapter: string; chapters: string[]; items: Item[] };
       type Data = { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, Stored>; featured?: Group[] };
       const MAX_FEATURED = 4;
       type Board = { blob: Blob; ext: 'webp' | 'jpg'; url: string; name: string };
@@ -238,11 +262,12 @@ for (const p of Object.values(portfolioData.projects)) {
       catSelect.addEventListener('change', render);
       const current = () => data.chapters.find((c) => c.id === catSelect.value)!;
 
-      function thumbFor(id: string) {
-        const b = pending.get(id);
-        if (b) return b[0]!.url;
+      function thumbFor(id: string, board?: string) {
         const p = data.projects[id]!;
-        const key = `${p.folder}/${p.boards[0]}`;
+        const i = Math.max(0, board ? p.boards.indexOf(board) : 0);
+        const b = pending.get(id);
+        if (b) return b[i]!.url;
+        const key = `${p.folder}/${p.boards[i]}`;
         return thumbs[key] ?? `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${ASSET_DIR}/${key}`;
       }
 
@@ -283,70 +308,160 @@ for (const p of Object.values(portfolioData.projects)) {
         });
       }
       const nameOf = (id: string) => { const p = data.projects[id]!; return [p.client, p.title].filter(Boolean).join(' — ') || 'Untitled'; };
+      const chapterOf = (id: string) => data.chapters.find((c) => c.projects.includes(id));
+      const featuredEdit = () => { featuredChanged = true; dirty = true; render(); };
+      const thumbImg = (src: string, w = 96, h = 68) => {
+        const img = el('img') as HTMLImageElement;
+        img.src = src; img.alt = ''; img.loading = 'lazy'; img.width = w; img.height = h;
+        return img;
+      };
+      const button = (label: string, cls: string, aria: string, fn: () => void, disabled = false) => {
+        const b = el('button', cls, label) as HTMLButtonElement;
+        b.type = 'button'; b.disabled = busy || disabled; b.setAttribute('aria-label', aria);
+        b.addEventListener('click', fn);
+        return b;
+      };
 
       function renderFeatured() {
         const root = $<HTMLElement>('[data-featured]');
         const groups = data.featured ?? [];
-        const changed = () => { featuredChanged = true; dirty = true; render(); };
         root.replaceChildren(...groups.map((g, gi) => {
           const sec = el('section', 'fgroup');
-          const full = g.projects.length >= MAX_FEATURED;
-          sec.append(el('h2', 'fhead', `${String(gi + 1).padStart(2, '0')} · ${g.title}`));
-          sec.append(el('p', 'sub', `${g.projects.length} of ${MAX_FEATURED} projects`));
+          const head = el('div', 'fgroup-head');
+          head.append(el('h2', 'fhead', `${String(gi + 1).padStart(2, '0')} · ${g.title}`), el('p', 'sub', `${g.items.length} of ${MAX_FEATURED}`));
+          sec.append(head);
           const ol = el('ol', 'list');
-          g.projects.forEach((id, i) => {
-            const li = el('li', 'item');
-            const img = el('img') as HTMLImageElement;
-            img.src = thumbFor(id); img.alt = ''; img.loading = 'lazy'; img.width = 96; img.height = 68;
-            const text = el('div', 'txt');
-            text.append(el('p', 'name', nameOf(id)), el('p', 'sub', data.chapters.find((c) => c.projects.includes(id))?.title ?? ''));
-            const ctrls = el('div', 'ctrls');
-            const mk = (label: string, aria: string, fn: () => void, disabled: boolean) => {
-              const b = el('button', 'mini', label) as HTMLButtonElement;
-              b.type = 'button'; b.disabled = busy || disabled; b.setAttribute('aria-label', aria);
-              b.addEventListener('click', () => { fn(); changed(); });
-              ctrls.append(b);
-            };
-            mk('↑', `Move ${nameOf(id)} up`, () => move(g.projects, i, -1), i === 0);
-            mk('↓', `Move ${nameOf(id)} down`, () => move(g.projects, i, 1), i === g.projects.length - 1);
-            mk('✕', `Remove ${nameOf(id)} from ${g.title}`, () => { g.projects.splice(i, 1); }, false);
-            li.append(el('span', 'num', String(i + 1).padStart(2, '0')), img, text, ctrls);
-            ol.append(li);
-          });
-          sec.append(ol);
-
-          // Add: any published project, grouped by category, not already in this group
-          const add = el('div', 'fadd');
-          const sel = el('select') as HTMLSelectElement;
-          sel.setAttribute('aria-label', `Project to add to ${g.title}`);
-          const first = el('option', undefined, full ? `Group is full (${MAX_FEATURED}) — remove one first` : 'Choose a project to add…') as HTMLOptionElement;
-          first.value = '';
-          sel.append(first);
-          for (const c of data.chapters) {
-            const og = document.createElement('optgroup');
-            og.label = c.title;
-            for (const id of c.projects) {
-              if (g.projects.includes(id) || pending.has(id)) continue;
-              const o = el('option', undefined, nameOf(id)) as HTMLOptionElement;
-              o.value = id;
-              og.append(o);
+          for (let i = 0; i < MAX_FEATURED; i++) {
+            const it = g.items[i];
+            const li = el('li', it ? 'item fitem' : 'item fitem is-empty');
+            const num = el('span', 'num', String(i + 1).padStart(2, '0'));
+            if (!it) {
+              const add = i === g.items.length
+                ? button('+ Add Project', 'btn btn--ghost', `Add a project to ${g.title}`, () => openPicker(g, null))
+                : el('span');
+              li.append(num, el('div', 'slot', 'Empty slot'), add);
+              ol.append(li);
+              continue;
             }
-            if (og.children.length) sel.append(og);
+            const name = nameOf(it.project);
+            const text = el('div', 'txt');
+            const p = data.projects[it.project]!;
+            text.append(el('p', 'name', name), el('p', 'sub', [chapterOf(it.project)?.title, `cover: board ${p.boards.indexOf(it.cover) + 1} of ${p.boards.length}`].filter(Boolean).join(' · ')));
+            const ctrls = el('div', 'ctrls');
+            ctrls.append(
+              button('↑', 'mini', `Move ${name} up`, () => { move(g.items, i, -1); featuredEdit(); }, i === 0),
+              button('↓', 'mini', `Move ${name} down`, () => { move(g.items, i, 1); featuredEdit(); }, i === g.items.length - 1),
+            );
+            const acts = el('div', 'facts');
+            acts.append(
+              button('Change Project', 'link', `Replace ${name} in ${g.title}`, () => openPicker(g, i)),
+              button('Change Cover', 'link', `Choose the cover of ${name}`, () => openCover(g, i), p.boards.length < 2),
+              button('Remove', 'link link--danger', `Remove ${name} from ${g.title}`, () => {
+                if (!confirm(`Remove “${name}” from Selected Work?\n\nThe project stays in the full portfolio — only the featured reference is removed.`)) return;
+                g.items.splice(i, 1); featuredEdit();
+              }),
+            );
+            text.append(acts);
+            li.append(num, thumbImg(thumbFor(it.project, it.cover)), text, ctrls);
+            ol.append(li);
           }
-          const btn = el('button', 'btn btn--ghost', 'Add') as HTMLButtonElement;
-          btn.type = 'button';
-          sel.disabled = btn.disabled = busy || full;
-          btn.addEventListener('click', () => {
-            if (!sel.value || g.projects.length >= MAX_FEATURED) return;
-            g.projects.push(sel.value);
-            changed();
-          });
-          add.append(sel, btn);
-          sec.append(add);
+          sec.append(ol);
           return sec;
         }));
         if (!groups.length) root.append(el('p', 'msg', 'No Selected Work groups found in portfolio.json.'));
       }
+
+      // Project picker: existing projects (including ones added in this session), filtered to the
+      // group's categories unless "all categories" is ticked; projects already in the group are excluded.
+      const picker = $<HTMLDialogElement>('[data-picker]');
+      const search = $<HTMLInputElement>('[data-picker-search]');
+      const showAll = $<HTMLInputElement>('[data-picker-all]');
+      let pickFor: { g: Group; slot: number | null } | null = null;
+      function openPicker(g: Group, slot: number | null) {
+        if (slot === null && g.items.length >= MAX_FEATURED) return;
+        pickFor = { g, slot };
+        $<HTMLElement>('[data-picker-title]').textContent = slot === null ? `Add to ${g.title}` : `Replace “${nameOf(g.items[slot]!.project)}”`;
+        search.value = ''; showAll.checked = false;
+        renderPicker();
+        picker.showModal();
+        search.focus();
+      }
+      function renderPicker() {
+        if (!pickFor) return;
+        const { g, slot } = pickFor;
+        const q = search.value.trim().toLowerCase();
+        const taken = new Set(g.items.map((it) => it.project));
+        const rows: HTMLElement[] = [];
+        for (const c of data.chapters) {
+          if (!showAll.checked && !g.chapters.includes(c.id)) continue;
+          for (const id of c.projects) {
+            if (taken.has(id)) continue;
+            const name = nameOf(id);
+            if (q && !`${name} ${c.title}`.toLowerCase().includes(q)) continue;
+            const li = el('li');
+            const b = el('button', 'pick') as HTMLButtonElement;
+            b.type = 'button';
+            const t = el('span', 'txt');
+            t.append(el('span', 'name', name), el('span', 'sub', `${c.title} · ${data.projects[id]!.boards.length} board${data.projects[id]!.boards.length > 1 ? 's' : ''}`));
+            b.append(thumbImg(thumbFor(id), 72, 51), t);
+            b.addEventListener('click', () => {
+              const item = { project: id, cover: data.projects[id]!.boards[0]! };
+              if (slot === null) { if (g.items.length < MAX_FEATURED) g.items.push(item); }
+              else g.items[slot] = item;
+              picker.close();
+              featuredEdit();
+            });
+            li.append(b);
+            rows.push(li);
+          }
+        }
+        $<HTMLOListElement>('[data-picker-list]').replaceChildren(...(rows.length ? rows : [el('li', 'msg', 'No matching projects.')]));
+      }
+      search.addEventListener('input', renderPicker);
+      showAll.addEventListener('change', renderPicker);
+      $('[data-picker-close]').addEventListener('click', () => picker.close());
+
+      // Cover picker: the project's own boards, uncropped thumbnails
+      const coverDlg = $<HTMLDialogElement>('[data-cover]');
+      function openCover(g: Group, i: number) {
+        const it = g.items[i]!;
+        const p = data.projects[it.project]!;
+        $<HTMLElement>('[data-cover-title]').textContent = `Cover for “${nameOf(it.project)}”`;
+        $<HTMLOListElement>('[data-cover-list]').replaceChildren(...p.boards.map((b, bi) => {
+          const li = el('li');
+          const btn = el('button', b === it.cover ? 'cov is-current' : 'cov') as HTMLButtonElement;
+          btn.type = 'button';
+          btn.setAttribute('aria-pressed', String(b === it.cover));
+          btn.setAttribute('aria-label', `Board ${bi + 1} of ${p.boards.length}`);
+          const img = el('img') as HTMLImageElement;
+          img.src = thumbFor(it.project, b); img.alt = '';
+          btn.append(img, el('span', 'sub', `Board ${bi + 1}${b === it.cover ? ' · current' : ''}`));
+          btn.addEventListener('click', () => {
+            coverDlg.close();
+            if (b !== it.cover) { it.cover = b; featuredEdit(); }
+          });
+          li.append(btn);
+          return li;
+        }));
+        coverDlg.showModal();
+      }
+      $('[data-cover-close]').addEventListener('click', () => coverDlg.close());
+
+      // Checked again right before publishing (also protects against a hand-edited file)
+      function validateFeatured() {
+        for (const g of data.featured ?? []) {
+          if (g.items.length > MAX_FEATURED) throw new Error(`“${g.title}” has more than ${MAX_FEATURED} projects`);
+          const seen = new Set<string>();
+          for (const it of g.items) {
+            const p = data.projects[it.project];
+            if (!p || !chapterOf(it.project)) throw new Error(`“${g.title}” refers to a project that no longer exists (${it.project})`);
+            if (seen.has(it.project)) throw new Error(`“${nameOf(it.project)}” appears twice in “${g.title}”`);
+            seen.add(it.project);
+            if (!p.boards.includes(it.cover)) throw new Error(`the cover of “${nameOf(it.project)}” is not one of its boards`);
+          }
+        }
+      }
+
       function move<T>(arr: T[], i: number, d: number) {
         const j = i + d;
         if (j < 0 || j >= arr.length) return;
@@ -465,6 +580,7 @@ for (const p of Object.values(portfolioData.projects)) {
         busy = true; render();
         status('Publishing… do not close this page.');
         try {
+          validateFeatured();
           const ref = await gh(repo(`/git/ref/heads/${BRANCH}`));
           const head: string = ref.object.sha;
           const live = await gh(repo(`/contents/${DATA_PATH}?ref=${head}`));
@@ -501,7 +617,8 @@ for (const p of Object.values(portfolioData.projects)) {
           loadedOrder = order();
           busy = false;
           render();
-          status('Published to GitHub. The live site updates automatically in about 2–3 minutes.', 'ok');
+          status('Saved to GitHub ✓ — the website is rebuilding (usually 2–3 minutes)…', 'ok');
+          watchDeploy(commit.sha);
         } catch (e) {
           busy = false;
           render();
@@ -513,6 +630,27 @@ for (const p of Object.values(portfolioData.projects)) {
               : `Publishing failed: ${err.message}. Nothing was published.`, 'err');
         }
       });
+
+      // The public page carries the commit it was built from (<meta name="build">). Poll it (same origin,
+      // cache-busted) until this commit is live. "Saved to GitHub" ≠ "live" until this confirms it.
+      async function watchDeploy(sha: string) {
+        const home = new URL('../', location.href);
+        const t0 = Date.now();
+        while (Date.now() - t0 < 10 * 60_000) {
+          await new Promise((r) => setTimeout(r, 15_000));
+          if (dirty || busy) return; // a newer edit/publish takes over the status line
+          try {
+            const html = await (await fetch(`${home.href}?build=${Date.now()}`, { cache: 'no-store' })).text();
+            if (html.includes(`name="build" content="${sha}"`)) {
+              status('Live deployment complete ✓ — the website now shows your changes.', 'ok');
+              return;
+            }
+          } catch {}
+          const min = Math.round((Date.now() - t0) / 60_000);
+          status(`Saved to GitHub ✓ — the website is rebuilding${min ? ` (${min} min)` : ''}…`, 'ok');
+        }
+        if (!dirty && !busy) status(`Saved to GitHub ✓, but the website has not updated after 10 minutes. Check the Actions tab on GitHub (github.com/${OWNER}/${REPO}/actions).`, 'err');
+      }
 
       // ---- Start --------------------------------------------------------------------------------
       const saved = store.get();
@@ -579,10 +717,39 @@ for (const p of Object.values(portfolioData.projects)) {
       }
       .tab[aria-pressed=true] { color: var(--cream); border-bottom-color: var(--blue); }
       .fgroup { margin-top: 32px; }
+      .fgroup-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
       .fhead { font-size: 1.125rem; margin: 0; }
-      .fadd { display: flex; gap: 12px; margin-top: 14px; }
-      .fadd select { flex: 1; }
-      .fadd select:disabled { opacity: 0.5; }
+      .fgroup .list { margin-top: 8px; }
+      .fitem.is-empty { grid-template-columns: 2rem minmax(0, 1fr) auto; min-height: 89px; }
+      .slot { color: var(--cream-dim); font-size: 0.875rem; border: 1px dashed var(--rule-dark); padding: 14px; }
+      .facts { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 0.8125rem; }
+      .link:disabled { opacity: 0.35; cursor: default; text-decoration: none; }
+      .link--danger { color: #ff8a80; }
+
+      .picker {
+        width: min(640px, 100vw - 24px); max-height: min(80vh, 760px); padding: 20px;
+        background: var(--ink-2); color: var(--cream); border: 1px solid var(--rule-dark);
+      }
+      .picker[open] { display: flex; flex-direction: column; gap: 12px; }
+      .picker::backdrop { background: rgb(0 0 4 / 0.7); }
+      .picker-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+      .picker-head h2 { margin: 0; font-size: 1.125rem; }
+      .plist, .covers { list-style: none; margin: 0; padding: 0; overflow-y: auto; min-height: 0; }
+      .pick {
+        display: grid; grid-template-columns: 72px minmax(0, 1fr); align-items: center; gap: 12px; width: 100%;
+        padding: 8px; background: none; border: 0; border-bottom: 1px solid var(--rule-dark); color: inherit; text-align: left; cursor: pointer; font: inherit;
+      }
+      .pick:hover, .pick:focus-visible { background: rgb(0 160 222 / 0.12); }
+      .pick img { width: 72px; height: 51px; object-fit: contain; background: var(--paper); }
+      .pick .txt { display: grid; gap: 2px; }
+      .covers { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+      .cov {
+        display: grid; gap: 6px; width: 100%; padding: 6px; cursor: pointer; font: inherit; color: inherit; text-align: left;
+        background: none; border: 2px solid var(--rule-dark);
+      }
+      .cov:hover, .cov:focus-visible { border-color: var(--blue); }
+      .cov.is-current { border-color: var(--blue); background: rgb(0 160 222 / 0.12); }
+      .cov img { width: 100%; height: 120px; object-fit: contain; background: var(--paper); }
 
       .add { margin-top: 28px; }
       .add .grid { display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 12px; }
@@ -603,6 +770,8 @@ for (const p of Object.values(portfolioData.projects)) {
         .item { grid-template-columns: 1.6rem 72px minmax(0, 1fr); }
         .item img { width: 72px; height: 51px; }
         .item .ctrls { grid-column: 2 / -1; }
+        .fitem.is-empty { grid-template-columns: 1.6rem minmax(0, 1fr); }
+        .fitem.is-empty > :last-child { grid-column: 2 / -1; }
         .publish { flex-direction: column; align-items: stretch; gap: 8px; }
       }
     </style>

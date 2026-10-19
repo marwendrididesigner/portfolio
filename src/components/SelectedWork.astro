@@ -3,11 +3,11 @@ import { Image } from 'astro:assets';
 import { featured } from '../data/portfolio';
 
 // Selected Work: a short introduction to the portfolio — four groups (portfolio.json → "featured",
-// managed from /admin/) of up to four projects, each shown by its first board. Projects are the same
+// managed from /admin/) of up to four projects, each shown by its chosen cover board. Projects are the same
 // records the full portfolio renders below; nothing is duplicated, and they stay in the full portfolio.
 // Two projects per row from 760 px, one on phones; boards keep their original proportions.
-// Clicking a card opens the shared viewer (Work.astro) at that project's first board, so its other
-// boards follow with → / swipe.
+// Clicking a card opens the shared viewer (Work.astro) at that board of the project, so its other
+// boards follow with ← / → / swipe.
 
 // Same widths/format/quality as Work.astro, so the build reuses the exact same image files.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
@@ -33,9 +33,9 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
             const meta = [p.country, p.services ?? g.chapter.title, n > 1 ? `${n} boards` : ''].filter(Boolean).join(' · ');
             return (
               <article class="card">
-                <button type="button" class="card-board" data-viewer-open={p.id}
+                <button type="button" class="card-board" data-viewer-open={p.id} data-board={p.coverIndex}
                   aria-label={`Open ${[p.client, p.title].filter(Boolean).join(' — ')} in the viewer`}>
-                  <Image src={p.boards[0]!.src} alt={p.boards[0]!.alt} widths={[640, 960, 1400, 1920]}
+                  <Image src={p.cover.src} alt={p.cover.alt} widths={[640, 960, 1400, 1920]}
                     sizes={SIZES} format="webp" quality={82} loading="lazy" decoding="async" />
                   <span class="zoom" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="16" height="16"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.5 4.5-1.41 1.41-4.5-4.5A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm1 2.5v2h2v2h-2v2h-2v-2h-2v-2h2v-2h2Z" fill="currentColor"/></svg>

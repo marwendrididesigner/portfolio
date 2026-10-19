@@ -138,11 +138,12 @@ const rowsOf = (projects: Project[]) => {
       dialog.showModal();
     };
     triggers.forEach((t, i) => t.addEventListener('click', () => open(i, t)));
-    // Selected Work cards open the viewer at their project's first board in the full portfolio, so the
-    // project's remaining boards follow with → / swipe.
+    // Selected Work cards open the viewer at their cover board in the full portfolio, so the project's
+    // other boards follow with ← / → / swipe.
     document.querySelectorAll<HTMLButtonElement>('[data-viewer-open]').forEach((b) => b.addEventListener('click', () => {
-      const first = document.getElementById(b.dataset.viewerOpen ?? '')?.querySelector<HTMLButtonElement>('[data-viewer]');
-      const i = first ? triggers.indexOf(first) : -1;
+      const boards = document.getElementById(b.dataset.viewerOpen ?? '')?.querySelectorAll<HTMLButtonElement>('[data-viewer]');
+      const board = boards?.[Number(b.dataset.board) || 0] ?? boards?.[0];
+      const i = board ? triggers.indexOf(board) : -1;
       if (i >= 0) open(i, b);
     }));
     dialog.addEventListener('close', () => {

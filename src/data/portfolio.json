@@ -1314,44 +1314,105 @@
       "id": "social",
       "title": "Social Media & Digital Campaigns",
       "chapter": "social",
-      "projects": [
-        "social-eddykenzo",
-        "social-vijaysales",
-        "social-papparazo",
-        "social-acemobility"
+      "chapters": [
+        "social"
+      ],
+      "items": [
+        {
+          "project": "social-eddykenzo",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "social-vijaysales",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "social-papparazo",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "social-acemobility",
+          "cover": "d-01.webp"
+        }
       ]
     },
     {
       "id": "identity",
       "title": "Brand Identity, Logo Design & Guidelines",
       "chapter": "identity",
-      "projects": [
-        "identity-almizan",
-        "identity-espresso21",
-        "identity-tada",
-        "guidelines-p63"
+      "chapters": [
+        "identity",
+        "guidelines"
+      ],
+      "items": [
+        {
+          "project": "identity-almizan",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "identity-espresso21",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "identity-tada",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "guidelines-p63",
+          "cover": "d-01.webp"
+        }
       ]
     },
     {
       "id": "editorial",
       "title": "Presentation & Editorial Design",
       "chapter": "editorial",
-      "projects": [
-        "editorial-p84",
-        "editorial-p89",
-        "editorial-p99",
-        "editorial-p104"
+      "chapters": [
+        "editorial"
+      ],
+      "items": [
+        {
+          "project": "editorial-p84",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "editorial-p89",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "editorial-p99",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "editorial-p104",
+          "cover": "d-01.webp"
+        }
       ]
     },
     {
       "id": "ai",
       "title": "AI-Powered Visual Design",
       "chapter": "ai",
-      "projects": [
-        "ai-p150",
-        "ai-p170",
-        "ai-p157",
-        "ai-p146"
+      "chapters": [
+        "ai"
+      ],
+      "items": [
+        {
+          "project": "ai-p150",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "ai-p170",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "ai-p157",
+          "cover": "d-01.webp"
+        },
+        {
+          "project": "ai-p146",
+          "cover": "d-01.webp"
+        }
       ]
     }
   ]

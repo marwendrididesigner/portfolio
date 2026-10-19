@@ -25,9 +25,12 @@ export interface StoredProject {
   client: string | null; title: string | null; country: string | null; services: string | null;
   folder: string; boards: string[];
 }
-// Selected Work: four fixed groups, each listing up to four project ids (references, never copies) and
-// the Work chapter its "Explore all" link scrolls to. Edited from /admin/ like the rest of the file.
-export interface FeaturedGroup { id: string; title: string; chapter: string; projects: string[] }
+// Selected Work: four fixed groups. Each item references an existing project by id plus the board shown
+// as its preview (`cover`, a file name from that project's boards) — never a copy of the project or its
+// images. `chapter` is the Work chapter the "Explore all" link scrolls to; `chapters` are the categories
+// the admin picker offers for the group. Edited from /admin/ independently of the portfolio order.
+export interface FeaturedItem { project: string; cover: string }
+export interface FeaturedGroup { id: string; title: string; chapter: string; chapters: string[]; items: FeaturedItem[] }
 export interface PortfolioData {
   chapters: { id: string; title: string; projects: string[] }[];
   projects: Record<string, StoredProject>;
@@ -73,10 +76,13 @@ export const featured = (portfolioData.featured ?? []).map((g, i) => {
   return {
     id: g.id, number: String(i + 1).padStart(2, '0'), title: g.title,
     chapter: { id: chapter.id, title: chapter.title },
-    projects: g.projects.slice(0, MAX_FEATURED).map((id) => {
+    // Empty slots are simply not rendered
+    projects: g.items.slice(0, MAX_FEATURED).map(({ project: id, cover }) => {
       const p = all.find((x) => x.id === id);
       if (!p) throw new Error(`portfolio.json: featured group "${g.id}" lists "${id}", which is not in any chapter`);
-      return p;
+      const coverIndex = portfolioData.projects[id]!.boards.indexOf(cover);
+      if (coverIndex < 0) throw new Error(`portfolio.json: featured "${id}" uses cover "${cover}", which is not one of its boards`);
+      return { ...p, coverIndex, cover: p.boards[coverIndex]! };
     }),
   };
 });

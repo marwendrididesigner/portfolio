@@ -14,6 +14,9 @@ const { title, description } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(`${base}og.jpg`, Astro.site);
+// Commit this build was made from (set by GitHub Actions). The portfolio manager polls for it to
+// report when a publish is actually live.
+const build: string | undefined = import.meta.env.GITHUB_SHA;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -33,6 +36,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#000004" />
+    {build && <meta name="build" content={build} />}
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <link rel="preload" href={font800} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={font400} as="font" type="font/woff2" crossorigin />
