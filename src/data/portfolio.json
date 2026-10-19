@@ -125,7 +125,10 @@
     {
       "id": "packaging",
       "title": "Packaging Design",
-      "projects": []
+      "projects": [
+        "packaging-crac",
+        "packaging-froste"
+      ]
     },
     {
       "id": "ai",
@@ -1349,6 +1352,30 @@
       "boards": [
         "d-01.webp",
         "d-02.webp"
+      ]
+    },
+    "packaging-crac": {
+      "client": "CRAC",
+      "title": null,
+      "country": "Switzerland",
+      "services": null,
+      "folder": "packaging-crac",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "packaging-froste": {
+      "client": "FROSTE",
+      "title": null,
+      "country": "France",
+      "services": null,
+      "folder": "packaging-froste",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
       ]
     }
   },
