@@ -6,6 +6,9 @@
       "projects": [
         "social-mzuriorganics",
         "social-eddykenzo",
+        "social-mgmr-restaurant",
+        "social-darlek",
+        "social-darlek-carousels",
         "social-indintambwe",
         "social-shepherdcollege",
         "social-kukupoultry",
@@ -23,10 +26,7 @@
         "social-ccd4tunisia",
         "social-cleantech216",
         "social-wyanatravels",
-        "social-eventandfacebookcovers",
-        "social-mgmr-restaurant",
-        "social-darlek",
-        "social-darlek-carousels"
+        "social-eventandfacebookcovers"
       ]
     },
     {
@@ -1364,20 +1364,22 @@
           ]
         },
         {
-          "project": "social-vijaysales",
+          "project": "social-mgmr-restaurant",
           "boards": [
             "d-01.webp",
-            "d-02.webp"
+            "d-03.webp"
+          ]
+        },
+        {
+          "project": "social-darlek",
+          "boards": [
+            "d-01.webp",
+            "d-02.webp",
+            "d-03.webp"
           ]
         },
         {
           "project": "social-shitanaultratrail",
-          "boards": [
-            "d-01.webp"
-          ]
-        },
-        {
-          "project": "social-mzuriorganics",
           "boards": [
             "d-01.webp"
           ]
