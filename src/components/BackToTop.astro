@@ -15,7 +15,10 @@
 
 <style>
   .to-top {
-    position: fixed; right: clamp(16px, 2.5vw, 32px); bottom: clamp(16px, 2.5vw, 32px); z-index: 90;
+    /* Stacked above the WhatsApp button (WhatsApp.astro) */
+    position: fixed; z-index: 90;
+    right: calc(clamp(16px, 2.5vw, 32px) + env(safe-area-inset-right));
+    bottom: calc(clamp(16px, 2.5vw, 32px) + env(safe-area-inset-bottom) + 60px);
     display: grid; place-items: center; width: 48px; height: 48px;
     background: var(--ink); color: var(--cream); border: 1px solid var(--rule-dark);
     text-decoration: none;

@@ -104,16 +104,20 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
 
     // Reuse the board's own responsive sources (no extra downloads up front); the browser picks the
     // largest candidate needed for the viewer size.
+    // Displayed width of a board in the viewer, for the browser's srcset choice
+    const sizesFor = (src: HTMLImageElement) => {
+      const w = Number(src.getAttribute('width')) || 4, h = Number(src.getAttribute('height')) || 3;
+      return `${Math.round(Math.min(window.innerWidth * 0.94, (window.innerHeight - 120) * (w / h)))}px`;
+    };
     const show = (i: number) => {
       index = (i + list.length) % list.length;
       const t = list[index]!;
       const src = t.querySelector('img')!;
       const w = Number(src.getAttribute('width')) || 4, h = Number(src.getAttribute('height')) || 3;
-      const shown = Math.min(window.innerWidth * 0.94, (window.innerHeight - 120) * (w / h));
       img.classList.remove('is-loaded');
       img.removeAttribute('src');
       img.width = w; img.height = h;
-      img.sizes = `${Math.round(shown)}px`;
+      img.sizes = sizesFor(src);
       img.srcset = src.getAttribute('srcset') ?? '';
       img.src = src.getAttribute('src') ?? '';
       img.alt = src.alt;
@@ -124,6 +128,19 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
     // Each image fades in once decoded (also on error, so the stage never stays blank)
     const loaded = () => img.classList.add('is-loaded');
     img.addEventListener('load', loaded);
+    // Once the current image is in, fetch the previous/next ones at the same size so stepping is
+    // instant. Nothing is fetched before the viewer is opened, and nothing on Save-Data connections.
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    img.addEventListener('load', () => {
+      if (saveData || list.length < 2) return;
+      for (const d of [1, -1]) {
+        const src = list[(index + d + list.length) % list.length]!.querySelector('img')!;
+        const pre = new Image();
+        pre.sizes = sizesFor(src);
+        pre.srcset = src.getAttribute('srcset') ?? '';
+        pre.src = src.getAttribute('src') ?? '';
+      }
+    });
     img.addEventListener('error', loaded);
 
     triggers.forEach((t) => t.addEventListener('click', () => {
@@ -163,7 +180,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
 
   /* Chapter introduction — full portfolio width, compact */
   .chapter + .chapter { margin-top: clamp(56px, 7vw, 96px); }
-  .chapter { scroll-margin-top: calc(var(--header-h) + 16px); }
+  .chapter { scroll-margin-top: calc(var(--header-h) + var(--catnav-h) + 16px); }
   .chapter-head {
     padding-bottom: clamp(16px, 2vw, 24px); margin-bottom: clamp(24px, 3vw, 40px);
     border-bottom: 1px solid var(--rule-light);
@@ -184,7 +201,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
   /* Projects: one per full-width row, a clear gap between projects */
   .projects { display: flex; flex-direction: column; gap: clamp(48px, 6vw, 80px); }
 
-  .project { scroll-margin-top: calc(var(--header-h) + 16px); }
+  .project { scroll-margin-top: calc(var(--header-h) + var(--catnav-h) + 16px); }
   .project-head { margin-bottom: 12px; }
   .client { font-size: clamp(1.0625rem, 1.5vw, 1.25rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25; }
   .ptitle { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--label); }

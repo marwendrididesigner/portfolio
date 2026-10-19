@@ -76,7 +76,7 @@ const packaging = featured.some((g) => g.chapter.id === 'packaging') ? ' packagi
 )}
 
 <style>
-  .selected { background: var(--paper); color: var(--ink); padding-top: clamp(48px, 6vw, 88px); scroll-margin-top: var(--header-h); }
+  .selected { background: var(--paper); color: var(--ink); padding-top: clamp(48px, 6vw, 88px); scroll-margin-top: calc(var(--header-h) + var(--catnav-h)); }
 
   .sel-intro { margin-bottom: clamp(32px, 4vw, 56px); }
   .sel-title, .full-title {

@@ -1,0 +1,128 @@
+---
+import { chapters, featured } from '../data/portfolio';
+
+// Sticky category bar above Selected Work. It sticks under the site header while the visitor is in
+// Selected Work or the full portfolio (its parent, .browse in index.astro, wraps exactly those two),
+// and links every rendered chapter, so a new category appears here automatically.
+// Short labels for the bar; any other chapter uses its own title.
+const short: Record<string, string> = {
+  social: 'Social Media',
+  identity: 'Brand Identity',
+  guidelines: 'Brand Guidelines',
+  editorial: 'Presentation & Editorial',
+  collateral: 'Marketing & Print',
+  packaging: 'Packaging Design',
+  ai: 'AI-Powered Work',
+};
+const items = [
+  ...(featured.length ? [{ href: '#selected-work', label: 'Selected Work' }] : []),
+  ...chapters.map((c) => ({ href: `#work-${c.id}`, label: short[c.id] ?? c.title })),
+];
+---
+<nav class="catnav" aria-label="Portfolio categories" data-catnav>
+  <div class="container">
+    <ul class="scroller" data-catnav-scroller>
+      {items.map((it) => <li><a href={it.href}>{it.label}</a></li>)}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  // Active category: the last section whose top has passed a line a little below the sticky bars.
+  // One IntersectionObserver whose root ends at that line fires whenever a section's top crosses it
+  // (also on instant jumps) and triggers the check — no scroll listeners.
+  const nav = document.querySelector<HTMLElement>('[data-catnav]');
+  const scroller = nav?.querySelector<HTMLElement>('[data-catnav-scroller]');
+  if (nav && scroller && 'IntersectionObserver' in window) {
+    const links = [...scroller.querySelectorAll<HTMLAnchorElement>('a')];
+    const targets = links.map((a) => document.getElementById(a.hash.slice(1)));
+    const calm = matchMedia('(prefers-reduced-motion: reduce)');
+    let active: HTMLAnchorElement | null = null;
+
+    const OFFSET = 48; // px below the bar, so a section whose heading was just scrolled to counts
+    const update = () => {
+      const line = nav.getBoundingClientRect().bottom + OFFSET;
+      let next: HTMLAnchorElement | null = null;
+      for (let i = 0; i < targets.length; i++) if ((targets[i]?.getBoundingClientRect().top ?? Infinity) <= line) next = links[i]!;
+      // Past the end of the portfolio (credentials, contact): nothing is highlighted
+      const last = targets[targets.length - 1];
+      if (last && last.getBoundingClientRect().bottom < line) next = null;
+      if (next === active) return;
+      active?.removeAttribute('aria-current');
+      active = next;
+      if (!active) return;
+      const a: HTMLAnchorElement = active;
+      a.setAttribute('aria-current', 'true');
+      // Keep the active tab in view inside the bar (horizontal only — never moves the page)
+      if (scroller.scrollWidth > scroller.clientWidth) {
+        const li = a.parentElement!;
+        const left = li.offsetLeft - (scroller.clientWidth - li.offsetWidth) / 2;
+        scroller.scrollTo({ left, behavior: calm.matches ? 'auto' : 'smooth' });
+      }
+    };
+
+    let io: IntersectionObserver | null = null;
+    const observe = () => {
+      io?.disconnect();
+      const line = Math.round(nav.getBoundingClientRect().height + parseFloat(getComputedStyle(nav).top)) + OFFSET;
+      io = new IntersectionObserver(update, { rootMargin: `0px 0px -${Math.max(0, innerHeight - line)}px 0px` });
+      targets.forEach((t) => t && io!.observe(t));
+      update();
+    };
+    observe();
+    let timer = 0;
+    addEventListener('resize', () => { clearTimeout(timer); timer = window.setTimeout(observe, 200); });
+  }
+</script>
+
+<style>
+  .catnav {
+    position: sticky; top: var(--header-h); z-index: 80;
+    height: var(--catnav-h);
+    background: var(--ink);
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .catnav .container { height: 100%; }
+  .scroller {
+    position: relative; display: flex; height: 100%; margin: 0; padding: 0; list-style: none;
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+  }
+  .scroller::-webkit-scrollbar { display: none; }
+  .scroller li { position: relative; flex: none; display: flex; }
+  /* Thin separators between items */
+  .scroller li + li::before {
+    content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: 12px; margin-top: -6px;
+    background: var(--rule-dark);
+  }
+  .scroller a {
+    position: relative; display: flex; align-items: center; padding-inline: 12px;
+    font-size: 0.6875rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap;
+    text-decoration: none; color: var(--cream-dim);
+    transition: color 0.2s var(--ease);
+  }
+  .scroller li:first-child a { padding-left: 0; }
+  .scroller a::after {
+    content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px;
+    background: var(--blue); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s var(--ease);
+  }
+  .scroller li:first-child a::after { left: 0; }
+  @media (min-width: 760px) {
+    .scroller li:last-child a { padding-right: 0; }
+    .scroller li:last-child a::after { right: 0; }
+  }
+  .scroller a:hover { color: var(--cream); }
+  .scroller a[aria-current] { color: var(--cream); }
+  .scroller a[aria-current]::after { transform: none; }
+  .scroller a:focus-visible { outline-offset: -2px; }
+
+  /* Phones: the bar scrolls sideways edge to edge, so a cut-off item signals there is more */
+  @media (max-width: 759px) {
+    .scroller { margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+    .scroller a { padding-inline: 14px; }
+    .scroller a::after { left: 14px; right: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroller a, .scroller a::after { transition: none; }
+  }
+</style>

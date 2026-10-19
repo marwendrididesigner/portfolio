@@ -18,6 +18,7 @@
   --gutter: clamp(16px, 4.5vw, 64px);
   --max: 1360px;
   --header-h: 64px;
+  --catnav-h: 0px;          /* sticky category bar, only inside .browse */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   color-scheme: dark;
@@ -31,7 +32,8 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
-main [id] { scroll-margin-top: var(--header-h); }
+main [id] { scroll-margin-top: calc(var(--header-h) + var(--catnav-h)); }
+.browse { --catnav-h: 46px; }
 
 body {
   margin: 0;
