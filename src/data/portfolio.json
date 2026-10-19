@@ -23,7 +23,10 @@
         "social-ccd4tunisia",
         "social-cleantech216",
         "social-wyanatravels",
-        "social-eventandfacebookcovers"
+        "social-eventandfacebookcovers",
+        "social-mgmr-restaurant",
+        "social-darlek",
+        "social-darlek-carousels"
       ]
     },
     {
@@ -1306,6 +1309,41 @@
         "d-05.webp",
         "d-06.webp",
         "d-07.webp"
+      ]
+    },
+    "social-mgmr-restaurant": {
+      "client": "MGMR Restaurant",
+      "title": null,
+      "country": "SAUDI ARABIA",
+      "services": null,
+      "folder": "social-mgmr-restaurant",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "social-darlek": {
+      "client": "DARLEK",
+      "title": null,
+      "country": "KUWAIT",
+      "services": null,
+      "folder": "social-darlek",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "social-darlek-carousels": {
+      "client": "DARLEK CAROUSELS",
+      "title": null,
+      "country": "KUWAIT",
+      "services": null,
+      "folder": "social-darlek-carousels",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
       ]
     }
   },
