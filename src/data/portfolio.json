@@ -127,7 +127,8 @@
       "title": "Packaging Design",
       "projects": [
         "packaging-crac",
-        "packaging-froste"
+        "packaging-froste",
+        "packaging-altura"
       ]
     },
     {
@@ -1372,6 +1373,18 @@
       "country": "France",
       "services": null,
       "folder": "packaging-froste",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "packaging-altura": {
+      "client": "ALTURA",
+      "title": null,
+      "country": "Switzerland",
+      "services": null,
+      "folder": "packaging-altura",
       "boards": [
         "d-01.webp",
         "d-02.webp",
