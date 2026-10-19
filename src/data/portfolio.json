@@ -127,8 +127,10 @@
       "title": "Packaging Design",
       "projects": [
         "packaging-crac",
+        "packaging-pulse-zero",
         "packaging-froste",
-        "packaging-altura"
+        "packaging-altura",
+        "packaging-voltage"
       ]
     },
     {
@@ -1389,6 +1391,32 @@
         "d-01.webp",
         "d-02.webp",
         "d-03.webp"
+      ]
+    },
+    "packaging-pulse-zero": {
+      "client": "PULSE ZERO",
+      "title": null,
+      "country": "USA",
+      "services": null,
+      "folder": "packaging-pulse-zero",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
+    },
+    "packaging-voltage": {
+      "client": "VOLTAGE",
+      "title": null,
+      "country": "France",
+      "services": null,
+      "folder": "packaging-voltage",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp",
+        "d-04.webp",
+        "d-05.webp"
       ]
     }
   },
