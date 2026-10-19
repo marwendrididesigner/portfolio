@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { featured, rowsOf } from '../data/portfolio';
 
-// Selected Work: a short introduction to the portfolio — four groups (portfolio.json → "featured",
+// Selected Work: a short introduction to the portfolio — five groups (portfolio.json → "featured",
 // managed from /admin/) of up to four projects. Each project shows only its SELECTED boards, in the
 // chosen order; the full portfolio below still shows every board. Projects are the same records the
 // full portfolio renders; nothing is duplicated.
@@ -12,13 +12,15 @@ import { featured, rowsOf } from '../data/portfolio';
 
 // Same widths/format/quality as Work.astro, so the build reuses the exact same image files.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
+// Packaging is only named once it has featured work (empty groups are not rendered)
+const packaging = featured.some((g) => g.chapter.id === 'packaging') ? ' packaging,' : '';
 ---
 {featured.length > 0 && (
 <section class="selected" id="selected-work" aria-labelledby="selected-title">
   <div class="container">
     <header class="sel-intro">
       <h2 id="selected-title" class="sel-title">Selected Work</h2>
-      <p class="sel-lede">A selection of brand identities, campaigns, editorial design, and AI-powered visuals.</p>
+      <p class="sel-lede">A selection of brand identities, campaigns, editorial design,{packaging} and AI-powered visuals.</p>
     </header>
 
     {featured.map((g) => (

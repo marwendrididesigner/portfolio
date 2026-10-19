@@ -304,6 +304,7 @@ for (const p of Object.values(portfolioData.projects)) {
           li.append(el('span', 'num', String(i + 1).padStart(2, '0')), img, text, ctrls);
           return li;
         }));
+        if (!ids.length) list.append(el('li', 'msg', 'No projects in this category yet — use “+ Add project” above.'));
         renderFeatured();
         $<HTMLButtonElement>('[data-publish]').disabled = !dirty || busy;
         if (dirty && !busy) status('Unpublished changes.');
@@ -445,7 +446,7 @@ for (const p of Object.values(portfolioData.projects)) {
             rows.push(li);
           }
         }
-        $<HTMLOListElement>('[data-picker-list]').replaceChildren(...(rows.length ? rows : [el('li', 'msg', 'No matching projects.')]));
+        $<HTMLOListElement>('[data-picker-list]').replaceChildren(...(rows.length ? rows : [el('li', 'msg', q || showAll.checked ? 'No matching projects.' : 'No projects in this category yet — add them under All Projects first.')]));
       }
       search.addEventListener('input', renderPicker);
       showAll.addEventListener('change', renderPicker);

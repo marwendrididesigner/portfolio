@@ -123,6 +123,11 @@
       ]
     },
     {
+      "id": "packaging",
+      "title": "Packaging Design",
+      "projects": []
+    },
+    {
       "id": "ai",
       "title": "AI-Powered Visual Design",
       "projects": [
@@ -1459,6 +1464,15 @@
           ]
         }
       ]
+    },
+    {
+      "id": "packaging",
+      "title": "Packaging Design",
+      "chapter": "packaging",
+      "chapters": [
+        "packaging"
+      ],
+      "items": []
     },
     {
       "id": "ai",

@@ -74,14 +74,17 @@ export const rowsOf = <T extends { boards: readonly unknown[] }>(projects: T[]) 
   return rows;
 };
 
+// Empty chapters (e.g. a new category with no projects yet) are dropped; numbering follows what is shown.
 export const chapters: Chapter[] = portfolioData.chapters
-  .map((c, i) => ({
-    id: c.id, number: String(i + 1).padStart(2, '0'), title: c.title, deliverables: deliverables[c.id] ?? [],
+  .map((c) => ({
+    id: c.id, number: '', title: c.title, deliverables: deliverables[c.id] ?? [],
     projects: c.projects.map((id) => project(id, c.id)).filter((p) => p.boards.length > 0),
   }))
-  .filter((c) => c.projects.length > 0);
+  .filter((c) => c.projects.length > 0)
+  .map((c, i) => ({ ...c, number: String(i + 1).padStart(2, '0') }));
 
-export const featured = (portfolioData.featured ?? []).map((g, i) => {
+// Groups with no featured projects yet stay in the data (and the admin) but are not rendered.
+export const featured = (portfolioData.featured ?? []).filter((g) => g.items.length > 0).map((g, i) => {
   const chapter = chapters.find((c) => c.id === g.chapter);
   if (!chapter) throw new Error(`portfolio.json: featured group "${g.id}" links to unknown chapter "${g.chapter}"`);
   const all = chapters.flatMap((c) => c.projects);
