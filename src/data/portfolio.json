@@ -1321,13 +1321,15 @@
         {
           "project": "social-eddykenzo",
           "boards": [
-            "d-01.webp"
+            "d-02.webp",
+            "d-03.webp"
           ]
         },
         {
           "project": "social-vijaysales",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         },
         {
@@ -1368,13 +1370,15 @@
         {
           "project": "guidelines-p63",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         },
         {
           "project": "guidelines-p79",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         }
       ]
@@ -1390,7 +1394,8 @@
         {
           "project": "editorial-p84",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         },
         {
@@ -1402,7 +1407,8 @@
         {
           "project": "editorial-p92",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         },
         {
@@ -1424,7 +1430,8 @@
         {
           "project": "ai-p150",
           "boards": [
-            "d-01.webp"
+            "d-03.webp",
+            "d-04.webp"
           ]
         },
         {
@@ -1436,13 +1443,15 @@
         {
           "project": "ai-p157",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         },
         {
           "project": "ai-p162",
           "boards": [
-            "d-01.webp"
+            "d-01.webp",
+            "d-02.webp"
           ]
         }
       ]
