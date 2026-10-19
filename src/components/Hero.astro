@@ -4,7 +4,12 @@ import portrait from '../assets/brand/portrait.png';
 import glow from '../assets/brand/glow.png';
 import letters from '../assets/brand/wordmark-letters.png';
 import overMaskUrl from '../assets/brand/ribbon-over-mask.png?url';
-import { hero, person } from '../data/site';
+import { copy, person } from '../data/site';
+import { langOf, ui } from '../i18n/ui';
+
+const lang = langOf(Astro.url);
+const t = ui[lang].hero;
+const c = copy[lang];
 import { ribbon } from '../data/ribbon';
 ---
 <section class="hero" id="top" aria-labelledby="hero-title">
@@ -14,19 +19,19 @@ import { ribbon } from '../data/ribbon';
 
   <!-- Region 1 — left content -->
   <div class="intro">
-    <ul class="contact-line" aria-label="Contact details">
+    <ul class="contact-line" aria-label={t.contactDetails}>
       <li><a href={`mailto:${person.email}`}>{person.email}</a></li>
       <li><a href={person.whatsapp} target="_blank" rel="noopener">{person.phoneDisplay}</a></li>
-      <li>{person.location}</li>
+      <li>{c.location}</li>
     </ul>
-    <p class="years">{person.experience} years of experience</p>
+    <p class="years">{person.experience} {t.years}</p>
     <h1 id="hero-title" class="display name">Marwen<br />Dridi</h1>
-    <p class="role">{person.role}</p>
-    <p class="statement">{hero.statement.map((s) => <span>{s}</span>)}</p>
-    <p class="support">{hero.support}</p>
+    <p class="role">{c.role}</p>
+    <p class="statement">{c.hero.statement.map((s) => <span>{s}</span>)}</p>
+    <p class="support">{c.hero.support}</p>
     <div class="actions">
-      <a class="btn btn--primary" href="#selected-work">View work <span class="arrow" aria-hidden="true">→</span></a>
-      <a class="btn btn--ghost" href="#contact">Contact</a>
+      <a class="btn btn--primary" href="#selected-work">{t.viewWork} <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href="#contact">{t.contact}</a>
     </div>
   </div>
 
@@ -34,7 +39,7 @@ import { ribbon } from '../data/ribbon';
   <div class="portrait-wrap">
     <Picture
       src={portrait}
-      alt="Portrait of Marwen Dridi in black and white, wearing a black T-shirt"
+      alt={t.portraitAlt}
       class="portrait"
       formats={['avif', 'webp']}
       fallbackFormat="webp"

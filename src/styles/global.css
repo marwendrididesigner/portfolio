@@ -29,8 +29,10 @@
 html {
   -webkit-text-size-adjust: 100%;
 }
+/* .jump (public pages, until loaded): opening a link to a section — e.g. after switching language —
+   lands there at once instead of animating through the whole page. */
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  html:not(.jump) { scroll-behavior: smooth; }
 }
 main [id] { scroll-margin-top: calc(var(--header-h) + var(--catnav-h)); }
 .browse { --catnav-h: 46px; }

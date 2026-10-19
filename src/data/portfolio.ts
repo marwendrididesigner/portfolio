@@ -2,6 +2,7 @@ import type { ImageMetadata } from 'astro';
 import data from './portfolio.json';
 import { alts } from './portfolio-alts';
 import { deliverables } from './projects';
+import { projectText, services as frServices } from '../i18n/ui';
 
 // The Work section renders src/data/portfolio.json: chapters in PDF order, each with its ordered project
 // ids, and every project's boards in display order (files in src/assets/portfolio/<folder>/).
@@ -9,7 +10,7 @@ import { deliverables } from './projects';
 // never replaces the live site.
 // (portfolio-inventory.json remains the PDF audit record used by the scripts/ tooling.)
 
-export interface Visual { src: ImageMetadata; alt: string }
+export interface Visual { src: ImageMetadata; alt: string; altFr: string } // alt text for /en/ and /fr/
 export interface PortfolioProject {
   id: string;
   chapter: string;
@@ -46,12 +47,15 @@ function project(id: string, chapter: string): PortfolioProject {
   if (!p) throw new Error(`portfolio.json: chapter "${chapter}" lists unknown project "${id}"`);
   const name = [p.client, p.title].filter(Boolean).join(' — ') || 'Project';
   const given = alts[id]?.desktop ?? [];
+  const givenFr = alts[id]?.fr ?? [];
+  const n = p.boards.length;
   const boards = p.boards.map((f, i) => {
     const file = files[`../assets/portfolio/${p.folder}/${f}`];
     if (!file) throw new Error(`portfolio.json: missing board ${p.folder}/${f}`);
     return {
       src: file.default,
-      alt: given[i] ?? `${name} — ${p.services ?? 'project'} presentation ${p.boards.length > 1 ? `${i + 1} of ${p.boards.length}` : ''}`.trim(),
+      alt: given[i] ?? `${name} — ${p.services ?? 'project'} presentation ${n > 1 ? `${i + 1} of ${n}` : ''}`.trim(),
+      altFr: givenFr[i] ?? `${[p.client, p.title].filter(Boolean).map((x) => projectText('fr', x!)).join(' — ') || 'Projet'} — planche de présentation${p.services ? ` (${frServices('fr', p.services)})` : ''}${n > 1 ? ` ${i + 1} sur ${n}` : ''}`,
     };
   });
   return {

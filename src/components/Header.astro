@@ -1,27 +1,37 @@
 ---
 import { person } from '../data/site';
+import { langOf, langs, ui } from '../i18n/ui';
 
+const lang = langOf(Astro.url);
+const t = ui[lang].header;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const links = [
-  { href: '#selected-work', label: 'Work' },
-  { href: '#credentials', label: 'Credentials' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#selected-work', label: t.work },
+  { href: '#credentials', label: t.credentials },
+  { href: '#contact', label: t.contact },
 ];
 ---
 <header class="site-header" data-header>
   <div class="container bar">
-    <a class="brand" href="#top" aria-label={`${person.name} — back to top`}>
+    <a class="brand" href="#top" aria-label={`${person.name} — ${t.home}`}>
       Marwen <span>Dridi</span>
     </a>
+    <ul class="langs" aria-label={t.language} data-langs>
+      {langs.map((l) => (
+        <li><a href={`${base}${l}/`} hreflang={l} lang={l} aria-current={l === lang ? 'page' : undefined}
+          aria-label={l === 'en' ? 'English' : 'Français'}>{l.toUpperCase()}</a></li>
+      ))}
+    </ul>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
-      <span class="visually-hidden">Menu</span>
+      <span class="visually-hidden">{t.menu}</span>
       <span class="bars" aria-hidden="true"></span>
     </button>
-    <nav id="site-nav" class="nav" aria-label="Main">
+    <nav id="site-nav" class="nav" aria-label={t.mainNav}>
       <ul>
         {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
       <a class="pdf" href={person.portfolioPdf} target="_blank" rel="noopener">
-        Portfolio PDF <span aria-hidden="true">↗</span><span class="visually-hidden">(opens in a new tab)</span>
+        Portfolio PDF <span aria-hidden="true">↗</span><span class="visually-hidden">{t.newTab}</span>
       </a>
     </nav>
   </div>
@@ -36,6 +46,16 @@ const links = [
   };
   toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
   header.querySelectorAll('nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  // Language switch keeps the visitor's place: the same page in the other language, at the section
+  // currently on screen (ids are identical in both versions).
+  header.querySelectorAll<HTMLAnchorElement>('[data-langs] a:not([aria-current])').forEach((a) => {
+    a.addEventListener('click', () => {
+      const line = header.getBoundingClientRect().bottom + 80;
+      let id = '';
+      for (const s of document.querySelectorAll<HTMLElement>('main section[id], main article[id]')) if (s.getBoundingClientRect().top <= line) id = s.id;
+      a.hash = id && id !== 'top' && id !== 'work' ? id : '';
+    });
+  });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && header.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
   });
@@ -68,7 +88,11 @@ const links = [
   .nav .pdf { color: var(--blue); font-weight: 800; white-space: nowrap; }
   .nav .pdf:hover { color: var(--cream); }
   /* Desktop: a thin blue underline draws in under the hovered link */
+  /* Desktop: brand · navigation · EN | FR (the switch comes before the menu button in the markup,
+     which is the order phones use: brand · EN | FR · ☰) */
   @media (min-width: 961px) {
+    .nav { margin-left: auto; order: 1; }
+    .langs { order: 2; }
     .nav ul a {
       background: linear-gradient(var(--blue), var(--blue)) left bottom / 0 1px no-repeat;
       padding-bottom: 4px;
@@ -76,6 +100,18 @@ const links = [
     }
     .nav ul a:hover { background-size: 100% 1px; }
   }
+
+  /* EN | FR — small, after the navigation; active language in blue */
+  .langs { display: flex; align-items: center; list-style: none; margin: 0 0 0 -8px; padding: 0; }
+  .langs li + li::before { content: ''; display: inline-block; width: 1px; height: 12px; background: var(--rule-dark); vertical-align: middle; }
+  .langs a {
+    display: inline-block; padding: 6px 8px;
+    font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em;
+    text-decoration: none; color: var(--cream-dim);
+    transition: color 0.2s var(--ease);
+  }
+  .langs a:hover { color: var(--cream); }
+  .langs a[aria-current] { color: var(--blue); }
 
   .menu-toggle {
     display: none; width: 44px; height: 44px; margin-right: -10px;
@@ -94,6 +130,7 @@ const links = [
   .is-open .bars::after { transform: translateY(-7px) rotate(-45deg); }
 
   @media (max-width: 960px) {
+    .langs { margin: 0 4px 0 auto; }
     .menu-toggle { display: block; }
     .nav {
       position: fixed; inset: var(--header-h) 0 auto; flex-direction: column; align-items: stretch; gap: 0;

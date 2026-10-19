@@ -1,25 +1,20 @@
 ---
 import { chapters, featured } from '../data/portfolio';
+import { langOf, navLabel, ui } from '../i18n/ui';
+
+const lang = langOf(Astro.url);
+const t = ui[lang].catnav;
 
 // Sticky category bar above Selected Work. It sticks under the site header while the visitor is in
 // Selected Work or the full portfolio (its parent, .browse in index.astro, wraps exactly those two),
 // and links every rendered chapter, so a new category appears here automatically.
-// Short labels for the bar; any other chapter uses its own title.
-const short: Record<string, string> = {
-  social: 'Social Media',
-  identity: 'Brand Identity',
-  guidelines: 'Brand Guidelines',
-  editorial: 'Presentation & Editorial',
-  collateral: 'Marketing & Print',
-  packaging: 'Packaging Design',
-  ai: 'AI-Powered Work',
-};
+// Short labels for the bar (src/i18n/ui.ts); any other chapter uses its own title.
 const items = [
-  ...(featured.length ? [{ href: '#selected-work', label: 'Selected Work' }] : []),
-  ...chapters.map((c) => ({ href: `#work-${c.id}`, label: short[c.id] ?? c.title })),
+  ...(featured.length ? [{ href: '#selected-work', label: t.selected }] : []),
+  ...chapters.map((c) => ({ href: `#work-${c.id}`, label: navLabel(lang, c.id, c.title) })),
 ];
 ---
-<nav class="catnav" aria-label="Portfolio categories" data-catnav>
+<nav class="catnav" aria-label={t.label} data-catnav>
   <div class="container">
     <ul class="scroller" data-catnav-scroller>
       {items.map((it) => <li><a href={it.href}>{it.label}</a></li>)}

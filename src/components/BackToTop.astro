@@ -1,7 +1,9 @@
 ---
 // Discreet "back to top" link: appears once the hero has scrolled out of view.
+import { langOf, ui } from '../i18n/ui';
+const label = ui[langOf(Astro.url)].toTop;
 ---
-<a class="to-top" href="#top" data-to-top aria-label="Back to top">
+<a class="to-top" href="#top" data-to-top aria-label={label}>
   <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
 

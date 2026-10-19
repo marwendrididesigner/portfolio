@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import SocialProof from '../../components/SocialProof.astro';
+import Credentials from '../../components/Credentials.astro';
+import Ribbon from '../../components/Ribbon.astro';
+import SelectedWork from '../../components/SelectedWork.astro';
+import Work from '../../components/Work.astro';
+import Contact from '../../components/Contact.astro';
+import BackToTop from '../../components/BackToTop.astro';
+import Motion from '../../components/Motion.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+import WhatsApp from '../../components/WhatsApp.astro';
+import { langs, type Lang } from '../../i18n/ui';
+
+// One page, rendered once per language (/en/, /fr/). Components read the language from the URL;
+// all of them share the same portfolio data and images.
+export function getStaticPaths() {
+  return langs.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+---
+<Layout lang={lang}>
+  <Header />
+  <main>
+    <Hero />
+    <SocialProof />
+    <!-- The category bar stays stuck only while browsing these two sections -->
+    <div class="browse">
+      <CategoryNav />
+      <SelectedWork />
+      <Work />
+    </div>
+    <Ribbon from="var(--paper)" to="var(--ink-2)" />
+    <Credentials />
+    <Contact />
+  </main>
+  <WhatsApp />
+  <BackToTop />
+  <Motion />
+</Layout>

@@ -1,14 +1,16 @@
 ---
-import { metrics } from '../data/site';
+import { copy, metrics } from '../data/site';
+import { langOf, ui } from '../i18n/ui';
+const lang = langOf(Astro.url);
 // Compact social-proof strip between the hero and the portfolio — numbers only, no intro copy.
 ---
-<section class="proof" aria-label="Key figures" data-proof>
+<section class="proof" aria-label={ui[lang].proof.label} data-proof>
   <div class="container">
     <dl class="stats">
-      {metrics.map((m) => (
+      {metrics.map((value, i) => (
         <div class="stat">
-          <dt>{m.label}</dt>
-          <dd><span class="num" data-count={m.value}>{m.value}</span><span class="plus">+</span></dd>
+          <dt>{copy[lang].metrics[i]}</dt>
+          <dd><span class="num" data-count={value}>{value}</span><span class="plus">+</span></dd>
         </div>
       ))}
     </dl>

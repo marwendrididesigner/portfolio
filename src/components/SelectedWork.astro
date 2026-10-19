@@ -1,6 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import { featured, rowsOf } from '../data/portfolio';
+import { chapterTitle, country, groupTitle, langOf, services, projectText, ui } from '../i18n/ui';
+
+const lang = langOf(Astro.url);
+const t = ui[lang].selected;
+const w = ui[lang].work;
 
 // Selected Work: a short introduction to the portfolio — five groups (portfolio.json → "featured",
 // managed from /admin/) of up to four projects. Each project shows only its SELECTED boards, in the
@@ -13,46 +18,47 @@ import { featured, rowsOf } from '../data/portfolio';
 // Same widths/format/quality as Work.astro, so the build reuses the exact same image files.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
 // Packaging is only named once it has featured work (empty groups are not rendered)
-const packaging = featured.some((g) => g.chapter.id === 'packaging') ? ' packaging,' : '';
+const packaging = featured.some((g) => g.chapter.id === 'packaging');
 ---
 {featured.length > 0 && (
 <section class="selected" id="selected-work" aria-labelledby="selected-title">
   <div class="container">
     <header class="sel-intro">
-      <h2 id="selected-title" class="sel-title">Selected Work</h2>
-      <p class="sel-lede">A selection of brand identities, campaigns, editorial design,{packaging} and AI-powered visuals.</p>
+      <h2 id="selected-title" class="sel-title">{t.title}</h2>
+      <p class="sel-lede">{t.lede(packaging)}</p>
     </header>
 
     {featured.map((g) => (
       <section class="group" aria-labelledby={`sel-${g.id}`}>
         <header class="group-head">
           <p class="group-num">{g.number}</p>
-          <h3 id={`sel-${g.id}`} class="group-title">{g.title}</h3>
+          <h3 id={`sel-${g.id}`} class="group-title">{groupTitle(lang, g.id, g.title)}</h3>
         </header>
 
         <div class="projects">
           {rowsOf(g.projects).map((row) => (
             <div class={row.length === 2 ? 'row pair' : 'row'}>
               {row.map((p) => {
-                const name = [p.client, p.title].filter(Boolean).join(' — ');
+                const client = projectText(lang, p.client), title = p.title && projectText(lang, p.title);
+            const name = [client, title].filter(Boolean).join(' — ');
                 const n = p.boards.length;
-                const meta = [p.country, p.services ?? g.chapter.title].filter(Boolean).join(' · ');
+                const meta = [p.country && country(lang, p.country), p.services ? services(lang, p.services) : chapterTitle(lang, g.chapter.id, g.chapter.title)].filter(Boolean).join(' · ');
                 return (
                   <article class="project" aria-labelledby={`sel-title-${g.id}-${p.id}`}>
                     <header class="project-head">
-                      <h4 id={`sel-title-${g.id}-${p.id}`} class="client">{p.client}{p.title && <span class="ptitle"> — {p.title}</span>}</h4>
+                      <h4 id={`sel-title-${g.id}-${p.id}`} class="client">{client}{title && <span class="ptitle"> — {title}</span>}</h4>
                       <p class="meta">{meta}</p>
                     </header>
                     <div class="boards">
                       {p.boards.map((v, i) => (
                         <button type="button" class="board"
                           data-viewer data-viewer-set={`${g.id}/${p.id}`} data-project={name} data-pos={`${i + 1} / ${n}`}>
-                          <Image src={v.src} alt={v.alt} widths={[640, 960, 1400, 1920]}
+                          <Image src={v.src} alt={lang === 'fr' ? v.altFr : v.alt} widths={[640, 960, 1400, 1920]}
                             sizes={SIZES} format="webp" quality={82} loading="lazy" decoding="async" />
                           <span class="zoom" aria-hidden="true">
                             <svg viewBox="0 0 24 24" width="16" height="16"><path d="M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.5 4.5-1.41 1.41-4.5-4.5A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm1 2.5v2h2v2h-2v2h-2v-2h-2v-2h2v-2h2Z" fill="currentColor"/></svg>
                           </span>
-                          <span class="visually-hidden">Open larger view</span>
+                          <span class="visually-hidden">{w.open}</span>
                         </button>
                       ))}
                     </div>
@@ -63,13 +69,13 @@ const packaging = featured.some((g) => g.chapter.id === 'packaging') ? ' packagi
           ))}
         </div>
 
-        <a class="explore" href={`#work-${g.chapter.id}`}>Explore all {g.chapter.title} projects <span aria-hidden="true">→</span></a>
+        <a class="explore" href={`#work-${g.chapter.id}`}>{t.explore(chapterTitle(lang, g.chapter.id, g.chapter.title))} <span aria-hidden="true">→</span></a>
       </section>
     ))}
 
     <header class="full-intro">
-      <h2 class="full-title">Full Portfolio</h2>
-      <p class="sel-lede">Explore the complete collection of projects.</p>
+      <h2 class="full-title">{t.fullTitle}</h2>
+      <p class="sel-lede">{t.fullLede}</p>
     </header>
   </div>
 </section>

@@ -1,37 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import SocialProof from '../components/SocialProof.astro';
-import Credentials from '../components/Credentials.astro';
-import Ribbon from '../components/Ribbon.astro';
-import SelectedWork from '../components/SelectedWork.astro';
-import Work from '../components/Work.astro';
-import Contact from '../components/Contact.astro';
-import BackToTop from '../components/BackToTop.astro';
-import Motion from '../components/Motion.astro';
-import CategoryNav from '../components/CategoryNav.astro';
-import WhatsApp from '../components/WhatsApp.astro';
+// /portfolio/ — the old entry point. Sends visitors to the English site, keeping any #section from
+// older links (e.g. /portfolio/#contact → /portfolio/en/#contact). No language detection: the
+// language is always the one in the URL.
+// It also carries the build meta: the portfolio manager (/admin/) polls this page to report when a
+// publish is live.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const target = `${base}en/`;
+const build: string | undefined = import.meta.env.GITHUB_SHA;
 ---
-<Layout
-  title="Marwen Dridi — Senior Graphic Designer | Brand Identity, Editorial & Presentation Design"
-  description="Marwen Dridi is a senior graphic designer in Tunis with 8+ years of experience in brand identities, bilingual Arabic/Latin brand guidelines, company profiles, pitch decks, reports and social media campaigns for clients in 15 countries."
->
-  <Header />
-  <main>
-    <Hero />
-    <SocialProof />
-    <!-- The category bar stays stuck only while browsing these two sections -->
-    <div class="browse">
-      <CategoryNav />
-      <SelectedWork />
-      <Work />
-    </div>
-    <Ribbon from="var(--paper)" to="var(--ink-2)" />
-    <Credentials />
-    <Contact />
-  </main>
-  <WhatsApp />
-  <BackToTop />
-  <Motion />
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marwen Dridi — Portfolio</title>
+    {build && <meta name="build" content={build} />}
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={new URL(target, Astro.site)} />
+    <meta name="theme-color" content="#000004" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <script is:inline define:vars={{ target }}>location.replace(target + location.search + location.hash);</script>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <style>body { margin: 0; background: #000004; color: #fff5ea; font: 1rem/1.6 system-ui, sans-serif; } a { color: #00a0de; } p { padding: 24px; }</style>
+  </head>
+  <body>
+    <p><a href={target}>Marwen Dridi — Portfolio (English)</a> · <a href={`${base}fr/`}>Version française</a></p>
+  </body>
+</html>
