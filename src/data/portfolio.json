@@ -1451,8 +1451,10 @@
           ]
         },
         {
-          "project": "social-shitanaultratrail",
+          "project": "social-papparazo",
           "boards": [
+            "d-03.webp",
+            "d-02.webp",
             "d-01.webp"
           ]
         }
