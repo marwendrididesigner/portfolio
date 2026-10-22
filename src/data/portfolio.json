@@ -1550,10 +1550,10 @@
           ]
         },
         {
-          "project": "packaging-froste",
+          "project": "packaging-pulse-zero",
           "boards": [
             "d-01.webp",
-            "d-02.webp"
+            "d-03.webp"
           ]
         },
         {
