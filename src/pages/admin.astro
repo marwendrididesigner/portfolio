@@ -132,6 +132,25 @@ for (const p of Object.values(portfolioData.projects)) {
           </div>
         </dialog>
 
+        <!-- Edit project details (text only: id, category, order and boards are untouched) -->
+        <dialog class="picker" data-ed aria-labelledby="ed-title">
+          <div class="picker-head">
+            <h2 id="ed-title">Edit details</h2>
+            <button type="button" class="mini" data-ed-cancel aria-label="Cancel">✕</button>
+          </div>
+          <form data-ed-form>
+            <label>Project name <input name="client" maxlength="80" /></label>
+            <label>Project title <input name="title" maxlength="120" /></label>
+            <label>Country <input name="country" maxlength="40" /></label>
+            <label>Services (separate with “ · ”) <input name="services" maxlength="160" /></label>
+            <p class="msg err" data-ed-msg role="status"></p>
+            <div class="row bm-foot">
+              <button class="btn btn--primary" type="submit">Confirm changes</button>
+              <button class="btn btn--ghost" type="button" data-ed-cancel>Cancel</button>
+            </div>
+          </form>
+        </dialog>
+
         <div class="publish">
           <p class="msg" data-status role="status" aria-live="polite"></p>
           <button type="button" class="btn btn--primary" data-publish disabled>Save &amp; Publish</button>
@@ -178,6 +197,7 @@ for (const p of Object.values(portfolioData.projects)) {
       let pending = new Map<string, Board[]>(); // new project id → its processed boards
       let dirty = false;
       let featuredChanged = false;
+      let detailsChanged = false;
       let busy = false;
       let draft: Board[] = [];
       // Chapter-order snapshot, so the commit message says whether the project order changed
@@ -292,6 +312,9 @@ for (const p of Object.values(portfolioData.projects)) {
           const text = el('div', 'txt');
           text.append(el('p', 'name', [p.client, p.title].filter(Boolean).join(' — ') || 'Untitled'));
           text.append(el('p', 'sub', [p.country, `${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`, pending.has(id) ? 'new — not published yet' : ''].filter(Boolean).join(' · ')));
+          const acts = el('div', 'facts');
+          acts.append(button('Edit Details', 'link', `Edit the details of ${nameOf(id)}`, () => openDetails(id)));
+          text.append(acts);
           const ctrls = el('div', 'ctrls');
           for (const [label, d] of [['↑', -1], ['↓', 1]] as const) {
             const b = el('button', 'mini', label) as HTMLButtonElement;
@@ -528,6 +551,35 @@ for (const p of Object.values(portfolioData.projects)) {
       for (const x of document.querySelectorAll('[data-bm-cancel]')) x.addEventListener('click', () => { bmCancel(); bm.close(); });
       bm.addEventListener('close', bmCancel); // Esc
 
+      // Edit details: changes only the project's text fields in place, so the website (both languages)
+      // and any Selected Work reference to this id pick them up on the next publish.
+      const ed = $<HTMLDialogElement>('[data-ed]');
+      const edForm = $<HTMLFormElement>('[data-ed-form]');
+      const edMsg = $<HTMLElement>('[data-ed-msg]');
+      const FIELDS = ['client', 'title', 'country', 'services'] as const;
+      let edFor = '';
+      function openDetails(id: string) {
+        edFor = id;
+        const p = data.projects[id]!;
+        for (const f of FIELDS) (edForm.elements.namedItem(f) as HTMLInputElement).value = p[f] ?? '';
+        edMsg.textContent = '';
+        ed.showModal();
+      }
+      edForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const p = data.projects[edFor];
+        if (!p) return;
+        const v = Object.fromEntries(FIELDS.map((f) => [f, (edForm.elements.namedItem(f) as HTMLInputElement).value.trim() || null]));
+        if (!v.client && !v.title) { edMsg.textContent = 'Enter a project name or a project title.'; return; }
+        if (FIELDS.some((f) => p[f] !== v[f])) {
+          for (const f of FIELDS) p[f] = v[f] ?? null;
+          detailsChanged = true; dirty = true;
+        }
+        ed.close();
+        render();
+      });
+      for (const x of document.querySelectorAll('[data-ed-cancel]')) x.addEventListener('click', () => ed.close());
+
       // Checked again right before publishing (also protects against a hand-edited file)
       function validateFeatured() {
         for (const g of data.featured ?? []) {
@@ -687,9 +739,7 @@ for (const p of Object.values(portfolioData.projects)) {
           const added = [...pending.keys()].map((id) => data.projects[id]!.client);
           const reordered = order() !== loadedOrder;
           const message = added.length ? `Portfolio manager: add ${added.join(', ')}`
-            : featuredChanged && reordered ? 'Portfolio manager: reorder projects, update Selected Work'
-            : featuredChanged ? 'Portfolio manager: update Selected Work'
-            : 'Portfolio manager: reorder projects';
+            : `Portfolio manager: ${[reordered && 'reorder projects', detailsChanged && 'edit project details', featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'reorder projects'}`;
           const commit = await gh(repo('/git/commits'), { method: 'POST', body: JSON.stringify({ message, tree: newTree.sha, parents: [head] }) });
           await gh(repo(`/git/refs/heads/${BRANCH}`), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
 
@@ -697,6 +747,7 @@ for (const p of Object.values(portfolioData.projects)) {
           pending = new Map();
           dirty = false;
           featuredChanged = false;
+          detailsChanged = false;
           loadedOrder = order();
           busy = false;
           render();
