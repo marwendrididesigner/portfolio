@@ -1445,19 +1445,17 @@
           ]
         },
         {
+          "project": "social-shitanaultratrail",
+          "boards": [
+            "d-01.webp"
+          ]
+        },
+        {
           "project": "social-vijaysales",
           "boards": [
             "d-01.webp",
             "d-02.webp",
             "d-03.webp"
-          ]
-        },
-        {
-          "project": "social-papparazo",
-          "boards": [
-            "d-03.webp",
-            "d-02.webp",
-            "d-01.webp"
           ]
         }
       ]
@@ -1545,17 +1543,17 @@
       ],
       "items": [
         {
-          "project": "packaging-crac",
-          "boards": [
-            "d-01.webp",
-            "d-02.webp"
-          ]
-        },
-        {
           "project": "packaging-pulse-zero",
           "boards": [
             "d-01.webp",
             "d-03.webp"
+          ]
+        },
+        {
+          "project": "packaging-crac",
+          "boards": [
+            "d-01.webp",
+            "d-02.webp"
           ]
         },
         {
