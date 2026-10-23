@@ -6,7 +6,9 @@
       "projects": [
         "social-mzuriorganics",
         "social-eddykenzo",
+        "social-seensociety",
         "social-mgmr-restaurant",
+        "social-shitanaultratrail",
         "social-darlek",
         "social-darlek-carousels",
         "social-indintambwe",
@@ -16,9 +18,7 @@
         "social-acemobility",
         "social-bodies",
         "social-motirentals",
-        "social-shitanaultratrail",
         "social-patvention",
-        "social-seensociety",
         "social-vivaextensions",
         "social-papparazo",
         "social-elspace",
@@ -128,7 +128,8 @@
         "packaging-pulse-zero",
         "packaging-froste",
         "packaging-altura",
-        "packaging-voltage"
+        "packaging-voltage",
+        "packaging-samray"
       ]
     },
     {
@@ -261,7 +262,7 @@
       "services": "Social Media Design · Ad Creatives",
       "folder": "010-social-seensociety",
       "boards": [
-        "d-01.webp"
+        "d-mvlb1d780.webp"
       ]
     },
     "social-shitanaultratrail": {
@@ -1396,6 +1397,18 @@
       "folder": "collateral-rdvmedecins-easyboost-plaquette",
       "boards": [
         "d-01.webp"
+      ]
+    },
+    "packaging-samray": {
+      "client": "SAMRAY",
+      "title": null,
+      "country": "UAE",
+      "services": null,
+      "folder": "packaging-samray",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
       ]
     }
   },
