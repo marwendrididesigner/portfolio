@@ -105,6 +105,7 @@
         "collateral-samray-d9",
         "collateral-samray-d8",
         "collateral-samray-d2",
+        "collateral-mzuri-organics-billboard",
         "collateral-p121",
         "collateral-p122",
         "collateral-p123",
@@ -112,17 +113,18 @@
         "collateral-p126",
         "collateral-p127",
         "collateral-p129",
+        "collateral-moti-rentals-billboard",
         "collateral-p130",
-        "collateral-p131",
         "collateral-p132",
+        "collateral-p131",
         "collateral-p134",
         "collateral-p136",
         "collateral-p137",
         "collateral-p139",
+        "collateral-rdvmedecins-easyboost-plaquette",
+        "collateral-concept-note-african-cleantech-congress",
         "collateral-p143",
         "collateral-p144",
-        "collateral-mzuri-organics-billboard",
-        "collateral-moti-rentals-billboard",
         "collateral-billboard-ace-mobility",
         "collateral-indintambwe-billboard"
       ]
@@ -1470,6 +1472,27 @@
       "country": null,
       "services": null,
       "folder": "collateral-indintambwe-billboard",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-concept-note-african-cleantech-congress": {
+      "client": "Concept Note - African Cleantech Congress",
+      "title": null,
+      "country": "TUNISIA",
+      "services": null,
+      "folder": "collateral-concept-note-african-cleantech-congress",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-rdvmedecins-easyboost-plaquette": {
+      "client": "RDVmédecins - EASYBOOST Plaquette",
+      "title": null,
+      "country": "FRANCE",
+      "services": null,
+      "folder": "collateral-rdvmedecins-easyboost-plaquette",
       "boards": [
         "d-01.webp"
       ]
