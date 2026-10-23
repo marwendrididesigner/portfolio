@@ -96,15 +96,6 @@
       "projects": [
         "collateral-p109",
         "collateral-p110",
-        "collateral-samray-d5",
-        "collateral-samray-d7",
-        "collateral-samray-d4",
-        "collateral-samray-d6",
-        "collateral-samray-d1",
-        "collateral-samray-d3",
-        "collateral-samray-d9",
-        "collateral-samray-d8",
-        "collateral-samray-d2",
         "collateral-mzuri-organics-billboard",
         "collateral-p121",
         "collateral-p122",
@@ -843,96 +834,6 @@
       "boards": [
         "d-01.webp",
         "d-02.webp"
-      ]
-    },
-    "collateral-samray-d5": {
-      "client": "Samray",
-      "title": "Direction 5 Ivory Gold",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "065-collateral-samray-d5",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d7": {
-      "client": "Samray",
-      "title": "Direction 7 Desert Sunset",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "066-collateral-samray-d7",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d4": {
-      "client": "Samray",
-      "title": "Direction 4 Jasmine Floral",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "067-collateral-samray-d4",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d6": {
-      "client": "Samray",
-      "title": "Direction 6 Purple Arabesque",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "068-collateral-samray-d6",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d1": {
-      "client": "Samray",
-      "title": "Direction 1 Ceylon Black Tea",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "069-collateral-samray-d1",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d3": {
-      "client": "Samray",
-      "title": "Direction 3 Sand Calligraphy",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "070-collateral-samray-d3",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d9": {
-      "client": "Samray",
-      "title": "Direction 9 Teal Abstract",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "071-collateral-samray-d9",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d8": {
-      "client": "Samray",
-      "title": "Direction 8 Orange Kilim",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "072-collateral-samray-d8",
-      "boards": [
-        "d-01.webp"
-      ]
-    },
-    "collateral-samray-d2": {
-      "client": "Samray",
-      "title": "Direction 2 Emerald Botanical",
-      "country": null,
-      "services": "Packaging Design",
-      "folder": "073-collateral-samray-d2",
-      "boards": [
-        "d-01.webp"
       ]
     },
     "collateral-p121": {
