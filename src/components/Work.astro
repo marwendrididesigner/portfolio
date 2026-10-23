@@ -114,6 +114,13 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
       const w = Number(src.getAttribute('width')) || 4, h = Number(src.getAttribute('height')) || 3;
       return `${Math.round(Math.min(window.innerWidth * 0.94, (window.innerHeight - 120) * (w / h)))}px`;
     };
+    // The grid's srcset stops at 1920w; the board's `src` is the same image at full size (≤ 2400 px,
+    // already built). Offer it to the viewer only, so retina / large screens get a sharp board.
+    const srcsetFor = (src: HTMLImageElement) => {
+      const set = src.getAttribute('srcset') ?? '', full = src.getAttribute('src'), w = Number(src.getAttribute('width'));
+      const max = Math.max(0, ...[...set.matchAll(/\s(\d+)w/g)].map((m) => Number(m[1])));
+      return full && w > max ? `${set}, ${full} ${w}w` : set;
+    };
     const show = (i: number) => {
       index = (i + list.length) % list.length;
       const t = list[index]!;
@@ -123,7 +130,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
       img.removeAttribute('src');
       img.width = w; img.height = h;
       img.sizes = sizesFor(src);
-      img.srcset = src.getAttribute('srcset') ?? '';
+      img.srcset = srcsetFor(src);
       img.src = src.getAttribute('src') ?? '';
       img.alt = src.alt;
       title.textContent = t.dataset.project ?? '';
@@ -142,7 +149,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
         const src = list[(index + d + list.length) % list.length]!.querySelector('img')!;
         const pre = new Image();
         pre.sizes = sizesFor(src);
-        pre.srcset = src.getAttribute('srcset') ?? '';
+        pre.srcset = srcsetFor(src);
         pre.src = src.getAttribute('src') ?? '';
       }
     });
