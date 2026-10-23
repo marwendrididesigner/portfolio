@@ -25,6 +25,9 @@ export interface Chapter { id: string; number: string; title: string; deliverabl
 export interface StoredProject {
   client: string | null; title: string | null; country: string | null; services: string | null;
   folder: string; boards: string[];
+  // Hidden from the public site (both languages, Work and Selected Work) but kept with its section
+  // position, boards and Selected Work entries, so un-hiding restores it as it was. Absent = visible.
+  hidden?: boolean;
 }
 // Selected Work: four fixed groups. Each item references an existing project by id plus the boards to
 // show, in display order (`boards`: file names from that project's boards — stable, unlike indices) —
@@ -85,13 +88,16 @@ export const rowsOf = <T extends { boards: readonly unknown[] }>(projects: T[]) 
 export const chapters: Chapter[] = portfolioData.chapters
   .map((c) => ({
     id: c.id, number: '', title: c.title, deliverables: deliverables[c.id] ?? [],
-    projects: c.projects.map((id) => project(id, c.id)).filter((p) => p.boards.length > 0),
+    // Hidden projects are still checked (missing boards fail the build) but never rendered
+    projects: c.projects.map((id) => project(id, c.id)).filter((p) => p.boards.length > 0 && !portfolioData.projects[p.id]!.hidden),
   }))
   .filter((c) => c.projects.length > 0)
   .map((c, i) => ({ ...c, number: String(i + 1).padStart(2, '0') }));
 
-// Groups with no featured projects yet stay in the data (and the admin) but are not rendered.
-export const featured = (portfolioData.featured ?? []).filter((g) => g.items.length > 0).map((g, i) => {
+// Groups with no featured projects yet stay in the data (and the admin) but are not rendered. Entries of
+// hidden projects keep their slot in the data and are skipped here.
+const shown = (g: FeaturedGroup) => g.items.filter((it) => !portfolioData.projects[it.project]?.hidden);
+export const featured = (portfolioData.featured ?? []).filter((g) => shown(g).length > 0).map((g, i) => {
   const chapter = chapters.find((c) => c.id === g.chapter);
   if (!chapter) throw new Error(`portfolio.json: featured group "${g.id}" links to unknown chapter "${g.chapter}"`);
   const all = chapters.flatMap((c) => c.projects);
@@ -99,7 +105,7 @@ export const featured = (portfolioData.featured ?? []).filter((g) => g.items.len
     id: g.id, number: String(i + 1).padStart(2, '0'), title: g.title,
     chapter: { id: chapter.id, title: chapter.title },
     // Empty slots are simply not rendered
-    projects: g.items.slice(0, MAX_FEATURED).map(({ project: id, boards }) => {
+    projects: shown(g).slice(0, MAX_FEATURED).map(({ project: id, boards }) => {
       const p = all.find((x) => x.id === id);
       if (!p) throw new Error(`portfolio.json: featured group "${g.id}" lists "${id}", which is not in any chapter`);
       if (!boards.length) throw new Error(`portfolio.json: featured "${id}" has no selected boards`);

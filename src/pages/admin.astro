@@ -10,12 +10,15 @@ import '../styles/global.css';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { portfolioData } from '../data/portfolio';
+import { alts } from '../data/portfolio-alts';
 
 // Build-time thumbnails of every board (lists show the first one, the Selected Work board manager all of
-// them). Projects added since the last deploy fall back to the repository file.
+// them). Projects added since the last deploy fall back to the repository file, and so do hidden
+// projects, so the built site carries no images of them.
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/portfolio/*/d-*.{webp,jpg}', { eager: true });
 const thumbs: Record<string, string> = {};
 for (const p of Object.values(portfolioData.projects)) {
+  if (p.hidden) continue;
   for (const b of p.boards) {
     const key = `${p.folder}/${b}`;
     const file = files[`../assets/portfolio/${key}`];
@@ -34,6 +37,9 @@ for (const p of Object.values(portfolioData.projects)) {
   </head>
   <body>
     <script type="application/json" id="thumbs" set:html={JSON.stringify(thumbs)} />
+    <!-- Ids with written alt texts (portfolio-alts.ts): a new project never takes one of them, so a
+         deleted project's texts can never attach to a new project's boards -->
+    <script type="application/json" id="reserved" set:html={JSON.stringify(Object.keys(alts))} />
 
     <header class="bar">
       <p class="brand">Portfolio <span>manager</span></p>
@@ -165,6 +171,28 @@ for (const p of Object.values(portfolioData.projects)) {
           </form>
         </dialog>
 
+        <!-- Delete project: explicit confirmation (type DELETE) -->
+        <dialog class="picker" data-del aria-labelledby="del-title">
+          <div class="picker-head">
+            <h2 id="del-title">Delete project permanently?</h2>
+            <button type="button" class="mini" data-del-cancel aria-label="Cancel">✕</button>
+          </div>
+          <form class="ed-form" data-del-form>
+            <div class="bm-body">
+              <p class="name del-name" data-del-name></p>
+              <p class="hint">This is <strong>permanent</strong>. After Save &amp; Publish the project, its details and its boards are removed from the portfolio and from both the English and French websites. It cannot be restored from this dashboard. To take it off the website but keep it, use <strong>Hide</strong> instead.</p>
+              <h3 class="bm-h">Also removed</h3>
+              <ul class="del-refs" data-del-refs></ul>
+              <p class="hint">Its board images are deleted from GitHub only once the new website is live, and only images no other project uses.</p>
+              <label>Type DELETE to confirm <input name="confirm" autocomplete="off" spellcheck="false" data-del-input /></label>
+            </div>
+            <div class="row bm-foot">
+              <button class="btn btn--danger" type="submit" data-del-ok disabled>Delete project</button>
+              <button class="btn btn--ghost" type="button" data-del-cancel>Cancel</button>
+            </div>
+          </form>
+        </dialog>
+
         <div class="publish">
           <p class="msg" data-status role="status" aria-live="polite"></p>
           <button type="button" class="btn btn--primary" data-publish disabled>Save &amp; Publish</button>
@@ -184,7 +212,7 @@ for (const p of Object.values(portfolioData.projects)) {
       const TYPES = ['image/jpeg', 'image/png', 'image/webp'];
       const KEY = 'portfolio-admin-token';
 
-      type Stored = { client: string | null; title: string | null; country: string | null; services: string | null; folder: string; boards: string[] };
+      type Stored = { client: string | null; title: string | null; country: string | null; services: string | null; folder: string; boards: string[]; hidden?: boolean };
       type Item = { project: string; boards: string[] }; // boards: selected board file names, in display order
       type Group = { id: string; title: string; chapter: string; chapters: string[]; items: Item[] };
       type Data = { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, Stored>; featured?: Group[] };
@@ -193,6 +221,7 @@ for (const p of Object.values(portfolioData.projects)) {
 
       const $ = <T extends Element>(s: string) => document.querySelector<T>(s)!;
       const thumbs: Record<string, string> = JSON.parse($('#thumbs').textContent || '{}');
+      const reserved = new Set<string>(JSON.parse($('#reserved').textContent || '[]'));
       const el = (tag: string, cls?: string, text?: string) => {
         const e = document.createElement(tag);
         if (cls) e.className = cls;
@@ -221,6 +250,11 @@ for (const p of Object.values(portfolioData.projects)) {
       let detailsChanged = false;
       const moved = new Map<string, string>(); // project id → its section when first moved (not published yet)
       const isMoved = (id: string) => moved.has(id) && !added.has(id) && chapterOf(id)?.id !== moved.get(id);
+      // Hidden: `hidden: true` in portfolio.json (absent = visible). The project keeps its place in its
+      // section and in Selected Work, so un-hiding restores it exactly.
+      const wasHidden = new Set<string>(); // hidden on GitHub when loaded / last published
+      const visChanged = (id: string) => !added.has(id) && !!data.projects[id]!.hidden !== wasHidden.has(id);
+      const deleted = new Map<string, string>(); // deleted published project id → its name (for the commit message)
       let busy = false;
       let draft: Board[] = [];
       // Chapter-order snapshot, so the commit message says whether the project order changed
@@ -261,7 +295,10 @@ for (const p of Object.values(portfolioData.projects)) {
         data = JSON.parse(b64ToText(f.content));
         dataSha = f.sha;
         loadedOrder = order();
-        for (const p of Object.values(data.projects)) for (const b of p.boards) inRepo.add(`${p.folder}/${b}`);
+        for (const [id, p] of Object.entries(data.projects)) {
+          if (p.hidden) wasHidden.add(id);
+          for (const b of p.boards) inRepo.add(`${p.folder}/${b}`);
+        }
       }
       const referenced = (d: Data) => new Set(Object.values(d.projects).flatMap((p) => p.boards.map((b) => `${p.folder}/${b}`)));
       // File names in one repository folder (empty for a folder that does not exist yet)
@@ -339,15 +376,23 @@ for (const p of Object.values(portfolioData.projects)) {
         const ids = current().projects;
         list.replaceChildren(...ids.map((id, i) => {
           const p = data.projects[id]!;
-          const li = el('li', added.has(id) ? 'item is-new' : 'item');
+          const li = el('li', ['item', added.has(id) && 'is-new', p.hidden && 'is-hidden'].filter(Boolean).join(' '));
           const img = el('img') as HTMLImageElement;
           img.src = thumbFor(id); img.alt = ''; img.loading = 'lazy'; img.width = 96; img.height = 68;
           const text = el('div', 'txt');
           text.append(el('p', 'name', [p.client, p.title].filter(Boolean).join(' — ') || 'Untitled'));
+          if (p.hidden) text.append(el('p', 'hidden-note', 'Hidden — not shown on the website'));
           text.append(el('p', 'sub', [p.country, `${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`,
-            added.has(id) ? 'new — not published yet' : isMoved(id) ? 'moved here — not published yet' : boardsChanged.has(id) ? 'boards changed — not published yet' : ''].filter(Boolean).join(' · ')));
+            added.has(id) ? 'new — not published yet' : visChanged(id) ? `${p.hidden ? 'hidden' : 'shown again'} — not published yet` : isMoved(id) ? 'moved here — not published yet' : boardsChanged.has(id) ? 'boards changed — not published yet' : ''].filter(Boolean).join(' · ')));
           const acts = el('div', 'facts');
-          acts.append(button('Edit Project', 'link', `Edit the details and boards of ${nameOf(id)}`, () => openDetails(id)));
+          const name = nameOf(id);
+          acts.append(
+            button('Edit Project', 'link', `Edit the details and boards of ${name}`, () => openDetails(id)),
+            button('Manage Boards', 'link', `Add, replace, remove or reorder the boards of ${name}`, () => openDetails(id, 'boards')),
+            button('Change Section', 'link', `Move ${name} to another section`, () => openDetails(id, 'section')),
+            button(p.hidden ? 'Unhide' : 'Hide', 'link', p.hidden ? `Show ${name} on the website again` : `Hide ${name} from the website`, () => setHidden(id, !p.hidden)),
+            button('Delete Project', 'link link--danger', `Delete ${name} permanently`, () => openDelete(id)),
+          );
           text.append(acts);
           const ctrls = el('div', 'ctrls');
           for (const [label, d] of [['↑', -1], ['↓', 1]] as const) {
@@ -415,6 +460,7 @@ for (const p of Object.values(portfolioData.projects)) {
             const text = el('div', 'txt');
             const p = data.projects[it.project]!;
             text.append(el('p', 'name', name), el('p', 'sub', [chapterOf(it.project)?.title, `${it.boards.length} of ${p.boards.length} board${p.boards.length > 1 ? 's' : ''} selected`].filter(Boolean).join(' · ')));
+            if (p.hidden) text.append(el('p', 'hidden-note', 'Hidden — keeps this slot, not shown on the website until un-hidden'));
             // Small previews of the selected boards, in display order
             const strip = el('div', 'strip');
             it.boards.forEach((b) => {
@@ -478,7 +524,7 @@ for (const p of Object.values(portfolioData.projects)) {
             const b = el('button', 'pick') as HTMLButtonElement;
             b.type = 'button';
             const t = el('span', 'txt');
-            t.append(el('span', 'name', name), el('span', 'sub', `${c.title} · ${data.projects[id]!.boards.length} board${data.projects[id]!.boards.length > 1 ? 's' : ''}`));
+            t.append(el('span', 'name', name), el('span', 'sub', `${c.title} · ${data.projects[id]!.boards.length} board${data.projects[id]!.boards.length > 1 ? 's' : ''}${data.projects[id]!.hidden ? ' · Hidden' : ''}`));
             b.append(thumbImg(thumbFor(id), 72, 51), t);
             // Adding or replacing starts a fresh board selection: a single-board project selects its
             // board; otherwise the board manager opens, and cancelling it undoes the add/replace.
@@ -612,7 +658,7 @@ for (const p of Object.values(portfolioData.projects)) {
       // Same image chosen twice (in this draft, or already waiting to be uploaded for this project)
       const isDuplicate = (b: Board) => entries.some((e) => (e.img ?? uploads.get(`${data.projects[edFor]!.folder}/${e.file}`))?.hash === b.hash);
 
-      function openDetails(id: string) {
+      function openDetails(id: string, focus?: 'boards' | 'section') {
         edFor = id;
         const p = data.projects[id]!;
         for (const f of FIELDS) (edForm.elements.namedItem(f) as HTMLInputElement).value = p[f] ?? '';
@@ -623,6 +669,8 @@ for (const p of Object.values(portfolioData.projects)) {
         renderEntries();
         edStart = edState();
         ed.showModal();
+        if (focus === 'section') edChapter.focus();
+        if (focus === 'boards') { $<HTMLElement>('[data-eb-count]').scrollIntoView({ block: 'start' }); document.querySelector<HTMLElement>('[data-eb] button')?.focus({ preventScroll: true }); }
       }
 
       let dragFrom = -1;
@@ -802,8 +850,78 @@ for (const p of Object.values(portfolioData.projects)) {
       for (const x of document.querySelectorAll('[data-ed-cancel]')) x.addEventListener('click', () => { if (edDiscard()) ed.close(); });
       ed.addEventListener('cancel', (e) => { if (!edDiscard()) e.preventDefault(); });
 
+      // ---- Hide / Unhide -----------------------------------------------------------------------
+      // Only the flag changes: section, position, details, boards and Selected Work entries stay.
+      function setHidden(id: string, hide: boolean) {
+        const p = data.projects[id]!;
+        if (hide) p.hidden = true; else delete p.hidden;
+        dirty = true;
+        render();
+        status(`Unpublished changes. “${nameOf(id)}” will be ${hide ? 'hidden from' : 'shown again on'} the website (English and French) after Save & Publish.`);
+      }
+
+      // ---- Delete project -----------------------------------------------------------------------
+      const del = $<HTMLDialogElement>('[data-del]');
+      const delInput = $<HTMLInputElement>('[data-del-input]');
+      const delOk = $<HTMLButtonElement>('[data-del-ok]');
+      let delFor = '';
+      function openDelete(id: string) {
+        delFor = id;
+        const p = data.projects[id]!;
+        $<HTMLElement>('[data-del-name]').textContent = nameOf(id);
+        const refs = [
+          `Section ${chapterOf(id)?.title ?? '—'} · ${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`,
+          ...(data.featured ?? []).filter((g) => g.items.some((it) => it.project === id)).map((g) => `Selected Work › ${g.title}`),
+        ];
+        $<HTMLElement>('[data-del-refs]').replaceChildren(...refs.map((r) => el('li', undefined, r)));
+        delInput.value = '';
+        delOk.disabled = true;
+        del.showModal();
+        delInput.focus();
+      }
+      delInput.addEventListener('input', () => { delOk.disabled = delInput.value.trim().toUpperCase() !== 'DELETE'; });
+      for (const x of document.querySelectorAll('[data-del-cancel]')) x.addEventListener('click', () => del.close());
+      $<HTMLFormElement>('[data-del-form]').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (delInput.value.trim().toUpperCase() !== 'DELETE' || !data.projects[delFor]) return;
+        const name = nameOf(delFor);
+        deleteProject(delFor);
+        del.close();
+        render();
+        status(`Unpublished changes. “${name}” will be deleted when you click Save & Publish (reload the page to undo before that).`);
+      });
+      // Removes the project and every reference to it (section list, Selected Work). Its board images
+      // are queued for the post-deploy cleanup, which deletes only files no project references any more.
+      function deleteProject(id: string) {
+        const p = data.projects[id]!;
+        const name = p.client ?? p.title ?? id;
+        for (const c of data.chapters) c.projects = c.projects.filter((x) => x !== id);
+        for (const g of data.featured ?? []) {
+          const n = g.items.length;
+          g.items = g.items.filter((it) => it.project !== id);
+          if (g.items.length !== n) featuredChanged = true;
+        }
+        delete data.projects[id];
+        const used = referenced(data);
+        for (const b of p.boards) {
+          const key = `${p.folder}/${b}`;
+          if (used.has(key)) continue; // shared with another project: kept
+          const u = uploads.get(key);
+          if (u) { URL.revokeObjectURL(u.url); uploads.delete(key); }
+          if (inRepo.has(key)) toDelete.add(key);
+        }
+        // A project added in this session and never published simply disappears
+        if (added.has(id)) added.delete(id); else deleted.set(id, name);
+        boardsChanged.delete(id);
+        moved.delete(id);
+        reserved.add(id); // never reused by a new project
+        dirty = true;
+      }
+
       // Checked again right before publishing (also protects against a hand-edited file)
       function validateFeatured() {
+        for (const c of data.chapters) for (const id of c.projects)
+          if (!data.projects[id]) throw new Error(`section “${c.title}” refers to a project that no longer exists (${id})`);
         for (const g of data.featured ?? []) {
           if (g.items.length > MAX_FEATURED) throw new Error(`“${g.title}” has more than ${MAX_FEATURED} projects`);
           const seen = new Set<string>();
@@ -924,7 +1042,7 @@ for (const p of Object.values(portfolioData.projects)) {
         if (!draft.length) { addMsg.textContent = 'Add at least one presentation board.'; return; }
         const folders = new Set(Object.values(data.projects).map((p) => p.folder));
         let id = `${chapter}-${slug(name)}`;
-        for (let n = 2; data.projects[id] || folders.has(id); n++) id = `${chapter}-${slug(name)}-${n}`;
+        for (let n = 2; data.projects[id] || folders.has(id) || reserved.has(id); n++) id = `${chapter}-${slug(name)}-${n}`;
         const boards = draft.map((b, i) => `d-${String(i + 1).padStart(2, '0')}.${b.ext}`);
         data.projects[id] = { client: name, title: null, country: country || null, services: null, folder: id, boards };
         data.chapters.find((c) => c.id === chapter)!.projects.push(id); // added at the end; move it with ↑/↓
@@ -976,10 +1094,14 @@ for (const p of Object.values(portfolioData.projects)) {
           const newTree = await gh(repo('/git/trees'), { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
           const names = (ids: Iterable<string>) => [...ids].map((id) => data.projects[id]!.client ?? data.projects[id]!.title).join(', ');
           const mv = [...moved.keys()].filter(isMoved);
-          const sansMoved = (chs: string[][]) => JSON.stringify(chs.map((ps) => ps.filter((x) => !mv.includes(x))));
+          // Order compared without moved, added or deleted projects
+          const sansMoved = (chs: string[][]) => JSON.stringify(chs.map((ps) => ps.filter((x) => !mv.includes(x) && !added.has(x) && data.projects[x])));
           const reordered = sansMoved(JSON.parse(loadedOrder)) !== sansMoved(data.chapters.map((c) => c.projects));
-          const message = added.size ? `Portfolio manager: add ${names(added)}`
-            : `Portfolio manager: ${[mv.length && `move ${mv.map((id) => `${names([id])} to ${chapterOf(id)!.title}`).join(', ')}`, reordered && 'reorder projects', detailsChanged && 'edit project details', boardsChanged.size && `update boards of ${names(boardsChanged)}`, featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'reorder projects'}`;
+          const vis = Object.keys(data.projects).filter(visChanged);
+          const hid = vis.filter((id) => data.projects[id]!.hidden), shown = vis.filter((id) => !data.projects[id]!.hidden);
+          const message = `Portfolio manager: ${[added.size && `add ${names(added)}`, deleted.size && `delete ${[...deleted.values()].join(', ')}`,
+            hid.length && `hide ${names(hid)}`, shown.length && `unhide ${names(shown)}`,
+            mv.length && `move ${mv.map((id) => `${names([id])} to ${chapterOf(id)!.title}`).join(', ')}`, reordered && 'reorder projects', detailsChanged && 'edit project details', boardsChanged.size && `update boards of ${names(boardsChanged)}`, featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'update portfolio'}`;
           const commit = await gh(repo('/git/commits'), { method: 'POST', body: JSON.stringify({ message, tree: newTree.sha, parents: [head] }) });
           await gh(repo(`/git/refs/heads/${BRANCH}`), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
 
@@ -992,6 +1114,9 @@ for (const p of Object.values(portfolioData.projects)) {
           featuredChanged = false;
           detailsChanged = false;
           moved.clear();
+          deleted.clear();
+          wasHidden.clear();
+          for (const [id, p] of Object.entries(data.projects)) if (p.hidden) wasHidden.add(id);
           loadedOrder = order();
           busy = false;
           render();
@@ -1133,6 +1258,15 @@ for (const p of Object.values(portfolioData.projects)) {
       .facts { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 0.8125rem; }
       .link:disabled { opacity: 0.35; cursor: default; text-decoration: none; }
       .link--danger { color: #ff8a80; }
+      .item.is-hidden img { opacity: 0.35; }
+      .item.is-hidden .name { color: var(--cream-dim); }
+      .item.is-hidden .name::after { content: ' HIDDEN'; color: #ffb74d; font-size: 0.6875rem; letter-spacing: 0.14em; }
+      .hidden-note { color: #ffb74d; font-size: 0.8125rem; font-weight: 800; }
+      .btn--danger { background: #c62828; border-color: #c62828; color: #fff; }
+      .btn--danger:hover:not(:disabled) { background: #ff5252; border-color: #ff5252; }
+      .del-name { font-size: 1.125rem; margin: 0 0 8px; }
+      .del-refs { margin: 0 0 16px; padding-left: 1.2em; font-size: 0.9375rem; }
+      [data-del-form] label { margin-top: 16px; }
 
       .picker {
         width: min(640px, 100vw - 24px); max-height: min(80vh, 760px); padding: 20px;
