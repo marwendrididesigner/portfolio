@@ -26,7 +26,8 @@
         "social-ccd4tunisia",
         "social-cleantech216",
         "social-wyanatravels",
-        "social-eventandfacebookcovers"
+        "social-eventandfacebookcovers",
+        "social-billboard-patvention"
       ]
     },
     {
@@ -119,7 +120,11 @@
         "collateral-p137",
         "collateral-p139",
         "collateral-p143",
-        "collateral-p144"
+        "collateral-p144",
+        "collateral-mzuri-organics-billboard",
+        "collateral-moti-rentals-billboard",
+        "collateral-billboard-ace-mobility",
+        "collateral-indintambwe-billboard"
       ]
     },
     {
@@ -167,7 +172,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "001-social-mzuriorganics",
       "boards": [
-        "d-01.webp"
+        "d-mvkxmy240.webp"
       ]
     },
     "social-kukupoultry": {
@@ -177,7 +182,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "002-social-kukupoultry",
       "boards": [
-        "d-01.webp"
+        "d-mvkxp6wu2.webp"
       ]
     },
     "social-eddykenzo": {
@@ -199,7 +204,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "004-social-acemobility",
       "boards": [
-        "d-01.webp"
+        "d-mvkxtamx4.webp"
       ]
     },
     "social-indintambwe": {
@@ -209,7 +214,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "005-social-indintambwe",
       "boards": [
-        "d-01.webp"
+        "d-mvkxnapc1.webp"
       ]
     },
     "social-shepherdcollege": {
@@ -231,7 +236,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "007-social-motirentals",
       "boards": [
-        "d-01.webp"
+        "d-mvkxpd4n3.webp"
       ]
     },
     "social-patvention": {
@@ -241,7 +246,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "008-social-patvention",
       "boards": [
-        "d-01.webp"
+        "d-mvkxtj9a5.webp"
       ]
     },
     "social-vijaysales": {
@@ -273,7 +278,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "011-social-shitanaultratrail",
       "boards": [
-        "d-01.webp"
+        "d-mvkxu69u6.webp"
       ]
     },
     "social-bodies": {
@@ -316,8 +321,8 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "015-social-elspace",
       "boards": [
-        "d-01.webp",
-        "d-02.webp"
+        "d-mvkxujx38.webp",
+        "d-mvkxujs87.webp"
       ]
     },
     "social-futureisland": {
@@ -327,7 +332,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "016-social-futureisland",
       "boards": [
-        "d-01.webp",
+        "d-mvkxuzqk9.webp",
         "d-02.webp"
       ]
     },
@@ -1418,6 +1423,56 @@
         "d-04.webp",
         "d-05.webp"
       ]
+    },
+    "collateral-mzuri-organics-billboard": {
+      "client": "MZURI ORGANICS Billboard",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "collateral-mzuri-organics-billboard",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-moti-rentals-billboard": {
+      "client": "MOTI RENTALS Billboard",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "collateral-moti-rentals-billboard",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-billboard-ace-mobility": {
+      "client": "Ace Mobility Billboard",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "collateral-billboard-ace-mobility",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "social-billboard-patvention": {
+      "client": "Billboard PATVENTION",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "social-billboard-patvention",
+      "boards": [
+        "d-01.webp"
+      ]
+    },
+    "collateral-indintambwe-billboard": {
+      "client": "INDINTAMBWE Billboard",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "collateral-indintambwe-billboard",
+      "boards": [
+        "d-01.webp"
+      ]
     }
   },
   "featured": [
@@ -1446,7 +1501,7 @@
         {
           "project": "social-shitanaultratrail",
           "boards": [
-            "d-01.webp"
+            "d-mvkxu69u6.webp"
           ]
         },
         {
