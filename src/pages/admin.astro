@@ -142,6 +142,7 @@ for (const p of Object.values(portfolioData.projects)) {
             <div class="bm-body">
               <h3 class="bm-h">Project details</h3>
               <div class="ed-grid">
+                <label class="ed-wide">Project section <select name="chapter" data-ed-chapter></select></label>
                 <label>Project name <input name="client" maxlength="80" /></label>
                 <label>Project title <input name="title" maxlength="120" /></label>
                 <label>Country <input name="country" maxlength="40" /></label>
@@ -218,6 +219,8 @@ for (const p of Object.values(portfolioData.projects)) {
       let dirty = false;
       let featuredChanged = false;
       let detailsChanged = false;
+      const moved = new Map<string, string>(); // project id → its section when first moved (not published yet)
+      const isMoved = (id: string) => moved.has(id) && !added.has(id) && chapterOf(id)?.id !== moved.get(id);
       let busy = false;
       let draft: Board[] = [];
       // Chapter-order snapshot, so the commit message says whether the project order changed
@@ -313,7 +316,7 @@ for (const p of Object.values(portfolioData.projects)) {
       // ---- Category list ----------------------------------------------------------------------
       const catSelect = $<HTMLSelectElement>('[data-category]');
       function fillCategories() {
-        for (const sel of [catSelect, $<HTMLSelectElement>('[data-add-chapter]')]) {
+        for (const sel of [catSelect, $<HTMLSelectElement>('[data-add-chapter]'), $<HTMLSelectElement>('[data-ed-chapter]')]) {
           sel.replaceChildren(...data.chapters.map((c, i) => {
             const o = el('option', undefined, `${String(i + 1).padStart(2, '0')} · ${c.title}`) as HTMLOptionElement;
             o.value = c.id;
@@ -342,7 +345,7 @@ for (const p of Object.values(portfolioData.projects)) {
           const text = el('div', 'txt');
           text.append(el('p', 'name', [p.client, p.title].filter(Boolean).join(' — ') || 'Untitled'));
           text.append(el('p', 'sub', [p.country, `${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`,
-            added.has(id) ? 'new — not published yet' : boardsChanged.has(id) ? 'boards changed — not published yet' : ''].filter(Boolean).join(' · ')));
+            added.has(id) ? 'new — not published yet' : isMoved(id) ? 'moved here — not published yet' : boardsChanged.has(id) ? 'boards changed — not published yet' : ''].filter(Boolean).join(' · ')));
           const acts = el('div', 'facts');
           acts.append(button('Edit Project', 'link', `Edit the details and boards of ${nameOf(id)}`, () => openDetails(id)));
           text.append(acts);
@@ -595,7 +598,8 @@ for (const p of Object.values(portfolioData.projects)) {
       let edFor = '';
       let entries: Entry[] = [];
       let edStart = '';
-      const edState = () => JSON.stringify([FIELDS.map((f) => (edForm.elements.namedItem(f) as HTMLInputElement).value), entries.map((e) => e.file)]);
+      const edChapter = $<HTMLSelectElement>('[data-ed-chapter]');
+      const edState = () => JSON.stringify([edChapter.value, FIELDS.map((f) => (edForm.elements.namedItem(f) as HTMLInputElement).value), entries.map((e) => e.file)]);
       const edThumb = (e: Entry) => e.img?.url ?? thumbFor(edFor, e.file);
       let seq = 0;
       function newName(ext: string) {
@@ -612,6 +616,7 @@ for (const p of Object.values(portfolioData.projects)) {
         edFor = id;
         const p = data.projects[id]!;
         for (const f of FIELDS) (edForm.elements.namedItem(f) as HTMLInputElement).value = p[f] ?? '';
+        edChapter.value = chapterOf(id)!.id;
         entries = p.boards.map((f) => ({ file: f, orig: f, img: null }));
         $<HTMLElement>('[data-ed-title]').textContent = `Edit project — ${nameOf(id)}`;
         edMsg.textContent = '';
@@ -758,9 +763,34 @@ for (const p of Object.values(portfolioData.projects)) {
           if (!added.has(edFor)) boardsChanged.add(edFor);
           dirty = true;
         }
+        // Section: the same project (id, details, boards) leaves its section and goes to the end of the
+        // chosen one. A Selected Work entry keeps its boards; it follows to the group for the new section
+        // when that group has a free slot, otherwise it stays where it is (other entries are untouched).
+        const from = chapterOf(edFor)!, to = data.chapters.find((c) => c.id === edChapter.value)!;
+        let note = '';
+        if (to.id !== from.id) {
+          from.projects.splice(from.projects.indexOf(edFor), 1);
+          to.projects.push(edFor);
+          if (!moved.has(edFor)) moved.set(edFor, from.id);
+          dirty = true;
+          for (const g of data.featured ?? []) {
+            const it = g.items.find((x) => x.project === edFor);
+            if (!it || g.chapters.includes(to.id)) continue;
+            const target = (data.featured ?? []).find((x) => x.chapters.includes(to.id));
+            if (target && target.items.length < MAX_FEATURED && !target.items.some((x) => x.project === edFor)) {
+              g.items.splice(g.items.indexOf(it), 1);
+              target.items.push(it);
+              featuredChanged = true;
+            } else {
+              note = ` “${nameOf(edFor)}” is still featured in Selected Work › ${g.title}${target ? ` (${target.title} has no free slot)` : ''} — change it in the Selected Work tab if needed.`;
+            }
+          }
+          catSelect.value = to.id;
+        }
         entries = [];
         ed.close();
         render();
+        if (note) status(`Unpublished changes.${note}`);
       });
       // Discard the draft (Cancel, ✕ or Esc); ask first when it has changes
       const edDiscard = () => {
@@ -945,9 +975,11 @@ for (const p of Object.values(portfolioData.projects)) {
           const base = await gh(repo(`/git/commits/${head}`));
           const newTree = await gh(repo('/git/trees'), { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
           const names = (ids: Iterable<string>) => [...ids].map((id) => data.projects[id]!.client ?? data.projects[id]!.title).join(', ');
-          const reordered = order() !== loadedOrder;
+          const mv = [...moved.keys()].filter(isMoved);
+          const sansMoved = (chs: string[][]) => JSON.stringify(chs.map((ps) => ps.filter((x) => !mv.includes(x))));
+          const reordered = sansMoved(JSON.parse(loadedOrder)) !== sansMoved(data.chapters.map((c) => c.projects));
           const message = added.size ? `Portfolio manager: add ${names(added)}`
-            : `Portfolio manager: ${[reordered && 'reorder projects', detailsChanged && 'edit project details', boardsChanged.size && `update boards of ${names(boardsChanged)}`, featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'reorder projects'}`;
+            : `Portfolio manager: ${[mv.length && `move ${mv.map((id) => `${names([id])} to ${chapterOf(id)!.title}`).join(', ')}`, reordered && 'reorder projects', detailsChanged && 'edit project details', boardsChanged.size && `update boards of ${names(boardsChanged)}`, featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'reorder projects'}`;
           const commit = await gh(repo('/git/commits'), { method: 'POST', body: JSON.stringify({ message, tree: newTree.sha, parents: [head] }) });
           await gh(repo(`/git/refs/heads/${BRANCH}`), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
 
@@ -959,6 +991,7 @@ for (const p of Object.values(portfolioData.projects)) {
           dirty = false;
           featuredChanged = false;
           detailsChanged = false;
+          moved.clear();
           loadedOrder = order();
           busy = false;
           render();
@@ -1148,6 +1181,7 @@ for (const p of Object.values(portfolioData.projects)) {
       .ed-form { display: flex; flex-direction: column; gap: 12px; margin-top: 0; min-height: 0; flex: 1 1 auto; }
       .ed-form .bm-h:first-child { margin-top: 0; }
       .ed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .ed-wide { grid-column: 1 / -1; }
       .eb { margin-bottom: 4px; }
       .eb-item { padding: 4px; border: 2px solid transparent; cursor: grab; }
       .eb-item.is-over { border-color: var(--blue); }

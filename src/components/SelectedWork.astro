@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { featured, rowsOf } from '../data/portfolio';
+import { chapters, featured, rowsOf } from '../data/portfolio';
 import { chapterTitle, country, groupTitle, langOf, services, projectText, ui } from '../i18n/ui';
 
 const lang = langOf(Astro.url);
@@ -42,7 +42,7 @@ const packaging = featured.some((g) => g.chapter.id === 'packaging');
                 const client = projectText(lang, p.client), title = p.title && projectText(lang, p.title);
             const name = [client, title].filter(Boolean).join(' — ');
                 const n = p.boards.length;
-                const meta = [p.country && country(lang, p.country), p.services ? services(lang, p.services) : chapterTitle(lang, g.chapter.id, g.chapter.title)].filter(Boolean).join(' · ');
+                const meta = [p.country && country(lang, p.country), p.services ? services(lang, p.services) : chapterTitle(lang, p.chapter, chapters.find((c) => c.id === p.chapter)!.title)].filter(Boolean).join(' · '); // the project's own section
                 return (
                   <article class="project" aria-labelledby={`sel-title-${g.id}-${p.id}`}>
                     <header class="project-head">
