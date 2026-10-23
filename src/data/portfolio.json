@@ -1548,7 +1548,7 @@
           ]
         },
         {
-          "project": "packaging-altura",
+          "project": "packaging-samray",
           "boards": [
             "d-01.webp",
             "d-02.webp"
