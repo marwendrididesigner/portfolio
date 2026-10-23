@@ -132,20 +132,33 @@ for (const p of Object.values(portfolioData.projects)) {
           </div>
         </dialog>
 
-        <!-- Edit project details (text only: id, category, order and boards are untouched) -->
-        <dialog class="picker" data-ed aria-labelledby="ed-title">
+        <!-- Edit project: details + boards (id, category and project order are untouched) -->
+        <dialog class="picker picker--wide" data-ed aria-labelledby="ed-title">
           <div class="picker-head">
-            <h2 id="ed-title">Edit details</h2>
+            <h2 id="ed-title" data-ed-title>Edit project</h2>
             <button type="button" class="mini" data-ed-cancel aria-label="Cancel">✕</button>
           </div>
-          <form data-ed-form>
-            <label>Project name <input name="client" maxlength="80" /></label>
-            <label>Project title <input name="title" maxlength="120" /></label>
-            <label>Country <input name="country" maxlength="40" /></label>
-            <label>Services (separate with “ · ”) <input name="services" maxlength="160" /></label>
+          <form class="ed-form" data-ed-form>
+            <div class="bm-body">
+              <h3 class="bm-h">Project details</h3>
+              <div class="ed-grid">
+                <label>Project name <input name="client" maxlength="80" /></label>
+                <label>Project title <input name="title" maxlength="120" /></label>
+                <label>Country <input name="country" maxlength="40" /></label>
+                <label>Services (separate with “ · ”) <input name="services" maxlength="160" /></label>
+              </div>
+              <h3 class="bm-h" data-eb-count>Manage boards</h3>
+              <p class="hint">Display order on the website. Drag a board to move it, or use ↑ ↓. Replacing keeps the board’s position.</p>
+              <ol class="boards eb" data-eb aria-label="Boards of this project"></ol>
+              <h3 class="bm-h">Add new boards</h3>
+              <label class="files">JPG, PNG or WebP · max 25 MB each · added at the end
+                <input type="file" accept="image/jpeg,image/png,image/webp" multiple data-eb-add />
+              </label>
+              <input type="file" accept="image/jpeg,image/png,image/webp" data-eb-replace hidden />
+            </div>
             <p class="msg err" data-ed-msg role="status"></p>
             <div class="row bm-foot">
-              <button class="btn btn--primary" type="submit">Confirm changes</button>
+              <button class="btn btn--primary" type="submit">Save changes</button>
               <button class="btn btn--ghost" type="button" data-ed-cancel>Cancel</button>
             </div>
           </form>
@@ -175,7 +188,7 @@ for (const p of Object.values(portfolioData.projects)) {
       type Group = { id: string; title: string; chapter: string; chapters: string[]; items: Item[] };
       type Data = { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, Stored>; featured?: Group[] };
       const MAX_FEATURED = 4;
-      type Board = { blob: Blob; ext: 'webp' | 'jpg'; url: string; name: string };
+      type Board = { blob: Blob; ext: 'webp' | 'jpg'; url: string; name: string; hash: string }; // hash: of the chosen file, to catch duplicates
 
       const $ = <T extends Element>(s: string) => document.querySelector<T>(s)!;
       const thumbs: Record<string, string> = JSON.parse($('#thumbs').textContent || '{}');
@@ -194,7 +207,14 @@ for (const p of Object.values(portfolioData.projects)) {
       let token = '';
       let data: Data;
       let dataSha = '';          // blob sha of portfolio.json when loaded — publish refuses if it changed
-      let pending = new Map<string, Board[]>(); // new project id → its processed boards
+      // Board files are keyed "<folder>/<file name>". A board's file name is its permanent id: new and
+      // replacement boards always get a new, unused name, so nothing published is ever overwritten.
+      let uploads = new Map<string, Board>(); // files to upload on the next publish (new projects + board edits)
+      const previews = new Map<string, string>(); // local previews of files published from this page
+      const inRepo = new Set<string>();      // board files known to exist on GitHub
+      const toDelete = new Set<string>();    // removed/replaced files, deleted once the new site is live
+      const added = new Set<string>();       // new project ids (not published yet)
+      const boardsChanged = new Set<string>(); // existing projects whose boards were edited
       let dirty = false;
       let featuredChanged = false;
       let detailsChanged = false;
@@ -238,6 +258,18 @@ for (const p of Object.values(portfolioData.projects)) {
         data = JSON.parse(b64ToText(f.content));
         dataSha = f.sha;
         loadedOrder = order();
+        for (const p of Object.values(data.projects)) for (const b of p.boards) inRepo.add(`${p.folder}/${b}`);
+      }
+      const referenced = (d: Data) => new Set(Object.values(d.projects).flatMap((p) => p.boards.map((b) => `${p.folder}/${b}`)));
+      // File names in one repository folder (empty for a folder that does not exist yet)
+      async function listFolder(folder: string, ref: string) {
+        try {
+          const items: { name: string }[] = await gh(repo(`/contents/${ASSET_DIR}/${folder}?ref=${ref}`));
+          return new Set(items.map((x) => x.name));
+        } catch (e) {
+          if ((e as { status?: number }).status === 404) return new Set<string>();
+          throw e;
+        }
       }
 
       // ---- Sign in ----------------------------------------------------------------------------
@@ -294,11 +326,9 @@ for (const p of Object.values(portfolioData.projects)) {
 
       function thumbFor(id: string, board?: string) {
         const p = data.projects[id]!;
-        const i = Math.max(0, board ? p.boards.indexOf(board) : 0);
-        const b = pending.get(id);
-        if (b) return b[i]!.url;
-        const key = `${p.folder}/${p.boards[i]}`;
-        return thumbs[key] ?? `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${ASSET_DIR}/${key}`;
+        const key = `${p.folder}/${board ?? p.boards[0]}`;
+        return uploads.get(key)?.url ?? previews.get(key) ?? thumbs[key]
+          ?? `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${ASSET_DIR}/${key}`;
       }
 
       function render() {
@@ -306,14 +336,15 @@ for (const p of Object.values(portfolioData.projects)) {
         const ids = current().projects;
         list.replaceChildren(...ids.map((id, i) => {
           const p = data.projects[id]!;
-          const li = el('li', pending.has(id) ? 'item is-new' : 'item');
+          const li = el('li', added.has(id) ? 'item is-new' : 'item');
           const img = el('img') as HTMLImageElement;
           img.src = thumbFor(id); img.alt = ''; img.loading = 'lazy'; img.width = 96; img.height = 68;
           const text = el('div', 'txt');
           text.append(el('p', 'name', [p.client, p.title].filter(Boolean).join(' — ') || 'Untitled'));
-          text.append(el('p', 'sub', [p.country, `${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`, pending.has(id) ? 'new — not published yet' : ''].filter(Boolean).join(' · ')));
+          text.append(el('p', 'sub', [p.country, `${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`,
+            added.has(id) ? 'new — not published yet' : boardsChanged.has(id) ? 'boards changed — not published yet' : ''].filter(Boolean).join(' · ')));
           const acts = el('div', 'facts');
-          acts.append(button('Edit Details', 'link', `Edit the details of ${nameOf(id)}`, () => openDetails(id)));
+          acts.append(button('Edit Project', 'link', `Edit the details and boards of ${nameOf(id)}`, () => openDetails(id)));
           text.append(acts);
           const ctrls = el('div', 'ctrls');
           for (const [label, d] of [['↑', -1], ['↓', 1]] as const) {
@@ -551,34 +582,195 @@ for (const p of Object.values(portfolioData.projects)) {
       for (const x of document.querySelectorAll('[data-bm-cancel]')) x.addEventListener('click', () => { bmCancel(); bm.close(); });
       bm.addEventListener('close', bmCancel); // Esc
 
-      // Edit details: changes only the project's text fields in place, so the website (both languages)
-      // and any Selected Work reference to this id pick them up on the next publish.
+      // Edit project: the project's text fields and its boards, edited as a draft. "Save changes" applies
+      // the whole draft in place (same id, category and position), so the website (both languages) and
+      // any Selected Work reference to this id pick it up on the next publish; Cancel/Esc discards it.
       const ed = $<HTMLDialogElement>('[data-ed]');
       const edForm = $<HTMLFormElement>('[data-ed-form]');
       const edMsg = $<HTMLElement>('[data-ed-msg]');
       const FIELDS = ['client', 'title', 'country', 'services'] as const;
+      // A draft board: `file` is its name after saving, `orig` the existing board it is or replaces
+      // (null = new board), `img` a new image chosen in this dialog.
+      type Entry = { file: string; orig: string | null; img: Board | null };
       let edFor = '';
+      let entries: Entry[] = [];
+      let edStart = '';
+      const edState = () => JSON.stringify([FIELDS.map((f) => (edForm.elements.namedItem(f) as HTMLInputElement).value), entries.map((e) => e.file)]);
+      const edThumb = (e: Entry) => e.img?.url ?? thumbFor(edFor, e.file);
+      let seq = 0;
+      function newName(ext: string) {
+        const p = data.projects[edFor]!;
+        const taken = (n: string) => p.boards.includes(n) || entries.some((e) => e.file === n) || inRepo.has(`${p.folder}/${n}`) || toDelete.has(`${p.folder}/${n}`);
+        let n: string;
+        do n = `d-${Date.now().toString(36)}${(seq++).toString(36)}.${ext}`; while (taken(n));
+        return n;
+      }
+      // Same image chosen twice (in this draft, or already waiting to be uploaded for this project)
+      const isDuplicate = (b: Board) => entries.some((e) => (e.img ?? uploads.get(`${data.projects[edFor]!.folder}/${e.file}`))?.hash === b.hash);
+
       function openDetails(id: string) {
         edFor = id;
         const p = data.projects[id]!;
         for (const f of FIELDS) (edForm.elements.namedItem(f) as HTMLInputElement).value = p[f] ?? '';
+        entries = p.boards.map((f) => ({ file: f, orig: f, img: null }));
+        $<HTMLElement>('[data-ed-title]').textContent = `Edit project — ${nameOf(id)}`;
         edMsg.textContent = '';
+        renderEntries();
+        edStart = edState();
         ed.showModal();
       }
+
+      let dragFrom = -1;
+      function renderEntries() {
+        const ol = $<HTMLOListElement>('[data-eb]');
+        $<HTMLElement>('[data-eb-count]').textContent = `Manage boards (${entries.length})`;
+        ol.replaceChildren(...entries.map((e, i) => {
+          const li = el('li', 'board eb-item');
+          li.draggable = true;
+          li.addEventListener('dragstart', (ev) => { dragFrom = i; li.classList.add('is-dragging'); ev.dataTransfer!.effectAllowed = 'move'; ev.dataTransfer!.setData('text/plain', String(i)); });
+          li.addEventListener('dragend', () => { dragFrom = -1; li.classList.remove('is-dragging'); });
+          li.addEventListener('dragover', (ev) => { if (dragFrom < 0) return; ev.preventDefault(); li.classList.add('is-over'); });
+          li.addEventListener('dragleave', () => li.classList.remove('is-over'));
+          li.addEventListener('drop', (ev) => {
+            ev.preventDefault();
+            if (dragFrom < 0 || dragFrom === i) return;
+            const [x] = entries.splice(dragFrom, 1);
+            entries.splice(i, 0, x!);
+            dragFrom = -1;
+            renderEntries();
+          });
+          const img = el('img') as HTMLImageElement;
+          img.src = edThumb(e); img.alt = `Board ${i + 1}`; img.draggable = false;
+          const tag = e.orig === null ? 'New' : e.img ? 'Replaced' : '';
+          const ctrls = el('div', 'ctrls');
+          const mk = (label: string, cls: string, aria: string, fn: () => void, disabled = false) => {
+            const b = el('button', cls, label) as HTMLButtonElement;
+            b.type = 'button'; b.disabled = disabled; b.setAttribute('aria-label', aria);
+            b.addEventListener('click', fn);
+            ctrls.append(b);
+          };
+          const focusAt = (j: number, k: number) => (ol.children[j]?.querySelectorAll('button')[k] as HTMLElement | undefined)?.focus();
+          // swap locally: the draft only counts as a change once "Save changes" applies it
+          const swap = (j: number) => { [entries[i], entries[j]] = [entries[j]!, entries[i]!]; renderEntries(); focusAt(j, j < i ? 0 : 1); };
+          mk('↑', 'mini', `Move board ${i + 1} up`, () => swap(i - 1), i === 0);
+          mk('↓', 'mini', `Move board ${i + 1} down`, () => swap(i + 1), i === entries.length - 1);
+          const acts = el('div', 'facts');
+          const link = (label: string, cls: string, aria: string, fn: () => void) => {
+            const b = el('button', cls, label) as HTMLButtonElement;
+            b.type = 'button'; b.setAttribute('aria-label', aria);
+            b.addEventListener('click', fn);
+            acts.append(b);
+          };
+          link('Replace', 'link', `Replace board ${i + 1}`, () => { replaceAt = i; replaceInput.click(); });
+          if (e.img && e.orig) link('Undo', 'link', `Undo the replacement of board ${i + 1}`, () => {
+            URL.revokeObjectURL(e.img!.url);
+            entries[i] = { file: e.orig!, orig: e.orig, img: null };
+            renderEntries();
+          });
+          link('Remove', 'link link--danger', `Remove board ${i + 1}`, () => removeEntry(i));
+          li.append(el('span', 'num', String(i + 1)), img);
+          if (tag) li.append(el('span', 'eb-tag', tag));
+          li.append(el('div', 'eb-row'));
+          li.lastElementChild!.append(ctrls, acts);
+          return li;
+        }));
+      }
+
+      function removeEntry(i: number) {
+        const e = entries[i]!;
+        if (entries.length === 1) { edMsg.textContent = 'A project needs at least one board — use Replace instead.'; return; }
+        const inFeatured = e.orig !== null && (data.featured ?? []).some((g) => g.items.some((it) => it.project === edFor && it.boards.includes(e.orig!)));
+        if (!confirm(`Remove board ${i + 1}?${inFeatured ? '\n\nThis board is shown in Selected Work and will be removed there too.' : ''}\n\nNothing is published until you click Save & Publish.`)) return;
+        if (e.img) URL.revokeObjectURL(e.img.url);
+        entries.splice(i, 1);
+        edMsg.textContent = '';
+        renderEntries();
+      }
+
+      const replaceInput = $<HTMLInputElement>('[data-eb-replace]');
+      let replaceAt = -1;
+      replaceInput.addEventListener('change', async () => {
+        const file = replaceInput.files?.[0];
+        replaceInput.value = '';
+        const i = replaceAt;
+        if (!file || !entries[i]) return;
+        edMsg.textContent = 'Optimizing image…';
+        try {
+          const b = await processImage(file);
+          if (isDuplicate(b)) { URL.revokeObjectURL(b.url); throw new Error(`${file.name}: this image is already one of the project’s new boards.`); }
+          const old = entries[i]!;
+          if (old.img) URL.revokeObjectURL(old.img.url);
+          entries[i] = { file: newName(b.ext), orig: old.orig, img: b }; // same position, same Selected Work link
+          edMsg.textContent = '';
+        } catch (e) { edMsg.textContent = (e as Error).message; }
+        renderEntries();
+      });
+
+      const addInput = $<HTMLInputElement>('[data-eb-add]');
+      addInput.addEventListener('change', async () => {
+        const chosen = [...(addInput.files ?? [])];
+        addInput.value = '';
+        if (entries.length + chosen.length > MAX_BOARDS) { edMsg.textContent = `A project can have at most ${MAX_BOARDS} boards.`; return; }
+        edMsg.textContent = 'Optimizing images…';
+        const errors: string[] = [];
+        for (const f of chosen) {
+          try {
+            const b = await processImage(f);
+            if (isDuplicate(b)) { URL.revokeObjectURL(b.url); throw new Error(`${f.name}: already added.`); }
+            entries.push({ file: newName(b.ext), orig: null, img: b });
+          } catch (e) { errors.push((e as Error).message); }
+        }
+        edMsg.textContent = errors.join(' ');
+        renderEntries();
+      });
+
       edForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const p = data.projects[edFor];
         if (!p) return;
         const v = Object.fromEntries(FIELDS.map((f) => [f, (edForm.elements.namedItem(f) as HTMLInputElement).value.trim() || null]));
         if (!v.client && !v.title) { edMsg.textContent = 'Enter a project name or a project title.'; return; }
+        if (!entries.length) { edMsg.textContent = 'A project needs at least one board.'; return; }
         if (FIELDS.some((f) => p[f] !== v[f])) {
           for (const f of FIELDS) p[f] = v[f] ?? null;
           detailsChanged = true; dirty = true;
         }
+        const next = entries.map((x) => x.file);
+        if (next.join() !== p.boards.join()) {
+          // Boards no longer used: drop not-yet-uploaded files; published ones are deleted after the next deploy
+          for (const f of p.boards.filter((b) => !next.includes(b))) {
+            const key = `${p.folder}/${f}`;
+            const u = uploads.get(key);
+            if (u) { URL.revokeObjectURL(u.url); uploads.delete(key); }
+            if (inRepo.has(key)) toDelete.add(key);
+          }
+          for (const x of entries) if (x.img) uploads.set(`${p.folder}/${x.file}`, x.img);
+          // Selected Work: a replaced board keeps its place there; a removed one is dropped, and if no
+          // selected board is left the project's first board is shown instead.
+          const swap = new Map(entries.filter((x) => x.img && x.orig).map((x) => [x.orig!, x.file]));
+          for (const g of data.featured ?? []) for (const it of g.items) {
+            if (it.project !== edFor) continue;
+            let sel = [...new Set(it.boards.map((b) => swap.get(b) ?? b).filter((b) => next.includes(b)))];
+            if (!sel.length) sel = [next[0]!];
+            if (sel.join() !== it.boards.join()) { it.boards = sel; featuredChanged = true; }
+          }
+          p.boards = next;
+          if (!added.has(edFor)) boardsChanged.add(edFor);
+          dirty = true;
+        }
+        entries = [];
         ed.close();
         render();
       });
-      for (const x of document.querySelectorAll('[data-ed-cancel]')) x.addEventListener('click', () => ed.close());
+      // Discard the draft (Cancel, ✕ or Esc); ask first when it has changes
+      const edDiscard = () => {
+        if (entries.length && edState() !== edStart && !confirm('Discard your changes to this project?')) return false;
+        for (const x of entries) if (x.img) URL.revokeObjectURL(x.img.url);
+        entries = [];
+        return true;
+      };
+      for (const x of document.querySelectorAll('[data-ed-cancel]')) x.addEventListener('click', () => { if (edDiscard()) ed.close(); });
+      ed.addEventListener('cancel', (e) => { if (!edDiscard()) e.preventDefault(); });
 
       // Checked again right before publishing (also protects against a hand-edited file)
       function validateFeatured() {
@@ -644,7 +836,8 @@ for (const p of Object.values(portfolioData.projects)) {
         let ext: 'webp' | 'jpg' = 'webp';
         if (!blob || blob.type !== 'image/webp') { blob = await encode('image/jpeg', 0.88); ext = 'jpg'; }
         if (!blob) throw new Error(`${file.name}: could not be processed.`);
-        return { blob, ext, url: URL.createObjectURL(blob), name: file.name };
+        const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', await file.arrayBuffer()))].map((x) => x.toString(16).padStart(2, '0')).join('');
+        return { blob, ext, url: URL.createObjectURL(blob), name: file.name, hash };
       }
 
       const filesInput = $<HTMLInputElement>('[data-files]');
@@ -655,7 +848,11 @@ for (const p of Object.values(portfolioData.projects)) {
         addMsg.textContent = 'Optimizing images…';
         const errors: string[] = [];
         for (const f of chosen) {
-          try { draft.push(await processImage(f)); } catch (e) { errors.push((e as Error).message); }
+          try {
+            const b = await processImage(f);
+            if (draft.some((x) => x.hash === b.hash)) { URL.revokeObjectURL(b.url); throw new Error(`${f.name}: already added.`); }
+            draft.push(b);
+          } catch (e) { errors.push((e as Error).message); }
         }
         addMsg.textContent = errors.join(' ');
         renderDraft();
@@ -701,7 +898,8 @@ for (const p of Object.values(portfolioData.projects)) {
         const boards = draft.map((b, i) => `d-${String(i + 1).padStart(2, '0')}.${b.ext}`);
         data.projects[id] = { client: name, title: null, country: country || null, services: null, folder: id, boards };
         data.chapters.find((c) => c.id === chapter)!.projects.push(id); // added at the end; move it with ↑/↓
-        pending.set(id, draft);
+        draft.forEach((b, i) => uploads.set(`${id}/${boards[i]}`, b));
+        added.add(id);
         draft = [];
         dirty = true;
         addForm.reset(); addForm.hidden = true; addMsg.textContent = ''; renderDraft();
@@ -721,14 +919,24 @@ for (const p of Object.values(portfolioData.projects)) {
           const live = await gh(repo(`/contents/${DATA_PATH}?ref=${head}`));
           if (live.sha !== dataSha) throw new Error('The portfolio was changed on GitHub since this page loaded. Reload the page and redo your changes — nothing was published.');
 
+          // Every board of a new or edited project must either exist on GitHub or be uploaded now, and an
+          // upload must never land on an existing file.
+          const used = referenced(data);
+          const queue = [...uploads].filter(([key]) => used.has(key));
+          const folders = new Set([...queue.map(([key]) => key.split('/')[0]!), ...[...boardsChanged].map((id) => data.projects[id]!.folder)]);
+          for (const folder of folders) {
+            const present = await listFolder(folder, head);
+            for (const [key] of queue) if (key.startsWith(`${folder}/`) && present.has(key.slice(folder.length + 1)))
+              throw new Error(`${key} already exists on GitHub and would be overwritten`);
+            for (const key of used) if (key.startsWith(`${folder}/`) && !uploads.has(key) && !present.has(key.slice(folder.length + 1)))
+              throw new Error(`the image ${key} is missing on GitHub`);
+          }
+
           const tree: { path: string; mode: string; type: string; sha: string }[] = [];
-          for (const [id, boards] of pending) {
-            const p = data.projects[id]!;
-            for (let i = 0; i < boards.length; i++) {
-              status(`Uploading ${p.client} — board ${i + 1} of ${boards.length}…`);
-              const blob = await gh(repo('/git/blobs'), { method: 'POST', body: JSON.stringify({ content: await blobToB64(boards[i]!.blob), encoding: 'base64' }) });
-              tree.push({ path: `${ASSET_DIR}/${p.folder}/${p.boards[i]}`, mode: '100644', type: 'blob', sha: blob.sha });
-            }
+          for (const [n, [key, b]] of queue.entries()) {
+            status(`Uploading image ${n + 1} of ${queue.length}…`);
+            const blob = await gh(repo('/git/blobs'), { method: 'POST', body: JSON.stringify({ content: await blobToB64(b.blob), encoding: 'base64' }) });
+            tree.push({ path: `${ASSET_DIR}/${key}`, mode: '100644', type: 'blob', sha: blob.sha });
           }
           const json = JSON.stringify(data, null, 2) + '\n';
           const jsonBlob = await gh(repo('/git/blobs'), { method: 'POST', body: JSON.stringify({ content: json, encoding: 'utf-8' }) });
@@ -736,15 +944,18 @@ for (const p of Object.values(portfolioData.projects)) {
 
           const base = await gh(repo(`/git/commits/${head}`));
           const newTree = await gh(repo('/git/trees'), { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
-          const added = [...pending.keys()].map((id) => data.projects[id]!.client);
+          const names = (ids: Iterable<string>) => [...ids].map((id) => data.projects[id]!.client ?? data.projects[id]!.title).join(', ');
           const reordered = order() !== loadedOrder;
-          const message = added.length ? `Portfolio manager: add ${added.join(', ')}`
-            : `Portfolio manager: ${[reordered && 'reorder projects', detailsChanged && 'edit project details', featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'reorder projects'}`;
+          const message = added.size ? `Portfolio manager: add ${names(added)}`
+            : `Portfolio manager: ${[reordered && 'reorder projects', detailsChanged && 'edit project details', boardsChanged.size && `update boards of ${names(boardsChanged)}`, featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'reorder projects'}`;
           const commit = await gh(repo('/git/commits'), { method: 'POST', body: JSON.stringify({ message, tree: newTree.sha, parents: [head] }) });
           await gh(repo(`/git/refs/heads/${BRANCH}`), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
 
           dataSha = jsonBlob.sha;
-          pending = new Map();
+          for (const [key, b] of queue) { inRepo.add(key); previews.set(key, b.url); }
+          uploads = new Map();
+          added.clear();
+          boardsChanged.clear();
           dirty = false;
           featuredChanged = false;
           detailsChanged = false;
@@ -777,6 +988,7 @@ for (const p of Object.values(portfolioData.projects)) {
             const html = await (await fetch(`${home.href}?build=${Date.now()}`, { cache: 'no-store' })).text();
             if (html.includes(`name="build" content="${sha}"`)) {
               status('Live deployment complete ✓ — the website now shows your changes.', 'ok');
+              await cleanup();
               return;
             }
           } catch {}
@@ -784,6 +996,32 @@ for (const p of Object.values(portfolioData.projects)) {
           status(`Saved to GitHub ✓ — the website is rebuilding${min ? ` (${min} min)` : ''}…`, 'ok');
         }
         if (!dirty && !busy) status(`Saved to GitHub ✓, but the website has not updated after 10 minutes. Check the Actions tab on GitHub (github.com/${OWNER}/${REPO}/actions).`, 'err');
+      }
+
+      // Removed and replaced board images stay on GitHub until the site without them is live. Then they
+      // are deleted in a separate commit — only files that still exist and that the current
+      // portfolio.json on GitHub no longer references. "[skip ci]": the website itself does not change.
+      // If this fails or the page is closed first, the files simply stay (unused) in the repository.
+      async function cleanup() {
+        if (!toDelete.size || dirty || busy) return;
+        const paths = [...toDelete];
+        try {
+          const head: string = (await gh(repo(`/git/ref/heads/${BRANCH}`))).object.sha;
+          const used = referenced(JSON.parse(b64ToText((await gh(repo(`/contents/${DATA_PATH}?ref=${head}`))).content)));
+          const gone: string[] = [];
+          for (const folder of new Set(paths.map((k) => k.split('/')[0]!))) {
+            const present = await listFolder(folder, head);
+            for (const k of paths) if (k.startsWith(`${folder}/`) && present.has(k.slice(folder.length + 1)) && !used.has(k)) gone.push(k);
+          }
+          if (gone.length) {
+            const base = await gh(repo(`/git/commits/${head}`));
+            const tree = await gh(repo('/git/trees'), { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree: gone.map((k) => ({ path: `${ASSET_DIR}/${k}`, mode: '100644', type: 'blob', sha: null })) }) });
+            const commit = await gh(repo('/git/commits'), { method: 'POST', body: JSON.stringify({ message: `Portfolio manager: delete ${gone.length} unused board image${gone.length > 1 ? 's' : ''} [skip ci]`, tree: tree.sha, parents: [head] }) });
+            await gh(repo(`/git/refs/heads/${BRANCH}`), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
+          }
+          for (const k of paths) { toDelete.delete(k); if (!used.has(k)) inRepo.delete(k); }
+          if (gone.length && !dirty && !busy) status(`Live deployment complete ✓ — the website now shows your changes. ${gone.length} unused board image${gone.length > 1 ? 's were' : ' was'} deleted from GitHub.`, 'ok');
+        } catch {} // kept for the next publish to retry
       }
 
       // ---- Start --------------------------------------------------------------------------------
@@ -907,13 +1145,28 @@ for (const p of Object.values(portfolioData.projects)) {
       .board .num { position: absolute; top: 6px; left: 8px; color: var(--ink); background: var(--blue); padding: 0 6px; }
       .board .mini { width: 34px; height: 34px; }
 
+      .ed-form { display: flex; flex-direction: column; gap: 12px; margin-top: 0; min-height: 0; flex: 1 1 auto; }
+      .ed-form .bm-h:first-child { margin-top: 0; }
+      .ed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .eb { margin-bottom: 4px; }
+      .eb-item { padding: 4px; border: 2px solid transparent; cursor: grab; }
+      .eb-item.is-over { border-color: var(--blue); }
+      .eb-item.is-dragging { opacity: 0.4; }
+      .eb-item .num { top: 10px; left: 12px; }
+      .eb-tag {
+        position: absolute; top: 10px; right: 10px; padding: 0 6px; background: var(--lime); color: var(--ink);
+        font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      }
+      .eb-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+      .eb-row .facts { margin-top: 0; gap: 4px 12px; }
+
       .publish {
         position: fixed; inset: auto 0 0; display: flex; align-items: center; justify-content: flex-end; gap: 20px;
         padding: 14px var(--gutter); background: var(--ink); border-top: 1px solid var(--rule-dark);
       }
       .publish .msg { margin-right: auto; }
       @media (max-width: 640px) {
-        .add .grid { grid-template-columns: 1fr; }
+        .add .grid, .ed-grid { grid-template-columns: 1fr; }
         .item { grid-template-columns: 1.6rem 72px minmax(0, 1fr); }
         .item img { width: 72px; height: 51px; }
         .item .ctrls { grid-column: 2 / -1; }

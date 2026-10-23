@@ -52,10 +52,13 @@ function project(id: string, chapter: string): PortfolioProject {
   const boards = p.boards.map((f, i) => {
     const file = files[`../assets/portfolio/${p.folder}/${f}`];
     if (!file) throw new Error(`portfolio.json: missing board ${p.folder}/${f}`);
+    // Written alt texts belong to the original boards d-01, d-02… (by file name, not position, so they
+    // follow a board when the admin reorders; boards added or replaced from the admin get other names).
+    const k = Number(/^d-(\d{2})\.(?:webp|jpg)$/.exec(f)?.[1] ?? 0) - 1;
     return {
       src: file.default,
-      alt: given[i] ?? `${name} — ${p.services ?? 'project'} presentation ${n > 1 ? `${i + 1} of ${n}` : ''}`.trim(),
-      altFr: givenFr[i] ?? `${[p.client, p.title].filter(Boolean).map((x) => projectText('fr', x!)).join(' — ') || 'Projet'} — planche de présentation${p.services ? ` (${frServices('fr', p.services)})` : ''}${n > 1 ? ` ${i + 1} sur ${n}` : ''}`,
+      alt: given[k] ?? `${name} — ${p.services ?? 'project'} presentation ${n > 1 ? `${i + 1} of ${n}` : ''}`.trim(),
+      altFr: givenFr[k] ?? `${[p.client, p.title].filter(Boolean).map((x) => projectText('fr', x!)).join(' — ') || 'Projet'} — planche de présentation${p.services ? ` (${frServices('fr', p.services)})` : ''}${n > 1 ? ` ${i + 1} sur ${n}` : ''}`,
     };
   });
   return {
