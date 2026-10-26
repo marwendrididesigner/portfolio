@@ -1434,7 +1434,8 @@
           "ratio": "9:16",
           "thumb": "v-mvpd3qag0.webp"
         }
-      ]
+      ],
+      "hidden": true
     },
     "motion-video-editing-project-02": {
       "client": "Video Editing — Project 02",
@@ -1451,7 +1452,8 @@
           "ratio": "9:16",
           "thumb": "v-mvpd3qag1.webp"
         }
-      ]
+      ],
+      "hidden": true
     }
   },
   "featured": [
