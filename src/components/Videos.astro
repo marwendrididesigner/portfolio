@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import type { Video } from '../data/portfolio';
+import { langOf, ui } from '../i18n/ui';
+
+// A project's Google Drive videos (Work and Selected Work). Each one is a thumbnail button with a play
+// icon; nothing from Google is loaded until it is clicked — the shared viewer (Work.astro) then embeds
+// Drive's player in the video's own proportions and removes it again on close or step.
+// Thumbnails keep their own proportions (never cropped); a video without one shows a placeholder in the
+// video's ratio. Grid: 12 columns from 760 px — landscape two per row, square / 4:5 three, vertical four;
+// on phones landscape and square take the full width, 4:5 and vertical two per row.
+interface Props {
+  videos: Video[];
+  name: string;     // project name, shown in the viewer bar
+  offset: number;   // the project's boards come first in the viewer count
+  total: number;
+  set?: string;     // Selected Work: the viewer walks only this project's selection
+}
+const { videos, name, offset, total, set } = Astro.props;
+const lang = langOf(Astro.url);
+const t = ui[lang].work;
+
+const SIZES: Record<string, string> = {
+  '16:9': '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw',
+  '1:1': '(min-width: 1440px) 427px, (min-width: 760px) 30vw, 91vw',
+  '4:5': '(min-width: 1440px) 427px, (min-width: 760px) 30vw, 45vw',
+  '9:16': '(min-width: 1440px) 316px, (min-width: 760px) 22vw, 45vw',
+};
+---
+<div class="videos">
+  {videos.map((v, i) => (
+    <figure class="video" data-ratio={v.ratio}>
+      <button type="button" class="vcard"
+        data-viewer data-viewer-set={set} data-video={v.embed} data-link={v.link} data-ratio={v.ratio}
+        data-project={name} data-pos={`${v.title ? `${v.title} · ` : ''}${offset + i + 1} / ${total}`}>
+        {v.thumb
+          ? <Image src={v.thumb.src} alt={lang === 'fr' ? v.thumb.altFr : v.thumb.alt} widths={[320, 480, 640, 960, 1400]}
+              sizes={SIZES[v.ratio]} format="webp" quality={80} loading="lazy" decoding="async" />
+          : <span class="ph" style={`aspect-ratio: ${v.ratio.replace(':', ' / ')}`} aria-hidden="true"></span>}
+        <span class="play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5.5v13a.6.6 0 0 0 .9.5l10.2-6.5a.6.6 0 0 0 0-1L8.9 5a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg>
+        </span>
+        <span class="visually-hidden">{t.play}{v.title ? `: ${v.title}` : ` ${offset + i + 1} — ${name}`}</span>
+      </button>
+      {v.title && <figcaption class="vcap">{v.title}</figcaption>}
+    </figure>
+  ))}
+</div>
+
+<style>
+  .videos { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; align-items: start; }
+  :global(.boards) + .videos { margin-top: 16px; }
+  .video { margin: 0; grid-column: span 12; min-width: 0; }
+  .video[data-ratio='4:5'], .video[data-ratio='9:16'] { grid-column: span 6; }
+  @media (min-width: 760px) {
+    .video[data-ratio='16:9'] { grid-column: span 6; }
+    .video[data-ratio='1:1'], .video[data-ratio='4:5'] { grid-column: span 4; }
+    .video[data-ratio='9:16'] { grid-column: span 3; }
+  }
+
+  .vcard {
+    position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--ink);
+    cursor: pointer; overflow: hidden; transition: box-shadow 0.25s var(--ease);
+  }
+  .vcard :global(img) { display: block; width: 100%; height: auto; box-shadow: inset 0 0 0 1px var(--rule-light); }
+  .vcard:hover { box-shadow: 0 10px 28px -12px rgb(0 0 4 / 0.28); }
+  .vcard:focus-visible { outline-offset: 2px; }
+  /* No thumbnail: the video's frame in brand navy, with the play button */
+  .ph { display: block; width: 100%; background: radial-gradient(120% 90% at 30% 20%, var(--glow) 0%, var(--ink-2) 55%, var(--ink) 100%); }
+  .play {
+    position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+    display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%;
+    background: rgb(0 0 4 / 0.72); color: var(--cream); box-shadow: 0 0 0 1px rgb(255 245 234 / 0.35);
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease), scale 0.2s var(--ease);
+  }
+  .play svg { margin-left: 3px; }
+  .vcard:hover .play, .vcard:focus-visible .play { background: var(--blue); color: var(--ink); scale: 1.06; }
+  .vcap { margin-top: 8px; font-size: 0.8125rem; line-height: 1.4; color: var(--label); }
+  @media (max-width: 759px) { .play { width: 48px; height: 48px; } }
+</style>

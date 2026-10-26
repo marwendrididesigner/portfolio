@@ -133,6 +133,11 @@
       ]
     },
     {
+      "id": "motion",
+      "title": "Motion Design & Video Editing",
+      "projects": []
+    },
+    {
       "id": "ai",
       "title": "AI-Powered Visual Design",
       "projects": [
@@ -1563,6 +1568,15 @@
           ]
         }
       ]
+    },
+    {
+      "id": "motion",
+      "title": "Motion Design & Video Editing",
+      "chapter": "motion",
+      "chapters": [
+        "motion"
+      ],
+      "items": []
     },
     {
       "id": "ai",

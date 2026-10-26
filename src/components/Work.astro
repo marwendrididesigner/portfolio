@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Videos from './Videos.astro';
 import { chapters, rowsOf } from '../data/portfolio';
 import { chapterTitle, country, deliverables, langOf, services, projectText, ui } from '../i18n/ui';
 
@@ -13,6 +14,7 @@ const t = ui[lang].work;
 // Exception: two CONSECUTIVE single-board projects in the same chapter share a row (side by side
 // from 760 px, stacked on phones); a single-board project without such a neighbour stays alone.
 // Every board is also a button that opens the viewer, which walks the whole portfolio in this order.
+// Google Drive videos (Videos.astro) follow a project's boards and open in the same viewer.
 
 // `sizes` can't use CSS variables: the gutter is ~4.5vw, the board gap 16px.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
@@ -38,7 +40,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
           {row.map((p) => {
             const client = projectText(lang, p.client), title = p.title && projectText(lang, p.title);
             const name = [client, title].filter(Boolean).join(' — ');
-            const n = p.boards.length;
+            const n = p.boards.length + p.videos.length;
             return (
               <article class="project" id={p.id} aria-labelledby={`title-${p.id}`}>
                 <header class="project-head">
@@ -47,7 +49,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
                     <p class="meta">{[p.country && country(lang, p.country), p.services && services(lang, p.services)].filter(Boolean).join(' · ')}</p>
                   )}
                 </header>
-                <div class="boards">
+                {p.boards.length > 0 && <div class="boards">
                   {p.boards.map((v, i) => {
                     return (
                       <button type="button" class="board"
@@ -62,7 +64,8 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
                       </button>
                     );
                   })}
-                </div>
+                </div>}
+                {p.videos.length > 0 && <Videos videos={p.videos} name={name} offset={p.boards.length} total={n} />}
               </article>
             );
           })}
@@ -82,6 +85,11 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
     </div>
     <div class="v-stage" data-v-stage>
       <img class="v-img" data-v-img alt="" decoding="async" />
+      <!-- Videos: Drive's player is created on open/step and removed on close/step (stops playback) -->
+      <div class="v-video" data-v-video hidden>
+        <div class="v-frame" data-v-frame></div>
+        <p class="v-fallback">{t.driveFallback} <a data-v-link target="_blank" rel="noopener noreferrer">{t.driveOpen}<span class="visually-hidden">{t.newTab}</span> <span aria-hidden="true">↗</span></a></p>
+      </div>
     </div>
     <button type="button" class="v-btn v-nav v-prev" data-v-prev aria-label={t.prev}>
       <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M15.4 4.6 8 12l7.4 7.4-1.4 1.4L5.2 12l8.8-8.8 1.4 1.4Z" fill="currentColor"/></svg>
@@ -101,6 +109,10 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
   const setOf = (t: HTMLButtonElement) => t.dataset.viewerSet ? triggers.filter((o) => o.dataset.viewerSet === t.dataset.viewerSet) : portfolio;
   if (dialog && triggers.length) {
     const img = dialog.querySelector<HTMLImageElement>('[data-v-img]')!;
+    const stage = dialog.querySelector<HTMLElement>('[data-v-stage]')!;
+    const video = dialog.querySelector<HTMLElement>('[data-v-video]')!;
+    const frame = dialog.querySelector<HTMLElement>('[data-v-frame]')!;
+    const link = dialog.querySelector<HTMLAnchorElement>('[data-v-link]')!;
     const title = dialog.querySelector<HTMLElement>('[data-v-title]')!;
     const pos = dialog.querySelector<HTMLElement>('[data-v-pos]')!;
     let index = 0;
@@ -121,9 +133,41 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
       const max = Math.max(0, ...[...set.matchAll(/\s(\d+)w/g)].map((m) => Number(m[1])));
       return full && w > max ? `${set}, ${full} ${w}w` : set;
     };
+    // Largest box of the video's ratio that fits the stage (minus the fallback line)
+    let ratio = 16 / 9;
+    const fit = () => {
+      const cs = getComputedStyle(stage);
+      const w = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      const h = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 44;
+      const fw = Math.max(160, Math.min(w, h * ratio));
+      frame.style.width = `${Math.round(fw)}px`;
+      frame.style.height = `${Math.round(fw / ratio)}px`;
+    };
+    const stopVideo = () => { frame.replaceChildren(); video.hidden = true; };
+    const showVideo = (t: HTMLButtonElement) => {
+      img.hidden = true;
+      img.removeAttribute('src'); img.removeAttribute('srcset');
+      const [w, h] = (t.dataset.ratio ?? '16:9').split(':').map(Number);
+      ratio = w! / h!;
+      const f = document.createElement('iframe');
+      f.src = t.dataset.video!;
+      f.title = `${t.dataset.project ?? ''} — ${t.dataset.pos ?? ''}`;
+      f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+      f.allowFullscreen = true;
+      frame.replaceChildren(f);
+      link.href = t.dataset.link ?? t.dataset.video!;
+      video.hidden = false;
+      fit();
+    };
+    addEventListener('resize', () => { if (!video.hidden) fit(); });
     const show = (i: number) => {
       index = (i + list.length) % list.length;
       const t = list[index]!;
+      title.textContent = t.dataset.project ?? '';
+      pos.textContent = t.dataset.pos ?? '';
+      stopVideo();
+      if (t.dataset.video) { showVideo(t); return; }
+      img.hidden = false;
       const src = t.querySelector('img')!;
       const w = Number(src.getAttribute('width')) || 4, h = Number(src.getAttribute('height')) || 3;
       img.classList.remove('is-loaded');
@@ -133,8 +177,6 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
       img.srcset = srcsetFor(src);
       img.src = src.getAttribute('src') ?? '';
       img.alt = src.alt;
-      title.textContent = t.dataset.project ?? '';
-      pos.textContent = t.dataset.pos ?? '';
     };
     const step = (d: number) => show(index + d);
     // Each image fades in once decoded (also on error, so the stage never stays blank)
@@ -146,7 +188,9 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
     img.addEventListener('load', () => {
       if (saveData || list.length < 2) return;
       for (const d of [1, -1]) {
-        const src = list[(index + d + list.length) % list.length]!.querySelector('img')!;
+        const next = list[(index + d + list.length) % list.length]!;
+        if (next.dataset.video) continue; // players are never loaded ahead
+        const src = next.querySelector('img')!;
         const pre = new Image();
         pre.sizes = sizesFor(src);
         pre.srcset = srcsetFor(src);
@@ -161,16 +205,18 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
       show(list.indexOf(t));
       document.documentElement.classList.add('viewer-open');
       dialog.showModal();
+      if (!video.hidden) fit(); // the stage only has its size once the dialog is open
     }));
     dialog.addEventListener('close', () => {
+      stopVideo();
       document.documentElement.classList.remove('viewer-open');
       opener?.focus();
     });
     dialog.querySelector('[data-v-close]')!.addEventListener('click', () => dialog.close());
     dialog.querySelector('[data-v-prev]')!.addEventListener('click', () => step(-1));
     dialog.querySelector('[data-v-next]')!.addEventListener('click', () => step(1));
-    // Clicking the dimmed area around the image closes the viewer
-    dialog.querySelector('[data-v-stage]')!.addEventListener('click', (e) => { if (e.target !== img) dialog.close(); });
+    // Clicking the dimmed area around the image or video closes the viewer
+    stage.addEventListener('click', (e) => { if (e.target === stage || e.target === video) dialog.close(); });
     dialog.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
@@ -274,6 +320,12 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
     transition: opacity 0.2s ease-out;
   }
   .v-img:not(.is-loaded) { opacity: 0; }
+  .v-img[hidden], .v-video[hidden] { display: none; }
+  .v-video { display: grid; justify-items: center; gap: 10px; }
+  .v-frame { background: #000; box-shadow: 0 20px 60px rgb(0 0 0 / 0.5); }
+  .v-frame :global(iframe) { display: block; width: 100%; height: 100%; border: 0; }
+  .v-fallback { min-height: 34px; font-size: 0.8125rem; color: var(--cream-dim); text-align: center; }
+  .v-fallback a { color: var(--blue); font-weight: 800; }
   .v-btn {
     display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
     border: 1px solid var(--rule-dark); border-radius: 50%; background: rgb(0 0 4 / 0.6); color: var(--cream);

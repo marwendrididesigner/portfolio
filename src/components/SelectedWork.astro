@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Videos from './Videos.astro';
 import { chapters, featured, rowsOf } from '../data/portfolio';
 import { chapterTitle, country, groupTitle, langOf, services, projectText, ui } from '../i18n/ui';
 
@@ -17,15 +18,16 @@ const w = ui[lang].work;
 
 // Same widths/format/quality as Work.astro, so the build reuses the exact same image files.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
-// Packaging is only named once it has featured work (empty groups are not rendered)
+// Packaging and motion are only named once they have featured work (empty groups are not rendered)
 const packaging = featured.some((g) => g.chapter.id === 'packaging');
+const motion = featured.some((g) => g.chapter.id === 'motion');
 ---
 {featured.length > 0 && (
 <section class="selected" id="selected-work" aria-labelledby="selected-title">
   <div class="container">
     <header class="sel-intro">
       <h2 id="selected-title" class="sel-title">{t.title}</h2>
-      <p class="sel-lede">{t.lede(packaging)}</p>
+      <p class="sel-lede">{t.lede(packaging, motion)}</p>
     </header>
 
     {featured.map((g) => (
@@ -41,7 +43,7 @@ const packaging = featured.some((g) => g.chapter.id === 'packaging');
               {row.map((p) => {
                 const client = projectText(lang, p.client), title = p.title && projectText(lang, p.title);
             const name = [client, title].filter(Boolean).join(' — ');
-                const n = p.boards.length;
+                const n = p.boards.length + p.videos.length;
                 const meta = [p.country && country(lang, p.country), p.services ? services(lang, p.services) : chapterTitle(lang, p.chapter, chapters.find((c) => c.id === p.chapter)!.title)].filter(Boolean).join(' · '); // the project's own section
                 return (
                   <article class="project" aria-labelledby={`sel-title-${g.id}-${p.id}`}>
@@ -49,7 +51,7 @@ const packaging = featured.some((g) => g.chapter.id === 'packaging');
                       <h4 id={`sel-title-${g.id}-${p.id}`} class="client">{client}{title && <span class="ptitle"> — {title}</span>}</h4>
                       <p class="meta">{meta}</p>
                     </header>
-                    <div class="boards">
+                    {p.boards.length > 0 && <div class="boards">
                       {p.boards.map((v, i) => (
                         <button type="button" class="board"
                           data-viewer data-viewer-set={`${g.id}/${p.id}`} data-project={name} data-pos={`${i + 1} / ${n}`}>
@@ -61,7 +63,8 @@ const packaging = featured.some((g) => g.chapter.id === 'packaging');
                           <span class="visually-hidden">{w.open}</span>
                         </button>
                       ))}
-                    </div>
+                    </div>}
+                    {p.videos.length > 0 && <Videos videos={p.videos} name={name} offset={p.boards.length} total={n} set={`${g.id}/${p.id}`} />}
                   </article>
                 );
               })}

@@ -12,14 +12,16 @@ import type { ImageMetadata } from 'astro';
 import { portfolioData } from '../data/portfolio';
 import { alts } from '../data/portfolio-alts';
 
-// Build-time thumbnails of every board (lists show the first one, the Selected Work board manager all of
-// them). Projects added since the last deploy fall back to the repository file, and so do hidden
-// projects, so the built site carries no images of them.
-const files = import.meta.glob<{ default: ImageMetadata }>('../assets/portfolio/*/d-*.{webp,jpg}', { eager: true });
+// Build-time thumbnails of every board and video thumbnail (lists show the first one, the Selected Work
+// manager all of them). Projects added since the last deploy fall back to the repository file, and so do
+// hidden projects, so the built site carries no images of them.
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/portfolio/*/{d,v}-*.{webp,jpg}', { eager: true });
 const thumbs: Record<string, string> = {};
-for (const p of Object.values(portfolioData.projects)) {
+const covers = new Map<string, string[]>(); // project id → its Selected-Work-only video thumbnails
+for (const g of portfolioData.featured ?? []) for (const it of g.items) covers.set(it.project, [...(covers.get(it.project) ?? []), ...Object.values(it.covers ?? {})]);
+for (const [id, p] of Object.entries(portfolioData.projects)) {
   if (p.hidden) continue;
-  for (const b of p.boards) {
+  for (const b of [...p.boards, ...(p.videos ?? []).flatMap((v) => (v.thumb ? [v.thumb] : [])), ...(covers.get(id) ?? [])]) {
     const key = `${p.folder}/${b}`;
     const file = files[`../assets/portfolio/${key}`];
     if (file) thumbs[key] = (await getImage({ src: file.default, width: 240, format: 'webp', quality: 70 })).src;
@@ -89,10 +91,13 @@ for (const p of Object.values(portfolioData.projects)) {
             <label>Category <select name="chapter" data-add-chapter></select></label>
             <label>Country <input name="country" maxlength="40" /></label>
           </div>
-          <label class="files">Presentation boards (JPG, PNG or WebP · max 25 MB each · in display order)
+          <label class="files">Presentation boards (JPG, PNG or WebP · max 25 MB each · in display order · optional for video projects)
             <input type="file" accept="image/jpeg,image/png,image/webp" multiple data-files />
           </label>
           <ol class="boards" data-boards aria-label="Boards of the new project"></ol>
+          <h3 class="bm-h">Videos (Google Drive)</h3>
+          <p class="hint">For Motion Design &amp; Video Editing. Paste each video’s Google Drive link (sharing: “Anyone with the link · Viewer”). Videos are never uploaded to GitHub — only the link and an optimized thumbnail.</p>
+          <div data-add-videos></div>
           <p class="msg" data-add-msg role="status"></p>
           <div class="row">
             <button class="btn btn--primary" type="submit">Add to category</button>
@@ -121,15 +126,25 @@ for (const p of Object.values(portfolioData.projects)) {
         <!-- Featured boards manager -->
         <dialog class="picker picker--wide" data-bm aria-labelledby="bm-title">
           <div class="picker-head">
-            <h2 id="bm-title" data-bm-title>Featured boards</h2>
+            <h2 id="bm-title" data-bm-title>Featured media</h2>
             <button type="button" class="mini" data-bm-cancel aria-label="Cancel">✕</button>
           </div>
           <div class="bm-body">
-            <p class="hint">Tick the boards to show in Selected Work, then set their order below. The full portfolio keeps showing every board.</p>
-            <h3 class="bm-h">All boards</h3>
-            <ol class="covers" data-bm-all></ol>
-            <h3 class="bm-h" data-bm-count>Selected boards</h3>
-            <ol class="list" data-bm-sel></ol>
+            <p class="hint">Tick the boards and videos to show in Selected Work, then set their order below. The full portfolio keeps showing everything.</p>
+            <div data-bm-boards>
+              <h3 class="bm-h">All boards</h3>
+              <ol class="covers" data-bm-all></ol>
+              <h3 class="bm-h" data-bm-count>Selected boards</h3>
+              <ol class="list" data-bm-sel></ol>
+            </div>
+            <div data-bmv>
+              <h3 class="bm-h">All videos</h3>
+              <ol class="covers" data-bmv-all></ol>
+              <h3 class="bm-h" data-bmv-count>Selected videos</h3>
+              <p class="hint">A Selected Work thumbnail is optional: it replaces the video’s own thumbnail in Selected Work only.</p>
+              <ol class="list" data-bmv-sel></ol>
+              <input type="file" accept="image/jpeg,image/png,image/webp" data-bmv-cover hidden />
+            </div>
           </div>
           <p class="msg err" data-bm-msg role="status"></p>
           <div class="row bm-foot">
@@ -162,6 +177,9 @@ for (const p of Object.values(portfolioData.projects)) {
                 <input type="file" accept="image/jpeg,image/png,image/webp" multiple data-eb-add />
               </label>
               <input type="file" accept="image/jpeg,image/png,image/webp" data-eb-replace hidden />
+              <h3 class="bm-h" data-ev-count>Videos &amp; thumbnails</h3>
+              <p class="hint">Google Drive videos, shown after the boards in this order. Share each video as “Anyone with the link · Viewer”. Thumbnails: JPG, PNG or WebP, optimized to WebP in your browser; without one the website shows a placeholder. Replacing a link or thumbnail keeps the video’s place, including in Selected Work.</p>
+              <div data-ev></div>
             </div>
             <p class="msg err" data-ed-msg role="status"></p>
             <div class="row bm-foot">
@@ -201,6 +219,7 @@ for (const p of Object.values(portfolioData.projects)) {
     </main>
 
     <script>
+      import { driveId, drivePreview, driveView, RATIOS, ratioValue, type Ratio } from '../data/drive';
       const OWNER = 'marwendrididesigner';
       const REPO = 'portfolio';
       const BRANCH = 'main';
@@ -212,12 +231,16 @@ for (const p of Object.values(portfolioData.projects)) {
       const TYPES = ['image/jpeg', 'image/png', 'image/webp'];
       const KEY = 'portfolio-admin-token';
 
-      type Stored = { client: string | null; title: string | null; country: string | null; services: string | null; folder: string; boards: string[]; hidden?: boolean };
-      type Item = { project: string; boards: string[] }; // boards: selected board file names, in display order
+      // Videos: Google Drive links; `id` is permanent, `thumb` a v-* file in the project folder (null = placeholder)
+      type SVideo = { id: string; url: string; title: string | null; ratio: Ratio; thumb: string | null };
+      type Stored = { client: string | null; title: string | null; country: string | null; services: string | null; folder: string; boards: string[]; videos?: SVideo[]; hidden?: boolean };
+      // boards / videos: the selection, in display order; covers: Selected-Work-only video thumbnails (video id → file)
+      type Item = { project: string; boards: string[]; videos?: string[]; covers?: Record<string, string> };
       type Group = { id: string; title: string; chapter: string; chapters: string[]; items: Item[] };
       type Data = { chapters: { id: string; title: string; projects: string[] }[]; projects: Record<string, Stored>; featured?: Group[] };
       const MAX_FEATURED = 4;
-      type Board = { blob: Blob; ext: 'webp' | 'jpg'; url: string; name: string; hash: string }; // hash: of the chosen file, to catch duplicates
+      type Board = { blob: Blob; ext: 'webp' | 'jpg'; url: string; name: string; hash: string; w: number; h: number }; // hash: of the chosen file, to catch duplicates
+      const THUMB_EDGE = 1920; // video thumbnails: never shown larger than a half-width card
 
       const $ = <T extends Element>(s: string) => document.querySelector<T>(s)!;
       const thumbs: Record<string, string> = JSON.parse($('#thumbs').textContent || '{}');
@@ -245,6 +268,7 @@ for (const p of Object.values(portfolioData.projects)) {
       const toDelete = new Set<string>();    // removed/replaced files, deleted once the new site is live
       const added = new Set<string>();       // new project ids (not published yet)
       const boardsChanged = new Set<string>(); // existing projects whose boards were edited
+      const videosChanged = new Set<string>(); // existing projects whose videos were edited
       let dirty = false;
       let featuredChanged = false;
       let detailsChanged = false;
@@ -295,12 +319,14 @@ for (const p of Object.values(portfolioData.projects)) {
         data = JSON.parse(b64ToText(f.content));
         dataSha = f.sha;
         loadedOrder = order();
-        for (const [id, p] of Object.entries(data.projects)) {
-          if (p.hidden) wasHidden.add(id);
-          for (const b of p.boards) inRepo.add(`${p.folder}/${b}`);
-        }
+        for (const [id, p] of Object.entries(data.projects)) if (p.hidden) wasHidden.add(id);
+        for (const k of referenced(data)) inRepo.add(k);
       }
-      const referenced = (d: Data) => new Set(Object.values(d.projects).flatMap((p) => p.boards.map((b) => `${p.folder}/${b}`)));
+      // Every image file the data uses: boards, video thumbnails and Selected Work thumbnails
+      const referenced = (d: Data) => new Set([
+        ...Object.values(d.projects).flatMap((p) => [...p.boards, ...(p.videos ?? []).flatMap((v) => (v.thumb ? [v.thumb] : []))].map((b) => `${p.folder}/${b}`)),
+        ...(d.featured ?? []).flatMap((g) => g.items.flatMap((it) => Object.values(it.covers ?? {}).map((f) => `${d.projects[it.project]?.folder}/${f}`))),
+      ]);
       // File names in one repository folder (empty for a folder that does not exist yet)
       async function listFolder(folder: string, ref: string) {
         try {
@@ -364,12 +390,25 @@ for (const p of Object.values(portfolioData.projects)) {
       catSelect.addEventListener('change', render);
       const current = () => data.chapters.find((c) => c.id === catSelect.value)!;
 
-      function thumbFor(id: string, board?: string) {
-        const p = data.projects[id]!;
-        const key = `${p.folder}/${board ?? p.boards[0]}`;
+      // Video without a thumbnail (same look as the website placeholder)
+      const PLACEHOLDER = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 90"><rect width="160" height="90" fill="#020a22"/><circle cx="80" cy="45" r="16" fill="#000004" stroke="#fff5ea" stroke-opacity=".35"/><path d="M75 37v16l13-8z" fill="#fff5ea"/></svg>')}`;
+      const fileUrl = (folder: string, file: string) => {
+        const key = `${folder}/${file}`;
         return uploads.get(key)?.url ?? previews.get(key) ?? thumbs[key]
           ?? `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${ASSET_DIR}/${key}`;
+      };
+      // A board (or, without one, the project's first board → first video thumbnail → placeholder)
+      function thumbFor(id: string, board?: string) {
+        const p = data.projects[id]!;
+        const f = board ?? p.boards[0] ?? p.videos?.find((v) => v.thumb)?.thumb;
+        return f ? fileUrl(p.folder, f) : PLACEHOLDER;
       }
+      const videoThumb = (id: string, vid: string) => {
+        const p = data.projects[id]!, v = p.videos?.find((x) => x.id === vid);
+        return v?.thumb ? fileUrl(p.folder, v.thumb) : PLACEHOLDER;
+      };
+      const plural = (n: number, w: string) => `${n} ${w}${n === 1 ? '' : 's'}`;
+      const mediaText = (p: Stored) => [p.boards.length && plural(p.boards.length, 'board'), p.videos?.length && plural(p.videos.length, 'video')].filter(Boolean).join(' · ') || 'no media';
 
       function render() {
         const list = $<HTMLOListElement>('[data-list]');
@@ -382,13 +421,15 @@ for (const p of Object.values(portfolioData.projects)) {
           const text = el('div', 'txt');
           text.append(el('p', 'name', [p.client, p.title].filter(Boolean).join(' — ') || 'Untitled'));
           if (p.hidden) text.append(el('p', 'hidden-note', 'Hidden — not shown on the website'));
-          text.append(el('p', 'sub', [p.country, `${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`,
-            added.has(id) ? 'new — not published yet' : visChanged(id) ? `${p.hidden ? 'hidden' : 'shown again'} — not published yet` : isMoved(id) ? 'moved here — not published yet' : boardsChanged.has(id) ? 'boards changed — not published yet' : ''].filter(Boolean).join(' · ')));
+          text.append(el('p', 'sub', [p.country, mediaText(p),
+            added.has(id) ? 'new — not published yet' : visChanged(id) ? `${p.hidden ? 'hidden' : 'shown again'} — not published yet` : isMoved(id) ? 'moved here — not published yet' : boardsChanged.has(id) ? 'boards changed — not published yet' : videosChanged.has(id) ? 'videos changed — not published yet' : ''].filter(Boolean).join(' · ')));
           const acts = el('div', 'facts');
           const name = nameOf(id);
           acts.append(
             button('Edit Project', 'link', `Edit the details and boards of ${name}`, () => openDetails(id)),
             button('Manage Boards', 'link', `Add, replace, remove or reorder the boards of ${name}`, () => openDetails(id, 'boards')),
+            ...(p.videos?.length || current().id === 'motion'
+              ? [button('Manage Videos', 'link', `Add, replace, remove or reorder the videos and thumbnails of ${name}`, () => openDetails(id, 'videos'))] : []),
             button('Change Section', 'link', `Move ${name} to another section`, () => openDetails(id, 'section')),
             button(p.hidden ? 'Unhide' : 'Hide', 'link', p.hidden ? `Show ${name} on the website again` : `Hide ${name} from the website`, () => setHidden(id, !p.hidden)),
             button('Delete Project', 'link link--danger', `Delete ${name} permanently`, () => openDelete(id)),
@@ -459,13 +500,21 @@ for (const p of Object.values(portfolioData.projects)) {
             const name = nameOf(it.project);
             const text = el('div', 'txt');
             const p = data.projects[it.project]!;
-            text.append(el('p', 'name', name), el('p', 'sub', [chapterOf(it.project)?.title, `${it.boards.length} of ${p.boards.length} board${p.boards.length > 1 ? 's' : ''} selected`].filter(Boolean).join(' · ')));
+            const nv = p.videos?.length ?? 0;
+            const sel = [p.boards.length && `${it.boards.length} of ${plural(p.boards.length, 'board')}`, nv && `${it.videos?.length ?? 0} of ${plural(nv, 'video')}`].filter(Boolean).join(' · ');
+            text.append(el('p', 'name', name), el('p', 'sub', [chapterOf(it.project)?.title, `${sel} selected`].filter(Boolean).join(' · ')));
             if (p.hidden) text.append(el('p', 'hidden-note', 'Hidden — keeps this slot, not shown on the website until un-hidden'));
             // Small previews of the selected boards, in display order
             const strip = el('div', 'strip');
             it.boards.forEach((b) => {
               const t = thumbImg(thumbFor(it.project, b), 64, 45);
               t.title = `Board ${p.boards.indexOf(b) + 1}`;
+              strip.append(t);
+            });
+            (it.videos ?? []).forEach((vid) => {
+              const t = thumbImg(it.covers?.[vid] ? fileUrl(p.folder, it.covers[vid]!) : videoThumb(it.project, vid), 64, 45);
+              t.title = `Video ${(p.videos ?? []).findIndex((v) => v.id === vid) + 1}`;
+              t.className = 'is-video';
               strip.append(t);
             });
             text.append(strip);
@@ -476,7 +525,7 @@ for (const p of Object.values(portfolioData.projects)) {
             );
             const acts = el('div', 'facts');
             acts.append(
-              button('Manage Featured Boards', 'link', `Choose which boards of ${name} appear in Selected Work`, () => openBoards(it, null)),
+              button(nv ? (p.boards.length ? 'Manage Featured Media' : 'Manage Featured Videos') : 'Manage Featured Boards', 'link', `Choose which ${nv ? 'boards and videos' : 'boards'} of ${name} appear in Selected Work`, () => openBoards(it, null)),
               button('Change Project', 'link', `Replace ${name} in ${g.title}`, () => openPicker(g, i)),
               button('Remove', 'link link--danger', `Remove ${name} from ${g.title}`, () => {
                 if (!confirm(`Remove “${name}” from Selected Work?\n\nThe project stays in the full portfolio — only the featured reference is removed.`)) return;
@@ -524,13 +573,15 @@ for (const p of Object.values(portfolioData.projects)) {
             const b = el('button', 'pick') as HTMLButtonElement;
             b.type = 'button';
             const t = el('span', 'txt');
-            t.append(el('span', 'name', name), el('span', 'sub', `${c.title} · ${data.projects[id]!.boards.length} board${data.projects[id]!.boards.length > 1 ? 's' : ''}${data.projects[id]!.hidden ? ' · Hidden' : ''}`));
+            t.append(el('span', 'name', name), el('span', 'sub', `${c.title} · ${mediaText(data.projects[id]!)}${data.projects[id]!.hidden ? ' · Hidden' : ''}`));
             b.append(thumbImg(thumbFor(id), 72, 51), t);
-            // Adding or replacing starts a fresh board selection: a single-board project selects its
-            // board; otherwise the board manager opens, and cancelling it undoes the add/replace.
+            // Adding or replacing starts a fresh selection: a project with a single board or video selects
+            // it; otherwise the media manager opens, and cancelling it undoes the add/replace.
             b.addEventListener('click', () => {
-              const all = data.projects[id]!.boards;
-              const item: Item = { project: id, boards: all.length === 1 ? [all[0]!] : [] };
+              const all = data.projects[id]!.boards, vids = data.projects[id]!.videos ?? [];
+              const one = all.length + vids.length === 1;
+              const item: Item = { project: id, boards: one && all.length ? [all[0]!] : [] };
+              if (one && vids.length) item.videos = [vids[0]!.id];
               let undo: () => void;
               if (slot === null) {
                 if (g.items.length >= MAX_FEATURED) return;
@@ -542,7 +593,7 @@ for (const p of Object.values(portfolioData.projects)) {
                 undo = () => { g.items[g.items.indexOf(item)] = prev; };
               }
               picker.close();
-              if (item.boards.length) featuredEdit();
+              if (one) featuredEdit();
               else openBoards(item, undo);
             });
             li.append(b);
@@ -560,10 +611,14 @@ for (const p of Object.values(portfolioData.projects)) {
       // and, for a just-added/replaced project, undoes that too.
       const bm = $<HTMLDialogElement>('[data-bm]');
       const bmMsg = $<HTMLElement>('[data-bm-msg]');
-      let bmFor: { it: Item; draft: string[]; undo: (() => void) | null } | null = null;
+      // covers: Selected-Work-only thumbnails per video id (a file name, or a new image chosen here)
+      let bmFor: { it: Item; draft: string[]; vdraft: string[]; covers: Record<string, string | Board>; undo: (() => void) | null } | null = null;
       function openBoards(it: Item, undo: (() => void) | null) {
-        bmFor = { it, draft: [...it.boards], undo };
-        $<HTMLElement>('[data-bm-title]').textContent = `Featured boards — ${nameOf(it.project)}`;
+        bmFor = { it, draft: [...it.boards], vdraft: [...(it.videos ?? [])], covers: { ...(it.covers ?? {}) }, undo };
+        const p = data.projects[it.project]!;
+        $<HTMLElement>('[data-bm-boards]').hidden = !p.boards.length;
+        $<HTMLElement>('[data-bmv]').hidden = !p.videos?.length;
+        $<HTMLElement>('[data-bm-title]').textContent = `Featured ${p.videos?.length ? (p.boards.length ? 'media' : 'videos') : 'boards'} — ${nameOf(it.project)}`;
         bmMsg.textContent = '';
         renderBoards();
         bm.showModal();
@@ -612,18 +667,107 @@ for (const p of Object.values(portfolioData.projects)) {
           li.append(el('span', 'num', String(i + 1).padStart(2, '0')), thumbImg(thumbFor(it.project, b)), el('p', 'name', label(b)), ctrls);
           return li;
         }) : [el('li', 'msg', 'No boards selected yet.')]));
+        renderFeaturedVideos();
       }
+      const coverUrl = (c: string | Board, folder: string) => (typeof c === 'string' ? fileUrl(folder, c) : c.url);
+      function renderFeaturedVideos() {
+        if (!bmFor) return;
+        const { it, vdraft, covers } = bmFor;
+        const p = data.projects[it.project]!;
+        const all = p.videos ?? [];
+        const label = (vid: string) => { const k = all.findIndex((v) => v.id === vid); return `Video ${k + 1}${all[k]?.title ? ` — ${all[k]!.title}` : ''}`; };
+        $<HTMLOListElement>('[data-bmv-all]').replaceChildren(...all.map((v, k) => {
+          const on = vdraft.includes(v.id);
+          const li = el('li');
+          const lab = el('label', on ? 'cov is-current' : 'cov');
+          const box = el('input') as HTMLInputElement;
+          box.type = 'checkbox'; box.checked = on;
+          box.addEventListener('change', () => {
+            if (box.checked) vdraft.push(v.id); else vdraft.splice(vdraft.indexOf(v.id), 1);
+            bmMsg.textContent = '';
+            renderFeaturedVideos();
+            ($<HTMLOListElement>('[data-bmv-all]').children[k]?.querySelector('input') as HTMLElement | null)?.focus();
+          });
+          const img = el('img') as HTMLImageElement;
+          img.src = videoThumb(it.project, v.id); img.alt = '';
+          const cap = el('span', 'cov-cap');
+          cap.append(box, el('span', undefined, label(v.id)), el('span', 'cov-state', on ? `Selected · #${vdraft.indexOf(v.id) + 1}` : 'Not selected'));
+          lab.append(img, cap);
+          li.append(lab);
+          return li;
+        }));
+        $<HTMLElement>('[data-bmv-count]').textContent = `Selected videos (${vdraft.length}) — display order`;
+        $<HTMLOListElement>('[data-bmv-sel]').replaceChildren(...(vdraft.length ? vdraft.map((vid, i) => {
+          const li = el('li', 'item bm-item');
+          const ctrls = el('div', 'ctrls');
+          const mk = (t: string, aria: string, fn: () => void, disabled: boolean) => {
+            const x = el('button', 'mini', t) as HTMLButtonElement;
+            x.type = 'button'; x.disabled = disabled; x.setAttribute('aria-label', aria);
+            x.addEventListener('click', () => { fn(); renderFeaturedVideos(); });
+            ctrls.append(x);
+          };
+          const swap = (j: number) => { [vdraft[i], vdraft[j]] = [vdraft[j]!, vdraft[i]!]; };
+          mk('↑', `Move ${label(vid)} earlier`, () => swap(i - 1), i === 0);
+          mk('↓', `Move ${label(vid)} later`, () => swap(i + 1), i === vdraft.length - 1);
+          mk('✕', `Unselect ${label(vid)}`, () => { vdraft.splice(i, 1); }, false);
+          const c = covers[vid];
+          const txt = el('div', 'txt');
+          txt.append(el('p', 'name', label(vid)), el('p', 'sub', c ? 'Custom Selected Work thumbnail' : 'Uses the video’s own thumbnail'));
+          const acts = el('div', 'facts');
+          const lk = (t: string, cls: string, fn: () => void) => { const x = el('button', cls, t) as HTMLButtonElement; x.type = 'button'; x.addEventListener('click', fn); acts.append(x); };
+          lk(c ? 'Replace Selected Work thumbnail' : 'Set Selected Work thumbnail', 'link', () => { coverFor = vid; coverInput.click(); });
+          if (c) lk('Use video thumbnail', 'link link--danger', () => {
+            if (typeof c !== 'string') URL.revokeObjectURL(c.url);
+            delete covers[vid];
+            renderFeaturedVideos();
+          });
+          txt.append(acts);
+          li.append(el('span', 'num', String(i + 1).padStart(2, '0')), thumbImg(c ? coverUrl(c, p.folder) : videoThumb(it.project, vid)), txt, ctrls);
+          return li;
+        }) : [el('li', 'msg', 'No videos selected.')]));
+      }
+      const coverInput = $<HTMLInputElement>('[data-bmv-cover]');
+      let coverFor = '';
+      coverInput.addEventListener('change', async () => {
+        const file = coverInput.files?.[0];
+        coverInput.value = '';
+        if (!file || !bmFor) return;
+        bmMsg.textContent = 'Optimizing image…';
+        try {
+          const b = await processImage(file, THUMB_EDGE, 320);
+          const old = bmFor.covers[coverFor];
+          if (old && typeof old !== 'string') URL.revokeObjectURL(old.url);
+          bmFor.covers[coverFor] = b;
+          bmMsg.textContent = '';
+        } catch (e) { bmMsg.textContent = (e as Error).message; }
+        renderFeaturedVideos();
+      });
       $('[data-bm-done]').addEventListener('click', () => {
         if (!bmFor) return;
-        if (!bmFor.draft.length) { bmMsg.textContent = 'Select at least one board.'; return; }
-        const changed = bmFor.undo !== null || bmFor.draft.join() !== bmFor.it.boards.join();
-        bmFor.it.boards = bmFor.draft;
+        if (!bmFor.draft.length && !bmFor.vdraft.length) { bmMsg.textContent = 'Select at least one board or video.'; return; }
+        const { it, draft, vdraft, covers, undo } = bmFor;
+        const p = data.projects[it.project]!;
+        // Selected Work thumbnails: only for selected videos; new images get new file names
+        const prev = it.covers ?? {}, next: Record<string, string> = {};
+        for (const vid of vdraft) {
+          const c = covers[vid];
+          if (!c) continue;
+          if (typeof c === 'string') next[vid] = c;
+          else { const n = freshName(p.folder, 'v', c.ext); uploads.set(`${p.folder}/${n}`, c); next[vid] = n; }
+        }
+        for (const [vid, file] of Object.entries(prev)) if (next[vid] !== file) dropFile(p.folder, file);
+        for (const [vid, c] of Object.entries(covers)) if (typeof c !== 'string' && !vdraft.includes(vid)) URL.revokeObjectURL(c.url);
+        const changed = undo !== null || draft.join() !== it.boards.join() || vdraft.join() !== (it.videos ?? []).join() || JSON.stringify(next) !== JSON.stringify(prev);
+        it.boards = draft;
+        if (vdraft.length) it.videos = vdraft; else delete it.videos;
+        if (Object.keys(next).length) it.covers = next; else delete it.covers;
         bmFor = null;
         bm.close();
         if (changed) featuredEdit();
       });
       const bmCancel = () => {
         if (!bmFor) return;
+        for (const c of Object.values(bmFor.covers)) if (typeof c !== 'string') URL.revokeObjectURL(c.url);
         bmFor.undo?.();
         bmFor = null;
         render();
@@ -645,9 +789,24 @@ for (const p of Object.values(portfolioData.projects)) {
       let entries: Entry[] = [];
       let edStart = '';
       const edChapter = $<HTMLSelectElement>('[data-ed-chapter]');
-      const edState = () => JSON.stringify([edChapter.value, FIELDS.map((f) => (edForm.elements.namedItem(f) as HTMLInputElement).value), entries.map((e) => e.file)]);
+      let edVideos: VDraft[] = [];
+      const edState = () => JSON.stringify([edChapter.value, FIELDS.map((f) => (edForm.elements.namedItem(f) as HTMLInputElement).value), entries.map((e) => e.file), edVideos.map((v) => [v.id, v.url, v.title, v.ratio, v.thumb, v.img?.hash])]);
       const edThumb = (e: Entry) => e.img?.url ?? thumbFor(edFor, e.file);
       let seq = 0;
+      // A new, unused image file name in a project folder (prefix d = board, v = video thumbnail)
+      function freshName(folder: string, prefix: 'd' | 'v', ext: string) {
+        const taken = (n: string) => [inRepo, toDelete, uploads].some((x) => x.has(`${folder}/${n}`));
+        let n: string;
+        do n = `${prefix}-${Date.now().toString(36)}${(seq++).toString(36)}.${ext}`; while (taken(n));
+        return n;
+      }
+      // An image no longer used: a pending upload is dropped, a published file is deleted after the next deploy
+      function dropFile(folder: string, file: string) {
+        const key = `${folder}/${file}`;
+        const u = uploads.get(key);
+        if (u) { URL.revokeObjectURL(u.url); uploads.delete(key); }
+        if (inRepo.has(key)) toDelete.add(key);
+      }
       function newName(ext: string) {
         const p = data.projects[edFor]!;
         const taken = (n: string) => p.boards.includes(n) || entries.some((e) => e.file === n) || inRepo.has(`${p.folder}/${n}`) || toDelete.has(`${p.folder}/${n}`);
@@ -658,19 +817,22 @@ for (const p of Object.values(portfolioData.projects)) {
       // Same image chosen twice (in this draft, or already waiting to be uploaded for this project)
       const isDuplicate = (b: Board) => entries.some((e) => (e.img ?? uploads.get(`${data.projects[edFor]!.folder}/${e.file}`))?.hash === b.hash);
 
-      function openDetails(id: string, focus?: 'boards' | 'section') {
+      function openDetails(id: string, focus?: 'boards' | 'section' | 'videos') {
         edFor = id;
         const p = data.projects[id]!;
         for (const f of FIELDS) (edForm.elements.namedItem(f) as HTMLInputElement).value = p[f] ?? '';
         edChapter.value = chapterOf(id)!.id;
         entries = p.boards.map((f) => ({ file: f, orig: f, img: null }));
+        edVideos = toDrafts(p);
         $<HTMLElement>('[data-ed-title]').textContent = `Edit project — ${nameOf(id)}`;
         edMsg.textContent = '';
         renderEntries();
+        renderEdVideos();
         edStart = edState();
         ed.showModal();
         if (focus === 'section') edChapter.focus();
         if (focus === 'boards') { $<HTMLElement>('[data-eb-count]').scrollIntoView({ block: 'start' }); document.querySelector<HTMLElement>('[data-eb] button')?.focus({ preventScroll: true }); }
+        if (focus === 'videos') { $<HTMLElement>('[data-ev-count]').scrollIntoView({ block: 'start' }); document.querySelector<HTMLElement>('[data-ev] input, [data-ev] button')?.focus({ preventScroll: true }); }
       }
 
       let dragFrom = -1;
@@ -731,7 +893,7 @@ for (const p of Object.values(portfolioData.projects)) {
 
       function removeEntry(i: number) {
         const e = entries[i]!;
-        if (entries.length === 1) { edMsg.textContent = 'A project needs at least one board — use Replace instead.'; return; }
+        if (entries.length === 1 && !edVideos.length) { edMsg.textContent = 'A project needs at least one board or video — use Replace instead.'; return; }
         const inFeatured = e.orig !== null && (data.featured ?? []).some((g) => g.items.some((it) => it.project === edFor && it.boards.includes(e.orig!)));
         if (!confirm(`Remove board ${i + 1}?${inFeatured ? '\n\nThis board is shown in Selected Work and will be removed there too.' : ''}\n\nNothing is published until you click Save & Publish.`)) return;
         if (e.img) URL.revokeObjectURL(e.img.url);
@@ -783,7 +945,8 @@ for (const p of Object.values(portfolioData.projects)) {
         if (!p) return;
         const v = Object.fromEntries(FIELDS.map((f) => [f, (edForm.elements.namedItem(f) as HTMLInputElement).value.trim() || null]));
         if (!v.client && !v.title) { edMsg.textContent = 'Enter a project name or a project title.'; return; }
-        if (!entries.length) { edMsg.textContent = 'A project needs at least one board.'; return; }
+        if (!entries.length && !edVideos.length) { edMsg.textContent = 'A project needs at least one board or video.'; return; }
+        try { videoUrls(edVideos); } catch (err) { edMsg.textContent = (err as Error).message; return; }
         if (FIELDS.some((f) => p[f] !== v[f])) {
           for (const f of FIELDS) p[f] = v[f] ?? null;
           detailsChanged = true; dirty = true;
@@ -798,19 +961,16 @@ for (const p of Object.values(portfolioData.projects)) {
             if (inRepo.has(key)) toDelete.add(key);
           }
           for (const x of entries) if (x.img) uploads.set(`${p.folder}/${x.file}`, x.img);
-          // Selected Work: a replaced board keeps its place there; a removed one is dropped, and if no
-          // selected board is left the project's first board is shown instead.
-          const swap = new Map(entries.filter((x) => x.img && x.orig).map((x) => [x.orig!, x.file]));
-          for (const g of data.featured ?? []) for (const it of g.items) {
-            if (it.project !== edFor) continue;
-            let sel = [...new Set(it.boards.map((b) => swap.get(b) ?? b).filter((b) => next.includes(b)))];
-            if (!sel.length) sel = [next[0]!];
-            if (sel.join() !== it.boards.join()) { it.boards = sel; featuredChanged = true; }
-          }
           p.boards = next;
           if (!added.has(edFor)) boardsChanged.add(edFor);
           dirty = true;
         }
+        if (applyVideos(edFor, edVideos)) {
+          if (!added.has(edFor)) videosChanged.add(edFor);
+          dirty = true;
+        }
+        // Selected Work: a replaced board keeps its place there; removed boards/videos are dropped
+        syncFeatured(edFor, new Map(entries.filter((x) => x.img && x.orig).map((x) => [x.orig!, x.file])));
         // Section: the same project (id, details, boards) leaves its section and goes to the end of the
         // chosen one. A Selected Work entry keeps its boards; it follows to the group for the new section
         // when that group has a free slot, otherwise it stays where it is (other entries are untouched).
@@ -836,6 +996,7 @@ for (const p of Object.values(portfolioData.projects)) {
           catSelect.value = to.id;
         }
         entries = [];
+        edVideos = [];
         ed.close();
         render();
         if (note) status(`Unpublished changes.${note}`);
@@ -844,11 +1005,211 @@ for (const p of Object.values(portfolioData.projects)) {
       const edDiscard = () => {
         if (entries.length && edState() !== edStart && !confirm('Discard your changes to this project?')) return false;
         for (const x of entries) if (x.img) URL.revokeObjectURL(x.img.url);
+        for (const x of edVideos) if (x.img) URL.revokeObjectURL(x.img.url);
         entries = [];
+        edVideos = [];
         return true;
       };
       for (const x of document.querySelectorAll('[data-ed-cancel]')) x.addEventListener('click', () => { if (edDiscard()) ed.close(); });
       ed.addEventListener('cancel', (e) => { if (!edDiscard()) e.preventDefault(); });
+
+      // ---- Videos (Google Drive) ---------------------------------------------------------------
+      // One editor for "New project" and "Edit project". A draft keeps the video's permanent `id`;
+      // `thumb` is its current thumbnail file (null = placeholder), `img` a thumbnail chosen in this draft.
+      // Nothing changes until the form is saved.
+      type VDraft = { id: string; url: string; title: string; ratio: Ratio; auto: boolean; thumb: string | null; img: Board | null; player: boolean };
+      const toDrafts = (p: Stored) => (p.videos ?? []).map((v): VDraft => ({ id: v.id, url: v.url, title: v.title ?? '', ratio: v.ratio, auto: false, thumb: v.thumb, img: null, player: false }));
+      let vseq = 0;
+      function newVideoId(list: VDraft[]) {
+        const used = new Set([...Object.values(data.projects).flatMap((p) => (p.videos ?? []).map((v) => v.id)), ...list.map((v) => v.id)]);
+        let id: string;
+        do id = `v${Date.now().toString(36)}${(vseq++).toString(36)}`; while (used.has(id));
+        return id;
+      }
+      const nearestRatio = (w: number, h: number) => RATIOS.reduce((a, r) => (Math.abs(Math.log(w / h / ratioValue(r))) < Math.abs(Math.log(w / h / ratioValue(a))) ? r : a));
+      // Valid Drive links (normalized to …/file/d/ID/view), or an error naming the video
+      function videoUrls(list: VDraft[]) {
+        return list.map((v, i) => {
+          const id = driveId(v.url);
+          if (!id) throw new Error(`Video ${i + 1}: ${v.url.trim() ? 'this is not a Google Drive file link (https://drive.google.com/file/d/…/view).' : 'paste its Google Drive link.'}`);
+          return driveView(id);
+        });
+      }
+      // Writes the draft into the project (call videoUrls first). Returns whether anything changed.
+      function applyVideos(id: string, list: VDraft[]) {
+        const p = data.projects[id]!;
+        const urls = videoUrls(list);
+        const next: SVideo[] = list.map((v, i) => {
+          let thumb = v.thumb;
+          if (v.img) { thumb = freshName(p.folder, 'v', v.img.ext); uploads.set(`${p.folder}/${thumb}`, v.img); }
+          return { id: v.id, url: urls[i]!, title: v.title.trim() || null, ratio: v.ratio, thumb };
+        });
+        if (JSON.stringify(next) === JSON.stringify(p.videos ?? [])) return false;
+        const keep = new Set(next.map((v) => v.thumb));
+        for (const v of p.videos ?? []) if (v.thumb && !keep.has(v.thumb)) dropFile(p.folder, v.thumb);
+        if (next.length) p.videos = next; else delete p.videos;
+        return true;
+      }
+      // Selected Work entries of a project after its boards/videos changed: replaced boards keep their
+      // place (swap: old → new file), removed boards and videos are dropped (with their Selected Work
+      // thumbnails); an entry left empty shows the project's first board, else its first video.
+      function syncFeatured(id: string, swap = new Map<string, string>()) {
+        const p = data.projects[id]!;
+        const vids = (p.videos ?? []).map((v) => v.id);
+        for (const g of data.featured ?? []) for (const it of g.items) {
+          if (it.project !== id) continue;
+          const before = JSON.stringify(it);
+          it.boards = [...new Set(it.boards.map((b) => swap.get(b) ?? b).filter((b) => p.boards.includes(b)))];
+          const v = (it.videos ?? []).filter((x) => vids.includes(x));
+          for (const [vid, file] of Object.entries(it.covers ?? {})) if (!v.includes(vid)) { dropFile(p.folder, file); delete it.covers![vid]; }
+          if (!it.boards.length && !v.length) { if (p.boards.length) it.boards = [p.boards[0]!]; else if (vids.length) v.push(vids[0]!); }
+          if (v.length) it.videos = v; else delete it.videos;
+          if (it.covers && !Object.keys(it.covers).length) delete it.covers;
+          if (JSON.stringify(it) !== before) featuredChanged = true;
+        }
+      }
+
+      // Sharing check: Drive serves a preview image of a file only when it is shared publicly. A failure is
+      // only a warning (a just-uploaded video may still be processing).
+      const shared = new Map<string, Promise<boolean>>();
+      const isShared = (id: string) => {
+        if (!shared.has(id)) shared.set(id, new Promise((ok) => {
+          const probe = new Image();
+          probe.referrerPolicy = 'no-referrer';
+          probe.onload = () => ok(probe.naturalWidth > 0);
+          probe.onerror = () => ok(false);
+          probe.src = `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w200`;
+        }));
+        return shared.get(id)!;
+      };
+
+      function videoEditor(root: HTMLElement, list: () => VDraft[], folder: () => string | null, say: (t: string) => void) {
+        const fileIn = el('input') as HTMLInputElement;
+        fileIn.type = 'file'; fileIn.accept = TYPES.join(','); fileIn.hidden = true;
+        let target: VDraft | null = null;
+        fileIn.addEventListener('change', async () => {
+          const file = fileIn.files?.[0];
+          fileIn.value = '';
+          const v = target;
+          if (!file || !v) return;
+          say('Optimizing thumbnail…');
+          try {
+            const b = await processImage(file, THUMB_EDGE, 320);
+            if (v.img) URL.revokeObjectURL(v.img.url);
+            v.img = b;
+            // Until the ratio is chosen by hand, it follows the thumbnail's proportions
+            if (v.auto) v.ratio = nearestRatio(b.w, b.h);
+            say(v.auto ? `Thumbnail added. Aspect ratio set to ${v.ratio} from its proportions — change it if the video differs.` : '');
+          } catch (e) { say((e as Error).message); }
+          draw();
+        });
+        const check = (v: VDraft, out: HTMLElement) => {
+          const id = driveId(v.url);
+          out.className = 'vstatus';
+          if (!v.url.trim()) { out.textContent = 'Paste the video’s Google Drive sharing link.'; return; }
+          if (!id) { out.textContent = 'Not a Google Drive file link — use the link from Share › Copy link (…/file/d/FILE_ID/view).'; out.classList.add('err'); return; }
+          out.textContent = 'Google Drive link ✓ · checking sharing…';
+          isShared(id).then((ok) => {
+            if (driveId(v.url) !== id) return;
+            out.textContent = ok ? 'Google Drive link ✓ · publicly viewable ✓ — the website embeds /preview of this file'
+              : 'Google Drive link ✓ · Drive returned no preview: set sharing to “Anyone with the link · Viewer” (new uploads can take a few minutes to process)';
+            out.classList.add(ok ? 'ok' : 'warn');
+          });
+        };
+        function draw() {
+          const vs = list();
+          const ol = el('ol', 'vlist');
+          ol.setAttribute('aria-label', 'Videos');
+          vs.forEach((v, i) => {
+            const li = el('li', 'vitem');
+            const media = el('div', 'vmedia');
+            const ratioCss = v.ratio.replace(':', ' / ');
+            const src = v.img?.url ?? (v.thumb && folder() ? fileUrl(folder()!, v.thumb) : null);
+            if (src) { const im = thumbImg(src, 160, 90); im.alt = `Thumbnail of video ${i + 1}`; media.append(im); }
+            else { const ph = el('div', 'vph'); ph.style.aspectRatio = ratioCss; ph.append(el('span', undefined, 'No thumbnail')); media.append(ph); }
+            media.append(el('span', 'num', String(i + 1)));
+            if (v.img) media.append(el('span', 'eb-tag', v.thumb ? 'New thumbnail' : 'Thumbnail'));
+
+            const fields = el('div', 'vfields');
+            const linkLab = el('label', undefined, 'Google Drive link');
+            const link = el('input') as HTMLInputElement;
+            link.type = 'url'; link.value = v.url; link.placeholder = 'https://drive.google.com/file/d/…/view'; link.spellcheck = false; link.autocomplete = 'off';
+            const st = el('p', 'vstatus');
+            let t = 0;
+            link.addEventListener('input', () => { v.url = link.value; clearTimeout(t); t = window.setTimeout(() => check(v, st), 350); });
+            link.addEventListener('change', () => { v.url = link.value.trim(); if (v.player) draw(); });
+            linkLab.append(link);
+            const row = el('div', 'vrow');
+            const tLab = el('label', undefined, 'Video title (optional)');
+            const tIn = el('input') as HTMLInputElement;
+            tIn.value = v.title; tIn.maxLength = 120;
+            tIn.addEventListener('input', () => { v.title = tIn.value; });
+            tLab.append(tIn);
+            const rLab = el('label', undefined, 'Aspect ratio');
+            const rSel = el('select') as HTMLSelectElement;
+            const names: Record<string, string> = { '16:9': '16:9 · landscape', '9:16': '9:16 · vertical', '1:1': '1:1 · square', '4:5': '4:5 · portrait' };
+            for (const r of RATIOS) { const o = el('option', undefined, names[r]) as HTMLOptionElement; o.value = r; o.selected = r === v.ratio; rSel.append(o); }
+            rSel.addEventListener('change', () => { v.ratio = rSel.value as Ratio; v.auto = false; draw(); (root.querySelectorAll('select')[i] as HTMLElement | undefined)?.focus(); });
+            rLab.append(rSel);
+            row.append(tLab, rLab);
+            const acts = el('div', 'facts');
+            const lk = (label: string, cls: string, aria: string, fn: () => void) => {
+              const b = el('button', cls, label) as HTMLButtonElement;
+              b.type = 'button'; b.setAttribute('aria-label', aria); b.addEventListener('click', fn); acts.append(b);
+            };
+            lk(src ? 'Replace thumbnail' : 'Upload thumbnail', 'link', `${src ? 'Replace' : 'Upload'} the thumbnail of video ${i + 1}`, () => { target = v; fileIn.click(); });
+            if (v.img && v.thumb) lk('Undo thumbnail', 'link', `Keep the current thumbnail of video ${i + 1}`, () => { URL.revokeObjectURL(v.img!.url); v.img = null; draw(); });
+            if (src) lk('Remove thumbnail', 'link link--danger', `Remove the thumbnail of video ${i + 1}`, () => {
+              if (v.img) URL.revokeObjectURL(v.img.url);
+              v.img = null; v.thumb = null; draw();
+            });
+            lk(v.player ? 'Hide player' : 'Preview player', 'link', `${v.player ? 'Hide' : 'Show'} the Google Drive player of video ${i + 1}`, () => { v.player = !v.player; draw(); });
+            fields.append(linkLab, st, row, acts);
+
+            const ctrls = el('div', 'ctrls');
+            const mk = (label: string, aria: string, fn: () => void, disabled = false) => {
+              const b = el('button', 'mini', label) as HTMLButtonElement;
+              b.type = 'button'; b.disabled = disabled; b.setAttribute('aria-label', aria);
+              b.addEventListener('click', fn); ctrls.append(b);
+            };
+            const swap = (j: number) => { [vs[i], vs[j]] = [vs[j]!, vs[i]!]; draw(); (root.querySelectorAll('.vitem')[j]?.querySelectorAll('.ctrls button')[j < i ? 0 : 1] as HTMLElement | undefined)?.focus(); };
+            mk('↑', `Move video ${i + 1} up`, () => swap(i - 1), i === 0);
+            mk('↓', `Move video ${i + 1} down`, () => swap(i + 1), i === vs.length - 1);
+            mk('✕', `Remove video ${i + 1}`, () => {
+              const featured = (data.featured ?? []).some((g) => g.items.some((it) => it.videos?.includes(v.id)));
+              if (!confirm(`Remove video ${i + 1}?${featured ? '\n\nThis video is shown in Selected Work and will be removed there too.' : ''}\n\nThe file on Google Drive is not touched. Nothing is published until you click Save & Publish.`)) return;
+              if (v.img) URL.revokeObjectURL(v.img.url);
+              vs.splice(i, 1); draw();
+            });
+
+            li.append(media, fields, ctrls);
+            const id = driveId(v.url);
+            if (v.player && id) {
+              const pl = el('div', 'vplayer');
+              pl.style.aspectRatio = ratioCss;
+              if (v.ratio !== '16:9') pl.style.maxWidth = `${Math.round(360 * ratioValue(v.ratio))}px`;
+              const f = el('iframe') as HTMLIFrameElement;
+              f.src = drivePreview(id); f.title = `Preview of video ${i + 1}`;
+              f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media'; f.allowFullscreen = true;
+              pl.append(f);
+              li.append(pl);
+            }
+            check(v, st);
+            ol.append(li);
+          });
+          if (!vs.length) ol.append(el('li', 'msg', 'No videos.'));
+          const add = el('button', 'btn btn--ghost', '+ Add video') as HTMLButtonElement;
+          add.type = 'button';
+          add.addEventListener('click', () => {
+            vs.push({ id: newVideoId(vs), url: '', title: '', ratio: '16:9', auto: true, thumb: null, img: null, player: false });
+            draw();
+            (root.querySelectorAll<HTMLInputElement>('.vitem input[type=url]')[vs.length - 1])?.focus();
+          });
+          root.replaceChildren(ol, add, fileIn);
+        }
+        return draw;
+      }
+      const renderEdVideos = videoEditor($('[data-ev]'), () => edVideos, () => data.projects[edFor]?.folder ?? null, (t) => { edMsg.textContent = t; });
 
       // ---- Hide / Unhide -----------------------------------------------------------------------
       // Only the flag changes: section, position, details, boards and Selected Work entries stay.
@@ -870,7 +1231,7 @@ for (const p of Object.values(portfolioData.projects)) {
         const p = data.projects[id]!;
         $<HTMLElement>('[data-del-name]').textContent = nameOf(id);
         const refs = [
-          `Section ${chapterOf(id)?.title ?? '—'} · ${p.boards.length} board${p.boards.length > 1 ? 's' : ''}`,
+          `Section ${chapterOf(id)?.title ?? '—'} · ${mediaText(p)}${p.videos?.length ? ' (the video files on Google Drive are not touched)' : ''}`,
           ...(data.featured ?? []).filter((g) => g.items.some((it) => it.project === id)).map((g) => `Selected Work › ${g.title}`),
         ];
         $<HTMLElement>('[data-del-refs]').replaceChildren(...refs.map((r) => el('li', undefined, r)));
@@ -895,24 +1256,24 @@ for (const p of Object.values(portfolioData.projects)) {
       function deleteProject(id: string) {
         const p = data.projects[id]!;
         const name = p.client ?? p.title ?? id;
+        const images = [...p.boards, ...(p.videos ?? []).flatMap((v) => (v.thumb ? [v.thumb] : []))];
         for (const c of data.chapters) c.projects = c.projects.filter((x) => x !== id);
         for (const g of data.featured ?? []) {
           const n = g.items.length;
+          for (const it of g.items) if (it.project === id) images.push(...Object.values(it.covers ?? {}));
           g.items = g.items.filter((it) => it.project !== id);
           if (g.items.length !== n) featuredChanged = true;
         }
         delete data.projects[id];
         const used = referenced(data);
-        for (const b of p.boards) {
-          const key = `${p.folder}/${b}`;
-          if (used.has(key)) continue; // shared with another project: kept
-          const u = uploads.get(key);
-          if (u) { URL.revokeObjectURL(u.url); uploads.delete(key); }
-          if (inRepo.has(key)) toDelete.add(key);
+        for (const b of images) {
+          if (used.has(`${p.folder}/${b}`)) continue; // shared with another project: kept
+          dropFile(p.folder, b);
         }
         // A project added in this session and never published simply disappears
         if (added.has(id)) added.delete(id); else deleted.set(id, name);
         boardsChanged.delete(id);
+        videosChanged.delete(id);
         moved.delete(id);
         reserved.add(id); // never reused by a new project
         dirty = true;
@@ -920,8 +1281,18 @@ for (const p of Object.values(portfolioData.projects)) {
 
       // Checked again right before publishing (also protects against a hand-edited file)
       function validateFeatured() {
-        for (const c of data.chapters) for (const id of c.projects)
-          if (!data.projects[id]) throw new Error(`section “${c.title}” refers to a project that no longer exists (${id})`);
+        for (const c of data.chapters) for (const id of c.projects) {
+          const p = data.projects[id];
+          if (!p) throw new Error(`section “${c.title}” refers to a project that no longer exists (${id})`);
+          if (!p.boards.length && !p.videos?.length) throw new Error(`“${nameOf(id)}” has no boards or videos`);
+          const ids = new Set<string>();
+          for (const [i, v] of (p.videos ?? []).entries()) {
+            if (!driveId(v.url)) throw new Error(`video ${i + 1} of “${nameOf(id)}” has an invalid Google Drive link`);
+            if (!v.id || ids.has(v.id)) throw new Error(`“${nameOf(id)}” has a repeated video id`);
+            if (!RATIOS.includes(v.ratio)) throw new Error(`video ${i + 1} of “${nameOf(id)}” has no aspect ratio`);
+            ids.add(v.id);
+          }
+        }
         for (const g of data.featured ?? []) {
           if (g.items.length > MAX_FEATURED) throw new Error(`“${g.title}” has more than ${MAX_FEATURED} projects`);
           const seen = new Set<string>();
@@ -930,9 +1301,12 @@ for (const p of Object.values(portfolioData.projects)) {
             if (!p || !chapterOf(it.project)) throw new Error(`“${g.title}” refers to a project that no longer exists (${it.project})`);
             if (seen.has(it.project)) throw new Error(`“${nameOf(it.project)}” appears twice in “${g.title}”`);
             seen.add(it.project);
-            if (!it.boards.length) throw new Error(`“${nameOf(it.project)}” has no selected boards`);
+            if (!it.boards.length && !it.videos?.length) throw new Error(`“${nameOf(it.project)}” has no selected boards or videos`);
             if (new Set(it.boards).size !== it.boards.length || it.boards.some((b) => !p.boards.includes(b)))
               throw new Error(`the selected boards of “${nameOf(it.project)}” do not match its boards`);
+            const vids = (p.videos ?? []).map((v) => v.id), sel = it.videos ?? [];
+            if (new Set(sel).size !== sel.length || sel.some((v) => !vids.includes(v)) || Object.keys(it.covers ?? {}).some((v) => !sel.includes(v)))
+              throw new Error(`the selected videos of “${nameOf(it.project)}” do not match its videos`);
           }
         }
       }
@@ -958,19 +1332,26 @@ for (const p of Object.values(portfolioData.projects)) {
         ($<HTMLSelectElement>('[data-add-chapter]')).value = catSelect.value;
         (addForm.elements.namedItem('name') as HTMLInputElement).focus();
       });
-      const closeAdd = () => { draft.forEach((b) => URL.revokeObjectURL(b.url)); draft = []; addForm.reset(); addForm.hidden = true; addMsg.textContent = ''; renderDraft(); };
+      let addVideos: VDraft[] = [];
+      const renderAddVideos = videoEditor($('[data-add-videos]'), () => addVideos, () => null, (t) => { addMsg.textContent = t; });
+      renderAddVideos();
+      const closeAdd = () => {
+        draft.forEach((b) => URL.revokeObjectURL(b.url)); draft = [];
+        addVideos.forEach((v) => v.img && URL.revokeObjectURL(v.img.url)); addVideos = [];
+        addForm.reset(); addForm.hidden = true; addMsg.textContent = ''; renderDraft(); renderAddVideos();
+      };
       $('[data-add-cancel]').addEventListener('click', closeAdd);
 
       // Resize to the web-master size and convert to WebP in the browser (JPEG where WebP encoding
       // is unavailable). Decoding doubles as content validation: non-images fail here.
-      async function processImage(file: File): Promise<Board> {
+      async function processImage(file: File, maxEdge = MAX_EDGE, minEdge = 600): Promise<Board> {
         if (!TYPES.includes(file.type)) throw new Error(`${file.name}: only JPG, PNG or WebP images are accepted.`);
         if (file.size > MAX_BYTES) throw new Error(`${file.name}: larger than 25 MB.`);
         let bmp: ImageBitmap;
         try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' }); }
         catch { throw new Error(`${file.name}: not a readable image.`); }
-        if (Math.max(bmp.width, bmp.height) < 600) throw new Error(`${file.name}: too small (at least 600 px on the long side).`);
-        const scale = Math.min(1, MAX_EDGE / Math.max(bmp.width, bmp.height));
+        if (Math.max(bmp.width, bmp.height) < minEdge) throw new Error(`${file.name}: too small (at least ${minEdge} px on the long side).`);
+        const scale = Math.min(1, maxEdge / Math.max(bmp.width, bmp.height));
         const c = document.createElement('canvas');
         c.width = Math.round(bmp.width * scale); c.height = Math.round(bmp.height * scale);
         const ctx = c.getContext('2d')!;
@@ -985,7 +1366,7 @@ for (const p of Object.values(portfolioData.projects)) {
         if (!blob || blob.type !== 'image/webp') { blob = await encode('image/jpeg', 0.88); ext = 'jpg'; }
         if (!blob) throw new Error(`${file.name}: could not be processed.`);
         const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', await file.arrayBuffer()))].map((x) => x.toString(16).padStart(2, '0')).join('');
-        return { blob, ext, url: URL.createObjectURL(blob), name: file.name, hash };
+        return { blob, ext, url: URL.createObjectURL(blob), name: file.name, hash, w: c.width, h: c.height };
       }
 
       const filesInput = $<HTMLInputElement>('[data-files]');
@@ -1039,7 +1420,8 @@ for (const p of Object.values(portfolioData.projects)) {
         const country = (addForm.elements.namedItem('country') as HTMLInputElement).value.trim();
         const chapter = (addForm.elements.namedItem('chapter') as HTMLSelectElement).value;
         if (!name) { addMsg.textContent = 'Enter a project name.'; return; }
-        if (!draft.length) { addMsg.textContent = 'Add at least one presentation board.'; return; }
+        if (!draft.length && !addVideos.length) { addMsg.textContent = 'Add at least one presentation board or video.'; return; }
+        try { videoUrls(addVideos); } catch (err) { addMsg.textContent = (err as Error).message; return; }
         const folders = new Set(Object.values(data.projects).map((p) => p.folder));
         let id = `${chapter}-${slug(name)}`;
         for (let n = 2; data.projects[id] || folders.has(id) || reserved.has(id); n++) id = `${chapter}-${slug(name)}-${n}`;
@@ -1047,8 +1429,11 @@ for (const p of Object.values(portfolioData.projects)) {
         data.projects[id] = { client: name, title: null, country: country || null, services: null, folder: id, boards };
         data.chapters.find((c) => c.id === chapter)!.projects.push(id); // added at the end; move it with ↑/↓
         draft.forEach((b, i) => uploads.set(`${id}/${boards[i]}`, b));
+        applyVideos(id, addVideos);
         added.add(id);
         draft = [];
+        addVideos = [];
+        renderAddVideos();
         dirty = true;
         addForm.reset(); addForm.hidden = true; addMsg.textContent = ''; renderDraft();
         catSelect.value = chapter;
@@ -1071,7 +1456,7 @@ for (const p of Object.values(portfolioData.projects)) {
           // upload must never land on an existing file.
           const used = referenced(data);
           const queue = [...uploads].filter(([key]) => used.has(key));
-          const folders = new Set([...queue.map(([key]) => key.split('/')[0]!), ...[...boardsChanged].map((id) => data.projects[id]!.folder)]);
+          const folders = new Set([...queue.map(([key]) => key.split('/')[0]!), ...[...boardsChanged, ...videosChanged].map((id) => data.projects[id]!.folder)]);
           for (const folder of folders) {
             const present = await listFolder(folder, head);
             for (const [key] of queue) if (key.startsWith(`${folder}/`) && present.has(key.slice(folder.length + 1)))
@@ -1101,7 +1486,7 @@ for (const p of Object.values(portfolioData.projects)) {
           const hid = vis.filter((id) => data.projects[id]!.hidden), shown = vis.filter((id) => !data.projects[id]!.hidden);
           const message = `Portfolio manager: ${[added.size && `add ${names(added)}`, deleted.size && `delete ${[...deleted.values()].join(', ')}`,
             hid.length && `hide ${names(hid)}`, shown.length && `unhide ${names(shown)}`,
-            mv.length && `move ${mv.map((id) => `${names([id])} to ${chapterOf(id)!.title}`).join(', ')}`, reordered && 'reorder projects', detailsChanged && 'edit project details', boardsChanged.size && `update boards of ${names(boardsChanged)}`, featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'update portfolio'}`;
+            mv.length && `move ${mv.map((id) => `${names([id])} to ${chapterOf(id)!.title}`).join(', ')}`, reordered && 'reorder projects', detailsChanged && 'edit project details', boardsChanged.size && `update boards of ${names(boardsChanged)}`, videosChanged.size && `update videos of ${names(videosChanged)}`, featuredChanged && 'update Selected Work'].filter(Boolean).join(', ') || 'update portfolio'}`;
           const commit = await gh(repo('/git/commits'), { method: 'POST', body: JSON.stringify({ message, tree: newTree.sha, parents: [head] }) });
           await gh(repo(`/git/refs/heads/${BRANCH}`), { method: 'PATCH', body: JSON.stringify({ sha: commit.sha, force: false }) });
 
@@ -1110,6 +1495,7 @@ for (const p of Object.values(portfolioData.projects)) {
           uploads = new Map();
           added.clear();
           boardsChanged.clear();
+          videosChanged.clear();
           dirty = false;
           featuredChanged = false;
           detailsChanged = false;
@@ -1328,13 +1714,40 @@ for (const p of Object.values(portfolioData.projects)) {
       .eb-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
       .eb-row .facts { margin-top: 0; gap: 4px 12px; }
 
+      /* Videos editor */
+      .vlist { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 12px; }
+      .vitem {
+        display: grid; grid-template-columns: 160px minmax(0, 1fr) auto; gap: 14px; align-items: start;
+        padding: 12px; border: 1px solid var(--rule-dark); background: var(--ink);
+      }
+      .vmedia { position: relative; }
+      .vmedia img { display: block; width: 160px; height: auto; max-height: 200px; object-fit: contain; object-position: left top; }
+      .vmedia .num { position: absolute; top: 6px; left: 6px; color: var(--ink); background: var(--blue); padding: 0 6px; }
+      .vmedia .eb-tag { top: auto; bottom: 6px; right: auto; left: 6px; }
+      .vph { display: grid; place-items: center; width: 160px; max-height: 200px; margin-inline: auto; background: var(--ink-2); border: 1px dashed var(--rule-dark); color: var(--cream-dim); font-size: 0.75rem; }
+      .vitem .vph { max-width: 160px; }
+      .vfields { display: grid; gap: 8px; min-width: 0; }
+      .vrow { display: grid; grid-template-columns: 1fr 200px; gap: 10px; }
+      .vstatus { font-size: 0.8125rem; color: var(--cream-dim); overflow-wrap: anywhere; }
+      .vstatus.ok { color: var(--blue); }
+      .vstatus.warn { color: #ffb74d; }
+      .vstatus.err { color: #ff8a80; }
+      .vplayer { grid-column: 1 / -1; justify-self: start; width: 100%; max-width: 640px; background: #000; }
+      .vplayer iframe { display: block; width: 100%; height: 100%; border: 0; }
+      .vitem .ctrls .mini { width: 34px; height: 34px; }
+      .strip img.is-video { outline: 2px solid var(--blue); outline-offset: -2px; }
+      [data-bm-boards][hidden], [data-bmv][hidden] { display: none; }
+
       .publish {
         position: fixed; inset: auto 0 0; display: flex; align-items: center; justify-content: flex-end; gap: 20px;
         padding: 14px var(--gutter); background: var(--ink); border-top: 1px solid var(--rule-dark);
       }
       .publish .msg { margin-right: auto; }
       @media (max-width: 640px) {
-        .add .grid, .ed-grid { grid-template-columns: 1fr; }
+        .add .grid, .ed-grid, .vrow { grid-template-columns: 1fr; }
+        .vitem { grid-template-columns: 96px minmax(0, 1fr); }
+        .vmedia img, .vph { width: 96px; }
+        .vitem .ctrls { grid-column: 1 / -1; }
         .item { grid-template-columns: 1.6rem 72px minmax(0, 1fr); }
         .item img { width: 72px; height: 51px; }
         .item .ctrls { grid-column: 2 / -1; }

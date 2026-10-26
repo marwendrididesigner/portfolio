@@ -39,9 +39,9 @@ const en = {
   catnav: { label: 'Portfolio categories', selected: 'Selected Work' },
   selected: {
     title: 'Selected Work',
-    // Joined into the introduction sentence; packaging only appears once it has featured work
-    lede: (packaging: boolean) =>
-      `A selection of brand identities, campaigns, editorial design,${packaging ? ' packaging,' : ''} and AI-powered visuals.`,
+    // Joined into the introduction sentence; packaging and motion only appear once they have featured work
+    lede: (packaging: boolean, motion: boolean) =>
+      `A selection of brand identities, campaigns, editorial design,${packaging ? ' packaging,' : ''}${motion ? ' motion design and video,' : ''} and AI-powered visuals.`,
     explore: (title: string) => `Explore all ${title} projects`,
     fullTitle: 'Full Portfolio',
     fullLede: 'Explore the complete collection of projects.',
@@ -53,6 +53,11 @@ const en = {
     close: 'Close viewer',
     prev: 'Previous image',
     next: 'Next image',
+    play: 'Play video',
+    video: 'Video',
+    driveFallback: 'Video not playing?',
+    driveOpen: 'Open it in Google Drive',
+    newTab: ' (opens in a new tab)',
   },
   credentials: {
     eyebrow: 'Credentials',
@@ -112,8 +117,8 @@ const fr: Dict = {
   catnav: { label: 'Catégories du portfolio', selected: 'Sélection' },
   selected: {
     title: 'Sélection de projets',
-    lede: (packaging: boolean) =>
-      `Une sélection d’identités de marque, de campagnes, de design éditorial${packaging ? ', de packaging' : ''} et de visuels créés avec l’IA.`,
+    lede: (packaging: boolean, motion: boolean) =>
+      `Une sélection d’identités de marque, de campagnes, de design éditorial${packaging ? ', de packaging' : ''}${motion ? ', de motion design et de vidéo' : ''} et de visuels créés avec l’IA.`,
     explore: (title: string) => `Voir tous les projets « ${title} »`,
     fullTitle: 'Portfolio complet',
     fullLede: 'Découvrez l’ensemble des projets.',
@@ -125,6 +130,11 @@ const fr: Dict = {
     close: 'Fermer la visionneuse',
     prev: 'Image précédente',
     next: 'Image suivante',
+    play: 'Lire la vidéo',
+    video: 'Vidéo',
+    driveFallback: 'La vidéo ne se lance pas ?',
+    driveOpen: 'L’ouvrir dans Google Drive',
+    newTab: ' (s’ouvre dans un nouvel onglet)',
   },
   credentials: {
     eyebrow: 'Compétences',
@@ -165,6 +175,7 @@ const chapterFr: Record<string, string> = {
   editorial: 'Design éditorial & présentations',
   collateral: 'Supports marketing & impression',
   packaging: 'Design de packaging',
+  motion: 'Motion Design & Montage Vidéo',
   ai: 'Création visuelle assistée par l’IA',
 };
 const groupFr: Record<string, string> = {
@@ -172,17 +183,18 @@ const groupFr: Record<string, string> = {
   identity: 'Identité de marque, logos & chartes graphiques',
   editorial: 'Présentations & design éditorial',
   packaging: 'Design de packaging',
+  motion: 'Motion Design & Montage Vidéo',
   ai: 'Création visuelle assistée par l’IA',
 };
 // Short labels for the sticky category bar
 const navShort: Record<Lang, Record<string, string>> = {
   en: {
     social: 'Social Media', identity: 'Brand Identity', guidelines: 'Brand Guidelines',
-    editorial: 'Presentation & Editorial', collateral: 'Marketing & Print', packaging: 'Packaging Design', ai: 'AI-Powered Work',
+    editorial: 'Presentation & Editorial', collateral: 'Marketing & Print', packaging: 'Packaging Design', motion: 'Motion & Video', ai: 'AI-Powered Work',
   },
   fr: {
     social: 'Réseaux sociaux', identity: 'Identité de marque', guidelines: 'Chartes graphiques',
-    editorial: 'Éditorial & présentations', collateral: 'Marketing & print', packaging: 'Packaging', ai: 'Création IA',
+    editorial: 'Éditorial & présentations', collateral: 'Marketing & print', packaging: 'Packaging', motion: 'Motion & vidéo', ai: 'Création IA',
   },
 };
 
@@ -229,6 +241,11 @@ const serviceFr: Record<string, string> = {
   'presentation design': 'Design de présentation',
   'journal design': 'Conception de journal',
   'packaging design': 'Design de packaging',
+  'motion design': 'Motion design',
+  'video editing': 'Montage vidéo',
+  'motion graphics': 'Motion design',
+  'animation': 'Animation',
+  'post-production': 'Postproduction',
 };
 const countryFr: Record<string, string> = {
   kenya: 'Kenya', uganda: 'Ouganda', rwanda: 'Rwanda', usa: 'États-Unis', india: 'Inde', kuwait: 'Koweït',
