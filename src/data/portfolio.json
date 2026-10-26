@@ -135,7 +135,10 @@
     {
       "id": "motion",
       "title": "Motion Design & Video Editing",
-      "projects": []
+      "projects": [
+        "motion-video-editing-project-01",
+        "motion-video-editing-project-02"
+      ]
     },
     {
       "id": "ai",
@@ -1415,6 +1418,40 @@
         "d-02.webp",
         "d-03.webp"
       ]
+    },
+    "motion-video-editing-project-01": {
+      "client": "Video Editing — Project 01",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-video-editing-project-01",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmvpd3qag0",
+          "url": "https://drive.google.com/file/d/1wKUvZfddKSvItb51Fm4JyO9Jrg588A3H/view",
+          "title": null,
+          "ratio": "9:16",
+          "thumb": "v-mvpd3qag0.webp"
+        }
+      ]
+    },
+    "motion-video-editing-project-02": {
+      "client": "Video Editing — Project 02",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-video-editing-project-02",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmvpd3qag1",
+          "url": "https://drive.google.com/file/d/1tpwYPfTHXjxUJUK3bpZxSzPw_qUMn7nR/view",
+          "title": null,
+          "ratio": "9:16",
+          "thumb": "v-mvpd3qag1.webp"
+        }
+      ]
     }
   },
   "featured": [
@@ -1576,7 +1613,22 @@
       "chapters": [
         "motion"
       ],
-      "items": []
+      "items": [
+        {
+          "project": "motion-video-editing-project-01",
+          "boards": [],
+          "videos": [
+            "vmvpd3qag0"
+          ]
+        },
+        {
+          "project": "motion-video-editing-project-02",
+          "boards": [],
+          "videos": [
+            "vmvpd3qag1"
+          ]
+        }
+      ]
     },
     {
       "id": "ai",
