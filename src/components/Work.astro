@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Videos from './Videos.astro';
-import { chapters, rowsOf } from '../data/portfolio';
+import { chapters, rowsOf, videoOnly } from '../data/portfolio';
 import { chapterTitle, country, deliverables, langOf, services, projectText, ui } from '../i18n/ui';
 
 const lang = langOf(Astro.url);
@@ -15,6 +15,8 @@ const t = ui[lang].work;
 // from 760 px, stacked on phones); a single-board project without such a neighbour stays alone.
 // Every board is also a button that opens the viewer, which walks the whole portfolio in this order.
 // Google Drive videos (Videos.astro) follow a project's boards and open in the same viewer.
+// Video-only projects (Motion & Video) form a compact grid instead, one project per cell: 1 column on
+// phones, 2 from 760 px, 3 from 1024 px, 4 from 1280 px; new projects fill the next cell.
 
 // `sizes` can't use CSS variables: the gutter is ~4.5vw, the board gap 16px.
 const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
@@ -36,7 +38,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
 
         <div class="projects">
           {rowsOf(c.projects).map((row) => (
-          <div class={row.length === 2 ? 'row pair' : 'row'}>
+          <div class={videoOnly(row[0]) ? 'row vgrid' : row.length === 2 ? 'row pair' : 'row'}>
           {row.map((p) => {
             const client = projectText(lang, p.client), title = p.title && projectText(lang, p.title);
             const name = [client, title].filter(Boolean).join(' — ');
@@ -65,7 +67,7 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
                     );
                   })}
                 </div>}
-                {p.videos.length > 0 && <Videos videos={p.videos} name={name} offset={p.boards.length} total={n} />}
+                {p.videos.length > 0 && <Videos videos={p.videos} name={name} offset={p.boards.length} total={n} stack={videoOnly(p)} />}
               </article>
             );
           })}
@@ -274,6 +276,13 @@ const SIZES = '(min-width: 1440px) 648px, (min-width: 760px) 45vw, 91vw';
     .pair .boards { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 759px) { .pair { display: flex; flex-direction: column; gap: clamp(48px, 6vw, 80px); } }
+  /* Video-only projects: one project per cell, title above its video. Subgrid puts every title of a
+     row on one track, so videos in a row start level even when a title wraps. */
+  .vgrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px 24px; align-items: start; }
+  .vgrid > .project { display: grid; grid-template-rows: subgrid; grid-row: span 2; row-gap: 0; align-content: start; }
+  @media (min-width: 760px) { .vgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 56px; } }
+  @media (min-width: 1024px) { .vgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .vgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
   .board {
     position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;

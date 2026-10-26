@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Videos from './Videos.astro';
-import { chapters, featured, rowsOf } from '../data/portfolio';
+import { chapters, featured, rowsOf, videoOnly } from '../data/portfolio';
 import { chapterTitle, country, groupTitle, langOf, services, projectText, ui } from '../i18n/ui';
 
 const lang = langOf(Astro.url);
@@ -39,7 +39,7 @@ const motion = featured.some((g) => g.chapter.id === 'motion');
 
         <div class="projects">
           {rowsOf(g.projects).map((row) => (
-            <div class={row.length === 2 ? 'row pair' : 'row'}>
+            <div class={videoOnly(row[0]) ? 'row vgrid' : row.length === 2 ? 'row pair' : 'row'}>
               {row.map((p) => {
                 const client = projectText(lang, p.client), title = p.title && projectText(lang, p.title);
             const name = [client, title].filter(Boolean).join(' — ');
@@ -64,7 +64,7 @@ const motion = featured.some((g) => g.chapter.id === 'motion');
                         </button>
                       ))}
                     </div>}
-                    {p.videos.length > 0 && <Videos videos={p.videos} name={name} offset={p.boards.length} total={n} set={`${g.id}/${p.id}`} />}
+                    {p.videos.length > 0 && <Videos videos={p.videos} name={name} offset={p.boards.length} total={n} set={`${g.id}/${p.id}`} stack={videoOnly(p)} />}
                   </article>
                 );
               })}
@@ -104,7 +104,8 @@ const motion = featured.some((g) => g.chapter.id === 'motion');
   .group-title { font-size: clamp(1.25rem, 2.2vw, 1.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.005em; }
 
   /* Same rules as the full portfolio (Work.astro): one project per row, its boards two per row from
-     760 px, consecutive single-board projects paired, one column on phones */
+     760 px, consecutive single-board projects paired, video-only projects in a compact grid, one
+     column on phones */
   .projects { display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px); }
   .project-head { margin-bottom: 12px; }
   .client { margin: 0; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25; }
@@ -118,6 +119,11 @@ const motion = featured.some((g) => g.chapter.id === 'motion');
     .pair .boards { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 759px) { .pair { display: flex; flex-direction: column; gap: clamp(40px, 5vw, 64px); } }
+  .vgrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px 24px; align-items: start; }
+  .vgrid > .project { display: grid; grid-template-rows: subgrid; grid-row: span 2; row-gap: 0; align-content: start; }
+  @media (min-width: 760px) { .vgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; } }
+  @media (min-width: 1024px) { .vgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .vgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
   .board {
     position: relative; display: block; width: 100%; padding: 0; border: 0; background: none;

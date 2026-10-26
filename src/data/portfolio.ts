@@ -101,14 +101,23 @@ function project(id: string, chapter: string): PortfolioProject {
   };
 }
 
+// A project with videos and no boards (Motion & Video): laid out as one cell of a compact grid
+export const videoOnly = (p?: { boards: readonly unknown[]; videos: readonly unknown[] }) => !!p && !p.boards.length && p.videos.length > 0;
 // Row grouping shared by Work and Selected Work: one project per row, except two CONSECUTIVE
-// single-board projects (without videos), which share a row.
-export const rowsOf = <T extends { boards: readonly unknown[]; videos: readonly unknown[] }>(projects: T[]) => {
+// single-board projects (without videos), which share a row, and consecutive video-only projects,
+// which all share one grid row (`.vgrid`).
+export const rowsOf =<T extends { boards: readonly unknown[]; videos: readonly unknown[] }>(projects: T[]) => {
   const rows: T[][] = [];
   const single = (p?: T) => p?.boards.length === 1 && !p.videos.length;
   for (let i = 0; i < projects.length; i++) {
     const p = projects[i]!, q = projects[i + 1];
-    if (single(p) && single(q)) { rows.push([p, q]); i++; }
+    if (videoOnly(p)) {
+      // Consecutive video-only projects share one grid row (one project per cell)
+      const row = [p];
+      while (videoOnly(projects[i + 1])) row.push(projects[++i]!);
+      rows.push(row);
+    }
+    else if (single(p) && single(q)) { rows.push([p, q]); i++; }
     else rows.push([p]);
   }
   return rows;
