@@ -7,25 +7,25 @@
         "social-mzuriorganics",
         "social-eddykenzo",
         "social-seensociety",
-        "social-mgmr-restaurant",
         "social-shitanaultratrail",
         "social-darlek",
         "social-darlek-carousels",
         "social-indintambwe",
+        "social-mgmr-restaurant",
         "social-shepherdcollege",
         "social-kukupoultry",
         "social-vijaysales",
         "social-acemobility",
         "social-bodies",
-        "social-motirentals",
         "social-patvention",
         "social-vivaextensions",
         "social-papparazo",
         "social-elspace",
+        "social-motirentals",
+        "social-wyanatravels",
         "social-futureisland",
         "social-ccd4tunisia",
         "social-cleantech216",
-        "social-wyanatravels",
         "social-eventandfacebookcovers"
       ]
     },
@@ -45,13 +45,13 @@
         "identity-almizan",
         "identity-elhudaib",
         "identity-akeedtravel",
+        "identity-ghitra",
         "identity-vita",
         "identity-ajiddouz",
-        "identity-ghitra",
-        "identity-aquarabia",
         "identity-pavlov",
+        "identity-greenbazar",
         "identity-tada",
-        "identity-greenbazar"
+        "identity-aquarabia"
       ]
     },
     {
@@ -111,13 +111,13 @@
         "collateral-p134",
         "collateral-p136",
         "collateral-p137",
+        "collateral-indintambwe-billboard",
         "collateral-p139",
         "collateral-rdvmedecins-easyboost-plaquette",
         "collateral-concept-note-african-cleantech-congress",
         "collateral-p143",
         "collateral-p144",
-        "collateral-billboard-ace-mobility",
-        "collateral-indintambwe-billboard"
+        "collateral-billboard-ace-mobility"
       ]
     },
     {
@@ -127,9 +127,9 @@
         "packaging-crac",
         "packaging-pulse-zero",
         "packaging-froste",
+        "packaging-samray",
         "packaging-altura",
-        "packaging-voltage",
-        "packaging-samray"
+        "packaging-voltage"
       ]
     },
     {
@@ -894,7 +894,8 @@
       "folder": "078-collateral-p126",
       "boards": [
         "d-01.webp"
-      ]
+      ],
+      "hidden": true
     },
     "collateral-p127": {
       "client": null,
@@ -978,7 +979,8 @@
       "boards": [
         "d-01.webp",
         "d-02.webp"
-      ]
+      ],
+      "hidden": true
     },
     "collateral-p139": {
       "client": "Career Insider — IEEE Mansoura Student Branch",
@@ -1246,9 +1248,7 @@
       "services": null,
       "folder": "social-mgmr-restaurant",
       "boards": [
-        "d-01.webp",
-        "d-02.webp",
-        "d-03.webp"
+        "d-01.webp"
       ]
     },
     "social-darlek": {
@@ -1261,7 +1261,8 @@
         "d-01.webp",
         "d-02.webp",
         "d-03.webp"
-      ]
+      ],
+      "hidden": true
     },
     "social-darlek-carousels": {
       "client": "DARLEK CAROUSELS",
@@ -1270,8 +1271,7 @@
       "services": null,
       "folder": "social-darlek-carousels",
       "boards": [
-        "d-01.webp",
-        "d-02.webp"
+        "d-01.webp"
       ]
     },
     "packaging-crac": {
@@ -1284,7 +1284,8 @@
         "d-01.webp",
         "d-02.webp",
         "d-03.webp"
-      ]
+      ],
+      "hidden": true
     },
     "packaging-froste": {
       "client": "FROSTE",
@@ -1296,7 +1297,8 @@
         "d-01.webp",
         "d-02.webp",
         "d-03.webp"
-      ]
+      ],
+      "hidden": true
     },
     "packaging-altura": {
       "client": "ALTURA",
@@ -1475,8 +1477,7 @@
         {
           "project": "social-mgmr-restaurant",
           "boards": [
-            "d-01.webp",
-            "d-03.webp"
+            "d-01.webp"
           ]
         },
         {
