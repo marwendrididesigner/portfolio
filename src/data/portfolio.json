@@ -731,7 +731,7 @@
       "client": "Dairat Podcast",
       "title": null,
       "country": "Kuwait",
-      "services": "Brochure Design",
+      "services": "Podcast Profile Design",
       "folder": "054-editorial-p92",
       "boards": [
         "d-01.webp",
@@ -1468,16 +1468,16 @@
       ],
       "items": [
         {
+          "project": "social-mzuriorganics",
+          "boards": [
+            "d-mvkxmy240.webp"
+          ]
+        },
+        {
           "project": "social-eddykenzo",
           "boards": [
             "d-02.webp",
             "d-03.webp"
-          ]
-        },
-        {
-          "project": "social-mgmr-restaurant",
-          "boards": [
-            "d-01.webp"
           ]
         },
         {
@@ -1527,8 +1527,8 @@
         {
           "project": "guidelines-p67",
           "boards": [
-            "d-01.webp",
-            "d-02.webp"
+            "d-02.webp",
+            "d-01.webp"
           ]
         }
       ]
@@ -1549,14 +1549,14 @@
           ]
         },
         {
-          "project": "editorial-p89",
+          "project": "editorial-p92",
           "boards": [
             "d-01.webp",
             "d-02.webp"
           ]
         },
         {
-          "project": "editorial-p92",
+          "project": "editorial-p89",
           "boards": [
             "d-01.webp",
             "d-02.webp"
