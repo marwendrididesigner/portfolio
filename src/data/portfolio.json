@@ -1687,9 +1687,10 @@
         {
           "project": "ai-p165",
           "boards": [
-            "d-mvryy65st.webp",
             "d-mvryy62cs.webp",
-            "d-mvryy5vrr.webp"
+            "d-mvryy5vrr.webp",
+            "d-mvryy65st.webp",
+            "d-mvryy5mgp.webp"
           ]
         }
       ]
