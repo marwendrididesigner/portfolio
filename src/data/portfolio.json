@@ -78,12 +78,12 @@
         "editorial-p84",
         "editorial-p87",
         "editorial-p89",
-        "editorial-p92",
-        "editorial-p94",
-        "editorial-p95",
         "editorial-p97",
+        "editorial-p92",
         "editorial-p99",
         "editorial-p101",
+        "editorial-p94",
+        "editorial-p95",
         "editorial-p102",
         "editorial-p104",
         "editorial-p106"
@@ -94,8 +94,10 @@
       "title": "Marketing Collateral & Print Design",
       "projects": [
         "collateral-p109",
-        "collateral-p110",
+        "collateral-rdvmedecins-bifold-brochure-design",
+        "collateral-aiq-brochure-design",
         "collateral-mzuri-organics-billboard",
+        "collateral-p110",
         "collateral-p121",
         "collateral-p122",
         "collateral-p123",
@@ -112,8 +114,8 @@
         "collateral-p136",
         "collateral-p137",
         "collateral-indintambwe-billboard",
-        "collateral-p139",
         "collateral-rdvmedecins-easyboost-plaquette",
+        "collateral-p139",
         "collateral-concept-note-african-cleantech-congress",
         "collateral-p143",
         "collateral-p144",
@@ -145,20 +147,20 @@
       "title": "AI-Powered Visual Design",
       "projects": [
         "ai-p146",
-        "ai-p149",
         "ai-p150",
         "ai-p156",
-        "ai-p157",
-        "ai-p159",
-        "ai-p161",
-        "ai-p162",
-        "ai-p164",
         "ai-p165",
+        "ai-p157",
+        "ai-p161",
+        "ai-p149",
+        "ai-p164",
+        "ai-p159",
+        "ai-p162",
+        "ai-p181",
         "ai-p170",
         "ai-p172",
         "ai-p176",
         "ai-p180",
-        "ai-p181",
         "ai-p186",
         "ai-p189",
         "ai-p192",
@@ -270,7 +272,7 @@
       "services": "Social Media Design · Ad Creatives",
       "folder": "010-social-seensociety",
       "boards": [
-        "d-mvlb1d780.webp"
+        "d-mvry6htu0.webp"
       ]
     },
     "social-shitanaultratrail": {
@@ -290,8 +292,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "012-social-bodies",
       "boards": [
-        "d-01.webp",
-        "d-02.webp"
+        "d-mvry776z1.webp"
       ]
     },
     "social-vivaextensions": {
@@ -301,7 +302,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "013-social-vivaextensions",
       "boards": [
-        "d-01.webp"
+        "d-mvry7pc82.webp"
       ]
     },
     "social-papparazo": {
@@ -311,9 +312,8 @@
       "services": "Social Media Design · Ad Creatives",
       "folder": "014-social-papparazo",
       "boards": [
-        "d-01.webp",
-        "d-02.webp",
-        "d-03.webp"
+        "d-mvry985z6.webp",
+        "d-mvry97yq5.webp"
       ]
     },
     "social-elspace": {
@@ -323,8 +323,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "015-social-elspace",
       "boards": [
-        "d-mvkxujx38.webp",
-        "d-mvkxujs87.webp"
+        "d-mvry8kgw4.webp"
       ]
     },
     "social-futureisland": {
@@ -367,7 +366,7 @@
       "services": "Social Media Design · Digital Brand Assets",
       "folder": "019-social-wyanatravels",
       "boards": [
-        "d-01.webp"
+        "d-mvry81x33.webp"
       ]
     },
     "social-eventandfacebookcovers": {
@@ -745,7 +744,7 @@
       "services": "Presentation Design",
       "folder": "055-editorial-p94",
       "boards": [
-        "d-01.webp"
+        "d-mvryde84b.webp"
       ]
     },
     "editorial-p95": {
@@ -755,8 +754,8 @@
       "services": "Presentation Design",
       "folder": "056-editorial-p95",
       "boards": [
-        "d-01.webp",
-        "d-02.webp"
+        "d-mvrybadya.webp",
+        "d-mvrybab39.webp"
       ]
     },
     "editorial-p97": {
@@ -798,8 +797,8 @@
       "services": "Presentation Design",
       "folder": "060-editorial-p102",
       "boards": [
-        "d-01.webp",
-        "d-02.webp"
+        "d-mvryebiyc.webp",
+        "d-mvryeblhd.webp"
       ]
     },
     "editorial-p104": {
@@ -809,8 +808,8 @@
       "services": "Presentation Design",
       "folder": "061-editorial-p104",
       "boards": [
-        "d-01.webp",
-        "d-02.webp"
+        "d-mvrygw1df.webp",
+        "d-mvrygvxhe.webp"
       ]
     },
     "editorial-p106": {
@@ -1022,9 +1021,9 @@
       "services": null,
       "folder": "090-ai-p146",
       "boards": [
-        "d-01.webp",
-        "d-02.webp",
-        "d-03.webp"
+        "d-mvrysc5ng.webp",
+        "d-mvrysccnh.webp",
+        "d-mvryscj1i.webp"
       ]
     },
     "ai-p149": {
@@ -1034,7 +1033,9 @@
       "services": null,
       "folder": "091-ai-p149",
       "boards": [
-        "d-01.webp"
+        "d-mvrytz3ej.webp",
+        "d-mvrytz8pk.webp",
+        "d-mvrytzfjl.webp"
       ]
     },
     "ai-p150": {
@@ -1112,7 +1113,9 @@
       "services": null,
       "folder": "098-ai-p164",
       "boards": [
-        "d-01.webp"
+        "d-mvryuzxao.webp",
+        "d-mvryuzswn.webp",
+        "d-mvryuzlcm.webp"
       ]
     },
     "ai-p165": {
@@ -1122,11 +1125,10 @@
       "services": null,
       "folder": "099-ai-p165",
       "boards": [
-        "d-01.webp",
-        "d-02.webp",
-        "d-03.webp",
-        "d-04.webp",
-        "d-05.webp"
+        "d-mvryy65st.webp",
+        "d-mvryy5mgp.webp",
+        "d-mvryy5vrr.webp",
+        "d-mvryy62cs.webp"
       ]
     },
     "ai-p170": {
@@ -1142,15 +1144,13 @@
     },
     "ai-p172": {
       "client": "Bodies",
-      "title": "Product imagery",
+      "title": "Shapewear product review shots",
       "country": null,
       "services": null,
       "folder": "101-ai-p172",
       "boards": [
-        "d-01.webp",
-        "d-02.webp",
-        "d-03.webp",
-        "d-04.webp"
+        "d-mvryzsbpu.webp",
+        "d-mvryzshnv.webp"
       ]
     },
     "ai-p176": {
@@ -1160,10 +1160,8 @@
       "services": null,
       "folder": "102-ai-p176",
       "boards": [
-        "d-01.webp",
-        "d-02.webp",
-        "d-03.webp",
-        "d-04.webp"
+        "d-mvrz23j8y.webp",
+        "d-mvrz1flrx.webp"
       ]
     },
     "ai-p180": {
@@ -1174,7 +1172,8 @@
       "folder": "103-ai-p180",
       "boards": [
         "d-01.webp"
-      ]
+      ],
+      "hidden": true
     },
     "ai-p181": {
       "client": null,
@@ -1183,11 +1182,10 @@
       "services": null,
       "folder": "104-ai-p181",
       "boards": [
-        "d-01.webp",
-        "d-02.webp",
-        "d-03.webp",
-        "d-04.webp",
-        "d-05.webp"
+        "d-mvrz4ebk11.webp",
+        "d-mvrz4e2zz.webp",
+        "d-mvrz4eed12.webp",
+        "d-mvrz4e8l10.webp"
       ]
     },
     "ai-p186": {
@@ -1200,7 +1198,8 @@
         "d-01.webp",
         "d-02.webp",
         "d-03.webp"
-      ]
+      ],
+      "hidden": true
     },
     "ai-p189": {
       "client": null,
@@ -1212,7 +1211,8 @@
         "d-01.webp",
         "d-02.webp",
         "d-03.webp"
-      ]
+      ],
+      "hidden": true
     },
     "ai-p192": {
       "client": null,
@@ -1239,7 +1239,8 @@
         "d-05.webp",
         "d-06.webp",
         "d-07.webp"
-      ]
+      ],
+      "hidden": true
     },
     "social-mgmr-restaurant": {
       "client": "MGMR Restaurant",
@@ -1407,7 +1408,8 @@
       "folder": "collateral-rdvmedecins-easyboost-plaquette",
       "boards": [
         "d-01.webp"
-      ]
+      ],
+      "hidden": true
     },
     "packaging-samray": {
       "client": "SAMRAY",
@@ -1456,6 +1458,27 @@
         }
       ],
       "hidden": true
+    },
+    "collateral-rdvmedecins-bifold-brochure-design": {
+      "client": "RDVmédecins Bifold Brochure Design",
+      "title": null,
+      "country": "FRANCE",
+      "services": null,
+      "folder": "collateral-rdvmedecins-bifold-brochure-design",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp"
+      ]
+    },
+    "collateral-aiq-brochure-design": {
+      "client": "AIQ Brochure Design",
+      "title": null,
+      "country": "UAE",
+      "services": null,
+      "folder": "collateral-aiq-brochure-design",
+      "boards": [
+        "d-01.webp"
+      ]
     }
   },
   "featured": [
@@ -1565,8 +1588,7 @@
         {
           "project": "editorial-p95",
           "boards": [
-            "d-01.webp",
-            "d-02.webp"
+            "d-mvrybadya.webp"
           ]
         }
       ]
@@ -1651,7 +1673,7 @@
         {
           "project": "ai-p149",
           "boards": [
-            "d-01.webp"
+            "d-mvrytz3ej.webp"
           ]
         },
         {
