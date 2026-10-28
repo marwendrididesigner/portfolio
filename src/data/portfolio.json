@@ -1671,9 +1671,10 @@
           ]
         },
         {
-          "project": "ai-p149",
+          "project": "ai-p146",
           "boards": [
-            "d-mvrytz3ej.webp"
+            "d-mvryscj1i.webp",
+            "d-mvrysccnh.webp"
           ]
         },
         {
@@ -1684,10 +1685,11 @@
           ]
         },
         {
-          "project": "ai-p162",
+          "project": "ai-p165",
           "boards": [
-            "d-01.webp",
-            "d-02.webp"
+            "d-mvryy65st.webp",
+            "d-mvryy62cs.webp",
+            "d-mvryy5vrr.webp"
           ]
         }
       ]
