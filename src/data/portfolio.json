@@ -80,6 +80,7 @@
         "editorial-p89",
         "editorial-p97",
         "editorial-p92",
+        "editorial-ghareeb-group-company-profile-design",
         "editorial-p99",
         "editorial-p101",
         "editorial-p94",
@@ -1479,6 +1480,18 @@
       "boards": [
         "d-01.webp"
       ]
+    },
+    "editorial-ghareeb-group-company-profile-design": {
+      "client": "Ghareeb Group Company Profile Design",
+      "title": null,
+      "country": "Bahrain",
+      "services": null,
+      "folder": "editorial-ghareeb-group-company-profile-design",
+      "boards": [
+        "d-01.webp",
+        "d-02.webp",
+        "d-03.webp"
+      ]
     }
   },
   "featured": [
@@ -1687,8 +1700,6 @@
         {
           "project": "ai-p165",
           "boards": [
-            "d-mvryy62cs.webp",
-            "d-mvryy5vrr.webp",
             "d-mvryy65st.webp",
             "d-mvryy5mgp.webp"
           ]
