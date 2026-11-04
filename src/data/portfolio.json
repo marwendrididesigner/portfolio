@@ -142,10 +142,11 @@
         "motion-video-editing-project-01",
         "motion-video-editing-project-02",
         "motion-testimonial-video-yousinet-project",
+        "motion-backstage-highlight-reel-daffah-project",
+        "motion-reel-ads-electronet-services-mp4",
         "motion-teaser-african-cleantech-congress",
         "motion-promotional-video-dazzy-women-s-clothing",
-        "motion-short-interview-video-ccd4tunisia-projec",
-        "motion-backstage-highlight-reel-daffah-project"
+        "motion-short-interview-video-ccd4tunisia-projec"
       ]
     },
     {
@@ -1580,6 +1581,23 @@
           "title": "Backstage Highlight Reel - DAFFAH PROJECT",
           "ratio": "9:16",
           "thumb": "v-mw203u6d4.webp"
+        }
+      ]
+    },
+    "motion-reel-ads-electronet-services-mp4": {
+      "client": "Reel Ads - ElectroNet Services.mp4",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-reel-ads-electronet-services-mp4",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmw21226r5",
+          "url": "https://drive.google.com/file/d/1LNZdbXAqkiIR7Aq7rXYjbPD3yKEdMPb9/view",
+          "title": "Reel Ads - ElectroNet Services.mp4",
+          "ratio": "9:16",
+          "thumb": "v-mw214kc65.webp"
         }
       ]
     }
