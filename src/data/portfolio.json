@@ -140,7 +140,8 @@
       "title": "Motion Design & Video Editing",
       "projects": [
         "motion-video-editing-project-01",
-        "motion-video-editing-project-02"
+        "motion-video-editing-project-02",
+        "motion-testimonial-video-yousinet-project"
       ]
     },
     {
@@ -1491,6 +1492,23 @@
         "d-01.webp",
         "d-02.webp",
         "d-03.webp"
+      ]
+    },
+    "motion-testimonial-video-yousinet-project": {
+      "client": "Testimonial video - YOUSINET PROJECT",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-testimonial-video-yousinet-project",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmw1yqnhm0",
+          "url": "https://drive.google.com/file/d/15FrbeBnc4QHkrr5ievET2TSq7niUfKah/view",
+          "title": "Testimonial video - YOUSINET PROJECT",
+          "ratio": "9:16",
+          "thumb": "v-mw1yxyw70.webp"
+        }
       ]
     }
   },
