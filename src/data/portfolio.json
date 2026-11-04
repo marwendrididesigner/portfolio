@@ -141,7 +141,11 @@
       "projects": [
         "motion-video-editing-project-01",
         "motion-video-editing-project-02",
-        "motion-testimonial-video-yousinet-project"
+        "motion-testimonial-video-yousinet-project",
+        "motion-teaser-african-cleantech-congress",
+        "motion-promotional-video-dazzy-women-s-clothing",
+        "motion-short-interview-video-ccd4tunisia-projec",
+        "motion-backstage-highlight-reel-daffah-project"
       ]
     },
     {
@@ -1508,6 +1512,74 @@
           "title": "Testimonial video - YOUSINET PROJECT",
           "ratio": "9:16",
           "thumb": "v-mw1yxyw70.webp"
+        }
+      ]
+    },
+    "motion-teaser-african-cleantech-congress": {
+      "client": "TEASER - AFRICAN CLEANTECH CONGRESS",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-teaser-african-cleantech-congress",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmw1zne0u1",
+          "url": "https://drive.google.com/file/d/10TE0qB2L1ebgXH633_2tRvL-rDYNuYGd/view",
+          "title": "TEASER - AFRICAN CLEANTECH CONGRESS",
+          "ratio": "16:9",
+          "thumb": "v-mw1zp6bs1.webp"
+        }
+      ]
+    },
+    "motion-promotional-video-dazzy-women-s-clothing": {
+      "client": "Promotional Video - DAZZY women's clothing boutique",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-promotional-video-dazzy-women-s-clothing",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmw1zro6y2",
+          "url": "https://drive.google.com/file/d/1wpR1z4Fxf8Lk-dq7Y-OK2yeoKzLJQuJL/view",
+          "title": "Promotional Video - DAZZY women's clothing boutique",
+          "ratio": "4:5",
+          "thumb": "v-mw1ztytw2.webp"
+        }
+      ]
+    },
+    "motion-short-interview-video-ccd4tunisia-projec": {
+      "client": "Short Interview video - CCD4TUNISIA PROJECT",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-short-interview-video-ccd4tunisia-projec",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmw1zw9t23",
+          "url": "https://drive.google.com/file/d/1Xg2Z_FY3r49HXBkO56nRXvna7srYoDZb/view",
+          "title": "Short Interview video - CCD4TUNISIA PROJECT",
+          "ratio": "1:1",
+          "thumb": "v-mw1zxvyg3.webp"
+        }
+      ]
+    },
+    "motion-backstage-highlight-reel-daffah-project": {
+      "client": "Backstage Highlight Reel - DAFFAH PROJECT",
+      "title": null,
+      "country": null,
+      "services": null,
+      "folder": "motion-backstage-highlight-reel-daffah-project",
+      "boards": [],
+      "videos": [
+        {
+          "id": "vmw2012vm4",
+          "url": "https://drive.google.com/file/d/1-F_wNXKKzuodc2lph7UNo-ZYuskW9_jb/view",
+          "title": "Backstage Highlight Reel - DAFFAH PROJECT",
+          "ratio": "9:16",
+          "thumb": "v-mw203u6d4.webp"
         }
       ]
     }
